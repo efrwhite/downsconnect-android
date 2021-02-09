@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">DownsConnect</string>
+    <string name="feed">Feed</string>
+    <string name="activity">Activity</string>
+    <string name="sleep">Sleep</string>
+    <string name="mood">Mood</string>
+    <string name="resources">Resources</string>
+    <string name="medical">Medical</string>
+    <string name="message">Message</string>
+    <string name="milestone">Milestone</string>
+    <string name="sign_in_out">Sign in/out</string>
+    <string name="photo">Photo</string>
+    <string name="dairy">Dairy</string>
+    <string name="more">More</string>
+    <string name="measured_height">Measured Height</string>
+    <string name="measured_weight">Measured Weight</string>
+    <string name="head_size">Head Size</string>
+    <string name="health">Health</string>
+    <string name="vaccine">Vaccine</string>
+    <string name="dosage">Dosage</string>
+    <string name="doctor_s_visit">Doctor\'s Visit</string>
+    <string name="temperature">Temperature</string>
+    <string name="notes">Notes:</string>
+    <string name="save">Save</string>
+    <string name="back">Back</string>
+    <string name="bottle">Bottle</string>
+    <string name="nursing">Nursing</string>
+    <string name="solids">Solids</string>
+</resources>
