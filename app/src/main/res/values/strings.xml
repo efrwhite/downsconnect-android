@@ -35,4 +35,14 @@
     <string name="due_date">Due Date</string>
     <string name="allergies">Allergies</string>
     <string name="medications">Medications</string>
+    <string name="cancel">Cancel</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="username">Username</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="sign_in">Sign In</string>
 </resources>
