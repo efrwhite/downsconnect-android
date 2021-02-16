@@ -26,4 +26,13 @@
     <string name="bottle">Bottle</string>
     <string name="nursing">Nursing</string>
     <string name="solids">Solids</string>
+    <string name="weight">Weight</string>
+    <string name="profiles">Profiles</string>
+    <string name="parents_caregivers">Parents/Caregivers</string>
+    <string name="your_children">Your Children</string>
+    <string name="gender">Gender</string>
+    <string name="birthday">Birthday</string>
+    <string name="due_date">Due Date</string>
+    <string name="allergies">Allergies</string>
+    <string name="medications">Medications</string>
 </resources>

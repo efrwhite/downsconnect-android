@@ -202,15 +202,15 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.756691" />
 
-    <ImageView
-        android:id="@+id/sideNavImageView"
+    <Button
+        android:id="@+id/sideNavButton"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginStart="16dp"
+        android:background="@drawable/nav_button"
         app:layout_constraintBottom_toBottomOf="@+id/homeTopNavView"
-        app:layout_constraintStart_toStartOf="@+id/homeTopNavView"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_actions_menu" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/historyButton"
@@ -255,5 +255,55 @@
         android:text="Button"
         app:layout_constraintBaseline_toBaselineOf="@+id/emailButton"
         app:layout_constraintEnd_toEndOf="@+id/medicalView" />
+
+    <TextView
+        android:id="@+id/nameText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/imageView3"
+        tools:layout_editor_absoluteY="16dp"
+        tools:text="First Name Last Name" />
+
+    <TextView
+        android:id="@+id/ageText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@+id/nameText"
+        tools:layout_editor_absoluteY="39dp"
+        tools:text=" yrs, mo, days" />
+
+    <TextView
+        android:id="@+id/recentEntriesText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Recent Entries"
+        app:layout_constraintBottom_toBottomOf="@+id/view"
+        app:layout_constraintEnd_toStartOf="@+id/guideline5"
+        app:layout_constraintStart_toStartOf="@+id/view"
+        app:layout_constraintTop_toTopOf="@+id/view" />
+
+    <TextView
+        android:id="@+id/summaryText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Summary"
+        app:layout_constraintBottom_toBottomOf="@+id/view"
+        app:layout_constraintEnd_toEndOf="@+id/view"
+        app:layout_constraintStart_toStartOf="@+id/guideline5"
+        app:layout_constraintTop_toTopOf="@+id/view" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/homeTopNavView"
+        app:layout_constraintStart_toEndOf="@+id/sideNavButton"
+        app:layout_constraintTop_toTopOf="@+id/homeTopNavView"
+        app:srcCompat="@drawable/circle_grey" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
