@@ -45,4 +45,9 @@
     <string name="confirm_password">Confirm Password</string>
     <string name="sign_up">Sign Up</string>
     <string name="sign_in">Sign In</string>
+    <string name="history">History</string>
+    <string name="graphs">Graphs</string>
+    <string name="timeline">Timeline</string>
+    <string name="mail">Mail</string>
+    <string name="synced">Synced @</string>
 </resources>
