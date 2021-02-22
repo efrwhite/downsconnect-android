@@ -33,7 +33,7 @@
         android:background="#BAF3F7"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signoutButton" />
+        app:layout_constraintTop_toBottomOf="@+id/signInOutText" />
 
     <Button
         android:id="@+id/feedButton"
@@ -41,8 +41,6 @@
         android:layout_height="75dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/circle_yellow"
-        android:text="@string/feed"
-        android:textSize="10sp"
         app:layout_constraintEnd_toStartOf="@+id/guideline6"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/homeTopNavView" />
@@ -52,8 +50,6 @@
         android:layout_width="75dp"
         android:layout_height="75dp"
         android:background="@drawable/circle_pink"
-        android:text="@string/activity"
-        android:textSize="10sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/feedButton"
         app:layout_constraintEnd_toStartOf="@+id/guideline5"
         app:layout_constraintStart_toStartOf="@+id/guideline6" />
@@ -63,8 +59,6 @@
         android:layout_width="75dp"
         android:layout_height="75dp"
         android:background="@drawable/circle_navy"
-        android:text="@string/sleep"
-        android:textSize="10sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/activityButton"
         app:layout_constraintEnd_toStartOf="@+id/guideline7"
         app:layout_constraintStart_toStartOf="@+id/guideline5" />
@@ -74,8 +68,6 @@
         android:layout_width="75dp"
         android:layout_height="75dp"
         android:background="@drawable/circle_green"
-        android:text="@string/mood"
-        android:textSize="10sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/sleepButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline7" />
@@ -86,19 +78,15 @@
         android:layout_height="75dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/circle_purple"
-        android:text="@string/resources"
-        android:textSize="10sp"
         app:layout_constraintEnd_toStartOf="@+id/guideline6"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/feedButton" />
+        app:layout_constraintTop_toBottomOf="@+id/feedText" />
 
     <Button
         android:id="@+id/medicalButton"
         android:layout_width="75dp"
         android:layout_height="75dp"
         android:background="@drawable/circle_red"
-        android:text="@string/medical"
-        android:textSize="10sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/resourcesButton"
         app:layout_constraintEnd_toStartOf="@+id/guideline5"
         app:layout_constraintStart_toStartOf="@+id/guideline6" />
@@ -108,8 +96,6 @@
         android:layout_width="75dp"
         android:layout_height="75dp"
         android:background="@drawable/circle_green"
-        android:text="@string/message"
-        android:textSize="10sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/medicalButton"
         app:layout_constraintEnd_toStartOf="@+id/guideline7"
         app:layout_constraintStart_toStartOf="@+id/guideline5" />
@@ -119,8 +105,6 @@
         android:layout_width="75dp"
         android:layout_height="75dp"
         android:background="@drawable/circle_yellow"
-        android:text="@string/milestone"
-        android:textSize="10sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/messageButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline7" />
@@ -131,19 +115,15 @@
         android:layout_height="75dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/circle_navy"
-        android:text="@string/sign_in_out"
-        android:textSize="10sp"
         app:layout_constraintEnd_toStartOf="@+id/guideline6"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/resourcesButton" />
+        app:layout_constraintTop_toBottomOf="@+id/resourcesText" />
 
     <Button
         android:id="@+id/photoButton"
         android:layout_width="75dp"
         android:layout_height="75dp"
         android:background="@drawable/circle_purple"
-        android:text="@string/photo"
-        android:textSize="10sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/signoutButton"
         app:layout_constraintEnd_toStartOf="@+id/guideline5"
         app:layout_constraintStart_toStartOf="@+id/guideline6" />
@@ -153,8 +133,6 @@
         android:layout_width="75dp"
         android:layout_height="75dp"
         android:background="@drawable/circle_pink"
-        android:text="@string/dairy"
-        android:textSize="10sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/photoButton"
         app:layout_constraintEnd_toStartOf="@+id/guideline7"
         app:layout_constraintStart_toStartOf="@+id/guideline5" />
@@ -164,18 +142,17 @@
         android:layout_width="75dp"
         android:layout_height="75dp"
         android:background="@drawable/circle_red"
-        android:text="@string/more"
-        android:textSize="10sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/diaryButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline7" />
 
     <ScrollView
-        android:layout_width="407dp"
-        android:layout_height="297dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/medicalView"
-        app:layout_constraintTop_toBottomOf="@+id/view"
-        tools:layout_editor_absoluteX="3dp">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -216,47 +193,50 @@
 
     <Button
         android:id="@+id/historyButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:text="Button"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/calendar_icon"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/medicalView" />
 
     <Button
         android:id="@+id/graphButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/graphs_icon"
         app:layout_constraintBaseline_toBaselineOf="@+id/historyButton"
-        app:layout_constraintEnd_toStartOf="@+id/timelineButton" />
+        app:layout_constraintEnd_toStartOf="@+id/timelineButton"
+        app:layout_constraintStart_toEndOf="@+id/historyButton" />
 
     <Button
         android:id="@+id/timelineButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/timeline_icon"
         app:layout_constraintBaseline_toBaselineOf="@+id/graphButton"
         app:layout_constraintEnd_toEndOf="@+id/medicalView"
         app:layout_constraintStart_toStartOf="@+id/medicalView" />
 
     <Button
         android:id="@+id/emailButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/mail_icon"
         app:layout_constraintBaseline_toBaselineOf="@+id/timelineButton"
+        app:layout_constraintEnd_toStartOf="@+id/syncButton"
         app:layout_constraintStart_toEndOf="@+id/timelineButton" />
 
     <Button
         android:id="@+id/syncButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:text="Button"
-        app:layout_constraintBaseline_toBaselineOf="@+id/emailButton"
-        app:layout_constraintEnd_toEndOf="@+id/medicalView" />
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/sync_icon"
+        app:layout_constraintEnd_toEndOf="@+id/medicalView"
+        app:layout_constraintTop_toTopOf="@+id/medicalView" />
 
     <TextView
         android:id="@+id/nameText"
@@ -293,10 +273,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Summary"
-        app:layout_constraintBottom_toBottomOf="@+id/view"
+        app:layout_constraintBaseline_toBaselineOf="@+id/recentEntriesText"
         app:layout_constraintEnd_toEndOf="@+id/view"
-        app:layout_constraintStart_toStartOf="@+id/guideline5"
-        app:layout_constraintTop_toTopOf="@+id/view" />
+        app:layout_constraintStart_toStartOf="@+id/guideline5" />
 
     <ImageView
         android:id="@+id/imageView3"
@@ -307,5 +286,173 @@
         app:layout_constraintStart_toEndOf="@+id/sideNavButton"
         app:layout_constraintTop_toTopOf="@+id/homeTopNavView"
         app:srcCompat="@drawable/circle_grey" />
+
+    <TextView
+        android:id="@+id/feedText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/feed"
+        app:layout_constraintEnd_toEndOf="@+id/feedButton"
+        app:layout_constraintStart_toStartOf="@+id/feedButton"
+        app:layout_constraintTop_toBottomOf="@+id/feedButton" />
+
+    <TextView
+        android:id="@+id/activityText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/activity"
+        app:layout_constraintEnd_toEndOf="@+id/activityButton"
+        app:layout_constraintStart_toStartOf="@+id/activityButton"
+        app:layout_constraintTop_toBottomOf="@+id/activityButton" />
+
+    <TextView
+        android:id="@+id/sleepText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sleep"
+        app:layout_constraintEnd_toEndOf="@+id/sleepButton"
+        app:layout_constraintStart_toStartOf="@+id/sleepButton"
+        app:layout_constraintTop_toBottomOf="@+id/sleepButton" />
+
+    <TextView
+        android:id="@+id/moodText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/mood"
+        app:layout_constraintEnd_toEndOf="@+id/moodButton"
+        app:layout_constraintStart_toStartOf="@+id/moodButton"
+        app:layout_constraintTop_toBottomOf="@+id/moodButton" />
+
+    <TextView
+        android:id="@+id/resourcesText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/resources"
+        app:layout_constraintEnd_toEndOf="@+id/resourcesButton"
+        app:layout_constraintStart_toStartOf="@+id/resourcesButton"
+        app:layout_constraintTop_toBottomOf="@+id/resourcesButton" />
+
+    <TextView
+        android:id="@+id/medicalText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/medical"
+        app:layout_constraintEnd_toEndOf="@+id/medicalButton"
+        app:layout_constraintStart_toStartOf="@+id/medicalButton"
+        app:layout_constraintTop_toBottomOf="@+id/medicalButton" />
+
+    <TextView
+        android:id="@+id/messageText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/message"
+        app:layout_constraintEnd_toEndOf="@+id/messageButton"
+        app:layout_constraintStart_toStartOf="@+id/messageButton"
+        app:layout_constraintTop_toBottomOf="@+id/messageButton" />
+
+    <TextView
+        android:id="@+id/milestoneText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/milestone"
+        app:layout_constraintEnd_toEndOf="@+id/milestoneButton"
+        app:layout_constraintStart_toStartOf="@+id/milestoneButton"
+        app:layout_constraintTop_toBottomOf="@+id/milestoneButton" />
+
+    <TextView
+        android:id="@+id/signInOutText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sign_in_out"
+        app:layout_constraintEnd_toEndOf="@+id/signoutButton"
+        app:layout_constraintStart_toStartOf="@+id/signoutButton"
+        app:layout_constraintTop_toBottomOf="@+id/signoutButton" />
+
+    <TextView
+        android:id="@+id/photoText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/photo"
+        app:layout_constraintEnd_toEndOf="@+id/photoButton"
+        app:layout_constraintStart_toStartOf="@+id/photoButton"
+        app:layout_constraintTop_toBottomOf="@+id/photoButton" />
+
+    <TextView
+        android:id="@+id/dairyText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/dairy"
+        app:layout_constraintEnd_toEndOf="@+id/diaryButton"
+        app:layout_constraintStart_toStartOf="@+id/diaryButton"
+        app:layout_constraintTop_toBottomOf="@+id/diaryButton" />
+
+    <TextView
+        android:id="@+id/moreText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/more"
+        app:layout_constraintEnd_toEndOf="@+id/moreButton"
+        app:layout_constraintStart_toStartOf="@+id/moreButton"
+        app:layout_constraintTop_toBottomOf="@+id/moreButton" />
+
+    <TextView
+        android:id="@+id/historyText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="History"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@+id/historyButton"
+        app:layout_constraintStart_toStartOf="@+id/historyButton"
+        app:layout_constraintTop_toBottomOf="@+id/historyButton" />
+
+    <TextView
+        android:id="@+id/graphsText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Graphs"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@+id/graphButton"
+        app:layout_constraintStart_toStartOf="@+id/guideline6"
+        app:layout_constraintTop_toBottomOf="@+id/graphButton" />
+
+    <TextView
+        android:id="@+id/timelineText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Timeline"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@+id/timelineButton"
+        app:layout_constraintStart_toStartOf="@+id/timelineButton"
+        app:layout_constraintTop_toBottomOf="@+id/timelineButton" />
+
+    <TextView
+        android:id="@+id/mailText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mail"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline7"
+        app:layout_constraintStart_toStartOf="@+id/emailButton"
+        app:layout_constraintTop_toBottomOf="@+id/emailButton" />
+
+    <TextView
+        android:id="@+id/syncText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Synced @"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="@+id/syncButton"
+        app:layout_constraintStart_toStartOf="@+id/syncButton"
+        app:layout_constraintTop_toBottomOf="@+id/syncButton" />
+
+    <TextView
+        android:id="@+id/syncTimeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="@+id/syncText"
+        app:layout_constraintStart_toStartOf="@+id/syncText"
+        app:layout_constraintTop_toBottomOf="@+id/syncText"
+        tools:text="0:00" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
