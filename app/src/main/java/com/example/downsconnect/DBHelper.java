@@ -1,6 +1,7 @@
 package com.example.downsconnect;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -81,4 +82,28 @@ public class DBHelper extends SQLiteOpenHelper {
             }
         }
     }
+
+    AccountHolder getAccountHolder(String user, String pass){
+        String query = "SELECT * FROM AccountHolders WHERE Username = '" + user +
+                "' AND Password = '" + pass + "';";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor c = db.rawQuery(query, null);
+        AccountHolder accountHolder = new AccountHolder();
+        if(c.moveToFirst()){
+            c.moveToFirst();
+            accountHolder.setAccountID(Integer.parseInt(c.getString(0)));
+            accountHolder.setFirstName(c.getString(1));
+            accountHolder.setLastName(c.getString(2));
+            accountHolder.setUsername(c.getString(3));
+            accountHolder.setPassword(c.getString(4));
+            accountHolder.setPhone(c.getString(5));
+        }
+        else{
+            c.close();
+            accountHolder = null;
+        }
+        db.close();
+        return accountHolder;
+    }
+
 }
