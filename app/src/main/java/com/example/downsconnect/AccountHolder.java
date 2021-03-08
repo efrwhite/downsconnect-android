@@ -2,7 +2,10 @@ package com.example.downsconnect;
 
 public class AccountHolder {
     private String firstName, lastName, username, password, phone;
+    private int accountID;
+    AccountHolder(){
 
+    }
     AccountHolder(String firstName, String lastName, String username, String password, String phone){
         this.firstName = firstName;
         this.lastName = lastName;
@@ -49,5 +52,13 @@ public class AccountHolder {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public int getAccountID() {
+        return accountID;
+    }
+
+    public void setAccountID(int accountID) {
+        this.accountID = accountID;
     }
 }
