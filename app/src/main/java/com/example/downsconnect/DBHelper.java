@@ -69,6 +69,7 @@ public class DBHelper extends SQLiteOpenHelper {
             db.execSQL("DROP TABLE IF EXISTS Children");
             db.execSQL("DROP TABLE IF EXISTS Feed");
             db.execSQL("DROP TABLE IF EXISTS Mood");
+            db.execSQL("DROP TABLE IF EXISTS Sleep");
         }
     }
 
