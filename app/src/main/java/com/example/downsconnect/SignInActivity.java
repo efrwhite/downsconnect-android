@@ -2,7 +2,9 @@ package com.example.downsconnect;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -29,10 +31,12 @@ public class SignInActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String user = Username.getText().toString();
                 String pass = Password.getText().toString();
-                if(db.getAccountHolder(user, pass) != null) {
-                    Intent intent = new Intent(SignInActivity.this, HomeActivity.class);
-                    startActivity(intent);
-                }
+                    if (db.getAccountHolder(user, pass) != null) {
+                        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                        sharedPreferences.edit().putBoolean("signedIn", true).commit();
+                        Intent intent = new Intent(SignInActivity.this, HomeActivity.class);
+                        startActivity(intent);
+                    }
                 else{
                     AlertDialog a = new AlertDialog.Builder(signIn.getContext()).create();
                     a.setTitle("Incorrect Username or Password");
