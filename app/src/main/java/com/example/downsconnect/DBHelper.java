@@ -1,5 +1,6 @@
 package com.example.downsconnect;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -11,7 +12,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "downsconnect.db";
     private static final int DATABASE_VERSION = 1;
     private static final String[] TABLE_NAMES = {"AccountHolders", "Children", "Feed", "Mood", "Sleep"};
-    private static final String[] COLUMN_1 = {"FirstName", "LastName", "Username", "Password", "Phone"};
+    private static final String[] COLUMN_1 = {"AccountID","FirstName", "LastName", "Username", "Password", "Phone"};
     private static final String[] COLUMN_2 = {"ChildID", "FirstName", "LastName", "Age" , "Gender", "BloodType", "DueDate", "Birthday", "Allergies"};
     private static final String[] COLUMN_3 = {"FeedID", "ChildID", "Amount", "Substance", "TimeConsumed", "Notes"};
     private static final String[] COLUMN_4 = {"MoodID", "ChildID", "MoodType", "Time", "Notes"};
@@ -23,7 +24,7 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE AccountHolders(" +
-                //"AccountHolderID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
+                "AccountHolderID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
                 "FirstName TEXT, " +
                 "LastName TEXT, " +
                 "Username TEXT, " +
@@ -82,6 +83,18 @@ public class DBHelper extends SQLiteOpenHelper {
                 db.execSQL(query);
             }
         }
+    }
+
+    public void addAccount(AccountHolder accountHolder){
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_1[1], accountHolder.getFirstName());
+        values.put(COLUMN_1[2], accountHolder.getLastName());
+        values.put(COLUMN_1[3], accountHolder.getUsername());
+        values.put(COLUMN_1[4], accountHolder.getPassword());
+        values.put(COLUMN_1[5], accountHolder.getPhone());
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.insert(TABLE_NAMES[0], null, values);
+        db.close();
     }
 
     AccountHolder getAccountHolder(String user, String pass){
