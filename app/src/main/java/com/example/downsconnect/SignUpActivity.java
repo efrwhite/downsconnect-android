@@ -1,7 +1,9 @@
 package com.example.downsconnect;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -41,13 +43,25 @@ public class SignUpActivity extends AppCompatActivity {
                 phone = phoneNumber.getText().toString();
                 confirmPass = confirmPassword.getText().toString();
                 if (!first.equals("") && !last.equals("") && !user.equals("")
-                        && !phone.equals("") && !pass.equals("") && !confirmPass.equals("") && pass.equals(confirmPass)) {
-                    AccountHolder accountHolder = new AccountHolder(first, last, user, pass, phone);
-                    //will add to database you dbhelper when that function is written
-                    Intent intent = new Intent(SignUpActivity.this, HomeActivity.class);
-                    startActivity(intent);
+                        && !phone.equals("") && !pass.equals("") && !confirmPass.equals("")) {
+                    if(!pass.equals(confirmPass)){
+                        AlertDialog a = new AlertDialog.Builder(signUp.getContext()).create();
+                        a.setTitle("Passwords dont match");
+                        a.setMessage("The passwords you've entered don't match, please ensure that do before continuing");
+                        a.show();
+                    }
+                    else {
+                        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                        sharedPreferences.edit().putBoolean("signedIn", true).commit();
+                        AccountHolder accountHolder = new AccountHolder(first, last, user, pass, phone);
+                        helper.addAccount(accountHolder);
+                        helper.close();
+                        //will add to database you dbhelper when that function is written
+                        Intent intent = new Intent(SignUpActivity.this, HomeActivity.class);
+                        startActivity(intent);
+                    }
                 }
-            else{
+                else{
                     AlertDialog a = new AlertDialog.Builder(signUp.getContext()).create();
                     a.setTitle("Invalid/Missing Information");
                     a.setMessage("Please make sure you've filled out all the required fields");
