@@ -52,4 +52,6 @@
     <string name="recent_entries">Recent Entries</string>
     <string name="summary">Summary</string>
     <string name="diary">Diary</string>
+    <string name="woke_up">Woke up</string>
+    <string name="went_to_sleep">Went to sleep</string>
 </resources>
