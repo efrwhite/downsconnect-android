@@ -1,8 +1,7 @@
 package com.example.downsconnect;
 
 public class Child {
-    private String firstName, lastName;
-    private String birthday, dueDate;
+    private String firstName, lastName, birthday, dueDate, allergies;
     private Gender gender;
     private BloodType bloodType;
 
@@ -60,5 +59,13 @@ public class Child {
 
     public void setDueDate(String dueDate) {
         this.dueDate = dueDate;
+    }
+
+    public String getAllergies() {
+        return allergies;
+    }
+
+    public void setAllergies(String allergies) {
+        this.allergies = allergies;
     }
 }
