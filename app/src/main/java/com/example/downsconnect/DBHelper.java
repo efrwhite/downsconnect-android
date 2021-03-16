@@ -13,7 +13,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
     private static final String[] TABLE_NAMES = {"AccountHolders", "Children", "Feed", "Mood", "Sleep"};
     private static final String[] COLUMN_1 = {"AccountID","FirstName", "LastName", "Username", "Password", "Phone"};
-    private static final String[] COLUMN_2 = {"ChildID", "FirstName", "LastName", "Age" , "Gender", "BloodType", "DueDate", "Birthday", "Allergies"};
+    private static final String[] COLUMN_2 = {"ChildID", "FirstName", "LastName", "Gender", "BloodType", "DueDate", "Birthday", "Allergies"};
     private static final String[] COLUMN_3 = {"FeedID", "ChildID", "Amount", "Substance", "TimeConsumed", "Notes"};
     private static final String[] COLUMN_4 = {"MoodID", "ChildID", "MoodType", "Time", "Notes"};
     private static final String[] COLUMN_5 = {"SleepID", "ChildID", "StartTime", "EndTime", "SleepType" ,"Notes"};
@@ -28,13 +28,12 @@ public class DBHelper extends SQLiteOpenHelper {
                 "FirstName TEXT, " +
                 "LastName TEXT, " +
                 "Username TEXT, " +
-                "Passwrod TEXT, " +
+                "Password TEXT, " +
                 "Phone TEXT);");
         db.execSQL("CREATE TABLE Children(" +
                 "ChildID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
                 "FirstName TEXT, " +
                 "LastName TEXT, " +
-                "Age INTEGER, " +
                 "Gender TEXT," +
                 "BloodType TEXT," +
                 "DueDate TEXT, " +
@@ -97,7 +96,60 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    public void addChild(Child child){
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_2[1], child.getFirstName());
+        values.put(COLUMN_2[2], child.getLastName());
+        values.put(COLUMN_2[3], String.valueOf(child.getGender()));
+        values.put(COLUMN_2[4], String.valueOf(child.getBloodType()));
+        values.put(COLUMN_2[5], child.getDueDate());
+        values.put(COLUMN_2[6], child.getBirthday());
+        values.put(COLUMN_2[7], child.getAllergies());
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.insert(TABLE_NAMES[0], null, values);
+        db.close();
+    }
+
+    public void addFeed(Feed feed){
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_3[1], feed.getChildID());
+        values.put(COLUMN_3[2], feed.getAmount());
+        values.put(COLUMN_3[3], feed.getSubstance());
+        values.put(COLUMN_3[4], feed.getTimeConsumed());
+        values.put(COLUMN_3[5], feed.getNotes());
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.insert(TABLE_NAMES[0], null, values);
+        db.close();
+    }
+
+
+    public void addMood(Mood mood){
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_4[1], mood.getMoodID());
+        values.put(COLUMN_4[2], mood.getMoodType());
+        values.put(COLUMN_4[3], mood.getTime());
+        values.put(COLUMN_4[4], mood.getNotes());
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.insert(TABLE_NAMES[0], null, values);
+        db.close();
+    }
+
+    public void addSleep(Sleep sleep){
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_5[1], sleep.getChildID());
+        values.put(COLUMN_5[2], sleep.getStartTime());
+        values.put(COLUMN_5[3], sleep.getEndTime());
+        values.put(COLUMN_5[4], sleep.getSleepType());
+        values.put(COLUMN_5[5], sleep.getNotes());
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.insert(TABLE_NAMES[0], null, values);
+        db.close();
+    }
+
     AccountHolder getAccountHolder(String user, String pass){
+//        String query = "SELECT * FROM AccountHolders WHERE Username = '" + user +
+//                "' AND Password = '" + pass + "';";
+
         String query = "SELECT * FROM AccountHolders WHERE Username = '" + user +
                 "' AND Password = '" + pass + "';";
         SQLiteDatabase db = this.getWritableDatabase();

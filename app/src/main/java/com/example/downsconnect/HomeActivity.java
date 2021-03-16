@@ -1,7 +1,11 @@
 package com.example.downsconnect;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 
@@ -12,6 +16,8 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        DBHelper helper = new DBHelper(this);
 
         Button feed = findViewById(R.id.feedButton);
         Button activity = findViewById(R.id.activityButton);
@@ -25,6 +31,28 @@ public class HomeActivity extends AppCompatActivity {
         Button photo = findViewById(R.id.photoButton);
         Button diary = findViewById(R.id.diaryButton);
         Button more = findViewById(R.id.moreButton);
+        Button signOut = findViewById(R.id.signoutButton);
+
+        signOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new AlertDialog.Builder(HomeActivity.this)
+                        .setTitle("Sign Out")
+                        .setMessage("Are you sure you want to sign out")
+                        .setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                    SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                                    sharedPreferences.edit().putBoolean("signedIn", false).commit();
+                                    Intent intent = new Intent(HomeActivity.this, MainActivity.class);
+                                    startActivity(intent);
+                            }
+                        })
+                        .setNegativeButton("no", null).show();
+            }
+
+        });
+
 
         feed.setOnClickListener(new View.OnClickListener() {
             @Override
