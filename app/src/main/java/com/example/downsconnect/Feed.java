@@ -2,6 +2,7 @@ package com.example.downsconnect;
 
 public class Feed {
     private int amount;
+    private long entryTime;
     private String substance, timeConsumed, notes;
     private int ChildID;
 
@@ -60,5 +61,13 @@ public class Feed {
 
     public void setChildID(int childID) {
         ChildID = childID;
+    }
+
+    public long getEntryTime() {
+        return entryTime;
+    }
+
+    public void setEntryTime(long entryTime) {
+        this.entryTime = entryTime;
     }
 }

@@ -17,6 +17,7 @@ public class SleepActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sleep);
 
         final Button back = findViewById(R.id.backButton);
+        final Button save = findViewById(R.id.saveButton);
         TextView currentTime = findViewById(R.id.current_time_text);
 
         Calendar calendar = Calendar.getInstance();
