@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <View
-        android:id="@+id/medicalView"
+        android:id="@+id/bottomNavView"
         android:layout_width="wrap_content"
         android:layout_height="70dp"
         android:background="#FFBEBE"
@@ -171,7 +171,7 @@
         android:text="Today 00:00 AM"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/medicalView" />
+        app:layout_constraintTop_toBottomOf="@+id/bottomNavView" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
@@ -186,10 +186,10 @@
         android:layout_height="wrap_content"
         android:text="@string/medical"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/medicalView"
-        app:layout_constraintEnd_toEndOf="@+id/medicalView"
-        app:layout_constraintStart_toStartOf="@+id/medicalView"
-        app:layout_constraintTop_toTopOf="@+id/medicalView" />
+        app:layout_constraintBottom_toBottomOf="@+id/bottomNavView"
+        app:layout_constraintEnd_toEndOf="@+id/bottomNavView"
+        app:layout_constraintStart_toStartOf="@+id/bottomNavView"
+        app:layout_constraintTop_toTopOf="@+id/bottomNavView" />
 
     <Button
         android:id="@+id/saveButton"
@@ -207,7 +207,7 @@
         android:layout_height="50dp"
         android:layout_marginStart="8dp"
         android:background="@drawable/left_arrow"
-        app:layout_constraintBottom_toBottomOf="@+id/medicalView"
+        app:layout_constraintBottom_toBottomOf="@+id/bottomNavView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -258,27 +258,27 @@
         app:layout_constraintTop_toTopOf="@+id/dosageEditText" />
 
     <Spinner
-        android:id="@+id/dosageSpinner3"
+        android:id="@+id/doctorsDaySpinner"
         android:layout_width="50dp"
         android:layout_height="40dp"
         android:background="@drawable/rounded_box"
-        app:layout_constraintBottom_toBottomOf="@+id/dosageSpinner5"
-        app:layout_constraintEnd_toStartOf="@+id/dosageSpinner4"
-        app:layout_constraintStart_toEndOf="@+id/dosageSpinner5"
-        app:layout_constraintTop_toTopOf="@+id/dosageSpinner5" />
+        app:layout_constraintBottom_toBottomOf="@+id/doctorsMonthSpinner"
+        app:layout_constraintEnd_toStartOf="@+id/doctorsYearSpinner"
+        app:layout_constraintStart_toEndOf="@+id/doctorsMonthSpinner"
+        app:layout_constraintTop_toTopOf="@+id/doctorsMonthSpinner" />
 
     <Spinner
-        android:id="@+id/dosageSpinner4"
+        android:id="@+id/doctorsYearSpinner"
         android:layout_width="50dp"
         android:layout_height="40dp"
         android:layout_marginEnd="24dp"
         android:background="@drawable/rounded_box"
-        app:layout_constraintBottom_toBottomOf="@+id/dosageSpinner3"
+        app:layout_constraintBottom_toBottomOf="@+id/doctorsDaySpinner"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/dosageSpinner3" />
+        app:layout_constraintTop_toTopOf="@+id/doctorsDaySpinner" />
 
     <Spinner
-        android:id="@+id/dosageSpinner5"
+        android:id="@+id/doctorsMonthSpinner"
         android:layout_width="50dp"
         android:layout_height="40dp"
         android:background="@drawable/rounded_box"

@@ -1,0 +1,14 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/activity_home"
+            android:title="Home" />
+        <item
+            android:id="@+id/activity_list_entries"
+            android:title="List Entries (History)" />
+        <item
+            android:id="@+id/activity_profiles"
+            android:title="Profiles" />
+    </group>
+</menu>

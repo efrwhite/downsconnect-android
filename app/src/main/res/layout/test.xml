@@ -1,0 +1,444 @@
+<!-- This DrawerLayout has two children at the root  -->
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- This LinearLayout represents the contents of the screen  -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- The ActionBar displayed at the top -->
+        <include
+            layout="@layout/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!-- The main content view where fragments are loaded -->
+        <FrameLayout
+            android:id="@+id/flContent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <View
+                    android:id="@+id/bottomNavView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="60dp"
+                    android:background="#BAF3F7"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <View
+                    android:id="@+id/view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="8dp"
+                    android:background="#BAF3F7"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/signInOutText" />
+
+                <Button
+                    android:id="@+id/feedButton"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/circle_yellow"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline6"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/activityButton"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:background="@drawable/circle_pink"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/feedButton"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline5"
+                    app:layout_constraintStart_toStartOf="@+id/guideline6" />
+
+                <Button
+                    android:id="@+id/sleepButton"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:background="@drawable/circle_navy"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/activityButton"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline7"
+                    app:layout_constraintStart_toStartOf="@+id/guideline5" />
+
+                <Button
+                    android:id="@+id/moodButton"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:background="@drawable/circle_green"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/sleepButton"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/guideline7" />
+
+                <Button
+                    android:id="@+id/resourcesButton"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/circle_purple"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline6"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/feedText" />
+
+                <Button
+                    android:id="@+id/medicalButton"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:background="@drawable/circle_red"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/resourcesButton"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline5"
+                    app:layout_constraintStart_toStartOf="@+id/guideline6" />
+
+                <Button
+                    android:id="@+id/messageButton"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:background="@drawable/circle_green"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/medicalButton"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline7"
+                    app:layout_constraintStart_toStartOf="@+id/guideline5" />
+
+                <Button
+                    android:id="@+id/milestoneButton"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:background="@drawable/circle_yellow"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/messageButton"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/guideline7" />
+
+                <Button
+                    android:id="@+id/signoutButton"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/circle_navy"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline6"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/resourcesText" />
+
+                <Button
+                    android:id="@+id/photoButton"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:background="@drawable/circle_purple"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/signoutButton"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline5"
+                    app:layout_constraintStart_toStartOf="@+id/guideline6" />
+
+                <Button
+                    android:id="@+id/diaryButton"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:background="@drawable/circle_pink"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/photoButton"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline7"
+                    app:layout_constraintStart_toStartOf="@+id/guideline5" />
+
+                <Button
+                    android:id="@+id/moreButton"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:background="@drawable/circle_red"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/diaryButton"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/guideline7" />
+
+                <ScrollView
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintBottom_toTopOf="@+id/bottomNavView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/view">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical" />
+                </ScrollView>
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.5" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.25" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.756691" />
+
+                <Button
+                    android:id="@+id/historyButton"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/calendar_icon"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/bottomNavView" />
+
+                <Button
+                    android:id="@+id/graphButton"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/graphs_icon"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/historyButton"
+                    app:layout_constraintEnd_toStartOf="@+id/timelineButton"
+                    app:layout_constraintStart_toEndOf="@+id/historyButton" />
+
+                <Button
+                    android:id="@+id/timelineButton"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/timeline_icon"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/graphButton"
+                    app:layout_constraintEnd_toEndOf="@+id/bottomNavView"
+                    app:layout_constraintStart_toStartOf="@+id/bottomNavView" />
+
+                <Button
+                    android:id="@+id/emailButton"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/mail_icon"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/timelineButton"
+                    app:layout_constraintEnd_toStartOf="@+id/syncButton"
+                    app:layout_constraintStart_toEndOf="@+id/timelineButton" />
+
+                <Button
+                    android:id="@+id/syncButton"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="24dp"
+                    android:background="@drawable/sync_icon"
+                    app:layout_constraintEnd_toEndOf="@+id/bottomNavView"
+                    app:layout_constraintTop_toTopOf="@+id/bottomNavView" />
+
+                <TextView
+                    android:id="@+id/recentEntriesText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Recent Entries"
+                    app:layout_constraintBottom_toBottomOf="@+id/view"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline5"
+                    app:layout_constraintStart_toStartOf="@+id/view"
+                    app:layout_constraintTop_toTopOf="@+id/view" />
+
+                <TextView
+                    android:id="@+id/summaryText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Summary"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/recentEntriesText"
+                    app:layout_constraintEnd_toEndOf="@+id/view"
+                    app:layout_constraintStart_toStartOf="@+id/guideline5" />
+
+                <TextView
+                    android:id="@+id/feedText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/feed"
+                    app:layout_constraintEnd_toEndOf="@+id/feedButton"
+                    app:layout_constraintStart_toStartOf="@+id/feedButton"
+                    app:layout_constraintTop_toBottomOf="@+id/feedButton" />
+
+                <TextView
+                    android:id="@+id/activityText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/activity"
+                    app:layout_constraintEnd_toEndOf="@+id/activityButton"
+                    app:layout_constraintStart_toStartOf="@+id/activityButton"
+                    app:layout_constraintTop_toBottomOf="@+id/activityButton" />
+
+                <TextView
+                    android:id="@+id/sleepText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sleep"
+                    app:layout_constraintEnd_toEndOf="@+id/sleepButton"
+                    app:layout_constraintStart_toStartOf="@+id/sleepButton"
+                    app:layout_constraintTop_toBottomOf="@+id/sleepButton" />
+
+                <TextView
+                    android:id="@+id/moodText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/mood"
+                    app:layout_constraintEnd_toEndOf="@+id/moodButton"
+                    app:layout_constraintStart_toStartOf="@+id/moodButton"
+                    app:layout_constraintTop_toBottomOf="@+id/moodButton" />
+
+                <TextView
+                    android:id="@+id/resourcesText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/resources"
+                    app:layout_constraintEnd_toEndOf="@+id/resourcesButton"
+                    app:layout_constraintStart_toStartOf="@+id/resourcesButton"
+                    app:layout_constraintTop_toBottomOf="@+id/resourcesButton" />
+
+                <TextView
+                    android:id="@+id/medicalText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/medical"
+                    app:layout_constraintEnd_toEndOf="@+id/medicalButton"
+                    app:layout_constraintStart_toStartOf="@+id/medicalButton"
+                    app:layout_constraintTop_toBottomOf="@+id/medicalButton" />
+
+                <TextView
+                    android:id="@+id/messageText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/message"
+                    app:layout_constraintEnd_toEndOf="@+id/messageButton"
+                    app:layout_constraintStart_toStartOf="@+id/messageButton"
+                    app:layout_constraintTop_toBottomOf="@+id/messageButton" />
+
+                <TextView
+                    android:id="@+id/milestoneText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/milestone"
+                    app:layout_constraintEnd_toEndOf="@+id/milestoneButton"
+                    app:layout_constraintStart_toStartOf="@+id/milestoneButton"
+                    app:layout_constraintTop_toBottomOf="@+id/milestoneButton" />
+
+                <TextView
+                    android:id="@+id/signInOutText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sign_in_out"
+                    app:layout_constraintEnd_toEndOf="@+id/signoutButton"
+                    app:layout_constraintStart_toStartOf="@+id/signoutButton"
+                    app:layout_constraintTop_toBottomOf="@+id/signoutButton" />
+
+                <TextView
+                    android:id="@+id/photoText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/photo"
+                    app:layout_constraintEnd_toEndOf="@+id/photoButton"
+                    app:layout_constraintStart_toStartOf="@+id/photoButton"
+                    app:layout_constraintTop_toBottomOf="@+id/photoButton" />
+
+                <TextView
+                    android:id="@+id/dairyText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/dairy"
+                    app:layout_constraintEnd_toEndOf="@+id/diaryButton"
+                    app:layout_constraintStart_toStartOf="@+id/diaryButton"
+                    app:layout_constraintTop_toBottomOf="@+id/diaryButton" />
+
+                <TextView
+                    android:id="@+id/moreText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/more"
+                    app:layout_constraintEnd_toEndOf="@+id/moreButton"
+                    app:layout_constraintStart_toStartOf="@+id/moreButton"
+                    app:layout_constraintTop_toBottomOf="@+id/moreButton" />
+
+                <TextView
+                    android:id="@+id/historyText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/history"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="@+id/historyButton"
+                    app:layout_constraintStart_toStartOf="@+id/historyButton"
+                    app:layout_constraintTop_toBottomOf="@+id/historyButton" />
+
+                <TextView
+                    android:id="@+id/graphsText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/graphs"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="@+id/graphButton"
+                    app:layout_constraintStart_toStartOf="@+id/guideline6"
+                    app:layout_constraintTop_toBottomOf="@+id/graphButton" />
+
+                <TextView
+                    android:id="@+id/timelineText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/timeline"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="@+id/timelineButton"
+                    app:layout_constraintStart_toStartOf="@+id/timelineButton"
+                    app:layout_constraintTop_toBottomOf="@+id/timelineButton" />
+
+                <TextView
+                    android:id="@+id/mailText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/mail"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline7"
+                    app:layout_constraintStart_toStartOf="@+id/emailButton"
+                    app:layout_constraintTop_toBottomOf="@+id/emailButton" />
+
+                <TextView
+                    android:id="@+id/syncText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/synced"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toEndOf="@+id/syncButton"
+                    app:layout_constraintStart_toStartOf="@+id/syncButton"
+                    app:layout_constraintTop_toBottomOf="@+id/syncButton" />
+
+                <TextView
+                    android:id="@+id/syncTimeText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toEndOf="@+id/syncText"
+                    app:layout_constraintStart_toStartOf="@+id/syncText"
+                    app:layout_constraintTop_toBottomOf="@+id/syncText"
+                    tools:text="0:00" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </FrameLayout>
+    </LinearLayout>
+
+    <!-- The navigation drawer that comes from the left -->
+    <!-- Note that `android:layout_gravity` needs to be set to 'start' -->
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nvView"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="@android:color/white"
+        app:menu="@menu/drawer_view" />
+</androidx.drawerlayout.widget.DrawerLayout>
