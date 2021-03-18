@@ -7,6 +7,8 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.Calendar;
+
 public class DiaryActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -14,6 +16,7 @@ public class DiaryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_diary);
 
         final Button back = findViewById(R.id.backButton);
+        Calendar calendar = Calendar.getInstance();
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override

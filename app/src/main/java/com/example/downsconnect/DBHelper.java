@@ -8,15 +8,18 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
+
 public class DBHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "downsconnect.db";
     private static final int DATABASE_VERSION = 1;
-    private static final String[] TABLE_NAMES = {"AccountHolders", "Children", "Feed", "Mood", "Sleep"};
+    private static final String[] TABLE_NAMES = {"AccountHolders", "Children", "Feed", "Mood", "Sleep", "Entries"};
     private static final String[] COLUMN_1 = {"AccountID","FirstName", "LastName", "Username", "Password", "Phone"};
     private static final String[] COLUMN_2 = {"ChildID", "FirstName", "LastName", "Gender", "BloodType", "DueDate", "Birthday", "Allergies"};
-    private static final String[] COLUMN_3 = {"FeedID", "ChildID", "Amount", "Substance", "TimeConsumed", "Notes"};
-    private static final String[] COLUMN_4 = {"MoodID", "ChildID", "MoodType", "Time", "Notes"};
-    private static final String[] COLUMN_5 = {"SleepID", "ChildID", "StartTime", "EndTime", "SleepType" ,"Notes"};
+    private static final String[] COLUMN_3 = {"FeedID", "ChildID", "Amount", "Substance", "TimeConsumed", "Notes", "EntryTime"};
+    private static final String[] COLUMN_4 = {"MoodID", "ChildID", "MoodType", "Time", "Notes", "EntryTime"};
+    private static final String[] COLUMN_5 = {"SleepID", "ChildID", "StartTime", "EndTime", "SleepType" ,"Notes", "EntryTime"};
+    private static final String[] COLUMN_6 = {"EntryID", "EntryType", "EntryID"};
     public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -45,20 +48,27 @@ public class DBHelper extends SQLiteOpenHelper {
                 "Amount INTEGER, " +
                 "Substance TEXT, " +
                 "TimeConsumed TEXT, " +
-                "Notes TEXT);");
+                "Notes TEXT, " +
+                "EntryTime INTEGER);");
         db.execSQL("CREATE TABLE Mood(" +
                 "MoodID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
                 "ChildID INTEGER, " +
                 "MoodType TEXT, " +
                 "Time TEXT, " +
-                "Notes TEXT);");
+                "Notes TEXT, " +
+                "EntryTime INTEGER);");
         db.execSQL("CREATE TABLE Sleep(" +
                 "SleepID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
                 "ChildID INTEGER, " +
-                "StartTime TEXT," +
-                "EndTime TEXT, " +
+                "StartTime INTEGER," +
+                "EndTime INTEGER, " +
                 "SleepType TEXT, " +
-                "Notes TEXT);");
+                "Notes TEXT, " +
+                "EntryTime TEXT);");
+        db.execSQL("CREATE TABLE Entries(" +
+                "EntryID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
+                "EntryType TEXT, " +
+                "EntryID INTEGER)");
 
     }
 
@@ -70,6 +80,7 @@ public class DBHelper extends SQLiteOpenHelper {
             db.execSQL("DROP TABLE IF EXISTS Feed");
             db.execSQL("DROP TABLE IF EXISTS Mood");
             db.execSQL("DROP TABLE IF EXISTS Sleep");
+            db.execSQL("DROP TABLE IF EXISTS Entries");
         }
     }
 
@@ -170,6 +181,27 @@ public class DBHelper extends SQLiteOpenHelper {
         }
         db.close();
         return accountHolder;
+    }
+
+    ArrayList<Entry> getAllEntries(){
+        String query = "SELECT * FROM Entries;";
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor c = db.rawQuery(query, null);
+        ArrayList<Entry> entries = new ArrayList<>();
+        int x = 0;
+        while(c.moveToNext()){
+            Entry entry = new Entry();
+            if(x == 0){
+                c.moveToFirst();
+                entry.setEntryType(c.getString(1));
+                entry.setEntryID(c.getInt(2));
+                entries.add(entry);
+                x++;
+            }
+        }
+        c.close();
+        db.close();
+        return entries;
     }
 
 }

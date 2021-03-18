@@ -1,14 +1,15 @@
 package com.example.downsconnect;
 
-public class Sleep {
+public class Sleep implements Comparable {
     private int sleepID, childID;
-    private String startTime, endTime, sleepType, notes;
+    private long entryTime, startTime, endTime;
+    private String sleepType, notes;
 
     public Sleep(){
 
     }
 
-    public Sleep(int childID, String startTime, String endTime, String notes){
+    public Sleep(int childID, long startTime, long endTime, String notes){
         this.childID = childID;
         this.startTime = startTime;
         this.endTime = endTime;
@@ -31,22 +32,6 @@ public class Sleep {
         this.childID = childID;
     }
 
-    public String getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(String startTime) {
-        this.startTime = startTime;
-    }
-
-    public String getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(String endTime) {
-        this.endTime = endTime;
-    }
-
     public String getSleepType() {
         return sleepType;
     }
@@ -61,5 +46,34 @@ public class Sleep {
 
     public void setNotes(String notes) {
         this.notes = notes;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        return this.compareTo(o);
+    }
+
+    public long getEntryTime() {
+        return entryTime;
+    }
+
+    public void setEntryTime(long entryTime) {
+        this.entryTime = entryTime;
+    }
+
+    public long getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(long startTime) {
+        this.startTime = startTime;
+    }
+
+    public long getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(long endTime) {
+        this.endTime = endTime;
     }
 }

@@ -2,6 +2,7 @@ package com.example.downsconnect;
 
 public class Mood {
     private int moodID;
+    private long entryTime;
     private String MoodType, time, notes;
 
     public String getMoodType() {
@@ -34,5 +35,13 @@ public class Mood {
 
     public void setMoodID(int moodID) {
         this.moodID = moodID;
+    }
+
+    public long getEntryTime() {
+        return entryTime;
+    }
+
+    public void setEntryTime(long entryTime) {
+        this.entryTime = entryTime;
     }
 }
