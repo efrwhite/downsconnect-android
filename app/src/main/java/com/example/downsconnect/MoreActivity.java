@@ -18,7 +18,7 @@ public class MoreActivity extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MoreActivity.this, HomeActivity.class);
+                Intent intent = new Intent(MoreActivity.this, HomeFragment.class);
                 startActivity(intent);
             }
         });

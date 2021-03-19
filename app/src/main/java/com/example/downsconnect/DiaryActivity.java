@@ -21,7 +21,7 @@ public class DiaryActivity extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(DiaryActivity.this, HomeActivity.class);
+                Intent intent = new Intent(DiaryActivity.this, HomeFragment.class);
                 startActivity(intent);
             }
         });

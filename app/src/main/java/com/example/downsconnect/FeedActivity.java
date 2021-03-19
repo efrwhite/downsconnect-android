@@ -34,7 +34,7 @@ public class FeedActivity extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(FeedActivity.this, HomeActivity.class);
+                Intent intent = new Intent(FeedActivity.this, HomeFragment.class);
                 startActivity(intent);
             }
         });

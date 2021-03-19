@@ -18,7 +18,7 @@
         </activity>
         <activity android:name=".SignInActivity" />
         <activity android:name=".SignUpActivity"/>
-        <activity android:name=".HomeActivity"/>
+        <activity android:name=".HomeFragment"/>
         <activity android:name=".FeedActivity"/>
         <activity android:name=".ActivityActivity"/>
         <activity android:name=".DiaryActivity"/>

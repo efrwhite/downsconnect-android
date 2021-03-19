@@ -21,7 +21,7 @@ public class ActivityActivity extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ActivityActivity.this, HomeActivity.class);
+                Intent intent = new Intent(ActivityActivity.this, HomeFragment.class);
                 startActivity(intent);
             }
         });

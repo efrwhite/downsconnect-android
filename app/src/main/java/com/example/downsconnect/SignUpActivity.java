@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -57,7 +56,7 @@ public class SignUpActivity extends AppCompatActivity {
                         helper.addAccount(accountHolder);
                         helper.close();
                         //will add to database you dbhelper when that function is written
-                        Intent intent = new Intent(SignUpActivity.this, HomeActivity.class);
+                        Intent intent = new Intent(SignUpActivity.this, HomeFragment.class);
                         startActivity(intent);
                     }
                 }

@@ -35,7 +35,7 @@ public class MedicalActivity extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MedicalActivity.this, HomeActivity.class);
+                Intent intent = new Intent(MedicalActivity.this, HomeFragment.class);
                 startActivity(intent);
             }
         });

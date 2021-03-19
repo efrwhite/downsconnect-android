@@ -18,7 +18,7 @@ public class ResourcesActivity extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ResourcesActivity.this, HomeActivity.class);
+                Intent intent = new Intent(ResourcesActivity.this, HomeFragment.class);
                 startActivity(intent);
             }
         });
