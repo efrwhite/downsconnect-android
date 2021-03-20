@@ -18,7 +18,7 @@ public class MilestoneActivity extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MilestoneActivity.this, HomeFragment.class);
+                Intent intent = new Intent(MilestoneActivity.this, ActivityContainer.class);
                 startActivity(intent);
             }
         });

@@ -1,7 +1,7 @@
 package com.example.downsconnect;
 
 public class Entry {
-    private int entryID;
+    private int typeID;
     private String entryType;
 
     public Entry(){
@@ -9,12 +9,12 @@ public class Entry {
     }
 
 
-    public int getEntryID() {
-        return entryID;
+    public int getTypeID() {
+        return typeID;
     }
 
-    public void setEntryID(int entryID) {
-        this.entryID = entryID;
+    public void setTypeID(int typeID) {
+        this.typeID = typeID;
     }
 
     public String getEntryType() {
