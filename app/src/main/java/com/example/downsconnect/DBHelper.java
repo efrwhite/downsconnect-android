@@ -19,7 +19,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String[] COLUMN_3 = {"FeedID", "ChildID", "Amount", "Substance", "TimeConsumed", "Notes", "EntryTime"};
     private static final String[] COLUMN_4 = {"MoodID", "ChildID", "MoodType", "Time", "Notes", "EntryTime"};
     private static final String[] COLUMN_5 = {"SleepID", "ChildID", "StartTime", "EndTime", "SleepType" ,"Notes", "EntryTime"};
-    private static final String[] COLUMN_6 = {"EntryID", "EntryType", "EntryID"};
+    private static final String[] COLUMN_6 = {"EntryID", "EntryType", "TypeID"};
     public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -68,7 +68,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE Entries(" +
                 "EntryID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
                 "EntryType TEXT, " +
-                "EntryID INTEGER)");
+                "TypeID INTEGER)");
 
     }
 
@@ -194,7 +194,7 @@ public class DBHelper extends SQLiteOpenHelper {
             if(x == 0){
                 c.moveToFirst();
                 entry.setEntryType(c.getString(1));
-                entry.setEntryID(c.getInt(2));
+                entry.setTypeID(c.getInt(2));
                 entries.add(entry);
                 x++;
             }
@@ -205,3 +205,137 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
 }
+
+//public class HomeFragment extends AppCompatActivity {
+//
+//    @Override
+//    protected void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.activity_home);
+//
+//        DBHelper helper = new DBHelper(this);
+//
+//        Button feed = findViewById(R.id.feedButton);
+//        Button activity = findViewById(R.id.activityButton);
+//        Button sleep = findViewById(R.id.sleepButton);
+//        Button mood = findViewById(R.id.moodButton);
+//        Button resources = findViewById(R.id.resourcesButton);
+//        Button medical = findViewById(R.id.medicalButton);
+//        Button message = findViewById(R.id.messageButton);
+//        Button milestone = findViewById(R.id.milestoneButton);
+//        Button photo = findViewById(R.id.photoButton);
+//        Button diary = findViewById(R.id.diaryButton);
+//        Button more = findViewById(R.id.moreButton);
+//        Button signOut = findViewById(R.id.signoutButton);
+//
+//        signOut.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                new AlertDialog.Builder(HomeFragment.this)
+//                        .setTitle("Sign Out")
+//                        .setMessage("Are you sure you want to sign out")
+//                        .setPositiveButton("yes", new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialogInterface, int i) {
+//                                    SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+//                                    sharedPreferences.edit().putBoolean("signedIn", false).commit();
+//                                    Intent intent = new Intent(HomeFragment.this, MainActivity.class);
+//                                    startActivity(intent);
+//                            }
+//                        })
+//                        .setNegativeButton("no", null).show();
+//            }
+//
+//        });
+//
+//
+//        feed.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(HomeFragment.this, FeedActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+//
+//        activity.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(HomeFragment.this, ActivityActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+//
+//        sleep.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(HomeFragment.this, SleepActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+//
+//        mood.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(HomeFragment.this, MoodActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+//
+//        resources.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(HomeFragment.this, ResourcesActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+//
+//        medical.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(HomeFragment.this, MedicalActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+//
+//        message.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(HomeFragment.this, MessageActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+//
+//        milestone.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(HomeFragment.this, MilestoneActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+//
+//        photo.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(HomeFragment.this, PhotoActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+//
+//        diary.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(HomeFragment.this, DiaryActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+//
+//        more.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(HomeFragment.this, MoreActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+//    }
+//}
+

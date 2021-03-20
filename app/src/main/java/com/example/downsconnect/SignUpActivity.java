@@ -56,7 +56,7 @@ public class SignUpActivity extends AppCompatActivity {
                         helper.addAccount(accountHolder);
                         helper.close();
                         //will add to database you dbhelper when that function is written
-                        Intent intent = new Intent(SignUpActivity.this, HomeFragment.class);
+                        Intent intent = new Intent(SignUpActivity.this, ActivityContainer.class);
                         startActivity(intent);
                     }
                 }

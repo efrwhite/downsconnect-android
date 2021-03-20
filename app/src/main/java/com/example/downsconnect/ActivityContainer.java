@@ -18,7 +18,6 @@ public class ActivityContainer extends AppCompatActivity {
     private Toolbar toolbar;
     private NavigationView nvDrawer;
 
-    final Fragment homeFragment = new HomeFragment();
 
     // Make sure to be using androidx.appcompat.app.ActionBarDrawerToggle version.
     private ActionBarDrawerToggle drawerToggle;
@@ -26,7 +25,9 @@ public class ActivityContainer extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_container);
+
+        final Fragment homeFragment = new HomeFragment();
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.flContent, homeFragment).commit();

@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         if(sharedPreferences.getBoolean("signedIn", false)){
-            Intent i = new Intent(MainActivity.this, HomeFragment.class);
+            Intent i = new Intent(MainActivity.this, ActivityContainer.class);
             startActivity(i);
         }
 
