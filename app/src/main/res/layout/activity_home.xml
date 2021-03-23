@@ -7,15 +7,6 @@
     android:layout_height="match_parent">
 
     <View
-        android:id="@+id/homeTopNavView"
-        android:layout_width="wrap_content"
-        android:layout_height="70dp"
-        android:background="#BAF3F7"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <View
         android:id="@+id/bottomNavView"
         android:layout_width="wrap_content"
         android:layout_height="60dp"
@@ -42,7 +33,7 @@
         android:background="@drawable/circle_yellow"
         app:layout_constraintEnd_toStartOf="@+id/guideline6"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/homeTopNavView" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/activityButton"
@@ -181,16 +172,6 @@
         app:layout_constraintGuide_percent="0.756691" />
 
     <Button
-        android:id="@+id/sideNavButton"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="16dp"
-        android:background="@drawable/nav_button"
-        app:layout_constraintBottom_toBottomOf="@+id/homeTopNavView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
         android:id="@+id/historyButton"
         android:layout_width="30dp"
         android:layout_height="30dp"
@@ -238,26 +219,6 @@
         app:layout_constraintTop_toTopOf="@+id/bottomNavView" />
 
     <TextView
-        android:id="@+id/nameText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/imageView3"
-        app:layout_constraintTop_toTopOf="@+id/imageView3"
-        tools:text="First Name Last Name" />
-
-    <TextView
-        android:id="@+id/ageText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView3"
-        app:layout_constraintStart_toStartOf="@+id/nameText"
-        tools:text=" yrs, mo, days" />
-
-    <TextView
         android:id="@+id/recentEntriesText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -275,16 +236,6 @@
         app:layout_constraintBaseline_toBaselineOf="@+id/recentEntriesText"
         app:layout_constraintEnd_toEndOf="@+id/view"
         app:layout_constraintStart_toStartOf="@+id/guideline5" />
-
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/homeTopNavView"
-        app:layout_constraintStart_toEndOf="@+id/sideNavButton"
-        app:layout_constraintTop_toTopOf="@+id/homeTopNavView"
-        app:srcCompat="@drawable/circle_grey" />
 
     <TextView
         android:id="@+id/feedText"
