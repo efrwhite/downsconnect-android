@@ -54,10 +54,18 @@
     <string name="diary">Diary</string>
     <string name="woke_up">Woke up</string>
     <string name="went_to_sleep">Went to sleep</string>
+    <string name="enter_birthday">Enter Birthday</string>
+    <string name="enter_due_date">Enter Due Date</string>
 
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="bathroom">Bathroom</string>
+    <array name="gender">
+        <item>Select</item>
+        <item>Male</item>
+        <item>Female</item>
+    </array>
+
 </resources>

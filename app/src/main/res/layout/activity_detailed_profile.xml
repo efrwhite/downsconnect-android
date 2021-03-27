@@ -92,6 +92,7 @@
         android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
         android:background="@drawable/rounded_box"
+        android:entries="@array/gender"
         android:inputType="numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline4"
@@ -132,64 +133,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Spinner
-        android:id="@+id/birthdayMonthSpinner"
-        android:layout_width="50dp"
-        android:layout_height="40dp"
-        android:background="@drawable/rounded_box"
-        app:layout_constraintBottom_toBottomOf="@+id/birthdayText"
-        app:layout_constraintStart_toStartOf="@+id/guideline4"
-        app:layout_constraintTop_toTopOf="@+id/birthdayText" />
-
-    <Spinner
-        android:id="@+id/birthdayDaySpinner"
-        android:layout_width="50dp"
-        android:layout_height="40dp"
-        android:background="@drawable/rounded_box"
-        app:layout_constraintBottom_toBottomOf="@+id/birthdayMonthSpinner"
-        app:layout_constraintEnd_toStartOf="@+id/birthdayYearSpinner"
-        app:layout_constraintStart_toEndOf="@+id/birthdayMonthSpinner"
-        app:layout_constraintTop_toTopOf="@+id/birthdayMonthSpinner" />
-
-    <Spinner
-        android:id="@+id/birthdayYearSpinner"
-        android:layout_width="50dp"
-        android:layout_height="40dp"
-        android:layout_marginEnd="24dp"
-        android:background="@drawable/rounded_box"
-        app:layout_constraintBottom_toBottomOf="@+id/birthdayDaySpinner"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/birthdayDaySpinner" />
-
-    <Spinner
-        android:id="@+id/dueMonthSpinner"
-        android:layout_width="50dp"
-        android:layout_height="40dp"
-        android:background="@drawable/rounded_box"
-        app:layout_constraintBottom_toBottomOf="@+id/dueDateText"
-        app:layout_constraintStart_toStartOf="@+id/guideline4"
-        app:layout_constraintTop_toTopOf="@+id/dueDateText" />
-
-    <Spinner
-        android:id="@+id/dueDaySpinner"
-        android:layout_width="50dp"
-        android:layout_height="40dp"
-        android:background="@drawable/rounded_box"
-        app:layout_constraintBottom_toBottomOf="@+id/dueMonthSpinner"
-        app:layout_constraintEnd_toStartOf="@+id/dueYearSpinner"
-        app:layout_constraintStart_toEndOf="@+id/dueMonthSpinner"
-        app:layout_constraintTop_toTopOf="@+id/dueMonthSpinner" />
-
-    <Spinner
-        android:id="@+id/dueYearSpinner"
-        android:layout_width="50dp"
-        android:layout_height="40dp"
-        android:layout_marginEnd="24dp"
-        android:background="@drawable/rounded_box"
-        app:layout_constraintBottom_toBottomOf="@+id/dueDaySpinner"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/dueDaySpinner" />
-
     <Button
         android:id="@+id/saveButton"
         android:layout_width="wrap_content"
@@ -219,5 +162,38 @@
         app:layout_constraintBaseline_toBaselineOf="@+id/medicationsText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline4" />
+
+    <EditText
+        android:id="@+id/birthdayPicker"
+        android:layout_width="192dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="125dp"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:focusable="false"
+        android:hint="@string/enter_birthday"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.777"
+        app:layout_constraintStart_toEndOf="@+id/birthdayText"
+        app:layout_constraintTop_toBottomOf="@+id/genderEditText" />
+
+    <EditText
+        android:id="@+id/dueDatePicker"
+        android:layout_width="192dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="118dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:focusable="false"
+        android:hint="@string/enter_due_date"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/allergyEditText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.75"
+        app:layout_constraintStart_toEndOf="@+id/dueDateText"
+        app:layout_constraintTop_toBottomOf="@+id/birthdayPicker"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
