@@ -2,10 +2,10 @@ package com.example.downsconnect;
 
 public class Child {
     private String firstName, lastName, birthday, dueDate, allergies;
-    private Gender gender;
+    private String gender;
     private BloodType bloodType;
 
-   public Child(String firstName, String lastName, String birthday, Gender gender){
+   public Child(String firstName, String lastName, String birthday, String gender){
        this.firstName = firstName;
        this.lastName = lastName;
        this.birthday = birthday;
@@ -37,11 +37,11 @@ public class Child {
         this.birthday = birthday;
     }
 
-    public Gender getGender() {
+    public String getGender() {
         return gender;
     }
 
-    public void setGender(Gender gender) {
+    public void setGender(String gender) {
         this.gender = gender;
     }
 
