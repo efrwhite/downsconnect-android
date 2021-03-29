@@ -64,7 +64,15 @@ public class DBHelper extends SQLiteOpenHelper {
                 "EndTime INTEGER, " +
                 "SleepType TEXT, " +
                 "Notes TEXT, " +
-                "EntryTime TEXT);");
+                "EntryTime INTEGER);");
+        db.execSQL("CREATE TABLE Bathroom(" +
+                "BathroomID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
+                "ChildID INTEGER, " +
+                "BathroomType TEXT, " +
+                "TreatmentPlan TEXT, " +
+                "DateOfLastStool INTEGER, " +
+                "Notes TEXT, " +
+                "EntryTime INTEGER)");
         db.execSQL("CREATE TABLE Entries(" +
                 "EntryID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
                 "EntryType TEXT, " +
