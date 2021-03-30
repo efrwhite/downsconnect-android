@@ -5,16 +5,15 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -84,7 +83,7 @@ public class HomeFragment extends Fragment {
         Button medical = view.findViewById(R.id.medicalButton);
         Button message = view.findViewById(R.id.messageButton);
         Button milestone = view.findViewById(R.id.milestoneButton);
-        Button photo = view.findViewById(R.id.photoButton);
+        Button bathroom = view.findViewById(R.id.bathroomButton);
         Button diary = view.findViewById(R.id.diaryButton);
         Button more = view.findViewById(R.id.moreButton);
         Button signOut = view.findViewById(R.id.signoutButton);
@@ -174,10 +173,10 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        photo.setOnClickListener(new View.OnClickListener() {
+        bathroom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), PhotoActivity.class);
+                Intent intent = new Intent(getContext(), BathroomActivity.class);
                 startActivity(intent);
             }
         });

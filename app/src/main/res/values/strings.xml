@@ -62,6 +62,9 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="bathroom">Bathroom</string>
+    <string name="diaper">Diaper</string>
+    <string name="potty">Potty</string>
+    <string name="constipation">Constipation</string>
 
     <array name="gender">
         <item>Select</item>

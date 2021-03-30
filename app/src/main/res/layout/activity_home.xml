@@ -110,7 +110,7 @@
         app:layout_constraintTop_toBottomOf="@+id/resourcesText" />
 
     <Button
-        android:id="@+id/photoButton"
+        android:id="@+id/bathroomButton"
         android:layout_width="75dp"
         android:layout_height="75dp"
         android:background="@drawable/circle_purple"
@@ -123,7 +123,7 @@
         android:layout_width="75dp"
         android:layout_height="75dp"
         android:background="@drawable/circle_pink"
-        app:layout_constraintBaseline_toBaselineOf="@+id/photoButton"
+        app:layout_constraintBaseline_toBaselineOf="@+id/bathroomButton"
         app:layout_constraintEnd_toStartOf="@+id/guideline7"
         app:layout_constraintStart_toStartOf="@+id/guideline5" />
 
@@ -319,13 +319,13 @@
         app:layout_constraintTop_toBottomOf="@+id/signoutButton" />
 
     <TextView
-        android:id="@+id/photoText"
+        android:id="@+id/bathroomText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/photo"
-        app:layout_constraintEnd_toEndOf="@+id/photoButton"
-        app:layout_constraintStart_toStartOf="@+id/photoButton"
-        app:layout_constraintTop_toBottomOf="@+id/photoButton" />
+        android:text="@string/bathroom"
+        app:layout_constraintEnd_toEndOf="@+id/bathroomButton"
+        app:layout_constraintStart_toStartOf="@+id/bathroomButton"
+        app:layout_constraintTop_toBottomOf="@+id/bathroomButton" />
 
     <TextView
         android:id="@+id/diaryText"
