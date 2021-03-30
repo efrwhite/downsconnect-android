@@ -217,6 +217,7 @@
         android:layout_height="40dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="24dp"
+        android:entries="@array/height"
         android:background="@drawable/rounded_box"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -230,6 +231,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="24dp"
         android:background="@drawable/rounded_box"
+        android:entries="@array/weight"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/measuredWeightEditText"
         app:layout_constraintTop_toTopOf="@+id/measuredWeightEditText" />
@@ -241,6 +243,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="24dp"
         android:background="@drawable/rounded_box"
+        android:entries="@array/temperature"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/temperatureEditText"
@@ -253,36 +256,22 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="24dp"
         android:background="@drawable/rounded_box"
+        android:entries="@array/dosage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/dosageEditText"
         app:layout_constraintTop_toTopOf="@+id/dosageEditText" />
 
-    <Spinner
-        android:id="@+id/doctorsDaySpinner"
-        android:layout_width="50dp"
-        android:layout_height="40dp"
-        android:background="@drawable/rounded_box"
-        app:layout_constraintBottom_toBottomOf="@+id/doctorsMonthSpinner"
-        app:layout_constraintEnd_toStartOf="@+id/doctorsYearSpinner"
-        app:layout_constraintStart_toEndOf="@+id/doctorsMonthSpinner"
-        app:layout_constraintTop_toTopOf="@+id/doctorsMonthSpinner" />
-
-    <Spinner
-        android:id="@+id/doctorsYearSpinner"
-        android:layout_width="50dp"
+    <EditText
+        android:id="@+id/doctorDatePicker"
+        android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginEnd="24dp"
         android:background="@drawable/rounded_box"
-        app:layout_constraintBottom_toBottomOf="@+id/doctorsDaySpinner"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/doctorsDaySpinner" />
-
-    <Spinner
-        android:id="@+id/doctorsMonthSpinner"
-        android:layout_width="50dp"
-        android:layout_height="40dp"
-        android:background="@drawable/rounded_box"
+        android:hint="Enter Appointment Date"
+        android:paddingStart="7dp"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/doctorsVisitText"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toTopOf="@+id/doctorsVisitText" />
 
@@ -293,6 +282,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="24dp"
         android:background="@drawable/rounded_box"
+        android:entries="@array/measurement"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/headSizeEditText"
         app:layout_constraintTop_toTopOf="@+id/headSizeEditText" />
@@ -303,6 +293,7 @@
         android:layout_height="40dp"
         android:layout_marginEnd="24dp"
         android:background="@drawable/rounded_box"
+        android:entries="@array/health"
         app:layout_constraintBottom_toBottomOf="@+id/healthText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
