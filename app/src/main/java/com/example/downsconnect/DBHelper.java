@@ -13,13 +13,14 @@ import java.util.ArrayList;
 public class DBHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "downsconnect.db";
     private static final int DATABASE_VERSION = 1;
-    private static final String[] TABLE_NAMES = {"AccountHolders", "Children", "Feed", "Mood", "Sleep", "Entries"};
+    private static final String[] TABLE_NAMES = {"AccountHolders", "Children", "Feed", "Mood", "Sleep", "Entries", "Medical"};
     private static final String[] COLUMN_1 = {"AccountID","FirstName", "LastName", "Username", "Password", "Phone"};
     private static final String[] COLUMN_2 = {"ChildID", "FirstName", "LastName", "Gender", "BloodType", "DueDate", "Birthday", "Allergies"};
     private static final String[] COLUMN_3 = {"FeedID", "ChildID", "Amount", "Substance", "TimeConsumed", "Notes", "EntryTime"};
     private static final String[] COLUMN_4 = {"MoodID", "ChildID", "MoodType", "Time", "Notes", "EntryTime"};
     private static final String[] COLUMN_5 = {"SleepID", "ChildID", "StartTime", "EndTime", "SleepType" ,"Notes", "EntryTime"};
     private static final String[] COLUMN_6 = {"EntryID", "EntryType", "TypeID"};
+    private static final String[] COLUMN_7 = {"MedicalID", "ChildID", "Height", "HeightUnit", "Weight", "WeightUnit", "HeadSize", "HeadSizeUnit", "Health", "Vaccine", "Dosage", "DosageUnit", "DoctorsVisit", "Temperature", "TemperatureUnit", "Notes", "EntryTime"};
     public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -76,8 +77,25 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE Entries(" +
                 "EntryID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
                 "EntryType TEXT, " +
+                "EntryTime INTEGER, " +
                 "TypeID INTEGER)");
-
+        db.execSQL("CREATE TABLE Medical(" +
+                "MedicalID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
+                "ChildID INTEGER, " +
+                "Height INTEGER, " +
+                "HeightUnit TEXT, " +
+                "Weight INTEGER, " +
+                "WeightUnit TEXT, " +
+                "HeadSize INTEGER, " +
+                "HeadSizeUnit TEXT, " +
+                "Health TEXT, " +
+                "Vaccine TEXT, " +
+                "Dosage INTEGER, " +
+                "DosageUnit TEXT, " +
+                "DoctorsVisit INTEGER, " +
+                "Temperature TEXT, " +
+                "Notes TEXT, " +
+                "EntryTime INTEGER)");
     }
 
     @Override
@@ -89,6 +107,7 @@ public class DBHelper extends SQLiteOpenHelper {
             db.execSQL("DROP TABLE IF EXISTS Mood");
             db.execSQL("DROP TABLE IF EXISTS Sleep");
             db.execSQL("DROP TABLE IF EXISTS Entries");
+            db.execSQL("DROP TABLE IF EXISTS Medical");
         }
     }
 
@@ -125,7 +144,7 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(COLUMN_2[6], child.getBirthday());
         values.put(COLUMN_2[7], child.getAllergies());
         SQLiteDatabase db = this.getWritableDatabase();
-        db.insert(TABLE_NAMES[0], null, values);
+        db.insert(TABLE_NAMES[1], null, values);
         db.close();
     }
 
@@ -137,7 +156,7 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(COLUMN_3[4], feed.getTimeConsumed());
         values.put(COLUMN_3[5], feed.getNotes());
         SQLiteDatabase db = this.getWritableDatabase();
-        db.insert(TABLE_NAMES[0], null, values);
+        db.insert(TABLE_NAMES[2], null, values);
         db.close();
     }
 
@@ -149,7 +168,7 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(COLUMN_4[3], mood.getTime());
         values.put(COLUMN_4[4], mood.getNotes());
         SQLiteDatabase db = this.getWritableDatabase();
-        db.insert(TABLE_NAMES[0], null, values);
+        db.insert(TABLE_NAMES[3], null, values);
         db.close();
     }
 
@@ -161,7 +180,39 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(COLUMN_5[4], sleep.getSleepType());
         values.put(COLUMN_5[5], sleep.getNotes());
         SQLiteDatabase db = this.getWritableDatabase();
-        db.insert(TABLE_NAMES[0], null, values);
+        db.insert(TABLE_NAMES[4], null, values);
+        db.close();
+    }
+
+    public void addEntry(Entry entry){
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_6[1], entry.getEntryType());
+        values.put(COLUMN_6[2], entry.getEntryTime());
+        values.put(COLUMN_6[3], entry.getTypeID());
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.insert(TABLE_NAMES[5], null, values);
+        db.close();
+    }
+
+    public void addMedical(MedicalInfo medicalInfo){
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_7[1], medicalInfo.getChildId());
+        values.put(COLUMN_7[2], medicalInfo.getHeight());
+        values.put(COLUMN_7[3], medicalInfo.getHeightUnit());
+        values.put(COLUMN_7[4], medicalInfo.getWeight());
+        values.put(COLUMN_7[5], medicalInfo.getWeightUnit());
+        values.put(COLUMN_7[6], medicalInfo.getHeadSize());
+        values.put(COLUMN_7[7], medicalInfo.getHeadSizeUnit());
+        values.put(COLUMN_7[8], medicalInfo.getHealth());
+        values.put(COLUMN_7[9], medicalInfo.getVaccine());
+        values.put(COLUMN_7[10], medicalInfo.getDosage());
+        values.put(COLUMN_7[11], medicalInfo.getDosageUnit());
+        values.put(COLUMN_7[12], medicalInfo.getDoctorVisit());
+        values.put(COLUMN_7[13], medicalInfo.getTemperature());
+        values.put(COLUMN_7[14], medicalInfo.getNotes());
+        values.put(COLUMN_7[15], medicalInfo.getEntryTime());
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.insert(TABLE_NAMES[6], null, values);
         db.close();
     }
 

@@ -3,6 +3,7 @@ package com.example.downsconnect;
 public class Entry {
     private int typeID;
     private String entryType;
+    private long entryTime;
 
     public Entry(){
 
@@ -23,5 +24,13 @@ public class Entry {
 
     public void setEntryType(String entryType) {
         this.entryType = entryType;
+    }
+
+    public long getEntryTime() {
+        return entryTime;
+    }
+
+    public void setEntryTime(long entryTime) {
+        this.entryTime = entryTime;
     }
 }
