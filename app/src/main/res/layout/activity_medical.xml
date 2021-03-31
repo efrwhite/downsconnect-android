@@ -270,6 +270,7 @@
         android:hint="Enter Appointment Date"
         android:paddingStart="7dp"
         android:textSize="14sp"
+        android:focusable="false"
         app:layout_constraintBottom_toBottomOf="@+id/doctorsVisitText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline2"

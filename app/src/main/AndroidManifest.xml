@@ -26,6 +26,7 @@
         <activity android:name=".MilestoneActivity"/>
         <activity android:name=".MoodActivity"/>
         <activity android:name=".MoreActivity"/>
+        <activity android:name=".BathroomActivity"/>
         <activity android:name=".PhotoActivity"/>
         <activity android:name=".ResourcesActivity"/>
         <activity android:name=".SleepActivity"/>

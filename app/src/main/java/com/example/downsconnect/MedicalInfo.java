@@ -1,9 +1,9 @@
 package com.example.downsconnect;
 
 public class MedicalInfo {
-    private int height, weight, headSize, dosage;
-    private long entryTime;
-    private String vaccine, doctorVisit, temperature, health;
+    private int height, weight, headSize, dosage, childId;
+    private long entryTime, doctorVisit;
+    private String vaccine, temperature, health, heightUnit, weightUnit, headSizeUnit, dosageUnit, notes;
 
     public MedicalInfo(){
 
@@ -48,11 +48,11 @@ public class MedicalInfo {
         this.vaccine = vaccine;
     }
 
-    public String getDoctorVisit() {
+    public long getDoctorVisit() {
         return doctorVisit;
     }
 
-    public void setDoctorVisit(String doctorVisit) {
+    public void setDoctorVisit(long doctorVisit) {
         this.doctorVisit = doctorVisit;
     }
 
@@ -78,5 +78,53 @@ public class MedicalInfo {
 
     public void setEntryTime(long entryTime) {
         this.entryTime = entryTime;
+    }
+
+    public String getHeightUnit() {
+        return heightUnit;
+    }
+
+    public void setHeightUnit(String heightUnit) {
+        this.heightUnit = heightUnit;
+    }
+
+    public String getWeightUnit() {
+        return weightUnit;
+    }
+
+    public void setWeightUnit(String weightUnit) {
+        this.weightUnit = weightUnit;
+    }
+
+    public String getHeadSizeUnit() {
+        return headSizeUnit;
+    }
+
+    public void setHeadSizeUnit(String headSizeUnit) {
+        this.headSizeUnit = headSizeUnit;
+    }
+
+    public int getChildId() {
+        return childId;
+    }
+
+    public void setChildId(int childId) {
+        this.childId = childId;
+    }
+
+    public String getDosageUnit() {
+        return dosageUnit;
+    }
+
+    public void setDosageUnit(String dosageUnit) {
+        this.dosageUnit = dosageUnit;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
     }
 }
