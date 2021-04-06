@@ -1,9 +1,9 @@
 package com.example.downsconnect;
 
 public class MedicalInfo {
-    private int height, weight, headSize, dosage, childId;
+    private int height, weight, headSize, dosage, childId, temperature, medicalID;
     private long entryTime, doctorVisit;
-    private String vaccine, temperature, health, heightUnit, weightUnit, headSizeUnit, dosageUnit, notes;
+    private String vaccine, temperatureUnit, health, heightUnit, weightUnit, headSizeUnit, dosageUnit, notes;
 
     public MedicalInfo(){
 
@@ -56,11 +56,11 @@ public class MedicalInfo {
         this.doctorVisit = doctorVisit;
     }
 
-    public String getTemperature() {
+    public int getTemperature() {
         return temperature;
     }
 
-    public void setTemperature(String temperature) {
+    public void setTemperature(int temperature) {
         this.temperature = temperature;
     }
 
@@ -126,5 +126,21 @@ public class MedicalInfo {
 
     public void setNotes(String notes) {
         this.notes = notes;
+    }
+
+    public String getTemperatureUnit() {
+        return temperatureUnit;
+    }
+
+    public void setTemperatureUnit(String temperatureUnit) {
+        this.temperatureUnit = temperatureUnit;
+    }
+
+    public int getMedicalID() {
+        return medicalID;
+    }
+
+    public void setMedicalID(int medicalID) {
+        this.medicalID = medicalID;
     }
 }

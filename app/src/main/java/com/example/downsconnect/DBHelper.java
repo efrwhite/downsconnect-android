@@ -93,7 +93,8 @@ public class DBHelper extends SQLiteOpenHelper {
                 "Dosage INTEGER, " +
                 "DosageUnit TEXT, " +
                 "DoctorsVisit INTEGER, " +
-                "Temperature TEXT, " +
+                "Temperature INTEGER, " +
+                "TemperatureUnit TEXT, " +
                 "Notes TEXT, " +
                 "EntryTime INTEGER)");
     }
@@ -155,6 +156,7 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(COLUMN_3[3], feed.getSubstance());
         values.put(COLUMN_3[4], feed.getTimeConsumed());
         values.put(COLUMN_3[5], feed.getNotes());
+        values.put(COLUMN_3[6], feed.getEntryTime());
         SQLiteDatabase db = this.getWritableDatabase();
         db.insert(TABLE_NAMES[2], null, values);
         db.close();
@@ -167,6 +169,7 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(COLUMN_4[2], mood.getMoodType());
         values.put(COLUMN_4[3], mood.getTime());
         values.put(COLUMN_4[4], mood.getNotes());
+        values.put(COLUMN_4[5], mood.getEntryTime());
         SQLiteDatabase db = this.getWritableDatabase();
         db.insert(TABLE_NAMES[3], null, values);
         db.close();
@@ -179,6 +182,7 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(COLUMN_5[3], sleep.getEndTime());
         values.put(COLUMN_5[4], sleep.getSleepType());
         values.put(COLUMN_5[5], sleep.getNotes());
+        values.put(COLUMN_5[6], sleep.getEntryTime());
         SQLiteDatabase db = this.getWritableDatabase();
         db.insert(TABLE_NAMES[4], null, values);
         db.close();
@@ -209,8 +213,9 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(COLUMN_7[11], medicalInfo.getDosageUnit());
         values.put(COLUMN_7[12], medicalInfo.getDoctorVisit());
         values.put(COLUMN_7[13], medicalInfo.getTemperature());
-        values.put(COLUMN_7[14], medicalInfo.getNotes());
-        values.put(COLUMN_7[15], medicalInfo.getEntryTime());
+        values.put(COLUMN_7[14], medicalInfo.getTemperatureUnit());
+        values.put(COLUMN_7[15], medicalInfo.getNotes());
+        values.put(COLUMN_7[16], medicalInfo.getEntryTime());
         SQLiteDatabase db = this.getWritableDatabase();
         db.insert(TABLE_NAMES[6], null, values);
         db.close();
@@ -263,138 +268,37 @@ public class DBHelper extends SQLiteOpenHelper {
         return entries;
     }
 
-}
+    MedicalInfo findMedicalInfo(int medicalID){
+        String query = "SELECT * FROM Medical WHERE MedicalID = " + medicalID + ";";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor c = db.rawQuery(query, null);
+        MedicalInfo medicalInfo = new MedicalInfo();
+        if(c.moveToFirst()) {
+            c.moveToFirst();
+            medicalInfo.setMedicalID(Integer.parseInt(c.getString(0)));
+            medicalInfo.setChildId(Integer.parseInt(c.getString(1)));
+            medicalInfo.setHeight(Integer.parseInt(c.getString(2)));
+            medicalInfo.setHeightUnit(c.getString(3));
+            medicalInfo.setWeight(Integer.parseInt(c.getString(4)));
+            medicalInfo.setWeightUnit(c.getString(5));
+            medicalInfo.setHeadSize(Integer.parseInt(c.getString(6)));
+            medicalInfo.setHeadSizeUnit(c.getString(7));
+            medicalInfo.setHealth(c.getString(8));
+            medicalInfo.setVaccine(c.getString(9));
+            medicalInfo.setDosage(Integer.parseInt(c.getString(10)));
+            medicalInfo.setDosageUnit(c.getString(11));
+            medicalInfo.setDoctorVisit(Integer.parseInt(c.getString(12)));
+            medicalInfo.setTemperature(Integer.parseInt(c.getString(13)));
+            medicalInfo.setTemperatureUnit(c.getString(14));
+            medicalInfo.setNotes(c.getString(15));
+            medicalInfo.setEntryTime(Integer.parseInt(c.getString(16)));
+        }
+        else{
+            medicalInfo = null;
+        }
+        db.close();
+        return medicalInfo;
+    }
 
-//public class HomeFragment extends AppCompatActivity {
-//
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_home);
-//
-//        DBHelper helper = new DBHelper(this);
-//
-//        Button feed = findViewById(R.id.feedButton);
-//        Button activity = findViewById(R.id.activityButton);
-//        Button sleep = findViewById(R.id.sleepButton);
-//        Button mood = findViewById(R.id.moodButton);
-//        Button resources = findViewById(R.id.resourcesButton);
-//        Button medical = findViewById(R.id.medicalButton);
-//        Button message = findViewById(R.id.messageButton);
-//        Button milestone = findViewById(R.id.milestoneButton);
-//        Button photo = findViewById(R.id.photoButton);
-//        Button diary = findViewById(R.id.diaryButton);
-//        Button more = findViewById(R.id.moreButton);
-//        Button signOut = findViewById(R.id.signoutButton);
-//
-//        signOut.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                new AlertDialog.Builder(HomeFragment.this)
-//                        .setTitle("Sign Out")
-//                        .setMessage("Are you sure you want to sign out")
-//                        .setPositiveButton("yes", new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialogInterface, int i) {
-//                                    SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-//                                    sharedPreferences.edit().putBoolean("signedIn", false).commit();
-//                                    Intent intent = new Intent(HomeFragment.this, MainActivity.class);
-//                                    startActivity(intent);
-//                            }
-//                        })
-//                        .setNegativeButton("no", null).show();
-//            }
-//
-//        });
-//
-//
-//        feed.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(HomeFragment.this, FeedActivity.class);
-//                startActivity(intent);
-//            }
-//        });
-//
-//        activity.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(HomeFragment.this, ActivityActivity.class);
-//                startActivity(intent);
-//            }
-//        });
-//
-//        sleep.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(HomeFragment.this, SleepActivity.class);
-//                startActivity(intent);
-//            }
-//        });
-//
-//        mood.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(HomeFragment.this, MoodActivity.class);
-//                startActivity(intent);
-//            }
-//        });
-//
-//        resources.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(HomeFragment.this, ResourcesActivity.class);
-//                startActivity(intent);
-//            }
-//        });
-//
-//        medical.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(HomeFragment.this, MedicalActivity.class);
-//                startActivity(intent);
-//            }
-//        });
-//
-//        message.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(HomeFragment.this, MessageActivity.class);
-//                startActivity(intent);
-//            }
-//        });
-//
-//        milestone.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(HomeFragment.this, MilestoneActivity.class);
-//                startActivity(intent);
-//            }
-//        });
-//
-//        photo.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(HomeFragment.this, PhotoActivity.class);
-//                startActivity(intent);
-//            }
-//        });
-//
-//        diary.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(HomeFragment.this, DiaryActivity.class);
-//                startActivity(intent);
-//            }
-//        });
-//
-//        more.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(HomeFragment.this, MoreActivity.class);
-//                startActivity(intent);
-//            }
-//        });
-//    }
-//}
+}
 

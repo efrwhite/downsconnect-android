@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,16 +16,39 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.Calendar;
 
 public class MedicalActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
-    private EditText doctorDatePicker;
-    private boolean doctorDate;
+    private EditText doctorDatePicker, height, weight, headSize, vaccine, dosage, temperature, notes;
+    private Spinner heightUnit, weightUnit, headUnit, health, dosageUnit, temperatureUnit;
+    private long doctorDate;
+    private MedicalInfo medicalInfo = new MedicalInfo();
+    private Button back, save;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_medical);
 
-        final Button back = findViewById(R.id.backButton);
+        back = findViewById(R.id.backButton);
+        save = findViewById(R.id.saveButton);
         TextView currentTime = findViewById(R.id.current_time_text);
         doctorDatePicker = findViewById(R.id.doctorDatePicker);
+        height = findViewById(R.id.measuredHeightEditText);
+        heightUnit = findViewById(R.id.heightSpinner);
+        weight = findViewById(R.id.measuredWeightEditText);
+        weightUnit = findViewById(R.id.weightSpinner);
+        headSize = findViewById(R.id.headSizeEditText);
+        headUnit = findViewById(R.id.headSpinner);
+        health = findViewById(R.id.healthSpinner);
+        vaccine = findViewById(R.id.vaccineEditText);
+        dosage = findViewById(R.id.dosageEditText);
+        dosageUnit = findViewById(R.id.dosageSpinner);
+        temperature = findViewById(R.id.temperatureEditText);
+        temperatureUnit = findViewById(R.id.temperatureSpinner);
+        notes = findViewById(R.id.notesEditText);
+
+        if(!notes.getText().toString().equals("")){
+            medicalInfo.setNotes(notes.getText().toString());
+        }
+
+
 
         Calendar calendar = Calendar.getInstance();
         long time = calendar.getTimeInMillis();
@@ -50,8 +74,24 @@ public class MedicalActivity extends AppCompatActivity implements DatePickerDial
         doctorDatePicker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                doctorDate = true;
                 showDatePickerDialog();
+            }
+        });
+
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                medicalInfo.setHeight(Integer.parseInt(height.getText().toString()));
+                medicalInfo.setHeightUnit(heightUnit.getSelectedItem().toString());
+                medicalInfo.setWeight(Integer.parseInt(weight.getText().toString()));
+                medicalInfo.setWeightUnit(weightUnit.getSelectedItem().toString());
+                medicalInfo.setHeadSize(Integer.parseInt(headSize.getText().toString()));
+                medicalInfo.setHeadSizeUnit(headUnit.getSelectedItem().toString());
+                medicalInfo.setVaccine(vaccine.getText().toString());
+                medicalInfo.setDosage(Integer.parseInt(dosage.getText().toString()));
+                medicalInfo.setDosageUnit(dosageUnit.getSelectedItem().toString());
+                medicalInfo.setTemperature(Integer.parseInt(temperature.getText().toString()));
+                medicalInfo.setTemperatureUnit(temperatureUnit.getSelectedItem().toString());
             }
         });
     }
@@ -67,9 +107,11 @@ public class MedicalActivity extends AppCompatActivity implements DatePickerDial
     }
 
     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-        if(doctorDate){
-            doctorDatePicker.setText(month + "/" + day + "/" + year);
-        }
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(year, month, day);
+        doctorDate = calendar.getTimeInMillis();
+        medicalInfo.setDoctorVisit(doctorDate);
+        doctorDatePicker.setText(month + "/" + day + "/" + year);
     }
 }
 
