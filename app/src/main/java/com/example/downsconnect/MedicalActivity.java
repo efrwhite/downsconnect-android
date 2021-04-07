@@ -1,6 +1,7 @@
 package com.example.downsconnect;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,14 +19,17 @@ import java.util.Calendar;
 public class MedicalActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
     private EditText doctorDatePicker, height, weight, headSize, vaccine, dosage, temperature, notes;
     private Spinner heightUnit, weightUnit, headUnit, health, dosageUnit, temperatureUnit;
-    private long doctorDate;
+    private long doctorDate = 0;
+    private long time;
     private MedicalInfo medicalInfo = new MedicalInfo();
     private Button back, save;
+    private DBHelper dbHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_medical);
 
+        dbHelper = new DBHelper(this);
         back = findViewById(R.id.backButton);
         save = findViewById(R.id.saveButton);
         TextView currentTime = findViewById(R.id.current_time_text);
@@ -51,7 +55,7 @@ public class MedicalActivity extends AppCompatActivity implements DatePickerDial
 
 
         Calendar calendar = Calendar.getInstance();
-        long time = calendar.getTimeInMillis();
+        time = calendar.getTimeInMillis();
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
         int minute = calendar.get(Calendar.MINUTE);
 
@@ -81,17 +85,60 @@ public class MedicalActivity extends AppCompatActivity implements DatePickerDial
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                medicalInfo.setHeight(Integer.parseInt(height.getText().toString()));
-                medicalInfo.setHeightUnit(heightUnit.getSelectedItem().toString());
-                medicalInfo.setWeight(Integer.parseInt(weight.getText().toString()));
-                medicalInfo.setWeightUnit(weightUnit.getSelectedItem().toString());
-                medicalInfo.setHeadSize(Integer.parseInt(headSize.getText().toString()));
-                medicalInfo.setHeadSizeUnit(headUnit.getSelectedItem().toString());
-                medicalInfo.setVaccine(vaccine.getText().toString());
-                medicalInfo.setDosage(Integer.parseInt(dosage.getText().toString()));
-                medicalInfo.setDosageUnit(dosageUnit.getSelectedItem().toString());
-                medicalInfo.setTemperature(Integer.parseInt(temperature.getText().toString()));
-                medicalInfo.setTemperatureUnit(temperatureUnit.getSelectedItem().toString());
+                if(!height.getText().equals("") && !heightUnit.getSelectedItem().equals("Select") && !weight.getText().equals("")
+                    && !weightUnit.getSelectedItem().equals("Select") && !headSize.getText().equals("") && !headUnit.getSelectedItem().equals("Select")
+                    && doctorDate != 0 && !health.getSelectedItem().equals("Select") && !vaccine.getText().equals("") && !dosage.getText().equals("") && !dosageUnit.getSelectedItem().equals("Select")
+                    && !temperature.getText().equals("") && !temperatureUnit.getSelectedItem().equals("Select") && !notes.getText().equals("")) {
+
+                    medicalInfo.setHeight(Integer.parseInt(height.getText().toString()));
+                    medicalInfo.setHeightUnit(heightUnit.getSelectedItem().toString());
+                    medicalInfo.setWeight(Integer.parseInt(weight.getText().toString()));
+                    medicalInfo.setWeightUnit(weightUnit.getSelectedItem().toString());
+                    medicalInfo.setHeadSize(Integer.parseInt(headSize.getText().toString()));
+                    medicalInfo.setHeadSizeUnit(headUnit.getSelectedItem().toString());
+                    medicalInfo.setVaccine(vaccine.getText().toString());
+                    medicalInfo.setDosage(Integer.parseInt(dosage.getText().toString()));
+                    medicalInfo.setDosageUnit(dosageUnit.getSelectedItem().toString());
+                    medicalInfo.setTemperature(Integer.parseInt(temperature.getText().toString()));
+                    medicalInfo.setTemperatureUnit(temperatureUnit.getSelectedItem().toString());
+                    medicalInfo.setNotes(notes.getText().toString());
+                    Calendar calendar = Calendar.getInstance();
+                    time = calendar.getTimeInMillis();
+                    medicalInfo.setEntryTime(time);
+                    Intent intent = new Intent(MedicalActivity.this, ActivityContainer.class);
+                    startActivity(intent);
+                }
+                else if(!height.getText().equals("") && !heightUnit.getSelectedItem().equals("Select") && !weight.getText().equals("")
+                        && !weightUnit.getSelectedItem().equals("Select") && !headSize.getText().equals("") && !headUnit.getSelectedItem().equals("Select")
+                        && doctorDate != 0 && !health.getSelectedItem().equals("Select") && !vaccine.getText().equals("") && !dosage.getText().equals("") && !dosageUnit.getSelectedItem().equals("Select")
+                        && !temperature.getText().equals("") && !temperatureUnit.getSelectedItem().equals("Select") && notes.getText().equals("")) {
+
+                    medicalInfo.setHeight(Integer.parseInt(height.getText().toString()));
+                    medicalInfo.setHeightUnit(heightUnit.getSelectedItem().toString());
+                    medicalInfo.setWeight(Integer.parseInt(weight.getText().toString()));
+                    medicalInfo.setWeightUnit(weightUnit.getSelectedItem().toString());
+                    medicalInfo.setHeadSize(Integer.parseInt(headSize.getText().toString()));
+                    medicalInfo.setHeadSizeUnit(headUnit.getSelectedItem().toString());
+                    medicalInfo.setVaccine(vaccine.getText().toString());
+                    medicalInfo.setDosage(Integer.parseInt(dosage.getText().toString()));
+                    medicalInfo.setDosageUnit(dosageUnit.getSelectedItem().toString());
+                    medicalInfo.setTemperature(Integer.parseInt(temperature.getText().toString()));
+                    medicalInfo.setTemperatureUnit(temperatureUnit.getSelectedItem().toString());
+                    medicalInfo.setNotes("None");
+                    Calendar calendar = Calendar.getInstance();
+                    time = calendar.getTimeInMillis();
+                    medicalInfo.setEntryTime(time);
+                    Intent intent = new Intent(MedicalActivity.this, ActivityContainer.class);
+                    startActivity(intent);
+                }
+                else{
+                    AlertDialog a = new AlertDialog.Builder(save.getContext()).create();
+                    a.setTitle("Missing Information");
+                    a.setMessage("Please make sure you've filled out the necessary information");
+                    a.show();
+                }
+
+
             }
         });
     }
