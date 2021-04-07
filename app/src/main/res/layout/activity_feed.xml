@@ -1,161 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <View
-        android:id="@+id/feedView"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
-        android:layout_height="56dp"
-        android:background="#FBFFC7"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="wrap_content">
 
-    <Button
-        android:id="@+id/backButton"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="8dp"
-        android:background="@drawable/left_arrow"
-        app:layout_constraintBottom_toBottomOf="@+id/feedView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <View
+            android:id="@+id/feedView"
+            android:layout_width="wrap_content"
+            android:layout_height="56dp"
+            android:background="#FBFFC7"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/feedText"
-        android:layout_width="wrap_content"
+        <Button
+            android:id="@+id/backButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/left_arrow"
+            app:layout_constraintBottom_toBottomOf="@+id/feedView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/feedText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/feed"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/feedView"
+            app:layout_constraintEnd_toEndOf="@+id/feedView"
+            app:layout_constraintStart_toStartOf="@+id/feedView"
+            app:layout_constraintTop_toTopOf="@+id/feedView" />
+
+        <TextView
+            android:id="@+id/current_time_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:text="Today 00:00 AM"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/feedView" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_layout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/feed"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/feedView"
-        app:layout_constraintEnd_toEndOf="@+id/feedView"
-        app:layout_constraintStart_toStartOf="@+id/feedView"
-        app:layout_constraintTop_toTopOf="@+id/feedView" />
+        android:background="#FCFDED"
+        app:tabSelectedTextColor="@android:color/holo_blue_dark"
+        app:tabTextColor="@android:color/secondary_text_dark" />
 
-    <TextView
-        android:id="@+id/current_time_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
-        android:text="Today 00:00 AM"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/feedView" />
+    <androidx.viewpager.widget.ViewPager
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/view_pager"/>
 
-    <TextView
-        android:id="@+id/bottleText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="@string/bottle"
-        app:layout_constraintStart_toStartOf="@+id/current_time_text"
-        app:layout_constraintTop_toBottomOf="@+id/current_time_text" />
 
-    <TextView
-        android:id="@+id/nursingText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="@string/nursing"
-        app:layout_constraintStart_toStartOf="@+id/bottleText"
-        app:layout_constraintTop_toBottomOf="@+id/bottleText" />
-
-    <TextView
-        android:id="@+id/solidsText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="@string/solids"
-        app:layout_constraintStart_toStartOf="@+id/nursingText"
-        app:layout_constraintTop_toBottomOf="@+id/nursingText" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.5" />
-
-    <EditText
-        android:id="@+id/bottleEditText"
-        android:layout_width="100dp"
-        android:layout_height="40dp"
-        android:background="@drawable/rounded_box"
-        android:inputType="numberDecimal"
-        app:layout_constraintBaseline_toBaselineOf="@+id/bottleText"
-        app:layout_constraintStart_toStartOf="@+id/guideline3" />
-
-    <EditText
-        android:id="@+id/nursingEditText"
-        android:layout_width="100dp"
-        android:layout_height="40dp"
-        android:background="@drawable/rounded_box"
-        android:inputType="numberDecimal"
-        app:layout_constraintBaseline_toBaselineOf="@+id/nursingText"
-        app:layout_constraintStart_toStartOf="@+id/guideline3" />
-
-    <EditText
-        android:id="@+id/solidsEditText"
-        android:layout_width="100dp"
-        android:layout_height="40dp"
-        android:background="@drawable/rounded_box"
-        android:inputType="numberDecimal"
-        app:layout_constraintBaseline_toBaselineOf="@+id/solidsText"
-        app:layout_constraintStart_toStartOf="@+id/guideline3" />
-
-    <Spinner
-        android:id="@+id/bottleSpinner"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="24dp"
-        android:background="@drawable/rounded_box"
-        android:entries="@array/height"
-        app:layout_constraintBottom_toBottomOf="@+id/bottleEditText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/bottleEditText"
-        app:layout_constraintTop_toTopOf="@+id/bottleEditText" />
-
-    <Spinner
-        android:id="@+id/nursingSpinner"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="24dp"
-        android:background="@drawable/rounded_box"
-        android:entries="@array/nursing"
-        app:layout_constraintBottom_toBottomOf="@+id/nursingEditText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/bottleEditText"
-        app:layout_constraintTop_toTopOf="@+id/nursingEditText" />
-
-    <Spinner
-        android:id="@+id/solidsSpinner"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="24dp"
-        android:background="@drawable/rounded_box"
-        android:entries="@array/solids"
-        app:layout_constraintBottom_toBottomOf="@+id/solidsEditText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/bottleEditText"
-        app:layout_constraintTop_toTopOf="@+id/solidsEditText" />
-
-    <Button
-        android:id="@+id/saveButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
-        android:text="@string/save"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

@@ -67,6 +67,14 @@
     <string name="constipation">Constipation</string>
     <string name="profileBabyName">Name</string>
 
+    <string name="phone_list">Phone List</string>
+    <string name="profile_status">Profile Status</string>
+    <string name="plus">+</string>
+    <string name="parent_description">Each caregiver will be able to view and save entries</string>
+    <string name="phone_description">This phone list will be visible by each caregiver</string>
+    <string name="inactive_profiles_are_hidden_on_your_homepage">Inactive profiles are hidden on your homepage</string>
+    <string name="delete">Delete</string>
+
     <array name="gender">
         <item>Select</item>
         <item>Male</item>
