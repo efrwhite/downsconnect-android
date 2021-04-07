@@ -65,6 +65,7 @@
     <string name="diaper">Diaper</string>
     <string name="potty">Potty</string>
     <string name="constipation">Constipation</string>
+    <string name="profileBabyName">Name</string>
 
     <array name="gender">
         <item>Select</item>
@@ -84,25 +85,30 @@
         <item>-</item>
     </array>
     <array name="height">
+        <item>Select</item>
         <item>cm</item>
         <item>ft</item>
     </array>
     <array name="nursing">
+        <item>Select</item>
         <item>oz</item>
         <item>tbsp</item>
         <item>tsp</item>
         <item>mL</item>
     </array>
     <array name="solids">
+        <item>Select</item>
         <item>oz</item>
         <item>tbsp</item>
         <item>tsp</item>
     </array>
     <array name="weight">
+        <item>Select</item>
         <item>lbs</item>
         <item>kg</item>
     </array>
     <array name="measurement">
+        <item>Select</item>
         <item>inches</item>
         <item>cm</item>
     </array>
@@ -114,9 +120,11 @@
         <item>Poor</item>
     </array>
     <array name="dosage">
+        <item>Select</item>
         <item>mL</item>
     </array>
     <array name="temperature">
+        <item>Select</item>
         <item>F</item>
         <item>C</item>
     </array>
