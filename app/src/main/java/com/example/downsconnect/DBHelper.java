@@ -40,9 +40,8 @@ public class DBHelper extends SQLiteOpenHelper {
                 "LastName TEXT, " +
                 "Gender TEXT," +
                 "BloodType TEXT," +
-                "DueDate TEXT, " +
-                "Birthday TEXT, " +
-                "Notes TEXT);");
+                "DueDate INTEGER, " +
+                "Birthday INTEGER);");
         db.execSQL("CREATE TABLE Feed(" +
                 "FeedID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
                 "ChildID INTEGER, " +

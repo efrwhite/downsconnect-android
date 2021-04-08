@@ -65,7 +65,7 @@
     <string name="diaper">Diaper</string>
     <string name="potty">Potty</string>
     <string name="constipation">Constipation</string>
-    <string name="profileBabyName">Name</string>
+    <string name="profileBabyName">First &amp; Last Name</string>
 
     <string name="phone_list">Phone List</string>
     <string name="profile_status">Profile Status</string>
