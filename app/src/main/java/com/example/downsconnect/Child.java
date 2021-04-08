@@ -1,16 +1,17 @@
 package com.example.downsconnect;
 
 public class Child {
-    private String firstName, lastName, birthday, dueDate, allergies;
+    private String firstName, lastName, allergies, bloodType;
     private String gender;
-    private BloodType bloodType;
+    private long birthday, dueDate;
 
-   public Child(String firstName, String lastName, String birthday, String gender){
+   public Child(String firstName, String lastName, long birthday, String gender){
        this.firstName = firstName;
        this.lastName = lastName;
        this.birthday = birthday;
        this.gender = gender;
    }
+   public Child(){}
 
 
     public String getFirstName() {
@@ -29,11 +30,11 @@ public class Child {
         this.lastName = lastName;
     }
 
-    public String getBirthday() {
+    public long getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(String birthday) {
+    public void setBirthday(long birthday) {
         this.birthday = birthday;
     }
 
@@ -45,19 +46,19 @@ public class Child {
         this.gender = gender;
     }
 
-    public BloodType getBloodType() {
+    public String getBloodType() {
         return bloodType;
     }
 
-    public void setBloodType(BloodType bloodType) {
+    public void setBloodType(String bloodType) {
         this.bloodType = bloodType;
     }
 
-    public String getDueDate() {
+    public long getDueDate() {
         return dueDate;
     }
 
-    public void setDueDate(String dueDate) {
+    public void setDueDate(long dueDate) {
         this.dueDate = dueDate;
     }
 
