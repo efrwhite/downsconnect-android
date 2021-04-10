@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/current_time_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:text="Today 00:00 AM"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/notesText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/notes"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/current_time_text" />
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/rounded_box"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/notesText"
+        app:layout_constraintTop_toBottomOf="@+id/notesText" />
+
+    <TextView
+        android:id="@+id/ateText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/ate"
+        app:layout_constraintStart_toStartOf="@+id/editText"
+        app:layout_constraintTop_toBottomOf="@+id/editText" />
+
+    <TextView
+        android:id="@+id/quantityText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/quantity"
+        app:layout_constraintStart_toStartOf="@+id/ateText"
+        app:layout_constraintTop_toBottomOf="@+id/ateText" />
+
+    <Spinner
+        android:id="@+id/diaperLeakPicker"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/rounded_box"
+        android:entries="@array/ate"
+        android:paddingStart="7dp"
+        android:ems="10"
+        android:textSize="14sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/ateText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline8" />
+
+    <EditText
+        android:id="@+id/quantityEditText"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:background="@drawable/rounded_box"
+        app:layout_constraintBaseline_toBaselineOf="@+id/quantityText"
+        app:layout_constraintStart_toStartOf="@+id/guideline8" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <Button
+        android:id="@+id/saveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/save"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addPhotobutton" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/rounded_box"
+        android:entries="@array/food"
+        app:layout_constraintBaseline_toBaselineOf="@+id/quantityEditText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/quantityEditText" />
+
+    <TextView
+        android:id="@+id/addPhotoText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/add_photo"
+        app:layout_constraintStart_toStartOf="@+id/quantityText"
+        app:layout_constraintTop_toBottomOf="@+id/quantityText" />
+
+    <Button
+        android:id="@+id/addPhotobutton"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/circle_blue"
+        android:text="@string/plus"
+        android:textColor="#FFF"
+        app:layout_constraintStart_toStartOf="@+id/addPhotoText"
+        app:layout_constraintTop_toBottomOf="@+id/addPhotoText" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

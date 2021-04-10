@@ -274,7 +274,7 @@
                 android:layout_marginEnd="24dp"
                 android:background="@drawable/rounded_box"
                 android:focusable="false"
-                android:hint="Enter Appointment Date"
+                android:hint="@string/enter_appointment_date"
                 android:paddingStart="7dp"
                 android:textSize="14sp"
                 app:layout_constraintBaseline_toBaselineOf="@+id/doctorsVisitText"

@@ -74,6 +74,17 @@
     <string name="phone_description">This phone list will be visible by each caregiver</string>
     <string name="inactive_profiles_are_hidden_on_your_homepage">Inactive profiles are hidden on your homepage</string>
     <string name="delete">Delete</string>
+    <string name="accident">Accident</string>
+    <string name="duration">Duration</string>
+    <string name="diaper_cream">Diaper Cream</string>
+    <string name="quantity">Quantity</string>
+    <string name="enter_date">Enter Date</string>
+    <string name="treatment_plan">Treatment Plan</string>
+    <string name="enter_time">Enter Time</string>
+    <string name="amount_of_fluid">Amount of Fluid</string>
+    <string name="enter_appointment_date">Enter Appointment Date</string>
+    <string name="ate">Ate</string>
+    <string name="add_photo">Add Photo</string>
 
     <array name="gender">
         <item>Select</item>
@@ -135,6 +146,30 @@
         <item>Select</item>
         <item>F</item>
         <item>C</item>
+    </array>
+    <array name="yn">
+        <item>Select</item>
+        <item>Yes</item>
+        <item>No</item>
+    </array>
+    <array name="sml">
+        <item>Select</item>
+        <item>Small</item>
+        <item>Medium</item>
+        <item>Large</item>
+    </array>
+    <array name="ate">
+        <item>Select</item>
+        <item>Food</item>
+        <item>Snack</item>
+        <item>Refused Food</item>
+    </array>
+    <array name="food">
+        <item>Select</item>
+        <item>cups</item>
+        <item>oz</item>
+        <item>grams</item>
+        <item>pieces</item>
     </array>
 
 </resources>
