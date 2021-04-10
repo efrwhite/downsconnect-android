@@ -3,6 +3,7 @@ package com.example.downsconnect;
 public class Child {
     private String firstName, lastName, allergies, bloodType;
     private String gender;
+    private int childID;
     private long birthday, dueDate;
 
    public Child(String firstName, String lastName, long birthday, String gender){
@@ -68,5 +69,13 @@ public class Child {
 
     public void setAllergies(String allergies) {
         this.allergies = allergies;
+    }
+
+    public int getChildID() {
+        return childID;
+    }
+
+    public void setChildID(int childID) {
+        this.childID = childID;
     }
 }

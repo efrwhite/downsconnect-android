@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 
@@ -19,7 +20,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String[] COLUMN_3 = {"FeedID", "ChildID", "Amount", "Substance", "TimeConsumed", "Notes", "EntryTime"};
     private static final String[] COLUMN_4 = {"MoodID", "ChildID", "MoodType", "Time", "Notes", "EntryTime"};
     private static final String[] COLUMN_5 = {"SleepID", "ChildID", "StartTime", "EndTime", "SleepType" ,"Notes", "EntryTime"};
-    private static final String[] COLUMN_6 = {"EntryID", "EntryType", "TypeID"};
+    private static final String[] COLUMN_6 = {"EntryID", "EntryType", "TypeID", "ChildID"};
     private static final String[] COLUMN_7 = {"MedicalID", "ChildID", "Height", "HeightUnit", "Weight", "WeightUnit", "HeadSize", "HeadSizeUnit", "Health", "Vaccine", "Dosage", "DosageUnit", "DoctorsVisit", "Temperature", "TemperatureUnit", "Notes", "EntryTime"};
     public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -41,7 +42,8 @@ public class DBHelper extends SQLiteOpenHelper {
                 "Gender TEXT," +
                 "BloodType TEXT," +
                 "DueDate INTEGER, " +
-                "Birthday INTEGER);");
+                "Birthday INTEGER, " +
+                "Allergies TEXT);");
         db.execSQL("CREATE TABLE Feed(" +
                 "FeedID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
                 "ChildID INTEGER, " +
@@ -77,7 +79,8 @@ public class DBHelper extends SQLiteOpenHelper {
                 "EntryID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
                 "EntryType TEXT, " +
                 "EntryTime INTEGER, " +
-                "TypeID INTEGER)");
+                "TypeID INTEGER, " +
+                "ChildID INTEGER)");
         db.execSQL("CREATE TABLE Medical(" +
                 "MedicalID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
                 "ChildID INTEGER, " +
@@ -134,18 +137,24 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    public void addChild(Child child){
+    public boolean addChild(Child child){
         ContentValues values = new ContentValues();
         values.put(COLUMN_2[1], child.getFirstName());
         values.put(COLUMN_2[2], child.getLastName());
-        values.put(COLUMN_2[3], String.valueOf(child.getGender()));
-        values.put(COLUMN_2[4], String.valueOf(child.getBloodType()));
+        values.put(COLUMN_2[3], child.getGender());
+        values.put(COLUMN_2[4], child.getBloodType());
         values.put(COLUMN_2[5], child.getDueDate());
         values.put(COLUMN_2[6], child.getBirthday());
         values.put(COLUMN_2[7], child.getAllergies());
         SQLiteDatabase db = this.getWritableDatabase();
-        db.insert(TABLE_NAMES[1], null, values);
+        long result = db.insert(TABLE_NAMES[1], null, values);
         db.close();
+        if(result == -1){
+            return false;
+        }
+        else{
+            return true;
+        }
     }
 
     public void addFeed(Feed feed){
@@ -254,17 +263,40 @@ public class DBHelper extends SQLiteOpenHelper {
         int x = 0;
         while(c.moveToNext()){
             Entry entry = new Entry();
-            if(x == 0){
+            if(x == 0) {
                 c.moveToFirst();
+            }
                 entry.setEntryType(c.getString(1));
                 entry.setTypeID(c.getInt(2));
                 entries.add(entry);
                 x++;
-            }
         }
         c.close();
         db.close();
         return entries;
+    }
+
+    ArrayList<Child> getAllChildren(){
+        String query = "SELECT * FROM Children;";
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor c = db.rawQuery(query, null);
+        ArrayList<Child> children = new ArrayList<>();
+        int x = 0;
+        Log.i("Count", String.valueOf(c.getColumnCount()));
+        while(c.moveToNext()){
+            Child child = new Child();
+                child.setChildID(c.getInt(0));
+                child.setFirstName(c.getString(1));
+                child.setLastName(c.getString(2));
+                child.setGender(c.getString(3));
+                child.setBloodType(c.getString(4));
+                child.setDueDate(c.getLong(5));
+                child.setBirthday(c.getLong(6));
+                children.add(child);
+        }
+        c.close();
+        db.close();
+        return children;
     }
 
     MedicalInfo findMedicalInfo(int medicalID){
