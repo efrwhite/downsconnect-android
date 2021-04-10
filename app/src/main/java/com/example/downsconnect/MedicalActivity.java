@@ -24,6 +24,7 @@ public class MedicalActivity extends AppCompatActivity implements DatePickerDial
     private MedicalInfo medicalInfo = new MedicalInfo();
     private Button back, save;
     private DBHelper dbHelper;
+    private Entry entry;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -105,6 +106,7 @@ public class MedicalActivity extends AppCompatActivity implements DatePickerDial
                     Calendar calendar = Calendar.getInstance();
                     time = calendar.getTimeInMillis();
                     medicalInfo.setEntryTime(time);
+
                     Intent intent = new Intent(MedicalActivity.this, ActivityContainer.class);
                     startActivity(intent);
                 }

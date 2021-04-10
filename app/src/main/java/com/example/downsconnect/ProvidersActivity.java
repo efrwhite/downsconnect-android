@@ -1,11 +1,18 @@
 package com.example.downsconnect;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.ArrayList;
 
 public class ProvidersActivity extends AppCompatActivity {
     @Override
@@ -14,6 +21,7 @@ public class ProvidersActivity extends AppCompatActivity {
         setContentView(R.layout.activity_providers);
 
         final Button back = findViewById(R.id.backButton);
+
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
