@@ -85,6 +85,22 @@
     <string name="enter_appointment_date">Enter Appointment Date</string>
     <string name="ate">Ate</string>
     <string name="add_photo">Add Photo</string>
+    <string name="cpap">CPAP</string>
+    <string name="other">Other</string>
+    <string name="please_indicate">Please indicate:</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="supplements_ex_melatonin">Supplements (ex: Melatonin)</string>
+    <string name="medication_detailed_in_medicine_area">Medication (detailed in Medicine area)</string>
+    <string name="did_the_child_have_a_sleep_study_conducted_before_age_4">Did the child have a sleep study conducted before age 4?</string>
+    <string name="check_all_that_apply">Check all that apply.</string>
+    <string name="does_the_child_use_any_sleep_treatments">Does the child use any sleep treatments?</string>
+    <string name="additional_information">Additional Information</string>
+    <string name="tap_to_set"><![CDATA[<tap to set>]]></string>
+    <string name="until">Until:</string>
+    <string name="national_support_groups">National Support Groups</string>
+    <string name="websites">Websites</string>
+    <string name="books">Books</string>
 
     <array name="gender">
         <item>Select</item>
