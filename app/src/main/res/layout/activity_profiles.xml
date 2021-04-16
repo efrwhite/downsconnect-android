@@ -97,6 +97,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical" />
     </ScrollView>
+
     <!--should contain children's profile bubbles-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class DBHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "downsconnect.db";
     private static final int DATABASE_VERSION = 1;
-    private static final String[] TABLE_NAMES = {"AccountHolders", "Children", "Feed", "Mood", "Sleep", "Entries", "Medical"};
+    private static final String[] TABLE_NAMES = {"Account", "Child", "Feed", "Mood", "Sleep", "Entry", "Medical"};
     private static final String[] COLUMN_1 = {"AccountID","FirstName", "LastName", "Username", "Password", "Phone"};
     private static final String[] COLUMN_2 = {"ChildID", "FirstName", "LastName", "Gender", "BloodType", "DueDate", "Birthday", "Allergies"};
     private static final String[] COLUMN_3 = {"FeedID", "ChildID", "Amount", "Substance", "TimeConsumed", "Notes", "EntryTime"};
@@ -28,14 +28,14 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE AccountHolders(" +
+        db.execSQL("CREATE TABLE Account(" +
                 "AccountHolderID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
                 "FirstName TEXT, " +
                 "LastName TEXT, " +
                 "Username TEXT, " +
                 "Password TEXT, " +
                 "Phone TEXT);");
-        db.execSQL("CREATE TABLE Children(" +
+        db.execSQL("CREATE TABLE Child(" +
                 "ChildID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
                 "FirstName TEXT, " +
                 "LastName TEXT, " +
@@ -75,7 +75,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 "DateOfLastStool INTEGER, " +
                 "Notes TEXT, " +
                 "EntryTime INTEGER)");
-        db.execSQL("CREATE TABLE Entries(" +
+        db.execSQL("CREATE TABLE Entry(" +
                 "EntryID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
                 "EntryType TEXT, " +
                 "EntryTime INTEGER, " +
@@ -115,10 +115,10 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     public void deleteEntry(int id, String table){
-        String tableID = table.substring(0, table.length() - 1);
+//        String tableID = table.substring(0, table.length() - 1);
         for(String name : TABLE_NAMES){
             if(name.equals(table)){
-                String query = "DELETE FROM " + table + " WHERE " + tableID + "ID = " + id + ";";
+                String query = "DELETE FROM " + table + " WHERE " + table + "ID = " + id + ";";
                 SQLiteDatabase db = this.getWritableDatabase();
                 db.execSQL(query);
             }
@@ -233,7 +233,7 @@ public class DBHelper extends SQLiteOpenHelper {
 //        String query = "SELECT * FROM AccountHolders WHERE Username = '" + user +
 //                "' AND Password = '" + pass + "';";
 
-        String query = "SELECT * FROM AccountHolders WHERE Username = '" + user +
+        String query = "SELECT * FROM Account WHERE Username = '" + user +
                 "' AND Password = '" + pass + "';";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor c = db.rawQuery(query, null);
@@ -256,7 +256,7 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     ArrayList<Entry> getAllEntries(){
-        String query = "SELECT * FROM Entries;";
+        String query = "SELECT * FROM Entry;";
         SQLiteDatabase db = getWritableDatabase();
         Cursor c = db.rawQuery(query, null);
         ArrayList<Entry> entries = new ArrayList<>();
@@ -277,7 +277,7 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     ArrayList<Child> getAllChildren(){
-        String query = "SELECT * FROM Children;";
+        String query = "SELECT * FROM Child;";
         SQLiteDatabase db = getWritableDatabase();
         Cursor c = db.rawQuery(query, null);
         ArrayList<Child> children = new ArrayList<>();
