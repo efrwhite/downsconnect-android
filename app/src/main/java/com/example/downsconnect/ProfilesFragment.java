@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.Guideline;
 import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
@@ -48,6 +49,7 @@ public class ProfilesFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), DetailedProfileActivity.class);
+                intent.putExtra("childName", "None");
                 startActivity(intent);
             }
         });
@@ -55,23 +57,27 @@ public class ProfilesFragment extends Fragment {
     }
 
     public void addChildren(){
-//        LinearLayout childLayout = getView().findViewById(R.id.childrenLinearLayout);
-//        childLayout.setGravity(Gravity.CENTER);
         children = helper.getAllChildren();
         Log.i("size", String.valueOf(children.size()));
         int i = 0;
         for(Child child: children){
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            ViewGroup.MarginLayoutParams marginLayoutParams = new ViewGroup.MarginLayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            marginLayoutParams.setMargins(50, 0, 50,10);
             LinearLayout horizontalLayout = new LinearLayout(getContext());
+            Guideline guideline =  new Guideline(getContext());
             horizontalLayout.setTag(child.getFirstName() + "Layout");
             horizontalLayout.setOrientation(LinearLayout.HORIZONTAL);
-            layoutParams.setMargins(30, 0, 0, 30);
-            TextView view = new TextView(getContext());
-            view.setGravity(Gravity.LEFT);
+            horizontalLayout.setLayoutParams(marginLayoutParams);
+
+            layoutParams.setMargins(200, 0, 0, 30);
+            final TextView view = new TextView(getContext());
+            view.setGravity(Gravity.CENTER_HORIZONTAL);
             view.setText(child.getFirstName());
             view.setTextColor(Color.BLACK);
             view.setTextSize(15);
             view.setLayoutParams(layoutParams);
+
             final Button button = new Button(getContext());
             button.setLayoutParams(layoutParams);
             button.setText("Delete");
@@ -80,14 +86,29 @@ public class ProfilesFragment extends Fragment {
             button.setId(child.getChildID());
             button.setTag(child.getFirstName());
             horizontalLayout.addView(view);
-            horizontalLayout.addView(button);
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     deleteChild(button);
                 }
             });
-            //button.setId("Child" + String.valueOf(i) + "btn");
+            final Button edit = new Button(getContext());
+            edit.setText("Edit");
+            edit.setHeight(10);
+            edit.setWidth(20);
+            edit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String name = (String) view.getText();
+                    //Child child = helper.getChild(name);
+                    Intent intent = new Intent(getContext(), DetailedProfileActivity.class);
+                    intent.putExtra("childName", name);
+                    startActivity(intent);
+                }
+            });
+
+            horizontalLayout.addView(button);
+            horizontalLayout.addView(edit);
             childLayout.addView(horizontalLayout);
 
         }

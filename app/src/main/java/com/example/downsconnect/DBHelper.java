@@ -16,7 +16,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
     private static final String[] TABLE_NAMES = {"Account", "Child", "Feed", "Mood", "Sleep", "Entry", "Medical"};
     private static final String[] COLUMN_1 = {"AccountID","FirstName", "LastName", "Username", "Password", "Phone"};
-    private static final String[] COLUMN_2 = {"ChildID", "FirstName", "LastName", "Gender", "BloodType", "DueDate", "Birthday", "Allergies"};
+    private static final String[] COLUMN_2 = {"ChildID", "FirstName", "LastName", "Gender", "BloodType", "DueDate", "Birthday", "Allergies", "Medications"};
     private static final String[] COLUMN_3 = {"FeedID", "ChildID", "Amount", "Substance", "TimeConsumed", "Notes", "EntryTime"};
     private static final String[] COLUMN_4 = {"MoodID", "ChildID", "MoodType", "Time", "Notes", "EntryTime"};
     private static final String[] COLUMN_5 = {"SleepID", "ChildID", "StartTime", "EndTime", "SleepType" ,"Notes", "EntryTime"};
@@ -43,7 +43,8 @@ public class DBHelper extends SQLiteOpenHelper {
                 "BloodType TEXT," +
                 "DueDate INTEGER, " +
                 "Birthday INTEGER, " +
-                "Allergies TEXT);");
+                "Allergies TEXT, " +
+                "Medications TEXT);");
         db.execSQL("CREATE TABLE Feed(" +
                 "FeedID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
                 "ChildID INTEGER, " +
@@ -146,6 +147,7 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(COLUMN_2[5], child.getDueDate());
         values.put(COLUMN_2[6], child.getBirthday());
         values.put(COLUMN_2[7], child.getAllergies());
+        values.put(COLUMN_2[8], child.getMedications());
         SQLiteDatabase db = this.getWritableDatabase();
         long result = db.insert(TABLE_NAMES[1], null, values);
         db.close();
@@ -227,6 +229,31 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         db.insert(TABLE_NAMES[6], null, values);
         db.close();
+    }
+
+    Child getChild(String firstName){
+        String query = "SELECT * FROM Child WHERE FirstName = '" + firstName + "';";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor c = db.rawQuery(query, null);
+        Child child = new Child();
+        if(c.moveToFirst()){
+            c.moveToFirst();
+            child.setChildID(c.getInt(0));
+            child.setFirstName(c.getString(1));
+            child.setLastName(c.getString(2));
+            child.setGender(c.getString(3));
+            child.setBloodType(c.getString(4));
+            child.setDueDate(c.getLong(5));
+            child.setBirthday(c.getLong(6));
+            child.setAllergies(c.getString(7));
+            child.setMedications(c.getString(8));
+        }
+        else{
+            c.close();
+            child = null;
+        }
+        db.close();
+        return child;
     }
 
     AccountHolder getAccountHolder(String user, String pass){
