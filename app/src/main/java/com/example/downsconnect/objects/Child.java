@@ -1,4 +1,4 @@
-package com.example.downsconnect;
+package com.example.downsconnect.objects;
 
 public class Child {
     private String firstName, lastName, allergies, bloodType, gender, medications;

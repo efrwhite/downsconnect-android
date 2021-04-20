@@ -14,6 +14,9 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.downsconnect.objects.Entry;
+import com.example.downsconnect.objects.MedicalInfo;
+
 import java.util.Calendar;
 
 public class MedicalActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {

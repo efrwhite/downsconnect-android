@@ -1,4 +1,4 @@
-package com.example.downsconnect;
+package com.example.downsconnect.objects;
 
 public class Sleep implements Comparable {
     private int sleepID, childID;
