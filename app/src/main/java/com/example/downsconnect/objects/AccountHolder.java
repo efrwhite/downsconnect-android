@@ -1,12 +1,12 @@
-package com.example.downsconnect;
+package com.example.downsconnect.objects;
 
 public class AccountHolder {
     private String firstName, lastName, username, password, phone;
     private int accountID;
-    AccountHolder(){
+    public AccountHolder(){
 
     }
-    AccountHolder(String firstName, String lastName, String username, String password, String phone){
+    public AccountHolder(String firstName, String lastName, String username, String password, String phone){
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;

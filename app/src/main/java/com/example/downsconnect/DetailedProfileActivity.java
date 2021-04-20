@@ -15,6 +15,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.downsconnect.objects.Child;
+
 import java.util.Calendar;
 
 public class DetailedProfileActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
