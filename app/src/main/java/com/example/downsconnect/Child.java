@@ -1,8 +1,7 @@
 package com.example.downsconnect;
 
 public class Child {
-    private String firstName, lastName, allergies, bloodType;
-    private String gender;
+    private String firstName, lastName, allergies, bloodType, gender, medications;
     private int childID;
     private long birthday, dueDate;
 
@@ -77,5 +76,13 @@ public class Child {
 
     public void setChildID(int childID) {
         this.childID = childID;
+    }
+
+    public String getMedications() {
+        return medications;
+    }
+
+    public void setMedications(String medications) {
+        this.medications = medications;
     }
 }

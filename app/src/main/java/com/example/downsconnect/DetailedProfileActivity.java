@@ -25,11 +25,12 @@ public class DetailedProfileActivity extends AppCompatActivity implements DatePi
     private Calendar birthdayDate, due_Date;
     private Button back, save;
     private DBHelper helper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detailed_profile);
-
+        helper = new DBHelper(this);
         birthdayDate = Calendar.getInstance();
         due_Date = Calendar.getInstance();
         age = findViewById(R.id.ageText);
@@ -38,55 +39,71 @@ public class DetailedProfileActivity extends AppCompatActivity implements DatePi
         allergies = findViewById(R.id.allergyEditText);
         medications = findViewById(R.id.medicationsEditText);
         fullName = findViewById(R.id.editTextTextPersonName);
-        helper = new DBHelper(this);
+        birthdayPicker = findViewById(R.id.birthdayPicker);
+        dueDatePicker = findViewById(R.id.dueDatePicker);
+
+        String childName = getIntent().getStringExtra("childName");
+        Child child = new Child();
+        if (!childName.equals("None")) {
+            child = helper.getChild(childName);
+        if (child != null) {
+            fullName.setText(child.getFirstName() + " " + child.getLastName());
+            gender.setSelection(getIndex(gender, child.getGender()));
+            Calendar birthday = Calendar.getInstance();
+            birthday.setTimeInMillis(child.getBirthday());
+            birthdayPicker.setText(birthday.get(Calendar.MONTH) + 1+ "/" + birthday.get(Calendar.DATE) + "/" + birthday.get(Calendar.YEAR));
+            Calendar due = Calendar.getInstance();
+            due.setTimeInMillis(child.getDueDate());
+            dueDatePicker.setText(due.get(Calendar.MONTH) + 1 + "/" + due.get(Calendar.DATE) + "/" + due.get(Calendar.YEAR));
+            bloodType.setSelection(getIndex(bloodType, child.getBloodType()));
+            allergies.setText(child.getAllergies());
+            medications.setText(child.getMedications());
+        }
+        }
+
 
         save = findViewById(R.id.saveButton);
         back = findViewById(R.id.backButton);
         Spinner genderSpinner = findViewById(R.id.genderEditText);
 
         String spinner = genderSpinner.getSelectedItem().toString();
-        birthdayPicker = findViewById(R.id.birthdayPicker);
-        dueDatePicker = findViewById(R.id.dueDatePicker);
 
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!fullName.getText().toString().equals("") && !gender.getSelectedItem().equals("Select") && !birthdayPicker.getText().toString().equals("")
-                       && !dueDatePicker.getText().toString().equals("") && !bloodType.getSelectedItem().equals("Select")){
+                if (!fullName.getText().toString().equals("") && !gender.getSelectedItem().equals("Select") && !birthdayPicker.getText().toString().equals("")
+                        && !dueDatePicker.getText().toString().equals("") && !bloodType.getSelectedItem().equals("Select")) {
                     Child child = new Child();
                     String name = fullName.getText().toString();
-                    if(!fullName.getText().toString().contains(" ")){
+                    if (!fullName.getText().toString().contains(" ")) {
                         AlertDialog a = new AlertDialog.Builder(save.getContext()).create();
                         a.setTitle("Child's Name");
                         a.setMessage("Please make sure you've entered your child's first and last name");
                         a.show();
-                    }
-                    else{
+                    } else {
                         child.setFirstName(name.substring(0, name.indexOf(" ")));
+                        child.setGender((String) gender.getSelectedItem());
                         child.setLastName(name.substring(name.indexOf(" ")));
                         child.setBirthday(birthdayDate.getTimeInMillis());
                         child.setDueDate(due_Date.getTimeInMillis());
                         child.setBloodType(bloodType.getSelectedItem().toString());
-                        if(allergies.getText().toString().equals(" ")){
+                        if (allergies.getText().toString().equals(" ")) {
                             child.setAllergies("None");
-                        }
-                        else{
+                        } else {
                             child.setAllergies(allergies.getText().toString());
                         }
 
-                        if(medications.getText().toString().equals(" ")){
-                            child.setAllergies("None");
-                        }
-                        else{
-                            child.setAllergies(medications.getText().toString());
+                        if (medications.getText().toString().equals(" ")) {
+                            child.setMedications("None");
+                        } else {
+                            child.setMedications(medications.getText().toString());
                         }
                         boolean result = helper.addChild(child);
                         Log.i("child", String.valueOf(result));
                         Intent intent = new Intent(DetailedProfileActivity.this, ActivityContainer.class);
                         startActivity(intent);
                     }
-                }
-                else{
+                } else {
                     AlertDialog a = new AlertDialog.Builder(save.getContext()).create();
                     a.setTitle("Missing Information");
                     a.setMessage("Please make sure you've filled out the necessary information");
@@ -123,9 +140,8 @@ public class DetailedProfileActivity extends AppCompatActivity implements DatePi
     }
 
 
-
     private void showDatePickerDialog() {
-        @SuppressLint("ResourceType") DatePickerDialog datePickerDialog = new DatePickerDialog(this, 2,this,
+        @SuppressLint("ResourceType") DatePickerDialog datePickerDialog = new DatePickerDialog(this, 2, this,
                 Calendar.getInstance().get(Calendar.YEAR),
                 Calendar.getInstance().get(Calendar.MONTH),
                 Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
@@ -133,19 +149,30 @@ public class DetailedProfileActivity extends AppCompatActivity implements DatePi
     }
 
     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-        if(birthday) {
+        if (birthday) {
             birthdayDate.set(year, month, day);
             Calendar currentDate = Calendar.getInstance();
             long difference = currentDate.getTimeInMillis() - birthdayDate.getTimeInMillis();
             long days = difference / (24 * 60 * 60 * 1000);
-            int months = (int) days/ 30;
-            int years = (int) days/365;
+            int months = (int) days / 30;
+            int years = (int) days / 365;
             age.setText(years + " year(s), " + months + " month(s), " + days + " day(s)");
-            birthdayPicker.setText(month + "/" + day + "/" + year);
+            birthdayPicker.setText((month + 1) + "/" + day + "/" + year);
         }
-        if(dueDate){
+        if (dueDate) {
             due_Date.set(year, month, day);
-            dueDatePicker.setText(month + "/" + day + "/" + year);
+            dueDatePicker.setText((month + 1) + "/" + day + "/" + year);
         }
+    }
+
+    private int getIndex(Spinner spinner, String myString) {
+        for (int i = 0; i < spinner.getCount(); i++) {
+            if (spinner.getItemAtPosition(i).toString().equalsIgnoreCase(myString)) {
+                return i;
+            }
+        }
+
+        return 0;
+
     }
 }
