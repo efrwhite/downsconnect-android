@@ -1,8 +1,8 @@
 package com.example.downsconnect.objects;
 
 public class Entry {
-    private int typeID;
-    private String entryType;
+    private int childID;
+    private String entryText;
     private long entryTime;
 
     public Entry(){
@@ -10,20 +10,20 @@ public class Entry {
     }
 
 
-    public int getTypeID() {
-        return typeID;
+    public int getChildID() {
+        return childID;
     }
 
-    public void setTypeID(int typeID) {
-        this.typeID = typeID;
+    public void setChildID(int childID) {
+        this.childID = childID;
     }
 
-    public String getEntryType() {
-        return entryType;
+    public String getEntryText() {
+        return entryText;
     }
 
-    public void setEntryType(String entryType) {
-        this.entryType = entryType;
+    public void setEntryText(String entryText) {
+        this.entryText = entryText;
     }
 
     public long getEntryTime() {

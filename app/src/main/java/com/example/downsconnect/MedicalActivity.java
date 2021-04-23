@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -51,6 +52,7 @@ public class MedicalActivity extends AppCompatActivity implements DatePickerDial
         temperature = findViewById(R.id.temperatureEditText);
         temperatureUnit = findViewById(R.id.temperatureSpinner);
         notes = findViewById(R.id.notesEditText);
+        entry = new Entry();
 
         if(!notes.getText().toString().equals("")){
             medicalInfo.setNotes(notes.getText().toString());
@@ -106,9 +108,14 @@ public class MedicalActivity extends AppCompatActivity implements DatePickerDial
                     medicalInfo.setTemperature(Integer.parseInt(temperature.getText().toString()));
                     medicalInfo.setTemperatureUnit(temperatureUnit.getSelectedItem().toString());
                     medicalInfo.setNotes(notes.getText().toString());
-                    Calendar calendar = Calendar.getInstance();
-                    time = calendar.getTimeInMillis();
+                    time = Calendar.getInstance().getTimeInMillis();
                     medicalInfo.setEntryTime(time);
+                    entry.setEntryTime(time);
+                    Log.i("Entry", String.valueOf(time));
+                    entry.setEntryText("Inserted Medical Info for Jeff");
+                    entry.setChildID(1);
+                    dbHelper.addMedical(medicalInfo);
+                    dbHelper.addEntry(entry);
 
                     Intent intent = new Intent(MedicalActivity.this, ActivityContainer.class);
                     startActivity(intent);
@@ -132,7 +139,11 @@ public class MedicalActivity extends AppCompatActivity implements DatePickerDial
                     medicalInfo.setNotes("None");
                     Calendar calendar = Calendar.getInstance();
                     time = calendar.getTimeInMillis();
-                    medicalInfo.setEntryTime(time);
+                    entry.setEntryTime(time);
+                    entry.setEntryText("Inserted Medical Info for Jeff");
+                    entry.setChildID(1);
+                    dbHelper.addMedical(medicalInfo);
+                    dbHelper.addEntry(entry);
                     Intent intent = new Intent(MedicalActivity.this, ActivityContainer.class);
                     startActivity(intent);
                 }
