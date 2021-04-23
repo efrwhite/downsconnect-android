@@ -6,14 +6,26 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import com.example.downsconnect.objects.Entry;
+
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -21,6 +33,9 @@ import androidx.fragment.app.Fragment;
  * create an instance of this fragment.
  */
 public class HomeFragment extends Fragment {
+    private LinearLayout entryLayout;
+    private DBHelper helper;
+    private ArrayList<Entry> entries;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -73,8 +88,8 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-                DBHelper helper = new DBHelper(getContext());
-
+        helper = new DBHelper(getContext());
+        entries = new ArrayList<>();
         Button feed = view.findViewById(R.id.feedButton);
         Button activity = view.findViewById(R.id.activityButton);
         Button sleep = view.findViewById(R.id.sleepButton);
@@ -87,6 +102,9 @@ public class HomeFragment extends Fragment {
         Button diary = view.findViewById(R.id.diaryButton);
         Button more = view.findViewById(R.id.moreButton);
         Button signOut = view.findViewById(R.id.signoutButton);
+        entryLayout = view.findViewById(R.id.entryLayout);
+
+        addEntries();
 
         signOut.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -196,5 +214,36 @@ public class HomeFragment extends Fragment {
                 startActivity(intent);
             }
         });
+    }
+
+    public void addEntries(){
+        entries = helper.getAllEntries();
+        Log.i("size", String.valueOf(entries.size()));
+        for(Entry entry: entries){
+            ViewGroup.MarginLayoutParams marginLayoutParams = new ViewGroup.MarginLayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            marginLayoutParams.setMargins(50, 0, 50,10);
+            LinearLayout horizontalLayout = new LinearLayout(getContext());
+            horizontalLayout.setOrientation(LinearLayout.HORIZONTAL);
+            horizontalLayout.setLayoutParams(marginLayoutParams);
+
+            TextView entryText = new TextView(getContext());
+            entryText.setText(entry.getEntryText() + " ");
+            entryText.setTextSize(15);
+
+            TextView entryDate = new TextView(getContext());
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTimeInMillis(entry.getEntryTime());
+            Log.i("Time", String.valueOf(entry.getEntryTime()));
+            Date date = calendar.getTime();
+            DateFormat formatter = new SimpleDateFormat("h:mm a");
+            String time = formatter.format(date);
+            entryDate.setText(calendar.get(Calendar.MONTH) + "/" + calendar.get(Calendar.DATE) + "/" + calendar.get(Calendar.YEAR) + " at: " + time);
+            horizontalLayout.addView(entryText);
+            horizontalLayout.addView(entryDate);
+            entryLayout.addView(horizontalLayout);
+
+
+        }
+
     }
 }

@@ -65,7 +65,6 @@ public class ProfilesFragment extends Fragment {
             ViewGroup.MarginLayoutParams marginLayoutParams = new ViewGroup.MarginLayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             marginLayoutParams.setMargins(50, 0, 50,10);
             LinearLayout horizontalLayout = new LinearLayout(getContext());
-            Guideline guideline =  new Guideline(getContext());
             horizontalLayout.setTag(child.getFirstName() + "Layout");
             horizontalLayout.setOrientation(LinearLayout.HORIZONTAL);
             horizontalLayout.setLayoutParams(marginLayoutParams);
@@ -76,6 +75,7 @@ public class ProfilesFragment extends Fragment {
             view.setText(child.getFirstName());
             view.setTextColor(Color.BLACK);
             view.setTextSize(15);
+            view.setMaxWidth(100);
             view.setLayoutParams(layoutParams);
 
             final Button button = new Button(getContext());

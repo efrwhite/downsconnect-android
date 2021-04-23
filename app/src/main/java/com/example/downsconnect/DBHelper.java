@@ -26,7 +26,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String[] COLUMN_3 = {"FeedID", "ChildID", "Amount", "Substance", "TimeConsumed", "Notes", "EntryTime"};
     private static final String[] COLUMN_4 = {"MoodID", "ChildID", "MoodType", "Time", "Notes", "EntryTime"};
     private static final String[] COLUMN_5 = {"SleepID", "ChildID", "StartTime", "EndTime", "SleepType" ,"Notes", "EntryTime"};
-    private static final String[] COLUMN_6 = {"EntryID", "EntryType", "TypeID", "ChildID"};
+    private static final String[] COLUMN_6 = {"EntryID", "EntryText", "EntryTime", "ChildID"};
     private static final String[] COLUMN_7 = {"MedicalID", "ChildID", "Height", "HeightUnit", "Weight", "WeightUnit", "HeadSize", "HeadSizeUnit", "Health", "Vaccine", "Dosage", "DosageUnit", "DoctorsVisit", "Temperature", "TemperatureUnit", "Notes", "EntryTime"};
     public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -84,9 +84,8 @@ public class DBHelper extends SQLiteOpenHelper {
                 "EntryTime INTEGER)");
         db.execSQL("CREATE TABLE Entry(" +
                 "EntryID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
-                "EntryType TEXT, " +
+                "EntryText TEXT, " +
                 "EntryTime INTEGER, " +
-                "TypeID INTEGER, " +
                 "ChildID INTEGER)");
         db.execSQL("CREATE TABLE Medical(" +
                 "MedicalID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
@@ -111,12 +110,12 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         if(oldVersion != newVersion){
-            db.execSQL("DROP TABLE IF EXISTS AccountHolders");
-            db.execSQL("DROP TABLE IF EXISTS Children");
+            db.execSQL("DROP TABLE IF EXISTS Account");
+            db.execSQL("DROP TABLE IF EXISTS Child");
             db.execSQL("DROP TABLE IF EXISTS Feed");
             db.execSQL("DROP TABLE IF EXISTS Mood");
             db.execSQL("DROP TABLE IF EXISTS Sleep");
-            db.execSQL("DROP TABLE IF EXISTS Entries");
+            db.execSQL("DROP TABLE IF EXISTS Entry");
             db.execSQL("DROP TABLE IF EXISTS Medical");
         }
     }
@@ -206,9 +205,9 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public void addEntry(Entry entry){
         ContentValues values = new ContentValues();
-        values.put(COLUMN_6[1], entry.getEntryType());
+        values.put(COLUMN_6[1], entry.getEntryText());
         values.put(COLUMN_6[2], entry.getEntryTime());
-        values.put(COLUMN_6[3], entry.getTypeID());
+        values.put(COLUMN_6[3], entry.getChildID());
         SQLiteDatabase db = this.getWritableDatabase();
         db.insert(TABLE_NAMES[5], null, values);
         db.close();
@@ -299,8 +298,9 @@ public class DBHelper extends SQLiteOpenHelper {
             if(x == 0) {
                 c.moveToFirst();
             }
-                entry.setEntryType(c.getString(1));
-                entry.setTypeID(c.getInt(2));
+                entry.setEntryText(c.getString(1));
+                entry.setEntryTime(c.getLong(2));
+                entry.setChildID(c.getInt(3));
                 entries.add(entry);
                 x++;
         }
