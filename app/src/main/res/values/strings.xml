@@ -187,5 +187,9 @@
         <item>grams</item>
         <item>pieces</item>
     </array>
+    <array name="sleep_time">
+        <item>Hrs</item>
+        <item>Mins</item>
+    </array>
 
 </resources>
