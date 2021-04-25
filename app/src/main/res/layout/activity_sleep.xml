@@ -82,23 +82,28 @@
         app:layout_constraintGuide_percent="0.5" />
 
     <EditText
-        android:id="@+id/wentToSleepEditText"
+        android:id="@+id/sleepTimePicker"
         android:layout_width="100dp"
         android:layout_height="40dp"
         android:background="@drawable/rounded_box"
+        android:focusable="false"
+        android:gravity="center"
         android:inputType="numberDecimal"
         app:layout_constraintBaseline_toBaselineOf="@+id/wentToSleepText"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline3" />
 
     <EditText
         android:id="@+id/wokeUpEditText"
         android:layout_width="100dp"
         android:layout_height="40dp"
+        android:layout_marginEnd="100dp"
         android:hint="@string/tap_to_set"
         android:inputType="numberDecimal"
         android:textAlignment="center"
         android:textSize="14sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/durationText"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline3" />
 
     <EditText
@@ -115,24 +120,14 @@
         app:layout_constraintTop_toBottomOf="@+id/notesText" />
 
     <Spinner
-        android:id="@+id/wentToSleepSpinner"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="24dp"
-        android:background="@drawable/rounded_box"
-        app:layout_constraintBottom_toBottomOf="@+id/wentToSleepEditText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/wentToSleepEditText"
-        app:layout_constraintTop_toTopOf="@+id/wentToSleepEditText" />
-
-    <Spinner
         android:id="@+id/timerSpinner"
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="24dp"
         android:background="@drawable/rounded_box"
+        android:entries="@array/sleep_time"
+        android:gravity="center"
         app:layout_constraintBottom_toBottomOf="@+id/wokeUpEditText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

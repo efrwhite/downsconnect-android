@@ -237,7 +237,7 @@ public class HomeFragment extends Fragment {
             Date date = calendar.getTime();
             DateFormat formatter = new SimpleDateFormat("h:mm a");
             String time = formatter.format(date);
-            entryDate.setText(calendar.get(Calendar.MONTH) + "/" + calendar.get(Calendar.DATE) + "/" + calendar.get(Calendar.YEAR) + " at: " + time);
+            entryDate.setText((calendar.get(Calendar.MONTH) + 1) + "/" + calendar.get(Calendar.DATE) + "/" + calendar.get(Calendar.YEAR) + " at: " + time);
             horizontalLayout.addView(entryText);
             horizontalLayout.addView(entryDate);
             entryLayout.addView(horizontalLayout);

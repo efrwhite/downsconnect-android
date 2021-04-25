@@ -1,9 +1,9 @@
 package com.example.downsconnect.objects;
 
 public class Sleep implements Comparable {
-    private int sleepID, childID;
-    private long entryTime, startTime, endTime;
-    private String sleepType, notes;
+    private int sleepID, childID, duration;
+    private long sleepTime;
+    private String snoring, notes, sleepTreatments, study;
 
     public Sleep(){
 
@@ -11,8 +11,6 @@ public class Sleep implements Comparable {
 
     public Sleep(int childID, long startTime, long endTime, String notes){
         this.childID = childID;
-        this.startTime = startTime;
-        this.endTime = endTime;
         this.notes = notes;
     }
 
@@ -32,12 +30,12 @@ public class Sleep implements Comparable {
         this.childID = childID;
     }
 
-    public String getSleepType() {
-        return sleepType;
+    public String getSnoring() {
+        return snoring;
     }
 
-    public void setSleepType(String sleepType) {
-        this.sleepType = sleepType;
+    public void setSnoring(String snoring) {
+        this.snoring = snoring;
     }
 
     public String getNotes() {
@@ -53,27 +51,36 @@ public class Sleep implements Comparable {
         return this.compareTo(o);
     }
 
-    public long getEntryTime() {
-        return entryTime;
+    public long getSleepTime() {
+        return sleepTime;
     }
 
-    public void setEntryTime(long entryTime) {
-        this.entryTime = entryTime;
+    public void setSleepTime(long sleepTime) {
+        this.sleepTime = sleepTime;
     }
 
-    public long getStartTime() {
-        return startTime;
+
+    public int getDuration() {
+        return duration;
     }
 
-    public void setStartTime(long startTime) {
-        this.startTime = startTime;
+    public void setDuration(int duration) {
+        this.duration = duration;
     }
 
-    public long getEndTime() {
-        return endTime;
+    public String getSleepTreatments() {
+        return sleepTreatments;
     }
 
-    public void setEndTime(long endTime) {
-        this.endTime = endTime;
+    public void setSleepTreatments(String sleepTreatments) {
+        this.sleepTreatments = sleepTreatments;
+    }
+
+    public String getStudy() {
+        return study;
+    }
+
+    public void setStudy(String study) {
+        this.study = study;
     }
 }
