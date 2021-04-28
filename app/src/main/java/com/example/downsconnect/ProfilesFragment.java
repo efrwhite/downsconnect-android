@@ -62,6 +62,7 @@ public class ProfilesFragment extends Fragment {
         int i = 0;
         for(Child child: children){
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            LinearLayout.LayoutParams textParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             ViewGroup.MarginLayoutParams marginLayoutParams = new ViewGroup.MarginLayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             marginLayoutParams.setMargins(50, 0, 50,10);
             LinearLayout horizontalLayout = new LinearLayout(getContext());
@@ -70,13 +71,15 @@ public class ProfilesFragment extends Fragment {
             horizontalLayout.setLayoutParams(marginLayoutParams);
 
             layoutParams.setMargins(200, 0, 0, 30);
+            textParams.setMargins(50, 0, 50, 30);
+
             final TextView view = new TextView(getContext());
             view.setGravity(Gravity.CENTER_HORIZONTAL);
             view.setText(child.getFirstName());
             view.setTextColor(Color.BLACK);
             view.setTextSize(15);
-            view.setMaxWidth(100);
-            view.setLayoutParams(layoutParams);
+            view.setMaxWidth(300);
+            view.setLayoutParams(textParams);
 
             final Button button = new Button(getContext());
             button.setLayoutParams(layoutParams);

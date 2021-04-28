@@ -25,7 +25,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String[] COLUMN_2 = {"ChildID", "FirstName", "LastName", "Gender", "BloodType", "DueDate", "Birthday", "Allergies", "Medications"};
     private static final String[] COLUMN_3 = {"FeedID", "ChildID", "Amount", "Substance", "TimeConsumed", "Notes", "EntryTime"};
     private static final String[] COLUMN_4 = {"MoodID", "ChildID", "MoodType", "Time", "Notes", "EntryTime"};
-    private static final String[] COLUMN_5 = {"SleepID", "ChildID", "SleepTime", "Duration", "Snoring" ,"SleepTreatments", "Study", "Notes"};
+    private static final String[] COLUMN_5 = {"SleepID", "ChildID", "SleepTime", "Duration", "Snoring" ,"Medication", "Supplements", "CPAP", "Other", "Study", "Notes"};
     private static final String[] COLUMN_6 = {"EntryID", "EntryText", "EntryTime", "ChildID"};
     private static final String[] COLUMN_7 = {"MedicalID", "ChildID", "Height", "HeightUnit", "Weight", "WeightUnit", "HeadSize", "HeadSizeUnit", "Health", "Vaccine", "Dosage", "DosageUnit", "DoctorsVisit", "Temperature", "TemperatureUnit", "Notes", "EntryTime"};
     public DBHelper(Context context) {
@@ -72,7 +72,10 @@ public class DBHelper extends SQLiteOpenHelper {
                 "SleepTime INTEGER," +
                 "Duration INTEGER, " +
                 "Snoring TEXT, " +
-                "SleepTreatments TEXT, " +
+                "Medication TEXT, " +
+                "Supplements TEXT, " +
+                "CPAP TEXT, " +
+                "Other TEXT, " +
                 "Study TEXT, " +
                 "Notes TEXT);");
         db.execSQL("CREATE TABLE Bathroom(" +
@@ -197,9 +200,12 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(COLUMN_5[2], sleep.getSleepTime());
         values.put(COLUMN_5[3], sleep.getDuration());
         values.put(COLUMN_5[4], sleep.getSnoring());
-        values.put(COLUMN_5[5], sleep.getSleepTreatments());
-        values.put(COLUMN_5[6], sleep.getStudy());
-        values.put(COLUMN_5[6], sleep.getNotes());
+        values.put(COLUMN_5[5], sleep.getMedication());
+        values.put(COLUMN_5[6], sleep.getSupplements());
+        values.put(COLUMN_5[7], sleep.getCPAP());
+        values.put(COLUMN_5[8], sleep.getOther());
+        values.put(COLUMN_5[9], sleep.getStudy());
+        values.put(COLUMN_5[10], sleep.getNotes());
         SQLiteDatabase db = this.getWritableDatabase();
         db.insert(TABLE_NAMES[4], null, values);
         db.close();
