@@ -3,7 +3,7 @@ package com.example.downsconnect.objects;
 public class Sleep implements Comparable {
     private int sleepID, childID, duration;
     private long sleepTime;
-    private String snoring, notes, sleepTreatments, study;
+    private String snoring, notes, medication, study, supplements, CPAP, other;
 
     public Sleep(){
 
@@ -68,12 +68,12 @@ public class Sleep implements Comparable {
         this.duration = duration;
     }
 
-    public String getSleepTreatments() {
-        return sleepTreatments;
+    public String getMedication() {
+        return medication;
     }
 
-    public void setSleepTreatments(String sleepTreatments) {
-        this.sleepTreatments = sleepTreatments;
+    public void setMedication(String medication) {
+        this.medication = medication;
     }
 
     public String getStudy() {
@@ -82,5 +82,29 @@ public class Sleep implements Comparable {
 
     public void setStudy(String study) {
         this.study = study;
+    }
+
+    public String getSupplements() {
+        return supplements;
+    }
+
+    public void setSupplements(String supplements) {
+        this.supplements = supplements;
+    }
+
+    public String getCPAP() {
+        return CPAP;
+    }
+
+    public void setCPAP(String CPAP) {
+        this.CPAP = CPAP;
+    }
+
+    public String getOther() {
+        return other;
+    }
+
+    public void setOther(String other) {
+        this.other = other;
     }
 }

@@ -19,8 +19,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.downsconnect.objects.Entry;
+import com.example.downsconnect.objects.Month;
 
-import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -36,6 +36,7 @@ public class HomeFragment extends Fragment {
     private LinearLayout entryLayout;
     private DBHelper helper;
     private ArrayList<Entry> entries;
+    private Month month = new Month();
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -220,15 +221,20 @@ public class HomeFragment extends Fragment {
         entries = helper.getAllEntries();
         Log.i("size", String.valueOf(entries.size()));
         for(Entry entry: entries){
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+
             ViewGroup.MarginLayoutParams marginLayoutParams = new ViewGroup.MarginLayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            marginLayoutParams.setMargins(50, 0, 50,10);
+            marginLayoutParams.setMargins(10, 0, 5,30);
             LinearLayout horizontalLayout = new LinearLayout(getContext());
             horizontalLayout.setOrientation(LinearLayout.HORIZONTAL);
             horizontalLayout.setLayoutParams(marginLayoutParams);
+            layoutParams.setMargins(15, 0, 30, 30);
+
 
             TextView entryText = new TextView(getContext());
             entryText.setText(entry.getEntryText() + " ");
-            entryText.setTextSize(15);
+            entryText.setTextSize(12);
+            entryText.setLayoutParams(layoutParams);
 
             TextView entryDate = new TextView(getContext());
             Calendar calendar = Calendar.getInstance();
@@ -237,12 +243,12 @@ public class HomeFragment extends Fragment {
             Date date = calendar.getTime();
             DateFormat formatter = new SimpleDateFormat("h:mm a");
             String time = formatter.format(date);
-            entryDate.setText((calendar.get(Calendar.MONTH) + 1) + "/" + calendar.get(Calendar.DATE) + "/" + calendar.get(Calendar.YEAR) + " at: " + time);
+
+            entryDate.setText(month.getMonth(calendar.get(Calendar.MONTH)) + " " + calendar.get(Calendar.DATE) + ", " + calendar.get(Calendar.YEAR) + " at: " + time);
+            entryDate.setTextSize(12);
             horizontalLayout.addView(entryText);
             horizontalLayout.addView(entryDate);
             entryLayout.addView(horizontalLayout);
-
-
         }
 
     }

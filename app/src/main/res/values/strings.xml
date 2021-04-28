@@ -188,6 +188,7 @@
         <item>pieces</item>
     </array>
     <array name="sleep_time">
+        <item>Select</item>
         <item>Hrs</item>
         <item>Mins</item>
     </array>
