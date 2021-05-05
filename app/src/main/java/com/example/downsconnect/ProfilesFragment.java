@@ -71,21 +71,21 @@ public class ProfilesFragment extends Fragment {
             horizontalLayout.setLayoutParams(marginLayoutParams);
 
             layoutParams.setMargins(200, 0, 0, 30);
-            textParams.setMargins(50, 0, 50, 30);
+            textParams.setMargins(50, 0, 10, 30);
 
             final TextView view = new TextView(getContext());
             view.setGravity(Gravity.CENTER_HORIZONTAL);
             view.setText(child.getFirstName());
             view.setTextColor(Color.BLACK);
             view.setTextSize(15);
-            view.setMaxWidth(300);
+            view.setWidth(250);
             view.setLayoutParams(textParams);
 
             final Button button = new Button(getContext());
             button.setLayoutParams(layoutParams);
             button.setText("Delete");
             button.setHeight(10);
-            button.setWidth(20);
+            button.setWidth(10);
             button.setId(child.getChildID());
             button.setTag(child.getFirstName());
             horizontalLayout.addView(view);
@@ -98,7 +98,7 @@ public class ProfilesFragment extends Fragment {
             final Button edit = new Button(getContext());
             edit.setText("Edit");
             edit.setHeight(10);
-            edit.setWidth(20);
+            edit.setWidth(10);
             edit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -118,7 +118,6 @@ public class ProfilesFragment extends Fragment {
     }
 
     public void deleteChild(final Button button){
-        //getView().findViewWithTag(button.getId());
         new AlertDialog.Builder(getContext())
                 .setTitle("Delete Child")
                 .setMessage("Are you sure you want to this child account")

@@ -224,16 +224,17 @@ public class HomeFragment extends Fragment {
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
             ViewGroup.MarginLayoutParams marginLayoutParams = new ViewGroup.MarginLayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            marginLayoutParams.setMargins(10, 0, 5,30);
+            marginLayoutParams.setMargins(10, 0, 0,30);
             LinearLayout horizontalLayout = new LinearLayout(getContext());
             horizontalLayout.setOrientation(LinearLayout.HORIZONTAL);
             horizontalLayout.setLayoutParams(marginLayoutParams);
-            layoutParams.setMargins(15, 0, 30, 30);
+            layoutParams.setMargins(15, 0, 10, 30);
 
 
             TextView entryText = new TextView(getContext());
             entryText.setText(entry.getEntryText() + " ");
-            entryText.setTextSize(12);
+            entryText.setTextSize(15);
+            entryText.setWidth(600);
             entryText.setLayoutParams(layoutParams);
 
             TextView entryDate = new TextView(getContext());
@@ -245,7 +246,7 @@ public class HomeFragment extends Fragment {
             String time = formatter.format(date);
 
             entryDate.setText(month.getMonth(calendar.get(Calendar.MONTH)) + " " + calendar.get(Calendar.DATE) + ", " + calendar.get(Calendar.YEAR) + " at: " + time);
-            entryDate.setTextSize(12);
+            entryDate.setTextSize(15);
             horizontalLayout.addView(entryText);
             horizontalLayout.addView(entryDate);
             entryLayout.addView(horizontalLayout);

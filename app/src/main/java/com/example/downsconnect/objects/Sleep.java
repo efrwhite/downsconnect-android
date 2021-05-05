@@ -3,7 +3,7 @@ package com.example.downsconnect.objects;
 public class Sleep implements Comparable {
     private int sleepID, childID, duration;
     private long sleepTime;
-    private String snoring, notes, medication, study, supplements, CPAP, other;
+    private String snoring, notes, medication, study, supplements, CPAP, other, unit;
 
     public Sleep(){
 
@@ -106,5 +106,13 @@ public class Sleep implements Comparable {
 
     public void setOther(String other) {
         this.other = other;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
     }
 }
