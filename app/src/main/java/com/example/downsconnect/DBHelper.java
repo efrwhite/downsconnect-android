@@ -25,7 +25,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String[] COLUMN_2 = {"ChildID", "FirstName", "LastName", "Gender", "BloodType", "DueDate", "Birthday", "Allergies", "Medications"};
     private static final String[] COLUMN_3 = {"FeedID", "ChildID", "Amount", "Substance", "TimeConsumed", "Notes", "EntryTime"};
     private static final String[] COLUMN_4 = {"MoodID", "ChildID", "MoodType", "Time", "Notes", "EntryTime"};
-    private static final String[] COLUMN_5 = {"SleepID", "ChildID", "SleepTime", "Duration", "Snoring" ,"Medication", "Supplements", "CPAP", "Other", "Study", "Notes"};
+    private static final String[] COLUMN_5 = {"SleepID", "ChildID", "SleepTime", "Duration", "Snoring" ,"Medication", "Supplements", "CPAP", "Other", "Study", "Unit", "Notes"};
     private static final String[] COLUMN_6 = {"EntryID", "EntryText", "EntryTime", "ChildID"};
     private static final String[] COLUMN_7 = {"MedicalID", "ChildID", "Height", "HeightUnit", "Weight", "WeightUnit", "HeadSize", "HeadSizeUnit", "Health", "Vaccine", "Dosage", "DosageUnit", "DoctorsVisit", "Temperature", "TemperatureUnit", "Notes", "EntryTime"};
     public DBHelper(Context context) {
@@ -77,6 +77,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 "CPAP TEXT, " +
                 "Other TEXT, " +
                 "Study TEXT, " +
+                "Unit TEXT, " +
                 "Notes TEXT);");
         db.execSQL("CREATE TABLE Bathroom(" +
                 "BathroomID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
@@ -205,7 +206,8 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(COLUMN_5[7], sleep.getCPAP());
         values.put(COLUMN_5[8], sleep.getOther());
         values.put(COLUMN_5[9], sleep.getStudy());
-        values.put(COLUMN_5[10], sleep.getNotes());
+        values.put(COLUMN_5[10], sleep.getUnit());
+        values.put(COLUMN_5[11], sleep.getNotes());
         SQLiteDatabase db = this.getWritableDatabase();
         db.insert(TABLE_NAMES[4], null, values);
         db.close();
