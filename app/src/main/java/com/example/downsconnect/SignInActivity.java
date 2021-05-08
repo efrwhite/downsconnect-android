@@ -30,7 +30,7 @@ public class SignInActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String user = Username.getText().toString();
                 String pass = Password.getText().toString();
-                    if (db.getAccountHolder(user, pass) != null) {
+                    if (db.getAccount(user, pass) != null) {
                         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                         sharedPreferences.edit().putBoolean("signedIn", true).commit();
                         Intent intent = new Intent(SignInActivity.this, ActivityContainer.class);

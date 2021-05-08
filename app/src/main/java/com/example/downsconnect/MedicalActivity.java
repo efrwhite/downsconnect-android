@@ -64,13 +64,20 @@ public class MedicalActivity extends AppCompatActivity implements DatePickerDial
         time = calendar.getTimeInMillis();
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
         int minute = calendar.get(Calendar.MINUTE);
+        String realMins;
+        if(minute <= 10){
+            realMins = "0" + minute;
+        }
+        else{
+            realMins = String.valueOf(minute);
+        }
 
         if(hour >= 12){
             hour = hour - 12;
-            currentTime.setText("Today " + String.valueOf(hour) + ":" + String.valueOf(minute) + "PM");
+            currentTime.setText("Today " + String.valueOf(hour) + ":" + realMins + "PM");
         }
         else{
-            currentTime.setText("Today " + String.valueOf(hour) + ":" + String.valueOf(minute) + "AM");
+            currentTime.setText("Today " + String.valueOf(hour) + ":" + realMins + "AM");
         }
 
         back.setOnClickListener(new View.OnClickListener() {
