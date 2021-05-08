@@ -16,17 +16,19 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.Guideline;
 import androidx.fragment.app.Fragment;
 
+import com.example.downsconnect.objects.AccountHolder;
 import com.example.downsconnect.objects.Child;
 
 import java.util.ArrayList;
+import java.util.concurrent.Executors;
 
 public class ProfilesFragment extends Fragment {
     private DBHelper helper;
     private ArrayList<Child> children = new ArrayList<>();
-    private LinearLayout childLayout;
+    private ArrayList<AccountHolder> accounts = new ArrayList<>();
+    private LinearLayout childLayout, caregiverLayout;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -41,10 +43,13 @@ public class ProfilesFragment extends Fragment {
 
         childLayout = getView().findViewById(R.id.childrenLinearLayout);
         childLayout.setGravity(Gravity.CENTER);
+        caregiverLayout = getView().findViewById(R.id.careGiversLayout);
+        caregiverLayout.setGravity(Gravity.CENTER);
 
         Button childrenBtn = view.findViewById(R.id.addChildrenButton);
         helper = new DBHelper(getContext());
         addChildren();
+        addCareGivers();
         childrenBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -103,7 +108,6 @@ public class ProfilesFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     String name = (String) view.getText();
-                    //Child child = helper.getChild(name);
                     Intent intent = new Intent(getContext(), DetailedProfileActivity.class);
                     intent.putExtra("childName", name);
                     startActivity(intent);
@@ -130,5 +134,47 @@ public class ProfilesFragment extends Fragment {
                     }
                 })
                 .setNegativeButton("no", null).show();
+    }
+
+    public void addCareGivers(){
+        accounts = helper.getAllAccounts();
+        Log.i("size", String.valueOf(accounts.size()));
+        for(AccountHolder account: accounts){
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            LinearLayout.LayoutParams textParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            ViewGroup.MarginLayoutParams marginLayoutParams = new ViewGroup.MarginLayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            marginLayoutParams.setMargins(50, 0, 50,10);
+            LinearLayout horizontalLayout = new LinearLayout(getContext());
+            horizontalLayout.setTag(account.getFirstName() + "Layout");
+            horizontalLayout.setOrientation(LinearLayout.HORIZONTAL);
+            horizontalLayout.setLayoutParams(marginLayoutParams);
+
+            layoutParams.setMargins(200, 0, 0, 30);
+            textParams.setMargins(50, 0, 10, 30);
+
+            TextView cg_name = new TextView(getContext());
+            cg_name.setText(account.getFirstName());
+            cg_name.setTextSize(15);
+            cg_name.setWidth(250);
+            cg_name.setGravity(Gravity.CENTER_HORIZONTAL);
+            cg_name.setTextColor(Color.BLACK);
+            cg_name.setLayoutParams(textParams);
+            horizontalLayout.addView(cg_name);
+
+            Button delete = new Button(getContext());
+            delete.setText("Delete");
+            delete.setWidth(10);
+            delete.setHeight(10);
+            delete.setLayoutParams(layoutParams);
+            horizontalLayout.addView(delete);
+
+            Button edit = new Button(getContext());
+            edit.setText("Edit");
+            edit.setWidth(10);
+            edit.setHeight(10);
+            horizontalLayout.addView(edit);
+
+            caregiverLayout.addView(horizontalLayout);
+        }
     }
 }

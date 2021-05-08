@@ -15,6 +15,8 @@ import com.example.downsconnect.objects.MedicalInfo;
 import com.example.downsconnect.objects.Mood;
 import com.example.downsconnect.objects.Sleep;
 
+import java.lang.reflect.Array;
+import java.nio.charset.IllegalCharsetNameException;
 import java.util.ArrayList;
 
 public class DBHelper extends SQLiteOpenHelper {
@@ -271,7 +273,7 @@ public class DBHelper extends SQLiteOpenHelper {
         return child;
     }
 
-    AccountHolder getAccountHolder(String user, String pass){
+    AccountHolder getAccount(String user, String pass){
 //        String query = "SELECT * FROM AccountHolders WHERE Username = '" + user +
 //                "' AND Password = '" + pass + "';";
 
@@ -295,6 +297,31 @@ public class DBHelper extends SQLiteOpenHelper {
         }
         db.close();
         return accountHolder;
+    }
+
+    ArrayList<AccountHolder> getAllAccounts(){
+        String query = "SELECT * FROM Account;";
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor c = db.rawQuery(query, null);
+        ArrayList<AccountHolder> accounts = new ArrayList<>();
+        int x = 0;
+        while(c.moveToNext()){
+            AccountHolder account = new AccountHolder();
+            if(x == 0){
+                c.moveToFirst();
+            }
+                account.setAccountID(c.getInt(0));
+                account.setFirstName(c.getString(1));
+                account.setLastName(c.getString(2));
+                account.setUsername(c.getString(3));
+                account.setPassword(c.getString(4));
+                account.setPhone(c.getString(5));
+                accounts.add(account);
+                x++;
+        }
+        c.close();
+        db.close();
+        return accounts;
     }
 
     ArrayList<Entry> getAllEntries(){

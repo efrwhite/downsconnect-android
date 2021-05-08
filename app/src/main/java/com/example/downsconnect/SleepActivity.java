@@ -59,13 +59,19 @@ public class SleepActivity extends AppCompatActivity implements TimePickerDialog
         Calendar calendar = Calendar.getInstance();
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
         int minute = calendar.get(Calendar.MINUTE);
-
-        if(hour >= 12){
-            hour = hour - 12;
-            currentTime.setText("Today " + String.valueOf(hour) + ":" + String.valueOf(minute) + "PM");
+        String realMins;
+        if(minute <= 10){
+            realMins = "0" + minute;
         }
         else{
-            currentTime.setText("Today " + String.valueOf(hour) + ":" + String.valueOf(minute) + "AM");
+            realMins = String.valueOf(minute);
+        }
+        if(hour >= 12){
+            hour = hour - 12;
+            currentTime.setText("Today " + String.valueOf(hour) + ":" + realMins + "PM");
+        }
+        else{
+            currentTime.setText("Today " + String.valueOf(hour) + ":" + realMins + "AM");
         }
 
         save.setOnClickListener(new View.OnClickListener() {

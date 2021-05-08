@@ -5,6 +5,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -26,6 +28,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -218,39 +222,51 @@ public class HomeFragment extends Fragment {
     }
 
     public void addEntries(){
-        entries = helper.getAllEntries();
-        Log.i("size", String.valueOf(entries.size()));
-        for(Entry entry: entries){
-            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        ExecutorService service = Executors.newSingleThreadExecutor();
+        final Handler handler = new Handler(Looper.getMainLooper());
 
-            ViewGroup.MarginLayoutParams marginLayoutParams = new ViewGroup.MarginLayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            marginLayoutParams.setMargins(10, 0, 0,30);
-            LinearLayout horizontalLayout = new LinearLayout(getContext());
-            horizontalLayout.setOrientation(LinearLayout.HORIZONTAL);
-            horizontalLayout.setLayoutParams(marginLayoutParams);
-            layoutParams.setMargins(15, 0, 10, 30);
+        service.execute(new Runnable() {
+            @Override
+            public void run() {
+                entries = helper.getAllEntries();
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        Log.i("size", String.valueOf(entries.size()));
+                        for(Entry entry: entries){
+                            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+
+                            ViewGroup.MarginLayoutParams marginLayoutParams = new ViewGroup.MarginLayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                            marginLayoutParams.setMargins(10, 0, 0,30);
+                            LinearLayout horizontalLayout = new LinearLayout(getContext());
+                            horizontalLayout.setOrientation(LinearLayout.HORIZONTAL);
+                            horizontalLayout.setLayoutParams(marginLayoutParams);
+                            layoutParams.setMargins(15, 0, 10, 30);
 
 
-            TextView entryText = new TextView(getContext());
-            entryText.setText(entry.getEntryText() + " ");
-            entryText.setTextSize(15);
-            entryText.setWidth(600);
-            entryText.setLayoutParams(layoutParams);
+                            TextView entryText = new TextView(getContext());
+                            entryText.setText(entry.getEntryText() + " ");
+                            entryText.setTextSize(15);
+                            entryText.setWidth(600);
+                            entryText.setLayoutParams(layoutParams);
 
-            TextView entryDate = new TextView(getContext());
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTimeInMillis(entry.getEntryTime());
-            Log.i("Time", String.valueOf(entry.getEntryTime()));
-            Date date = calendar.getTime();
-            DateFormat formatter = new SimpleDateFormat("h:mm a");
-            String time = formatter.format(date);
+                            TextView entryDate = new TextView(getContext());
+                            Calendar calendar = Calendar.getInstance();
+                            calendar.setTimeInMillis(entry.getEntryTime());
+                            Date date = calendar.getTime();
+                            DateFormat formatter = new SimpleDateFormat("h:mm a");
+                            String time = formatter.format(date);
 
-            entryDate.setText(month.getMonth(calendar.get(Calendar.MONTH)) + " " + calendar.get(Calendar.DATE) + ", " + calendar.get(Calendar.YEAR) + " at: " + time);
-            entryDate.setTextSize(15);
-            horizontalLayout.addView(entryText);
-            horizontalLayout.addView(entryDate);
-            entryLayout.addView(horizontalLayout);
-        }
+                            entryDate.setText(month.getMonth(calendar.get(Calendar.MONTH)) + " " + calendar.get(Calendar.DATE) + ", " + calendar.get(Calendar.YEAR) + " at: " + time);
+                            entryDate.setTextSize(15);
+                            horizontalLayout.addView(entryText);
+                            horizontalLayout.addView(entryDate);
+                            entryLayout.addView(horizontalLayout);
+                        }
+                    }
+                });
+            }
+        });
 
     }
 }
