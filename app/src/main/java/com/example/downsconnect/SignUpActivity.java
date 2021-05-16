@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -21,6 +22,8 @@ public class SignUpActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+
 
         helper = new DBHelper(this);
 
@@ -57,7 +60,6 @@ public class SignUpActivity extends AppCompatActivity {
                         AccountHolder accountHolder = new AccountHolder(first, last, user, pass, phone);
                         helper.addAccount(accountHolder);
                         helper.close();
-                        //will add to database you dbhelper when that function is written
                         Intent intent = new Intent(SignUpActivity.this, ActivityContainer.class);
                         startActivity(intent);
                     }

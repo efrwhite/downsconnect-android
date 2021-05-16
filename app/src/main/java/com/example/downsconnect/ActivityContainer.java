@@ -11,12 +11,17 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.example.downsconnect.objects.Child;
 import com.google.android.material.navigation.NavigationView;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 public class ActivityContainer extends AppCompatActivity {
     private DrawerLayout mDrawer;
     private Toolbar toolbar;
     private NavigationView nvDrawer;
+    private DBHelper helper;
 
 
     // Make sure to be using androidx.appcompat.app.ActionBarDrawerToggle version.
@@ -27,10 +32,18 @@ public class ActivityContainer extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_container);
 
-        final Fragment homeFragment = new HomeFragment();
-
+        helper = new DBHelper(getApplicationContext());
         FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.flContent, homeFragment).commit();
+        final Fragment homeFragment = new HomeFragment();
+        final Fragment profileFragment = new ProfilesFragment();
+
+        ArrayList<Child> children = helper.getAllChildren();
+        if(children.size() == 0){
+            fragmentManager.beginTransaction().replace(R.id.flContent, profileFragment).commit();
+        }
+        else {
+            fragmentManager.beginTransaction().replace(R.id.flContent, homeFragment).commit();
+        }
 
         // Set a Toolbar to replace the ActionBar.
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -89,19 +102,19 @@ public class ActivityContainer extends AppCompatActivity {
         // Create a new fragment and specify the fragment to show based on nav item clicked
         Fragment fragment = null;
         Class fragmentClass;
-        switch(menuItem.getItemId()) {
-            case R.id.activity_home:
-                fragmentClass = HomeFragment.class;
-                break;
-            case R.id.activity_list_entries:
-                fragmentClass = ListEntriesFragment.class;
-                break;
-            case R.id.activity_profiles:
-                fragmentClass = ProfilesFragment.class;
-                break;
-            default:
-                fragmentClass = HomeFragment.class;
-        }
+            switch (menuItem.getItemId()) {
+                case R.id.activity_home:
+                    fragmentClass = HomeFragment.class;
+                    break;
+                case R.id.activity_list_entries:
+                    fragmentClass = ListEntriesFragment.class;
+                    break;
+                case R.id.activity_profiles:
+                    fragmentClass = ProfilesFragment.class;
+                    break;
+                default:
+                    fragmentClass = HomeFragment.class;
+            }
 
         try {
             fragment = (Fragment) fragmentClass.newInstance();
