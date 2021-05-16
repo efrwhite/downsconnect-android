@@ -5,6 +5,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -22,6 +24,7 @@ import com.example.downsconnect.objects.AccountHolder;
 import com.example.downsconnect.objects.Child;
 
 import java.util.ArrayList;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class ProfilesFragment extends Fragment {
@@ -62,119 +65,158 @@ public class ProfilesFragment extends Fragment {
     }
 
     public void addChildren(){
-        children = helper.getAllChildren();
-        Log.i("size", String.valueOf(children.size()));
-        int i = 0;
-        for(Child child: children){
-            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            LinearLayout.LayoutParams textParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            ViewGroup.MarginLayoutParams marginLayoutParams = new ViewGroup.MarginLayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            marginLayoutParams.setMargins(50, 0, 50,10);
-            LinearLayout horizontalLayout = new LinearLayout(getContext());
-            horizontalLayout.setTag(child.getFirstName() + "Layout");
-            horizontalLayout.setOrientation(LinearLayout.HORIZONTAL);
-            horizontalLayout.setLayoutParams(marginLayoutParams);
+        final ExecutorService service = Executors.newSingleThreadExecutor();
+        final Handler handler = new Handler(Looper.getMainLooper());
 
-            layoutParams.setMargins(200, 0, 0, 30);
-            textParams.setMargins(50, 0, 10, 30);
+        service.execute(new Runnable() {
+            @Override
+            public void run() {
+                children = helper.getAllChildren();
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        Log.i("size", String.valueOf(children.size()));
+                        int i = 0;
+                        for(Child child: children){
+                            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                            LinearLayout.LayoutParams textParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                            ViewGroup.MarginLayoutParams marginLayoutParams = new ViewGroup.MarginLayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                            marginLayoutParams.setMargins(50, 0, 50,10);
+                            LinearLayout horizontalLayout = new LinearLayout(getContext());
+                            horizontalLayout.setTag(child.getFirstName() + "Layout");
+                            horizontalLayout.setOrientation(LinearLayout.HORIZONTAL);
+                            horizontalLayout.setLayoutParams(marginLayoutParams);
 
-            final TextView view = new TextView(getContext());
-            view.setGravity(Gravity.CENTER_HORIZONTAL);
-            view.setText(child.getFirstName());
-            view.setTextColor(Color.BLACK);
-            view.setTextSize(15);
-            view.setWidth(250);
-            view.setLayoutParams(textParams);
+                            layoutParams.setMargins(200, 0, 0, 30);
+                            textParams.setMargins(50, 0, 10, 30);
 
-            final Button button = new Button(getContext());
-            button.setLayoutParams(layoutParams);
-            button.setText("Delete");
-            button.setHeight(10);
-            button.setWidth(10);
-            button.setId(child.getChildID());
-            button.setTag(child.getFirstName());
-            horizontalLayout.addView(view);
-            button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    deleteChild(button);
-                }
-            });
-            final Button edit = new Button(getContext());
-            edit.setText("Edit");
-            edit.setHeight(10);
-            edit.setWidth(10);
-            edit.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    String name = (String) view.getText();
-                    Intent intent = new Intent(getContext(), DetailedProfileActivity.class);
-                    intent.putExtra("childName", name);
-                    startActivity(intent);
-                }
-            });
+                            final TextView view = new TextView(getContext());
+                            view.setGravity(Gravity.CENTER_HORIZONTAL);
+                            view.setText(child.getFirstName());
+                            view.setTextColor(Color.BLACK);
+                            view.setTextSize(15);
+                            view.setWidth(250);
+                            view.setLayoutParams(textParams);
 
-            horizontalLayout.addView(button);
-            horizontalLayout.addView(edit);
-            childLayout.addView(horizontalLayout);
+                            final Button button = new Button(getContext());
+                            button.setLayoutParams(layoutParams);
+                            button.setText("Delete");
+                            button.setHeight(10);
+                            button.setWidth(10);
+                            button.setId(child.getChildID());
+                            button.setTag(child.getFirstName());
+                            horizontalLayout.addView(view);
+                            button.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    delete(button, "Child");
+                                }
+                            });
+                            final Button edit = new Button(getContext());
+                            edit.setText("Edit");
+                            edit.setHeight(10);
+                            edit.setWidth(10);
+                            edit.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    String name = (String) view.getText();
+                                    Intent intent = new Intent(getContext(), DetailedProfileActivity.class);
+                                    intent.putExtra("childName", name);
+                                    startActivity(intent);
+                                }
+                            });
 
-        }
+                            horizontalLayout.addView(button);
+                            horizontalLayout.addView(edit);
+                            childLayout.addView(horizontalLayout);
+
+                        }
+                    }
+                });
+            }
+        });
     }
 
-    public void deleteChild(final Button button){
+    public void delete(final Button button, final String type){
         new AlertDialog.Builder(getContext())
                 .setTitle("Delete Child")
                 .setMessage("Are you sure you want to this child account")
                 .setPositiveButton("yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        helper.deleteEntry(button.getId(), "Child");
-                        helper.close();
-                        childLayout.removeView(getView().findViewWithTag(button.getTag() + "Layout"));
+                        if(type.equals("Child")) {
+                            helper.deleteEntry(button.getId(), "Child");
+                            childLayout.removeView(getView().findViewWithTag(button.getTag() + "Layout"));
+                        }
+                        else{
+                            helper.deleteEntry(button.getId(), "Account");
+                            caregiverLayout.removeView(getView().findViewById(button.getId()));
+                        }
                     }
                 })
                 .setNegativeButton("no", null).show();
     }
 
     public void addCareGivers(){
-        accounts = helper.getAllAccounts();
-        Log.i("size", String.valueOf(accounts.size()));
-        for(AccountHolder account: accounts){
-            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            LinearLayout.LayoutParams textParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            ViewGroup.MarginLayoutParams marginLayoutParams = new ViewGroup.MarginLayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            marginLayoutParams.setMargins(50, 0, 50,10);
-            LinearLayout horizontalLayout = new LinearLayout(getContext());
-            horizontalLayout.setTag(account.getFirstName() + "Layout");
-            horizontalLayout.setOrientation(LinearLayout.HORIZONTAL);
-            horizontalLayout.setLayoutParams(marginLayoutParams);
+        ExecutorService service = Executors.newSingleThreadExecutor();
+        final Handler handler = new Handler(Looper.getMainLooper());
 
-            layoutParams.setMargins(200, 0, 0, 30);
-            textParams.setMargins(50, 0, 10, 30);
+        service.execute(new Runnable() {
+            @Override
+            public void run() {
+                accounts = helper.getAllAccounts();
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        Log.i("size", String.valueOf(accounts.size()));
+                        for(AccountHolder account: accounts){
+                            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                            LinearLayout.LayoutParams textParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                            ViewGroup.MarginLayoutParams marginLayoutParams = new ViewGroup.MarginLayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                            marginLayoutParams.setMargins(50, 0, 50,10);
+                            LinearLayout horizontalLayout = new LinearLayout(getContext());
+                            horizontalLayout.setTag(account.getFirstName() + "Layout");
+                            horizontalLayout.setOrientation(LinearLayout.HORIZONTAL);
+                            horizontalLayout.setLayoutParams(marginLayoutParams);
 
-            TextView cg_name = new TextView(getContext());
-            cg_name.setText(account.getFirstName());
-            cg_name.setTextSize(15);
-            cg_name.setWidth(250);
-            cg_name.setGravity(Gravity.CENTER_HORIZONTAL);
-            cg_name.setTextColor(Color.BLACK);
-            cg_name.setLayoutParams(textParams);
-            horizontalLayout.addView(cg_name);
+                            layoutParams.setMargins(200, 0, 0, 30);
+                            textParams.setMargins(50, 0, 10, 30);
 
-            Button delete = new Button(getContext());
-            delete.setText("Delete");
-            delete.setWidth(10);
-            delete.setHeight(10);
-            delete.setLayoutParams(layoutParams);
-            horizontalLayout.addView(delete);
+                            TextView cg_name = new TextView(getContext());
+                            cg_name.setText(account.getFirstName());
+                            cg_name.setTextSize(15);
+                            cg_name.setWidth(250);
+                            cg_name.setGravity(Gravity.CENTER_HORIZONTAL);
+                            cg_name.setTextColor(Color.BLACK);
+                            cg_name.setLayoutParams(textParams);
+                            horizontalLayout.addView(cg_name);
 
-            Button edit = new Button(getContext());
-            edit.setText("Edit");
-            edit.setWidth(10);
-            edit.setHeight(10);
-            horizontalLayout.addView(edit);
+                            final Button delete = new Button(getContext());
+                            delete.setText("Delete");
+                            delete.setWidth(10);
+                            delete.setHeight(10);
+                            delete.setId(account.getAccountID());
+                            delete.setLayoutParams(layoutParams);
+                            delete.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    delete(delete, "Account");
+                                }
+                            });
+                            horizontalLayout.addView(delete);
 
-            caregiverLayout.addView(horizontalLayout);
-        }
+                            Button edit = new Button(getContext());
+                            edit.setText("Edit");
+                            edit.setWidth(10);
+                            edit.setHeight(10);
+                            horizontalLayout.addView(edit);
+
+                            caregiverLayout.addView(horizontalLayout);
+                        }
+                    }
+                });
+            }
+        });
+
     }
 }

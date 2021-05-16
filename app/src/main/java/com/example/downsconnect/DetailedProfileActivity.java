@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -23,6 +24,7 @@ public class DetailedProfileActivity extends AppCompatActivity implements DatePi
     private EditText birthdayPicker, dueDatePicker, allergies, medications, fullName;
     private Spinner gender, bloodType;
     private TextView age;
+    private ImageView image;
     private boolean birthday, dueDate;
     private Calendar birthdayDate, due_Date;
     private Button back, save;
@@ -43,9 +45,10 @@ public class DetailedProfileActivity extends AppCompatActivity implements DatePi
         fullName = findViewById(R.id.editTextTextPersonName);
         birthdayPicker = findViewById(R.id.birthdayPicker);
         dueDatePicker = findViewById(R.id.dueDatePicker);
+        image = findViewById(R.id.profileImageView);
 
         String childName = getIntent().getStringExtra("childName");
-        Child child = new Child();
+        Child child;
         if (!childName.equals("None")) {
             child = helper.getChild(childName);
         if (child != null) {

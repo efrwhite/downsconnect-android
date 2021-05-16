@@ -320,7 +320,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 x++;
         }
         c.close();
-        db.close();
+        //db.close();
         return accounts;
     }
 
@@ -365,7 +365,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 children.add(child);
         }
         c.close();
-        db.close();
+        //db.close();
         return children;
     }
 
