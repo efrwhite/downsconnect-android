@@ -29,7 +29,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String[] COLUMN_4 = {"MoodID", "ChildID", "MoodType", "Time", "Notes", "EntryTime"};
     private static final String[] COLUMN_5 = {"SleepID", "ChildID", "SleepTime", "Duration", "Snoring" ,"Medication", "Supplements", "CPAP", "Other", "Study", "Unit", "Notes"};
     private static final String[] COLUMN_6 = {"EntryID", "EntryText", "EntryTime", "ChildID"};
-    private static final String[] COLUMN_7 = {"MedicalID", "ChildID", "Height", "HeightUnit", "Weight", "WeightUnit", "HeadSize", "HeadSizeUnit", "Health", "Vaccine", "Dosage", "DosageUnit", "DoctorsVisit", "Temperature", "TemperatureUnit", "Notes", "EntryTime"};
+    private static final String[] COLUMN_7 = {"MedicalID", "ChildID", "Height", "HeightUnit", "Weight", "WeightUnit", "HeadSize", "HeadSizeUnit", "Health", "Vaccine", "Dosage", "DosageUnit", "DoctorsVisit", "Temperature", "TemperatureUnit", "Notes", "Provider", "EntryTime"};
     public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -111,6 +111,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 "Temperature INTEGER, " +
                 "TemperatureUnit TEXT, " +
                 "Notes TEXT, " +
+                "Provider TEXT, " +
                 "EntryTime INTEGER)");
     }
 
@@ -242,7 +243,8 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(COLUMN_7[13], medicalInfo.getTemperature());
         values.put(COLUMN_7[14], medicalInfo.getTemperatureUnit());
         values.put(COLUMN_7[15], medicalInfo.getNotes());
-        values.put(COLUMN_7[16], medicalInfo.getEntryTime());
+        values.put(COLUMN_7[16], medicalInfo.getProvider());
+        values.put(COLUMN_7[17], medicalInfo.getEntryTime());
         SQLiteDatabase db = this.getWritableDatabase();
         db.insert(TABLE_NAMES[6], null, values);
         db.close();
@@ -392,13 +394,46 @@ public class DBHelper extends SQLiteOpenHelper {
             medicalInfo.setTemperature(Integer.parseInt(c.getString(13)));
             medicalInfo.setTemperatureUnit(c.getString(14));
             medicalInfo.setNotes(c.getString(15));
-            medicalInfo.setEntryTime(Integer.parseInt(c.getString(16)));
+            medicalInfo.setProvider(c.getString(16));
+            medicalInfo.setEntryTime(Integer.parseInt(c.getString(17)));
         }
         else{
             medicalInfo = null;
         }
         db.close();
         return medicalInfo;
+    }
+
+    ArrayList<MedicalInfo> getAllSpecificProvider(String provider){
+        ArrayList<MedicalInfo> medical = new ArrayList<>();
+        String query = "SELECT * FROM Medical WHERE Provider = '" + provider + "';";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor c = db.rawQuery(query, null);
+        while(c.moveToNext()){
+            MedicalInfo medicalInfo = new MedicalInfo();
+            medicalInfo.setMedicalID(Integer.parseInt(c.getString(0)));
+            medicalInfo.setChildId(Integer.parseInt(c.getString(1)));
+            medicalInfo.setHeight(Integer.parseInt(c.getString(2)));
+            medicalInfo.setHeightUnit(c.getString(3));
+            medicalInfo.setWeight(Integer.parseInt(c.getString(4)));
+            medicalInfo.setWeightUnit(c.getString(5));
+            medicalInfo.setHeadSize(Integer.parseInt(c.getString(6)));
+            medicalInfo.setHeadSizeUnit(c.getString(7));
+            medicalInfo.setHealth(c.getString(8));
+            medicalInfo.setVaccine(c.getString(9));
+            medicalInfo.setDosage(Integer.parseInt(c.getString(10)));
+            medicalInfo.setDosageUnit(c.getString(11));
+            medicalInfo.setDoctorVisit(Integer.parseInt(c.getString(12)));
+            medicalInfo.setTemperature(Integer.parseInt(c.getString(13)));
+            medicalInfo.setTemperatureUnit(c.getString(14));
+            medicalInfo.setNotes(c.getString(15));
+            medicalInfo.setProvider(c.getString(16));
+            medicalInfo.setEntryTime(Integer.parseInt(c.getString(17)));
+            medical.add(medicalInfo);
+        }
+        c.close();
+        db.close();
+        return medical;
     }
 
 }

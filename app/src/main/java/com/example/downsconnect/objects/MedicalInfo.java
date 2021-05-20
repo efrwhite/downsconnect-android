@@ -3,7 +3,7 @@ package com.example.downsconnect.objects;
 public class MedicalInfo {
     private int height, weight, headSize, dosage, childId, temperature, medicalID;
     private long entryTime, doctorVisit;
-    private String vaccine, temperatureUnit, health, heightUnit, weightUnit, headSizeUnit, dosageUnit, notes;
+    private String vaccine, temperatureUnit, health, heightUnit, weightUnit, headSizeUnit, dosageUnit, notes, provider;
 
     public MedicalInfo(){
 
@@ -142,5 +142,13 @@ public class MedicalInfo {
 
     public void setMedicalID(int medicalID) {
         this.medicalID = medicalID;
+    }
+
+    public String getProvider() {
+        return provider;
+    }
+
+    public void setProvider(String provider) {
+        this.provider = provider;
     }
 }
