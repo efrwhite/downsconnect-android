@@ -65,7 +65,6 @@ public class BathroomActivity extends AppCompatActivity {
         });
 
         ArrayList<String> arrayList = new ArrayList<>();
-
         arrayList.add("Diaper");
         arrayList.add("Potty");
         arrayList.add("Constipation");
@@ -78,15 +77,11 @@ public class BathroomActivity extends AppCompatActivity {
     private void prepareViewPager(ViewPager viewPager, ArrayList<String> arrayList) {
         MainAdapter adapter = new MainAdapter(getSupportFragmentManager());
 
-        BathroomFragment fragment = new BathroomFragment();
 
-        for (int i=0; i<arrayList.size(); i++){
-            Bundle bundle = new Bundle();
-            bundle.putString("title",arrayList.get(i));
-            fragment.setArguments(bundle);
-            adapter.addFragment(fragment,arrayList.get(i));
-            fragment = new BathroomFragment();
-        }
+        adapter.addFragment(new DiaperFragment(), "Diaper");
+        adapter.addFragment(new PottyFragment(), "Potty");
+        adapter.addFragment(new ConstipationFragment(), "Constipation");
+
 
         viewPager.setAdapter(adapter);
     }
