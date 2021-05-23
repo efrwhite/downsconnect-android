@@ -76,15 +76,18 @@ public class FeedActivity extends AppCompatActivity {
     private void prepareViewPager(ViewPager viewPager, ArrayList<String> arrayList) {
         FeedActivity.MainAdapter adapter = new FeedActivity.MainAdapter(getSupportFragmentManager());
 
-        FeedFragment fragment = new FeedFragment();
+        //FeedFragment fragment = new FeedFragment();
 
-        for (int i=0; i<arrayList.size(); i++){
-            Bundle bundle = new Bundle();
-            bundle.putString("title",arrayList.get(i));
-            fragment.setArguments(bundle);
-            adapter.addFragment(fragment,arrayList.get(i));
-            fragment = new FeedFragment();
-        }
+        adapter.addFragment(new FluidFragment(), "Fluid");
+        adapter.addFragment(new SolidFragment(), "Solid");
+
+//        for (int i=0; i<arrayList.size(); i++){
+//            Bundle bundle = new Bundle();
+//            bundle.putString("title",arrayList.get(i));
+//            fragment.setArguments(bundle);
+//            adapter.addFragment(fragment,arrayList.get(i));
+//            fragment = new FeedFragment();
+//        }
 
         viewPager.setAdapter(adapter);
     }
