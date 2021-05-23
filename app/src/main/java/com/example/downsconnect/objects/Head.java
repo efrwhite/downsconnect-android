@@ -5,6 +5,11 @@ public class Head {
 
     public Head(){}
 
+    public Head(int head, int age){
+        this.headSize = head;
+        this.childAge = age;
+    }
+
     public int getHeadSize() {
         return headSize;
     }
