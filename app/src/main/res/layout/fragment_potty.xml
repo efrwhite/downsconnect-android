@@ -27,7 +27,7 @@
         app:layout_constraintTop_toBottomOf="@+id/notesText" />
 
     <TextView
-        android:id="@+id/ateText"
+        android:id="@+id/diaperLeakText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -41,8 +41,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="@string/duration"
-        app:layout_constraintStart_toStartOf="@+id/ateText"
-        app:layout_constraintTop_toBottomOf="@+id/ateText" />
+        app:layout_constraintStart_toStartOf="@+id/diaperLeakText"
+        app:layout_constraintTop_toBottomOf="@+id/diaperLeakText" />
 
     <Spinner
         android:id="@+id/diaperLeakPicker"
@@ -51,7 +51,7 @@
         android:layout_marginEnd="24dp"
         android:background="@drawable/rounded_box"
         android:entries="@array/yn"
-        app:layout_constraintBaseline_toBaselineOf="@+id/ateText"
+        app:layout_constraintBaseline_toBaselineOf="@+id/diaperLeakText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline8" />
 

@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <View
+        android:id="@+id/neckSafetyView"
+        android:layout_width="wrap_content"
+        android:layout_height="56dp"
+        android:background="#97B8F9"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/neckSafetyText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/neck_safety"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/neckSafetyView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/neckSafetyView"
+        app:layout_constraintTop_toTopOf="@+id/neckSafetyView" />
+
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/left_arrow"
+        app:layout_constraintBottom_toBottomOf="@+id/neckSafetyView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:id="@+id/scrollView4"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/neckSafetyView">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/neckSafetyView">
+
+            <TextView
+                android:id="@+id/trampolineText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="24dp"
+                android:text="@string/avoid_trampoline_use_under_the_age_of_6_and_under_close_supervision_over_6"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/olympicsText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/may_require_neck_x_ray_for_participation_in_activities_like_special_olympics"
+                app:layout_constraintEnd_toEndOf="@+id/trampolineText"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/trampolineText"
+                app:layout_constraintTop_toBottomOf="@+id/neckSympText" />
+
+            <TextView
+                android:id="@+id/symptomsText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/symptoms_to_monitor_for"
+                app:layout_constraintStart_toStartOf="@+id/olympicsText"
+                app:layout_constraintTop_toBottomOf="@+id/olympicsText" />
+
+            <TextView
+                android:id="@+id/neckPainText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/neck_pain"
+                app:layout_constraintStart_toStartOf="@+id/symptomsText"
+                app:layout_constraintTop_toBottomOf="@+id/symptomsText" />
+
+            <TextView
+                android:id="@+id/backLegPain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/back_or_leg_pain"
+                app:layout_constraintStart_toStartOf="@+id/neckPainText"
+                app:layout_constraintTop_toBottomOf="@+id/neckPainText" />
+
+            <TextView
+                android:id="@+id/weaknessText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/weakness"
+                app:layout_constraintStart_toStartOf="@+id/backLegPain"
+                app:layout_constraintTop_toBottomOf="@+id/backLegPain" />
+
+            <TextView
+                android:id="@+id/muscleText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/muscle_stiffening"
+                app:layout_constraintStart_toStartOf="@+id/weaknessText"
+                app:layout_constraintTop_toBottomOf="@+id/weaknessText" />
+
+            <TextView
+                android:id="@+id/changeToneText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/changes_in_tone"
+                app:layout_constraintStart_toStartOf="@+id/muscleText"
+                app:layout_constraintTop_toBottomOf="@+id/muscleText" />
+
+            <TextView
+                android:id="@+id/gaitText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/gait_changes"
+                app:layout_constraintStart_toStartOf="@+id/changeToneText"
+                app:layout_constraintTop_toBottomOf="@+id/changeToneText" />
+
+            <TextView
+                android:id="@+id/changeBowelText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/changes_in_bowel_or_bladder_function"
+                app:layout_constraintStart_toStartOf="@+id/gaitText"
+                app:layout_constraintTop_toBottomOf="@+id/gaitText" />
+
+            <TextView
+                android:id="@+id/neckSympText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/neck_x_ray_only_for_symptomatic_children"
+                app:layout_constraintStart_toStartOf="@+id/trampolineText"
+                app:layout_constraintTop_toBottomOf="@+id/trampolineText" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

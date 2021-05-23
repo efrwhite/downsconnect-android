@@ -27,22 +27,22 @@
         app:layout_constraintTop_toBottomOf="@+id/notesText" />
 
     <TextView
-        android:id="@+id/ateText"
+        android:id="@+id/diaperLeakText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="@string/accident"
+        android:text="@string/diaper_leak"
         app:layout_constraintStart_toStartOf="@+id/editText"
         app:layout_constraintTop_toBottomOf="@+id/editText" />
 
     <TextView
-        android:id="@+id/quantityText"
+        android:id="@+id/openAirText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="@string/duration"
-        app:layout_constraintStart_toStartOf="@+id/ateText"
-        app:layout_constraintTop_toBottomOf="@+id/ateText" />
+        android:text="@string/open_air_accident"
+        app:layout_constraintStart_toStartOf="@+id/diaperLeakText"
+        app:layout_constraintTop_toBottomOf="@+id/diaperLeakText" />
 
     <Spinner
         android:id="@+id/diaperLeakPicker"
@@ -51,7 +51,7 @@
         android:layout_marginEnd="24dp"
         android:background="@drawable/rounded_box"
         android:entries="@array/yn"
-        app:layout_constraintBaseline_toBaselineOf="@+id/ateText"
+        app:layout_constraintBaseline_toBaselineOf="@+id/diaperLeakText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline8" />
 
@@ -61,10 +61,10 @@
         android:layout_height="40dp"
         android:layout_marginEnd="24dp"
         android:background="@drawable/rounded_box"
-        app:layout_constraintBaseline_toBaselineOf="@+id/quantityText"
+        android:entries="@array/yn"
+        app:layout_constraintBaseline_toBaselineOf="@+id/openAirText"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline8"
-        android:entries="@array/yn"/>
+        app:layout_constraintStart_toStartOf="@+id/guideline8" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline8"
@@ -83,14 +83,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/quantityText" />
 
-    <TextView
-        android:id="@+id/diaperCreamText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="@string/diaper_cream"
-        app:layout_constraintStart_toStartOf="@+id/quantityText"
-        app:layout_constraintTop_toBottomOf="@+id/quantityText" />
+
 
     <TextView
         android:id="@+id/quantityText"
@@ -108,7 +101,7 @@
         android:layout_marginEnd="24dp"
         android:background="@drawable/rounded_box"
         android:entries="@array/sml"
-        app:layout_constraintBaseline_toBaselineOf="@+id/quantityText"
+        app:layout_constraintBaseline_toBaselineOf="@+id/diaperCreamText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline8" />
 
@@ -119,8 +112,17 @@
         android:layout_marginEnd="24dp"
         android:background="@drawable/rounded_box"
         android:entries="@array/yn"
-        app:layout_constraintBaseline_toBaselineOf="@+id/diaperCreamText"
+        app:layout_constraintBaseline_toBaselineOf="@+id/quantityText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline8" />
+
+    <TextView
+        android:id="@+id/diaperCreamText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/diaper_cream"
+        app:layout_constraintStart_toStartOf="@+id/openAirText"
+        app:layout_constraintTop_toBottomOf="@+id/openAirText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

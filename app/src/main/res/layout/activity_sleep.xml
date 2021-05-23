@@ -57,7 +57,7 @@
         app:layout_constraintTop_toBottomOf="@+id/current_time_text" />
 
     <TextView
-        android:id="@+id/durationText"
+        android:id="@+id/openAirText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -71,8 +71,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="@string/notes"
-        app:layout_constraintStart_toStartOf="@+id/durationText"
-        app:layout_constraintTop_toBottomOf="@+id/durationText" />
+        app:layout_constraintStart_toStartOf="@+id/openAirText"
+        app:layout_constraintTop_toBottomOf="@+id/openAirText" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline3"
@@ -102,7 +102,7 @@
         android:inputType="numberDecimal"
         android:textAlignment="center"
         android:textSize="14sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/durationText"
+        app:layout_constraintBaseline_toBaselineOf="@+id/openAirText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline3" />
 

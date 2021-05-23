@@ -101,6 +101,25 @@
     <string name="national_support_groups">National Support Groups</string>
     <string name="websites">Websites</string>
     <string name="books">Books</string>
+    <string name="child_first_rolled_over">Child first rolled over:</string>
+    <string name="child_first_sitting_up">Child first sitting up:</string>
+    <string name="child_first_standing">Child first standing:</string>
+    <string name="child_first_walking">Child first walking:</string>
+    <string name="age">Age</string>
+    <string name="neck_safety">Neck Safety</string>
+    <string name="avoid_trampoline_use_under_the_age_of_6_and_under_close_supervision_over_6">Avoid trampoline use under the age of 6 and under close supervision over 6</string>
+    <string name="neck_x_ray_only_for_symptomatic_children">Neck x-ray only for symptomatic children</string>
+    <string name="may_require_neck_x_ray_for_participation_in_activities_like_special_olympics">May require neck x-ray for participation in activities like Special Olympics</string>
+    <string name="symptoms_to_monitor_for">Symptoms to monitor for:</string>
+    <string name="neck_pain">- Neck pain</string>
+    <string name="back_or_leg_pain">- Back or leg pain</string>
+    <string name="weakness">- Weakness</string>
+    <string name="muscle_stiffening">- Muscle stiffening</string>
+    <string name="changes_in_tone">- Changes in tone</string>
+    <string name="gait_changes">- Gait changes</string>
+    <string name="changes_in_bowel_or_bladder_function">- Changes in bowel or bladder function</string>
+    <string name="open_air_accident">Open Air Accident</string>
+    <string name="diaper_leak">Diaper Leak</string>
 
     <array name="gender">
         <item>Select</item>

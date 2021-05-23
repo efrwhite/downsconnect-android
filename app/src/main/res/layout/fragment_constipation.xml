@@ -27,7 +27,7 @@
         app:layout_constraintTop_toBottomOf="@+id/notesText" />
 
     <TextView
-        android:id="@+id/ateText"
+        android:id="@+id/diaperLeakText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -41,8 +41,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="@string/treatment_plan"
-        app:layout_constraintStart_toStartOf="@+id/ateText"
-        app:layout_constraintTop_toBottomOf="@+id/ateText" />
+        app:layout_constraintStart_toStartOf="@+id/diaperLeakText"
+        app:layout_constraintTop_toBottomOf="@+id/diaperLeakText" />
 
     <EditText
         android:id="@+id/diaperLeakPicker"
@@ -54,7 +54,7 @@
         android:paddingStart="7dp"
         android:ems="10"
         android:textSize="14sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/ateText"
+        app:layout_constraintBaseline_toBaselineOf="@+id/diaperLeakText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline8" />
 

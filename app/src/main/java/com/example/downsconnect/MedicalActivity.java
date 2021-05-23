@@ -38,7 +38,7 @@ public class MedicalActivity extends AppCompatActivity implements DatePickerDial
         back = findViewById(R.id.backButton);
         save = findViewById(R.id.saveButton);
         TextView currentTime = findViewById(R.id.current_time_text);
-        doctorDatePicker = findViewById(R.id.doctorDatePicker);
+        doctorDatePicker = findViewById(R.id.rolledDatePicker);
         height = findViewById(R.id.measuredHeightEditText);
         heightUnit = findViewById(R.id.heightSpinner);
         weight = findViewById(R.id.measuredWeightEditText);
