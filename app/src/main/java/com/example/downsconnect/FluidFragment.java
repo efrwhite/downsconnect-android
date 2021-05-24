@@ -1,12 +1,24 @@
 package com.example.downsconnect;
 
+import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
+
+import com.example.downsconnect.objects.Entry;
+import com.example.downsconnect.objects.Feed;
+
+import java.util.Calendar;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -14,6 +26,12 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class FluidFragment extends Fragment {
+    private Button saveBtn;
+    private EditText notes, fluidFood, quantity;
+    private Spinner foodUnit;
+    private DBHelper helper;
+    private Feed feed;
+    private Entry entry;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -60,5 +78,52 @@ public class FluidFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_fluid, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        saveBtn = view.findViewById(R.id.saveButton);
+        notes = view.findViewById(R.id.editText);
+        fluidFood = view.findViewById(R.id.fluidFoodEditText);
+        foodUnit = view.findViewById(R.id.unitSpinner);
+        quantity = view.findViewById(R.id.quantityEditText);
+        helper = new DBHelper(getContext());
+        feed = new Feed();
+        entry = new Entry();
+
+
+        saveBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!fluidFood.getText().toString().equals("") && !foodUnit.getSelectedItem().equals("Select") && !quantity.getText().toString().equals("")){
+                    feed.setAmount(Integer.parseInt(quantity.getText().toString()));
+                    feed.setSubstance(fluidFood.getText().toString());
+                    feed.setFoodUnit(foodUnit.getSelectedItem().toString());
+                    Calendar calendar = Calendar.getInstance();
+                    feed.setEntryTime(calendar.getTimeInMillis());
+                    if(!notes.getText().toString().equals("")){
+                        feed.setNotes(notes.getText().toString());
+                    }
+                    else{
+                        feed.setNotes("");
+                    }
+                    entry.setChildID(0);
+                    entry.setEntryText("Child drank " + feed.getAmount() + feed.getFoodUnit() + " of " + feed.getSubstance());
+                    entry.setEntryTime(calendar.getTimeInMillis());
+                    helper.addFeed(feed);
+                    helper.addEntry(entry);
+                    Intent intent = new Intent(getContext(), ActivityContainer.class);
+                    startActivity(intent);
+                }
+                else{
+                    AlertDialog a = new AlertDialog.Builder(saveBtn.getContext()).create();
+                    a.setTitle("Missing Information");
+                    a.setMessage("Please make sure you've filled out the necessary information");
+                    a.show();
+                }
+            }
+        });
     }
 }

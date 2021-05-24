@@ -25,7 +25,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String[] TABLE_NAMES = {"Account", "Child", "Feed", "Mood", "Sleep", "Entry", "Medical"};
     private static final String[] COLUMN_1 = {"AccountID","FirstName", "LastName", "Username", "Password", "Phone"};
     private static final String[] COLUMN_2 = {"ChildID", "FirstName", "LastName", "Gender", "BloodType", "DueDate", "Birthday", "Allergies", "Medications"};
-    private static final String[] COLUMN_3 = {"FeedID", "ChildID", "Amount", "Substance", "TimeConsumed", "Notes", "EntryTime"};
+    private static final String[] COLUMN_3 = {"FeedID", "ChildID", "Amount", "Substance", "Notes", "FoodUnit" , "EntryTime"};
     private static final String[] COLUMN_4 = {"MoodID", "ChildID", "MoodType", "Time", "Notes", "EntryTime"};
     private static final String[] COLUMN_5 = {"SleepID", "ChildID", "SleepTime", "Duration", "Snoring" ,"Medication", "Supplements", "CPAP", "Other", "Study", "Unit", "Notes"};
     private static final String[] COLUMN_6 = {"EntryID", "EntryText", "EntryTime", "ChildID"};
@@ -58,8 +58,8 @@ public class DBHelper extends SQLiteOpenHelper {
                 "ChildID INTEGER, " +
                 "Amount INTEGER, " +
                 "Substance TEXT, " +
-                "TimeConsumed TEXT, " +
                 "Notes TEXT, " +
+                "FoodUnit TEXT, " +
                 "EntryTime INTEGER);");
         db.execSQL("CREATE TABLE Mood(" +
                 "MoodID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
@@ -177,8 +177,8 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(COLUMN_3[1], feed.getChildID());
         values.put(COLUMN_3[2], feed.getAmount());
         values.put(COLUMN_3[3], feed.getSubstance());
-        values.put(COLUMN_3[4], feed.getTimeConsumed());
-        values.put(COLUMN_3[5], feed.getNotes());
+        values.put(COLUMN_3[4], feed.getNotes());
+        values.put(COLUMN_3[5], feed.getFoodUnit());
         values.put(COLUMN_3[6], feed.getEntryTime());
         SQLiteDatabase db = this.getWritableDatabase();
         db.insert(TABLE_NAMES[2], null, values);
