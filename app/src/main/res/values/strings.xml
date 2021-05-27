@@ -120,6 +120,14 @@
     <string name="changes_in_bowel_or_bladder_function">- Changes in bowel or bladder function</string>
     <string name="open_air_accident">Open Air Accident</string>
     <string name="diaper_leak">Diaper Leak</string>
+    <string name="head_circumference">Head Circumference:</string>
+    <string name="height">Height:</string>
+    <string name="provider">Provider:</string>
+    <string name="date">Date:</string>
+    <string name="child_s_age">Child\'s Age:</string>
+    <string name="enter_provider_s_name">Enter Provider\'s Name</string>
+    <string name="visit">visit.</string>
+    <string name="this_is_the">This is the</string>
 
     <array name="gender">
         <item>Select</item>

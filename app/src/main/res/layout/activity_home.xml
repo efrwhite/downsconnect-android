@@ -7,7 +7,7 @@
     android:layout_height="match_parent">
 
     <View
-        android:id="@+id/bottomNavView"
+        android:id="@+id/doctorsVisitView"
         android:layout_width="wrap_content"
         android:layout_height="60dp"
         android:background="#BAF3F7"
@@ -139,7 +139,7 @@
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/bottomNavView"
+        app:layout_constraintBottom_toTopOf="@+id/doctorsVisitView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view">
@@ -180,7 +180,7 @@
         android:layout_marginTop="8dp"
         android:background="@drawable/calendar_icon"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/bottomNavView" />
+        app:layout_constraintTop_toTopOf="@+id/doctorsVisitView" />
 
     <Button
         android:id="@+id/graphButton"
@@ -197,8 +197,8 @@
         android:layout_height="30dp"
         android:background="@drawable/timeline_icon"
         app:layout_constraintBaseline_toBaselineOf="@+id/graphButton"
-        app:layout_constraintEnd_toEndOf="@+id/bottomNavView"
-        app:layout_constraintStart_toStartOf="@+id/bottomNavView" />
+        app:layout_constraintEnd_toEndOf="@+id/doctorsVisitView"
+        app:layout_constraintStart_toStartOf="@+id/doctorsVisitView" />
 
     <Button
         android:id="@+id/emailButton"
@@ -216,8 +216,8 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
         android:background="@drawable/sync_icon"
-        app:layout_constraintEnd_toEndOf="@+id/bottomNavView"
-        app:layout_constraintTop_toTopOf="@+id/bottomNavView" />
+        app:layout_constraintEnd_toEndOf="@+id/doctorsVisitView"
+        app:layout_constraintTop_toTopOf="@+id/doctorsVisitView" />
 
     <TextView
         android:id="@+id/recentEntriesText"
@@ -284,7 +284,7 @@
         app:layout_constraintTop_toBottomOf="@+id/resourcesButton" />
 
     <TextView
-        android:id="@+id/medicalText"
+        android:id="@+id/doctorsVisitText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/medical"

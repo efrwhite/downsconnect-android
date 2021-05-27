@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <View
+        android:id="@+id/doctorsVisitView"
+        android:layout_width="wrap_content"
+        android:layout_height="56dp"
+        android:background="#FFBEBE"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/current_time_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:text="Today 00:00 AM"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/doctorsVisitView" />
+
+    <TextView
+        android:id="@+id/doctorsVisitText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/doctor_s_visit"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/doctorsVisitView"
+        app:layout_constraintEnd_toEndOf="@+id/doctorsVisitView"
+        app:layout_constraintStart_toStartOf="@+id/doctorsVisitView"
+        app:layout_constraintTop_toTopOf="@+id/doctorsVisitView" />
+
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/left_arrow"
+        app:layout_constraintBottom_toBottomOf="@+id/doctorsVisitView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/ageText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/child_s_age"
+        android:textStyle="bold"
+        app:layout_constraintBaseline_toBaselineOf="@+id/current_time_text"
+        app:layout_constraintStart_toStartOf="@+id/guideline13" />
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/saveButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/current_time_text">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/dateText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/date"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/providerText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:text="@string/provider"
+                app:layout_constraintStart_toStartOf="@+id/dateText"
+                app:layout_constraintTop_toBottomOf="@+id/dateText" />
+
+            <TextView
+                android:id="@+id/heightText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/height"
+                app:layout_constraintStart_toStartOf="@+id/providerText"
+                app:layout_constraintTop_toBottomOf="@+id/providerText" />
+
+            <TextView
+                android:id="@+id/headText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/head_circumference"
+                app:layout_constraintStart_toStartOf="@+id/heightText"
+                app:layout_constraintTop_toBottomOf="@+id/heightText" />
+
+            <EditText
+                android:id="@+id/doctorsDatePicker"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/rounded_box"
+                android:focusable="false"
+                android:hint="@string/enter_appointment_date"
+                android:paddingStart="7dp"
+                android:textSize="14sp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/dateText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline15" />
+
+            <EditText
+                android:id="@+id/providerEditText"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/rounded_box"
+                android:hint="@string/enter_provider_s_name"
+                android:paddingStart="7dp"
+                android:textSize="14sp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/providerText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline15" />
+
+            <EditText
+                android:id="@+id/heightEditText"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/rounded_box"
+                android:hint="Enter Height"
+                android:paddingStart="7dp"
+                android:textSize="14sp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/heightText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline15" />
+
+            <EditText
+                android:id="@+id/headEditText"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:background="@drawable/rounded_box"
+                android:paddingStart="7dp"
+                android:textSize="14sp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/headText"
+                app:layout_constraintStart_toStartOf="@+id/guideline15" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5" />
+
+            <Spinner
+                android:id="@+id/headSpinner"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/rounded_box"
+                android:entries="@array/measurement"
+                app:layout_constraintBaseline_toBaselineOf="@+id/headEditText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/headEditText" />
+
+            <TextView
+                android:id="@+id/temperatureText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/temperature"
+                app:layout_constraintStart_toStartOf="@+id/headText"
+                app:layout_constraintTop_toBottomOf="@+id/headText" />
+
+            <EditText
+                android:id="@+id/temperatureEditText"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:background="@drawable/rounded_box"
+                android:inputType="numberDecimal"
+                app:layout_constraintBaseline_toBaselineOf="@+id/temperatureText"
+                app:layout_constraintStart_toStartOf="@+id/guideline15" />
+
+            <Spinner
+                android:id="@+id/temperatureSpinner"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/rounded_box"
+                android:entries="@array/temperature"
+                app:layout_constraintBaseline_toBaselineOf="@+id/temperatureEditText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/temperatureEditText" />
+
+            <TextView
+                android:id="@+id/visitTextView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/this_is_the"
+                app:layout_constraintStart_toStartOf="@+id/temperatureText"
+                app:layout_constraintTop_toBottomOf="@+id/temperatureText" />
+
+            <TextView
+                android:id="@+id/visitTextView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@string/visit"
+                app:layout_constraintBaseline_toBaselineOf="@+id/visitEditText"
+                app:layout_constraintStart_toEndOf="@+id/visitEditText" />
+
+            <EditText
+                android:id="@+id/visitEditText"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:background="@drawable/rounded_box"
+                android:inputType="numberDecimal"
+                app:layout_constraintBaseline_toBaselineOf="@+id/visitTextView1"
+                app:layout_constraintStart_toStartOf="@+id/guideline15" />
+
+            <TextView
+                android:id="@+id/docTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Documentation"
+                app:layout_constraintStart_toStartOf="@+id/visitTextView1"
+                app:layout_constraintTop_toBottomOf="@+id/visitTextView1" />
+
+            <Button
+                android:id="@+id/button6"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/circle_red"
+                android:text="@string/plus"
+                android:textColor="#FFF"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/docTextView"
+                app:layout_constraintTop_toBottomOf="@+id/docTextView" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+    <Button
+        android:id="@+id/saveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:text="@string/save"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <TextView
+        android:id="@+id/calcAgeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:text="Age"
+        app:layout_constraintBaseline_toBaselineOf="@+id/ageText"
+        app:layout_constraintStart_toEndOf="@+id/ageText" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
