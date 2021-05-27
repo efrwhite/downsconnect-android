@@ -12,6 +12,7 @@ import com.example.downsconnect.objects.Child;
 import com.example.downsconnect.objects.Entry;
 import com.example.downsconnect.objects.Feed;
 import com.example.downsconnect.objects.MedicalInfo;
+import com.example.downsconnect.objects.Milestone;
 import com.example.downsconnect.objects.Mood;
 import com.example.downsconnect.objects.Sleep;
 
@@ -22,14 +23,15 @@ import java.util.ArrayList;
 public class DBHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "downsconnect.db";
     private static final int DATABASE_VERSION = 1;
-    private static final String[] TABLE_NAMES = {"Account", "Child", "Feed", "Mood", "Sleep", "Entry", "Medical"};
+    private static final String[] TABLE_NAMES = {"Account", "Child", "Feed", "Mood", "Sleep", "Entry", "Medical", "Milestone"};
     private static final String[] COLUMN_1 = {"AccountID","FirstName", "LastName", "Username", "Password", "Phone"};
     private static final String[] COLUMN_2 = {"ChildID", "FirstName", "LastName", "Gender", "BloodType", "DueDate", "Birthday", "Allergies", "Medications"};
-    private static final String[] COLUMN_3 = {"FeedID", "ChildID", "Amount", "Substance", "TimeConsumed", "Notes", "EntryTime"};
+    private static final String[] COLUMN_3 = {"FeedID", "ChildID", "Amount", "Substance", "Notes", "FoodUnit" , "EntryTime"};
     private static final String[] COLUMN_4 = {"MoodID", "ChildID", "MoodType", "Time", "Notes", "EntryTime"};
     private static final String[] COLUMN_5 = {"SleepID", "ChildID", "SleepTime", "Duration", "Snoring" ,"Medication", "Supplements", "CPAP", "Other", "Study", "Unit", "Notes"};
     private static final String[] COLUMN_6 = {"EntryID", "EntryText", "EntryTime", "ChildID"};
     private static final String[] COLUMN_7 = {"MedicalID", "ChildID", "Height", "HeightUnit", "Weight", "WeightUnit", "HeadSize", "HeadSizeUnit", "Health", "Vaccine", "Dosage", "DosageUnit", "DoctorsVisit", "Temperature", "TemperatureUnit", "Notes", "Provider", "EntryTime"};
+    private static final String[] COLUMN_8 = {"MilestoneID", "ChildID", "Rolling", "Sitting", "Standing", "Walking"};
     public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -58,8 +60,8 @@ public class DBHelper extends SQLiteOpenHelper {
                 "ChildID INTEGER, " +
                 "Amount INTEGER, " +
                 "Substance TEXT, " +
-                "TimeConsumed TEXT, " +
                 "Notes TEXT, " +
+                "FoodUnit TEXT, " +
                 "EntryTime INTEGER);");
         db.execSQL("CREATE TABLE Mood(" +
                 "MoodID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
@@ -113,6 +115,13 @@ public class DBHelper extends SQLiteOpenHelper {
                 "Notes TEXT, " +
                 "Provider TEXT, " +
                 "EntryTime INTEGER)");
+        db.execSQL("CREATE TABLE Milestone(" +
+                "MilestoneID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
+                "ChildID INTEGER, " +
+                "Rolling INTEGER, " +
+                "Sitting INTEGER, " +
+                "Standing INTEGER, " +
+                "Walking INTEGER)");
     }
 
     @Override
@@ -125,6 +134,7 @@ public class DBHelper extends SQLiteOpenHelper {
             db.execSQL("DROP TABLE IF EXISTS Sleep");
             db.execSQL("DROP TABLE IF EXISTS Entry");
             db.execSQL("DROP TABLE IF EXISTS Medical");
+            db.execSQL("DROP TABLE IF EXISTS Milestone");
         }
     }
 
@@ -177,8 +187,8 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(COLUMN_3[1], feed.getChildID());
         values.put(COLUMN_3[2], feed.getAmount());
         values.put(COLUMN_3[3], feed.getSubstance());
-        values.put(COLUMN_3[4], feed.getTimeConsumed());
-        values.put(COLUMN_3[5], feed.getNotes());
+        values.put(COLUMN_3[4], feed.getNotes());
+        values.put(COLUMN_3[5], feed.getFoodUnit());
         values.put(COLUMN_3[6], feed.getEntryTime());
         SQLiteDatabase db = this.getWritableDatabase();
         db.insert(TABLE_NAMES[2], null, values);
@@ -223,6 +233,18 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(COLUMN_6[3], entry.getChildID());
         SQLiteDatabase db = this.getWritableDatabase();
         db.insert(TABLE_NAMES[5], null, values);
+        db.close();
+    }
+
+    public void addMilestone(Milestone milestone){
+        ContentValues values = new ContentValues();
+        SQLiteDatabase db = this.getWritableDatabase();
+        values.put(COLUMN_8[1], milestone.getChildId());
+        values.put(COLUMN_8[2], milestone.getRollingDate());
+        values.put(COLUMN_8[3], milestone.getSittingDate());
+        values.put(COLUMN_8[4], milestone.getStandingDate());
+        values.put(COLUMN_8[5], milestone.getWalkingDate());
+        db.insert(TABLE_NAMES[7], null, values);
         db.close();
     }
 
@@ -273,6 +295,28 @@ public class DBHelper extends SQLiteOpenHelper {
         }
         db.close();
         return child;
+    }
+
+    Milestone getMilestone(int childID){
+        String query = "SELECT * FROM Milestone WHERE ChildID = '" + childID + "';";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor c = db.rawQuery(query, null);
+        Milestone milestone = new Milestone();
+        if(c.moveToFirst()){
+            c.moveToFirst();
+            milestone.setMilestoneId(c.getInt(0));
+            milestone.setChildId(c.getInt(1));
+            milestone.setRollingDate(c.getLong(2));
+            milestone.setSittingDate(c.getLong(3));
+            milestone.setStandingDate(c.getLong(4));
+            milestone.setWalkingDate(c.getLong(5));
+        }
+        else{
+            c.close();
+            milestone = null;
+        }
+        db.close();
+        return milestone;
     }
 
     AccountHolder getAccount(String user, String pass){
@@ -434,6 +478,17 @@ public class DBHelper extends SQLiteOpenHelper {
         c.close();
         db.close();
         return medical;
+    }
+
+    public boolean updateMilestone(Milestone milestone){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_8[2], milestone.getRollingDate());
+        values.put(COLUMN_8[3], milestone.getSittingDate());
+        values.put(COLUMN_8[4], milestone.getStandingDate());
+        values.put(COLUMN_8[5], milestone.getWalkingDate());
+        return db.update(TABLE_NAMES[7], values, COLUMN_8[1] + "=" + milestone.getChildId(), null) > 0;
+
     }
 
 }
