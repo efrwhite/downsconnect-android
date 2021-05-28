@@ -4,7 +4,9 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -33,6 +35,9 @@ public class MedicalActivity extends AppCompatActivity implements DatePickerDial
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_medical);
+
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        final int childID = sharedPreferences.getInt("name", 0);
 
         dbHelper = new DBHelper(this);
         back = findViewById(R.id.backButton);
@@ -103,6 +108,7 @@ public class MedicalActivity extends AppCompatActivity implements DatePickerDial
                     && doctorDate != 0 && !health.getSelectedItem().equals("Select") && !vaccine.getText().equals("") && !dosage.getText().equals("") && !dosageUnit.getSelectedItem().equals("Select")
                     && !temperature.getText().equals("") && !temperatureUnit.getSelectedItem().equals("Select") && !notes.getText().equals("")) {
 
+                    medicalInfo.setChildId(childID);
                     medicalInfo.setHeight(Integer.parseInt(height.getText().toString()));
                     medicalInfo.setHeightUnit(heightUnit.getSelectedItem().toString());
                     medicalInfo.setWeight(Integer.parseInt(weight.getText().toString()));
@@ -119,8 +125,8 @@ public class MedicalActivity extends AppCompatActivity implements DatePickerDial
                     medicalInfo.setEntryTime(time);
                     entry.setEntryTime(time);
                     Log.i("Entry", String.valueOf(time));
-                    entry.setEntryText("Inserted Medical Info for Jeff");
-                    entry.setChildID(1);
+                    entry.setEntryText("Inserted Medical Info for " + dbHelper.getChildName(childID));
+                    entry.setChildID(childID);
                     dbHelper.addMedical(medicalInfo);
                     dbHelper.addEntry(entry);
 

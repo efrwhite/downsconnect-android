@@ -2,12 +2,14 @@ package com.example.downsconnect;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.example.downsconnect.objects.Child;
 import com.example.downsconnect.objects.Entry;
 import com.example.downsconnect.objects.Feed;
 
@@ -84,12 +87,16 @@ public class FluidFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+        final int childID = sharedPreferences.getInt("name", 0);
+
         saveBtn = view.findViewById(R.id.saveButton);
         notes = view.findViewById(R.id.editText);
         fluidFood = view.findViewById(R.id.fluidFoodEditText);
         foodUnit = view.findViewById(R.id.unitSpinner);
         quantity = view.findViewById(R.id.quantityEditText);
         helper = new DBHelper(getContext());
+
         feed = new Feed();
         entry = new Entry();
 
@@ -98,6 +105,7 @@ public class FluidFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if(!fluidFood.getText().toString().equals("") && !foodUnit.getSelectedItem().equals("Select") && !quantity.getText().toString().equals("")){
+                    feed.setChildID(childID);
                     feed.setAmount(Integer.parseInt(quantity.getText().toString()));
                     feed.setSubstance(fluidFood.getText().toString());
                     feed.setFoodUnit(foodUnit.getSelectedItem().toString());
@@ -109,8 +117,8 @@ public class FluidFragment extends Fragment {
                     else{
                         feed.setNotes("");
                     }
-                    entry.setChildID(0);
-                    entry.setEntryText("Child drank " + feed.getAmount() + feed.getFoodUnit() + " of " + feed.getSubstance());
+                    entry.setChildID(childID);
+                    entry.setEntryText(helper.getChildName(childID) + " drank " + feed.getAmount() + feed.getFoodUnit() + " of " + feed.getSubstance());
                     entry.setEntryTime(calendar.getTimeInMillis());
                     helper.addFeed(feed);
                     helper.addEntry(entry);

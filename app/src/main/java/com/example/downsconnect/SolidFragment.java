@@ -2,12 +2,14 @@ package com.example.downsconnect;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.example.downsconnect.objects.Child;
 import com.example.downsconnect.objects.Entry;
 import com.example.downsconnect.objects.Feed;
 
@@ -84,6 +87,9 @@ public class SolidFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+        final int childID = sharedPreferences.getInt("name", 0);
+
         saveBtn = view.findViewById(R.id.saveButton);
         notes = view.findViewById(R.id.editText);
         solidFood = view.findViewById(R.id.solidFoodEditText);
@@ -98,7 +104,7 @@ public class SolidFragment extends Fragment {
             public void onClick(View v) {
                 if(!solidFood.getSelectedItem().toString().equals("") && !quantity.getText().toString().equals("") && !foodUnit.getSelectedItem().equals("Select")){
                     Calendar calendar = Calendar.getInstance();
-                    feed.setChildID(0);
+                    feed.setChildID(childID);
                     feed.setSubstance(solidFood.getSelectedItem().toString());
                     feed.setAmount(Integer.parseInt(quantity.getText().toString()));
                     feed.setFoodUnit(foodUnit.getSelectedItem().toString());
@@ -109,8 +115,9 @@ public class SolidFragment extends Fragment {
                         feed.setNotes("");
                     }
                     feed.setEntryTime(calendar.getTimeInMillis());
+                    entry.setChildID(childID);
                     entry.setEntryTime(calendar.getTimeInMillis());
-                    entry.setEntryText("Child ate " + feed.getAmount() + feed.getFoodUnit() + " of " + feed.getSubstance());
+                    entry.setEntryText(helper.getChildName(childID) + " ate " + feed.getAmount() + feed.getFoodUnit() + " of " + feed.getSubstance());
                     helper.addEntry(entry);
                     helper.addFeed(feed);
 

@@ -297,6 +297,24 @@ public class DBHelper extends SQLiteOpenHelper {
         return child;
     }
 
+    String getChildName(int id){
+        String query = "SELECT * FROM Child WHERE ChildID = '" + id + "';";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor c = db.rawQuery(query, null);
+        Child child = new Child();
+        String childName;
+        if(c.moveToFirst()){
+            c.moveToFirst();
+            childName = c.getString(1);
+        }
+        else{
+            c.close();
+            childName = null;
+        }
+        db.close();
+        return childName;
+    }
+
     Milestone getMilestone(int childID){
         String query = "SELECT * FROM Milestone WHERE ChildID = '" + childID + "';";
         SQLiteDatabase db = this.getWritableDatabase();

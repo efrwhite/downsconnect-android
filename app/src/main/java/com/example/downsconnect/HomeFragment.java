@@ -1,5 +1,6 @@
 package com.example.downsconnect;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -95,6 +96,10 @@ public class HomeFragment extends Fragment {
 
         helper = new DBHelper(getContext());
         entries = new ArrayList<>();
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+        final int childID = sharedPreferences.getInt("name", 0);
+
+
         Button feed = view.findViewById(R.id.feedButton);
         Button activity = view.findViewById(R.id.activityButton);
         Button sleep = view.findViewById(R.id.sleepButton);

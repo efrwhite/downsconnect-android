@@ -29,7 +29,7 @@
     <string name="weight">Weight</string>
     <string name="profiles">Profiles</string>
     <string name="parents_caregivers">Parents/Caregivers</string>
-    <string name="your_children">Your Children</string>
+    <string name="your_children">Your Children(Click name to select child)</string>
     <string name="gender">Gender</string>
     <string name="birthday">Birthday</string>
     <string name="due_date">Due Date</string>

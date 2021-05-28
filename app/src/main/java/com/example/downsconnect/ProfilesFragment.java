@@ -3,10 +3,12 @@ package com.example.downsconnect;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -32,6 +34,7 @@ public class ProfilesFragment extends Fragment {
     private ArrayList<Child> children = new ArrayList<>();
     private ArrayList<AccountHolder> accounts = new ArrayList<>();
     private LinearLayout childLayout, caregiverLayout;
+    private Intent childIntent;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -71,10 +74,10 @@ public class ProfilesFragment extends Fragment {
         service.execute(new Runnable() {
             @Override
             public void run() {
-                children = helper.getAllChildren();
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
+                        children = helper.getAllChildren();
                         Log.i("size", String.valueOf(children.size()));
                         int i = 0;
                         for(Child child: children){
@@ -82,8 +85,9 @@ public class ProfilesFragment extends Fragment {
                             LinearLayout.LayoutParams textParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                             ViewGroup.MarginLayoutParams marginLayoutParams = new ViewGroup.MarginLayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                             marginLayoutParams.setMargins(50, 0, 50,10);
-                            LinearLayout horizontalLayout = new LinearLayout(getContext());
+                            final LinearLayout horizontalLayout = new LinearLayout(getContext());
                             horizontalLayout.setTag(child.getFirstName() + "Layout");
+                            horizontalLayout.setId(child.getChildID());
                             horizontalLayout.setOrientation(LinearLayout.HORIZONTAL);
                             horizontalLayout.setLayoutParams(marginLayoutParams);
 
@@ -128,6 +132,23 @@ public class ProfilesFragment extends Fragment {
 
                             horizontalLayout.addView(button);
                             horizontalLayout.addView(edit);
+                            horizontalLayout.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    new AlertDialog.Builder(getContext())
+                                            .setTitle("Setting Child")
+                                            .setMessage("Are you sure you want to select " + view.getText().toString())
+                                            .setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialogInterface, int i) {
+                                                    SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+                                                    sharedPreferences.edit().putInt("name", horizontalLayout.getId()).commit();
+
+                                                }
+                                            })
+                                            .setNegativeButton("no", null).show();
+                                }
+                            });
                             childLayout.addView(horizontalLayout);
 
                         }
