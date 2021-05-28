@@ -4,7 +4,9 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -29,6 +31,9 @@ public class MilestoneActivity extends AppCompatActivity implements DatePickerDi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_milestone);
 
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        final int childID = sharedPreferences.getInt("name", 0);
+
         final Button back = findViewById(R.id.backButton);
         save = findViewById(R.id.saveButton);
         standing = findViewById(R.id.standingDatePicker);
@@ -38,14 +43,14 @@ public class MilestoneActivity extends AppCompatActivity implements DatePickerDi
         month_ = new Month();
         milestone = new Milestone();
         
-        milestone.setChildId(0);
+        milestone.setChildId(childID);
         milestone.setWalkingDate(0);
         milestone.setRollingDate(0);
         milestone.setSittingDate(0);
         milestone.setStandingDate(0);
 
         helper = new DBHelper(this);
-        final Milestone stone = helper.getMilestone(0);
+        final Milestone stone = helper.getMilestone(childID);
 
         if(stone != null){
             milestone.setStandingDate(stone.getStandingDate());
