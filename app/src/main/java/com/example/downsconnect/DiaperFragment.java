@@ -1,5 +1,7 @@
 package com.example.downsconnect;
 
+import android.app.AlertDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -11,6 +13,14 @@ import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
+
+import com.example.downsconnect.objects.Bathroom;
+import com.example.downsconnect.objects.Entry;
+
+import java.util.Calendar;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -18,6 +28,13 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class DiaperFragment extends Fragment {
+    private Bathroom bathroom = new Bathroom();
+    private DBHelper helper;
+    private Entry entry = new Entry();
+    private EditText notes;
+    private Spinner diaperLeak, openAir, cream, quantity;
+    private Button save;
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -72,5 +89,57 @@ public class DiaperFragment extends Fragment {
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         final int childID = sharedPreferences.getInt("name", 0);
+
+        bathroom.setBathroomType("Diaper");
+        bathroom.setChildID(childID);
+        bathroom.setDateOfLastStool(-1);
+        bathroom.setTreatmentPlan("None");
+        bathroom.setPottyAccident("None");
+        bathroom.setDuration("None");
+
+        diaperLeak = view.findViewById(R.id.leakSpinner);
+        openAir = view.findViewById(R.id.openAirSpinner);
+        cream = view.findViewById(R.id.diaperCreamSpinner);
+        quantity = view.findViewById(R.id.quantitySpinner);
+        notes = view.findViewById(R.id.editText);
+        save = view.findViewById(R.id.saveButton);
+        helper = new DBHelper(getContext());
+
+
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!diaperLeak.getSelectedItem().equals("Select") && !openAir.getSelectedItem().equals("Select")
+                    && !cream.getSelectedItem().equals("Select") && !quantity.getSelectedItem().equals("Select")){
+                    if(!notes.getText().toString().equals("")){
+                        bathroom.setNotes(notes.getText().toString());
+                    }
+                    else{
+                        bathroom.setNotes("None");
+                    }
+                    bathroom.setDiaperCream(cream.getSelectedItem().toString());
+                    bathroom.setLeak(diaperLeak.getSelectedItem().toString());
+                    bathroom.setOpenAir(openAir.getSelectedItem().toString());
+                    bathroom.setQuantity(quantity.getSelectedItem().toString());
+                    entry.setEntryText(helper.getChildName(childID) + " had an accident in their diaper");
+                    entry.setEntryTime(Calendar.getInstance().getTimeInMillis());
+                    entry.setChildID(childID);
+
+                    helper.addEntry(entry);
+                    helper.addBathroom(bathroom);
+                    Intent intent = new Intent(getContext(), ActivityContainer.class);
+                    startActivity(intent);
+                }
+                else{
+                    AlertDialog a = new AlertDialog.Builder(save.getContext()).create();
+                    a.setTitle("Missing Information");
+                    a.setMessage("Please make sure you've filled out the necessary information");
+                    a.show();
+                }
+            }
+        });
+
+
+
     }
 }

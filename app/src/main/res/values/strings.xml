@@ -216,8 +216,14 @@
     </array>
     <array name="sleep_time">
         <item>Select</item>
-        <item>Hrs</item>
-        <item>Mins</item>
+        <item>hrs</item>
+        <item>mins</item>
+    </array>
+    <array name="potty_time">
+        <item>Select</item>
+        <item>secs</item>
+        <item>mins</item>
+        <item>hrs</item>
     </array>
 
 </resources>

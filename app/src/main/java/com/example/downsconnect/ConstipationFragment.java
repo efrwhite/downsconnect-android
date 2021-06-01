@@ -1,23 +1,45 @@
 package com.example.downsconnect;
 
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import com.example.downsconnect.objects.Bathroom;
+import com.example.downsconnect.objects.Entry;
+import com.example.downsconnect.objects.Month;
+
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link ConstipationFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ConstipationFragment extends Fragment {
+public class ConstipationFragment extends Fragment implements DatePickerDialog.OnDateSetListener {
+    private EditText lastStoolDate, treatment, notes;
+    private Button save;
+    private Bathroom bathroom = new Bathroom();
+    private DBHelper helper;
+    private Entry entry;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -72,5 +94,84 @@ public class ConstipationFragment extends Fragment {
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         final int childID = sharedPreferences.getInt("name", 0);
+
+        bathroom.setBathroomType("Constipation");
+        bathroom.setChildID(childID);
+        bathroom.setDiaperCream("None");
+        bathroom.setOpenAir("None");
+        bathroom.setLeak("None");
+        bathroom.setQuantity("None");
+        bathroom.setPottyAccident("None");
+        bathroom.setDuration("None");
+
+        lastStoolDate = view.findViewById(R.id.stoolDateEditText);
+        lastStoolDate.setFocusable(false);
+        treatment = view.findViewById(R.id.quantityEditText);
+        notes = view.findViewById(R.id.editText);
+        save = view.findViewById(R.id.saveButton);
+        helper = new DBHelper(getContext());
+        entry = new Entry();
+
+        lastStoolDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDatePickerDialog();
+            }
+        });
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!lastStoolDate.getText().toString().equals("") && !treatment.getText().toString().equals("")){
+                    if(!notes.getText().toString().equals("")){
+                        bathroom.setNotes(notes.getText().toString());
+                    }
+                    bathroom.setTreatmentPlan(treatment.getText().toString());
+                    helper.addBathroom(bathroom);
+                    entry.setChildID(childID);
+                    entry.setEntryText(helper.getChildName(childID) + " was constipated, treated with " + bathroom.getTreatmentPlan());
+                    entry.setEntryTime(Calendar.getInstance().getTimeInMillis());
+                    helper.addEntry(entry);
+                    Intent intent = new Intent(getContext(), ActivityContainer.class);
+                    startActivity(intent);
+                }
+                else{
+                    AlertDialog a = new AlertDialog.Builder(save.getContext()).create();
+                    a.setTitle("Missing Information");
+                    a.setMessage("Please make sure you've filled out the necessary information");
+                    a.show();
+                }
+            }
+        });
     }
+
+    private void showDatePickerDialog() {
+        Calendar cal = Calendar.getInstance();
+        @SuppressLint("ResourceType") DatePickerDialog datePicker = new DatePickerDialog(getContext(), 2,
+                this,
+                cal.get(Calendar.YEAR),
+                cal.get(Calendar.MONTH),
+                cal.get(Calendar.DAY_OF_MONTH));
+        datePicker.setCancelable(false);
+        datePicker.setTitle("Select the date");
+        datePicker.show();
+    }
+
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+        Month month_ = new Month();
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(year, month, dayOfMonth);
+        bathroom.setDateOfLastStool(calendar.getTimeInMillis());
+        lastStoolDate.setText(month_.getMonth(month) + " " + dayOfMonth + ", " + year);
+    }
+
+//    private DatePickerDialog.OnDateSetListener datePickerListener = new DatePickerDialog.OnDateSetListener() {
+//
+//        // when dialog box is closed, below method will be called.
+//        public void onDateSet(DatePicker view, int selectedYear,
+//                              int selectedMonth, int selectedDay) {
+//            Month month_ = new Month();
+//            lastStoolDate.setText(month_.getMonth(selectedMonth) + " " + selectedDay + ", " + selectedYear);
+//
+//        }
+//    };
 }

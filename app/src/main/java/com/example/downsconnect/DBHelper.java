@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import com.example.downsconnect.objects.AccountHolder;
+import com.example.downsconnect.objects.Bathroom;
 import com.example.downsconnect.objects.Child;
 import com.example.downsconnect.objects.Entry;
 import com.example.downsconnect.objects.Feed;
@@ -23,7 +24,7 @@ import java.util.ArrayList;
 public class DBHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "downsconnect.db";
     private static final int DATABASE_VERSION = 1;
-    private static final String[] TABLE_NAMES = {"Account", "Child", "Feed", "Mood", "Sleep", "Entry", "Medical", "Milestone"};
+    private static final String[] TABLE_NAMES = {"Account", "Child", "Feed", "Mood", "Sleep", "Entry", "Medical", "Milestone", "Bathroom"};
     private static final String[] COLUMN_1 = {"AccountID","FirstName", "LastName", "Username", "Password", "Phone"};
     private static final String[] COLUMN_2 = {"ChildID", "FirstName", "LastName", "Gender", "BloodType", "DueDate", "Birthday", "Allergies", "Medications"};
     private static final String[] COLUMN_3 = {"FeedID", "ChildID", "Amount", "Substance", "Notes", "FoodUnit" , "EntryTime"};
@@ -32,6 +33,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String[] COLUMN_6 = {"EntryID", "EntryText", "EntryTime", "ChildID"};
     private static final String[] COLUMN_7 = {"MedicalID", "ChildID", "Height", "HeightUnit", "Weight", "WeightUnit", "HeadSize", "HeadSizeUnit", "Health", "Vaccine", "Dosage", "DosageUnit", "DoctorsVisit", "Temperature", "TemperatureUnit", "Notes", "Provider", "EntryTime"};
     private static final String[] COLUMN_8 = {"MilestoneID", "ChildID", "Rolling", "Sitting", "Standing", "Walking"};
+    private static final String[] COLUMN_9 = {"BathroomID", "ChildID", "BathroomType", "TreatmentPlan", "Leak", "OpenAir", "DiaperCream", "Quantity", "PottyAccident", "DateOfLastStool", "Duration"};
     public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -122,6 +124,18 @@ public class DBHelper extends SQLiteOpenHelper {
                 "Sitting INTEGER, " +
                 "Standing INTEGER, " +
                 "Walking INTEGER)");
+        db.execSQL("CREATE TABLE Bathroom(" +
+                "BathroomID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
+                "ChildID INTEGER, " +
+                "BathroomType TEXT, " +
+                "Treatment TEXT, " +
+                "Leak TEXT, " +
+                "OpenAir TEXT, " +
+                "DiaperCream TEXT, " +
+                "Quantity TEXT, " +
+                "PottyAccident TEXT, " +
+                "DateOfLastStool INTEGER, " +
+                "Duration TEXT)");
     }
 
     @Override
@@ -135,6 +149,7 @@ public class DBHelper extends SQLiteOpenHelper {
             db.execSQL("DROP TABLE IF EXISTS Entry");
             db.execSQL("DROP TABLE IF EXISTS Medical");
             db.execSQL("DROP TABLE IF EXISTS Milestone");
+            db.execSQL("DROP TABLE IF EXISTS Bathroom");
         }
     }
 
@@ -270,6 +285,29 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         db.insert(TABLE_NAMES[6], null, values);
         db.close();
+    }
+
+    public boolean addBathroom(Bathroom bathroom){
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_9[1], bathroom.getChildID());
+        values.put(COLUMN_9[2], bathroom.getBathroomType());
+        values.put(COLUMN_9[3], bathroom.getTreatmentPlan());
+        values.put(COLUMN_9[4], bathroom.getLeak());
+        values.put(COLUMN_9[5], bathroom.getOpenAir());
+        values.put(COLUMN_9[6], bathroom.getQuantity());
+        values.put(COLUMN_9[7], bathroom.getPottyAccident());
+        values.put(COLUMN_9[8], bathroom.getDateOfLastStool());
+        values.put(COLUMN_9[9], bathroom.getDuration());
+        SQLiteDatabase db = this.getWritableDatabase();
+        long result = db.insert(TABLE_NAMES[8], null, values);
+        db.close();
+        if(result == -1){
+            return false;
+        }
+        else{
+            return true;
+        }
+
     }
 
     Child getChild(String firstName){
