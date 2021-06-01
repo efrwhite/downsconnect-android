@@ -45,7 +45,7 @@
         app:layout_constraintTop_toBottomOf="@+id/eatText" />
 
     <Spinner
-        android:id="@+id/fluidFoodEditText"
+        android:id="@+id/accidentEditText"
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginEnd="24dp"
@@ -56,13 +56,14 @@
         app:layout_constraintStart_toStartOf="@+id/guideline8" />
 
     <EditText
-        android:id="@+id/quantityEditText"
+        android:id="@+id/durationEditText"
         android:layout_width="0dp"
         android:layout_height="40dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginEnd="16dp"
         android:background="@drawable/rounded_box"
+        android:inputType="number"
         app:layout_constraintBaseline_toBaselineOf="@+id/quantityText"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/unitsSpinner"
         app:layout_constraintStart_toStartOf="@+id/guideline8" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -81,5 +82,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/quantityText" />
+
+    <Spinner
+        android:id="@+id/unitsSpinner"
+        android:layout_width="65dp"
+        android:layout_height="42dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/rounded_box"
+        android:entries="@array/potty_time"
+        app:layout_constraintBottom_toTopOf="@+id/saveButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/accidentEditText"
+        app:layout_constraintVertical_bias="0.26999998" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
