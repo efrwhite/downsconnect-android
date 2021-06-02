@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.strictmode.SqliteObjectLeakedViolation;
 import android.util.Log;
 
 import com.example.downsconnect.objects.AccountHolder;
@@ -339,7 +340,6 @@ public class DBHelper extends SQLiteOpenHelper {
         String query = "SELECT * FROM Child WHERE ChildID = '" + id + "';";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor c = db.rawQuery(query, null);
-        Child child = new Child();
         String childName;
         if(c.moveToFirst()){
             c.moveToFirst();
@@ -351,6 +351,23 @@ public class DBHelper extends SQLiteOpenHelper {
         }
         db.close();
         return childName;
+    }
+
+    long getChildBirthday(int id){
+        String query = "SELECT * FROM Child WHERE ChildID = '" + id + "';";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor c = db.rawQuery(query, null);
+        long childBirthday;
+        if(c.moveToFirst()){
+            c.moveToFirst();
+            childBirthday = c.getLong(6);
+        }
+        else{
+            c.close();
+            childBirthday = 0;
+        }
+        db.close();
+        return childBirthday;
     }
 
     Milestone getMilestone(int childID){

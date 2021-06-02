@@ -7,10 +7,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -26,6 +28,8 @@ public class MilestoneActivity extends AppCompatActivity implements DatePickerDi
     private DBHelper helper;
     private Milestone milestone;
     private Button save;
+    private TextView standAge, sitAge, walkAge, rollAge;
+    private long childBirthday;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,9 +44,14 @@ public class MilestoneActivity extends AppCompatActivity implements DatePickerDi
         sitting = findViewById(R.id.sittingDatePicker);
         rolling = findViewById(R.id.rolledDatePicker);
         walking = findViewById(R.id.walkingDatePicker);
+        standAge = findViewById(R.id.calcStandingAge);
+        sitAge = findViewById(R.id.calcSittingAge);
+        rollAge = findViewById(R.id.calcRolledOverAge);
+        walkAge = findViewById(R.id.calcWalkingAge);
         month_ = new Month();
         milestone = new Milestone();
-        
+
+
         milestone.setChildId(childID);
         milestone.setWalkingDate(0);
         milestone.setRollingDate(0);
@@ -51,6 +60,8 @@ public class MilestoneActivity extends AppCompatActivity implements DatePickerDi
 
         helper = new DBHelper(this);
         final Milestone stone = helper.getMilestone(childID);
+        childBirthday = helper.getChildBirthday(childID);
+
 
         if(stone != null){
             milestone.setStandingDate(stone.getStandingDate());
@@ -61,21 +72,61 @@ public class MilestoneActivity extends AppCompatActivity implements DatePickerDi
                 Calendar standTime = Calendar.getInstance();
                 standTime.setTimeInMillis(stone.getStandingDate());
                 standing.setText(month_.getMonth(standTime.get(Calendar.MONTH)) + " " + standTime.get(Calendar.DATE) + ", " + standTime.get(Calendar.YEAR));
+                long difference = standTime.getTimeInMillis() - childBirthday;
+                long days = difference / (24 * 60 * 60 * 1000);
+                int months = (int) days / 30;
+                int years = (int) days / 365;
+                if(days <= 547){
+                    standAge.setText(months + " months");
+                }
+                else{
+                    standAge.setText(years + "yrs");
+                }
             }
             if(stone.getSittingDate() != 0){
                 Calendar sitTime = Calendar.getInstance();
                 sitTime.setTimeInMillis(stone.getSittingDate());
                 sitting.setText(month_.getMonth(sitTime.get(Calendar.MONTH)) + " " + sitTime.get(Calendar.DATE) + ", " + sitTime.get(Calendar.YEAR));
+                long difference = sitTime.getTimeInMillis() - childBirthday;
+                long days = difference / (24 * 60 * 60 * 1000);
+                int months = (int) days / 30;
+                int years = (int) days / 365;
+                if(days <= 547){
+                    sitAge.setText(months + " months");
+                }
+                else{
+                    sitAge.setText(years + "yrs");
+                }
             }
             if(stone.getRollingDate() != 0){
                 Calendar rollTime = Calendar.getInstance();
                 rollTime.setTimeInMillis(stone.getRollingDate());
                 rolling.setText(month_.getMonth(rollTime.get(Calendar.MONTH)) + " " + rollTime.get(Calendar.DATE) + ", " + rollTime.get(Calendar.YEAR));
+                long difference = rollTime.getTimeInMillis() - childBirthday;
+                long days = difference / (24 * 60 * 60 * 1000);
+                int months = (int) days / 30;
+                int years = (int) days / 365;
+                if(days <= 547){
+                    rollAge.setText(months + " months");
+                }
+                else{
+                    rollAge.setText(years + "yrs");
+                }
             }
             if(stone.getWalkingDate() != 0){
                 Calendar walkTime = Calendar.getInstance();
                 walkTime.setTimeInMillis(stone.getWalkingDate());
                 walking.setText(month_.getMonth(walkTime.get(Calendar.MONTH)) + " " + walkTime.get(Calendar.DATE) + ", " + walkTime.get(Calendar.YEAR));
+                long difference = childBirthday - walkTime.getTimeInMillis();
+                long days = difference / (24 * 60 * 60 * 1000);
+                int months = (int) days / 30;
+                int years = (int) days / 365;
+                if(days <= 547){
+                    walkAge.setText(months + " months");
+                }
+                else{
+                    walkAge.setText(years + "yrs");
+                }
             }
 
         }
@@ -173,21 +224,62 @@ public class MilestoneActivity extends AppCompatActivity implements DatePickerDi
             calendar.set(year, month, dayOfMonth);
             milestone.setStandingDate(calendar.getTimeInMillis());
             standing.setText(month_.getMonth(month) + " " + dayOfMonth + ", " + year);
+            long difference = calendar.getTimeInMillis() - childBirthday;
+            long days = difference / (24 * 60 * 60 * 1000);
+            int months = (int) days / 30;
+            int years = (int) days / 365;
+            if(days <= 547){
+                standAge.setText(months + " months");
+            }
+            else{
+                standAge.setText(years + "yrs");
+            }
         }
         else if(sit){
             calendar.set(year, month, dayOfMonth);
             milestone.setSittingDate(calendar.getTimeInMillis());
             sitting.setText(month_.getMonth(month) + " " +dayOfMonth + ", " + year);
+            long difference = calendar.getTimeInMillis() - childBirthday;
+            long days = difference / (24 * 60 * 60 * 1000);
+            int months = (int) days / 30;
+            int years = (int) days / 365;
+            if(days <= 547){
+                sitAge.setText(months + " months");
+            }
+            else{
+                sitAge.setText(years + "yrs");
+            }
         }
         else if(roll){
             calendar.set(year, month, dayOfMonth);
             milestone.setRollingDate(calendar.getTimeInMillis());
             rolling.setText(month_.getMonth(month) + " " +dayOfMonth + ", " + year);
+            long difference = calendar.getTimeInMillis() - childBirthday;
+            long days = difference / (24 * 60 * 60 * 1000);
+            Log.i("days", String.valueOf(days));
+            int months = (int) days / 30;
+            int years = (int) days / 365;
+            if(days <= 547){
+                rollAge.setText(months + " months");
+            }
+            else{
+                rollAge.setText(years + "yrs");
+            }
         }
         else{
             calendar.set(year, month, dayOfMonth);
             milestone.setWalkingDate(calendar.getTimeInMillis());
             walking.setText(month_.getMonth(month) + " " +dayOfMonth + ", " + year);
+            long difference = calendar.getTimeInMillis() - childBirthday;
+            long days = difference / (24 * 60 * 60 * 1000);
+            int months = (int) days / 30;
+            int years = (int) days / 365;
+            if(days <= 547){
+                walkAge.setText(months + " months");
+            }
+            else{
+                walkAge.setText(years + "yrs");
+            }
         }
     }
 }
