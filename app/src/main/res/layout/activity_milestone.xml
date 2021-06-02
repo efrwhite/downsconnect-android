@@ -62,10 +62,11 @@
 
     <TextView
         android:id="@+id/calcRolledOverAge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
+        android:layout_width="40dp"
+        android:layout_height="22dp"
+        android:layout_marginEnd="8dp"
         android:text="@string/age"
+        android:textSize="10sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/rolledDatePicker"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -140,28 +141,31 @@
 
     <TextView
         android:id="@+id/calcSittingAge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
+        android:layout_width="42dp"
+        android:layout_height="24dp"
+        android:layout_marginEnd="8dp"
         android:text="@string/age"
+        android:textSize="10sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/sittingDatePicker"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
         android:id="@+id/calcStandingAge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
+        android:layout_width="41dp"
+        android:layout_height="22dp"
+        android:layout_marginEnd="8dp"
         android:text="@string/age"
+        android:textSize="10sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/standingDatePicker"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
         android:id="@+id/calcWalkingAge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
+        android:layout_width="41dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="4dp"
         android:text="@string/age"
+        android:textSize="10sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/walkingDatePicker"
         app:layout_constraintEnd_toEndOf="parent" />
 
