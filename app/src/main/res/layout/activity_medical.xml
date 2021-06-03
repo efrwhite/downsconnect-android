@@ -62,66 +62,39 @@
 
 
             <TextView
-                android:id="@+id/measuredHeightText"
+                android:id="@+id/heightText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="16dp"
-                android:text="@string/measured_height"
+                android:text="@string/height"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <EditText
-                android:id="@+id/measuredHeightEditText"
-                android:layout_width="100dp"
-                android:layout_height="40dp"
-                android:background="@drawable/rounded_box"
-                android:inputType="numberDecimal"
-                app:layout_constraintBaseline_toBaselineOf="@+id/measuredHeightText"
-                app:layout_constraintStart_toStartOf="@+id/guideline2" />
-
             <TextView
-                android:id="@+id/measuredWeightText"
+                android:id="@+id/weightText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:text="@string/measured_weight"
-                app:layout_constraintStart_toStartOf="@+id/measuredHeightText"
-                app:layout_constraintTop_toBottomOf="@+id/measuredHeightText" />
-
-            <EditText
-                android:id="@+id/measuredWeightEditText"
-                android:layout_width="100dp"
-                android:layout_height="40dp"
-                android:background="@drawable/rounded_box"
-                android:inputType="numberDecimal"
-                app:layout_constraintBaseline_toBaselineOf="@+id/measuredWeightText"
+                android:text="@string/weight2"
+                app:layout_constraintBaseline_toBaselineOf="@+id/heightText"
                 app:layout_constraintStart_toStartOf="@+id/guideline2" />
 
             <TextView
                 android:id="@+id/headSizeText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
                 android:layout_marginTop="24dp"
-                android:text="@string/head_size"
-                app:layout_constraintStart_toStartOf="@+id/measuredWeightText"
-                app:layout_constraintTop_toBottomOf="@+id/measuredWeightText" />
-
-            <EditText
-                android:id="@+id/headSizeEditText"
-                android:layout_width="100dp"
-                android:layout_height="40dp"
-                android:background="@drawable/rounded_box"
-                android:inputType="numberDecimal"
-                app:layout_constraintBaseline_toBaselineOf="@+id/headSizeText"
-                app:layout_constraintStart_toStartOf="@+id/guideline2" />
+                android:text="@string/head_circumference"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/heightText" />
 
             <TextView
-                android:id="@+id/healthText"
+                android:id="@+id/medicationsText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:text="@string/health"
+                android:text="@string/medications2"
                 app:layout_constraintStart_toStartOf="@+id/headSizeText"
                 app:layout_constraintTop_toBottomOf="@+id/headSizeText" />
 
@@ -130,85 +103,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:text="@string/vaccine"
-                app:layout_constraintStart_toStartOf="@+id/healthText"
-                app:layout_constraintTop_toBottomOf="@+id/healthText" />
-
-            <EditText
-                android:id="@+id/vaccineEditText"
-                android:layout_width="100dp"
-                android:layout_height="40dp"
-                android:background="@drawable/rounded_box"
-                android:inputType="text"
-                app:layout_constraintBaseline_toBaselineOf="@+id/vaccineText"
-                app:layout_constraintStart_toStartOf="@+id/guideline2" />
+                android:text="@string/vaccines"
+                app:layout_constraintStart_toStartOf="@+id/medicationsText"
+                app:layout_constraintTop_toBottomOf="@+id/medicationsText" />
 
             <TextView
-                android:id="@+id/dosageText"
+                android:id="@+id/allergiesText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:text="@string/dosage"
+                android:text="@string/allergies2"
                 app:layout_constraintStart_toStartOf="@+id/vaccineText"
                 app:layout_constraintTop_toBottomOf="@+id/vaccineText" />
-
-            <EditText
-                android:id="@+id/dosageEditText"
-                android:layout_width="100dp"
-                android:layout_height="40dp"
-                android:background="@drawable/rounded_box"
-                android:inputType="numberDecimal"
-                app:layout_constraintBaseline_toBaselineOf="@+id/dosageText"
-                app:layout_constraintStart_toStartOf="@+id/guideline2" />
-
-            <TextView
-                android:id="@+id/doctorsVisitText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:text="@string/doctor_s_visit"
-                app:layout_constraintStart_toStartOf="@+id/dosageText"
-                app:layout_constraintTop_toBottomOf="@+id/dosageText" />
-
-            <TextView
-                android:id="@+id/temperatureText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:text="@string/temperature"
-                app:layout_constraintStart_toStartOf="@+id/doctorsVisitText"
-                app:layout_constraintTop_toBottomOf="@+id/doctorsVisitText" />
-
-            <EditText
-                android:id="@+id/temperatureEditText"
-                android:layout_width="100dp"
-                android:layout_height="40dp"
-                android:background="@drawable/rounded_box"
-                android:inputType="numberDecimal"
-                app:layout_constraintBaseline_toBaselineOf="@+id/temperatureText"
-                app:layout_constraintStart_toStartOf="@+id/guideline2" />
-
-            <TextView
-                android:id="@+id/notesText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:text="@string/notes"
-                app:layout_constraintStart_toStartOf="@+id/temperatureText"
-                app:layout_constraintTop_toBottomOf="@+id/temperatureText" />
-
-            <EditText
-                android:id="@+id/notesEditText"
-                android:layout_width="0dp"
-                android:layout_height="100dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="24dp"
-                android:background="@drawable/rounded_box"
-                android:inputType="text"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/notesText" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline2"
@@ -217,92 +123,193 @@
                 android:orientation="vertical"
                 app:layout_constraintGuide_percent="0.5" />
 
-            <Spinner
-                android:id="@+id/heightSpinner"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="24dp"
-                android:background="@drawable/rounded_box"
-                android:entries="@array/height"
-                app:layout_constraintBaseline_toBaselineOf="@+id/measuredHeightEditText"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/measuredHeightEditText" />
-
-            <Spinner
-                android:id="@+id/weightSpinner"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="24dp"
-                android:background="@drawable/rounded_box"
-                android:entries="@array/weight"
-                app:layout_constraintBaseline_toBaselineOf="@+id/measuredWeightEditText"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/measuredWeightEditText" />
-
-            <Spinner
-                android:id="@+id/temperatureSpinner"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="24dp"
-                android:background="@drawable/rounded_box"
-                android:entries="@array/temperature"
-                app:layout_constraintBaseline_toBaselineOf="@+id/temperatureEditText"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toEndOf="@+id/temperatureEditText" />
-
-            <Spinner
-                android:id="@+id/dosageSpinner"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="24dp"
-                android:background="@drawable/rounded_box"
-                android:entries="@array/dosage"
-                app:layout_constraintBaseline_toBaselineOf="@+id/dosageEditText"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/dosageEditText" />
-
-            <EditText
-                android:id="@+id/rolledDatePicker"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_marginEnd="24dp"
-                android:background="@drawable/rounded_box"
-                android:focusable="false"
-                android:hint="@string/enter_appointment_date"
+            <Button
+                android:id="@+id/doctorVisitButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="#FFBEBE"
                 android:paddingStart="7dp"
-                android:textSize="14sp"
-                app:layout_constraintBaseline_toBaselineOf="@+id/doctorsVisitText"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:paddingEnd="7dp"
+                android:text="@string/doctor_visits"
+                app:layout_constraintStart_toStartOf="@+id/additionalInfoText"
+                app:layout_constraintTop_toBottomOf="@+id/additionalInfoText" />
+
+            <Button
+                android:id="@+id/occupationalTherapyButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="#C3FFCA"
+                android:text="@string/occupational_therapy"
+                android:paddingStart="7dp"
+                android:paddingEnd="7dp"
+                app:layout_constraintStart_toStartOf="@+id/doctorVisitButton"
+                app:layout_constraintTop_toBottomOf="@+id/doctorVisitButton" />
+
+            <Button
+                android:id="@+id/physicalTherapyButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:background="#BAF3F7"
+                android:text="@string/physical_therapy"
+                android:paddingStart="7dp"
+                android:paddingEnd="7dp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/doctorVisitButton"
+                app:layout_constraintStart_toEndOf="@+id/doctorVisitButton" />
+
+            <Button
+                android:id="@+id/speechButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="#FFD5EA"
+                android:text="@string/speech"
+                android:paddingStart="7dp"
+                android:paddingEnd="7dp"
+                app:layout_constraintStart_toStartOf="@+id/occupationalTherapyButton"
+                app:layout_constraintTop_toBottomOf="@+id/occupationalTherapyButton" />
+
+            <Button
+                android:id="@+id/hearingButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:background="#97B8F9"
+                android:text="@string/hearing"
+                android:paddingStart="7dp"
+                android:paddingEnd="7dp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/speechButton"
+                app:layout_constraintStart_toEndOf="@+id/speechButton" />
+
+            <Button
+                android:id="@+id/dentalButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:background="#FFBEBE"
+                android:text="@string/dental"
+                android:paddingStart="7dp"
+                android:paddingEnd="7dp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/hearingButton"
+                app:layout_constraintStart_toEndOf="@+id/hearingButton" />
+
+            <Button
+                android:id="@+id/cardioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="#BAF3F7"
+                android:text="@string/cardio"
+                android:paddingStart="7dp"
+                android:paddingEnd="7dp"
+                app:layout_constraintStart_toStartOf="@+id/speechButton"
+                app:layout_constraintTop_toBottomOf="@+id/speechButton" />
+
+            <Button
+                android:id="@+id/ophthamologyButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:background="#EFC7FC"
+                android:text="@string/ophthamology"
+                android:paddingStart="7dp"
+                android:paddingEnd="7dp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/occupationalTherapyButton"
                 app:layout_constraintStart_toStartOf="@+id/guideline2" />
 
-            <Spinner
-                android:id="@+id/headSpinner"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="24dp"
-                android:background="@drawable/rounded_box"
-                android:entries="@array/measurement"
-                app:layout_constraintBaseline_toBaselineOf="@+id/headSizeEditText"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/headSizeEditText" />
+            <Button
+                android:id="@+id/neckSafetyButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:background="#FBFFC7"
+                android:paddingStart="7dp"
+                android:paddingEnd="7dp"
+                android:text="@string/neck_safety"
+                app:layout_constraintBaseline_toBaselineOf="@+id/cardioButton"
+                app:layout_constraintStart_toEndOf="@+id/cardioButton" />
 
-            <Spinner
-                android:id="@+id/healthSpinner"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_marginEnd="24dp"
-                android:background="@drawable/rounded_box"
-                android:entries="@array/health"
-                app:layout_constraintBaseline_toBaselineOf="@+id/healthText"
+            <TextView
+                android:id="@+id/guidelinesHyperlink"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/aap_guidelines_for_down_s_syndrome"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/guideline2" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/neckSafetyButton" />
+
+            <TextView
+                android:id="@+id/additionalInfoText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/additional_information"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/allergiesText"
+                app:layout_constraintTop_toBottomOf="@+id/allergiesText" />
+
+            <TextView
+                android:id="@+id/calcHeightTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@string/calculated_height"
+                android:textStyle="bold"
+                app:layout_constraintBaseline_toBaselineOf="@+id/heightText"
+                app:layout_constraintStart_toEndOf="@+id/heightText" />
+
+            <TextView
+                android:id="@+id/calcWeightTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@string/calculated_weight"
+                android:textStyle="bold"
+                app:layout_constraintBaseline_toBaselineOf="@+id/weightText"
+                app:layout_constraintStart_toEndOf="@+id/weightText" />
+
+            <TextView
+                android:id="@+id/calcHeadTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@string/calculated_head_size"
+                android:textStyle="bold"
+                app:layout_constraintBaseline_toBaselineOf="@+id/headSizeText"
+                app:layout_constraintStart_toEndOf="@+id/headSizeText" />
+
+            <TextView
+                android:id="@+id/medicationsListTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@string/list_of_medications"
+                android:textStyle="bold"
+                app:layout_constraintBaseline_toBaselineOf="@+id/medicationsText"
+                app:layout_constraintStart_toEndOf="@+id/medicationsText" />
+
+            <TextView
+                android:id="@+id/vaccineRecordsTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@string/vaccine_records"
+                android:textStyle="bold"
+                app:layout_constraintBaseline_toBaselineOf="@+id/vaccineText"
+                app:layout_constraintStart_toEndOf="@+id/vaccineText" />
+
+            <TextView
+                android:id="@+id/allergyListTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@string/list_of_allergies"
+                android:textStyle="bold"
+                app:layout_constraintBaseline_toBaselineOf="@+id/allergiesText"
+                app:layout_constraintStart_toEndOf="@+id/allergiesText" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

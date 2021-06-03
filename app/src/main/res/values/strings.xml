@@ -128,6 +128,25 @@
     <string name="enter_provider_s_name">Enter Provider\'s Name</string>
     <string name="visit">visit.</string>
     <string name="this_is_the">This is the</string>
+    <string name="ophthamology">Ophthamology</string>
+    <string name="aap_guidelines_for_down_s_syndrome">AAP Guidelines for Down\'s Syndrome</string>
+    <string name="calculated_height">Calculated Height</string>
+    <string name="calculated_weight">Calculated Weight</string>
+    <string name="calculated_head_size">Calculated Head Size</string>
+    <string name="list_of_medications">List of Medications</string>
+    <string name="vaccine_records">Vaccine Records</string>
+    <string name="list_of_allergies">List of Allergies</string>
+    <string name="dental">Dental</string>
+    <string name="hearing">Hearing</string>
+    <string name="speech">Speech</string>
+    <string name="physical_therapy">Physical Therapy</string>
+    <string name="occupational_therapy">Occupational Therapy</string>
+    <string name="doctor_visits">Doctor Visits</string>
+    <string name="allergies2">Allergies:</string>
+    <string name="vaccines">Vaccines:</string>
+    <string name="medications2">Medications:</string>
+    <string name="weight2">Weight:</string>
+    <string name="cardio">Cardio</string>
 
     <array name="gender">
         <item>Select</item>
