@@ -101,10 +101,11 @@
                 android:id="@+id/headText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="32dp"
                 android:text="@string/head_circumference"
-                app:layout_constraintStart_toStartOf="@+id/heightText"
-                app:layout_constraintTop_toBottomOf="@+id/heightText" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
             <EditText
                 android:id="@+id/doctorsDatePicker"
@@ -135,26 +136,27 @@
 
             <EditText
                 android:id="@+id/heightEditText"
-                android:layout_width="0dp"
+                android:layout_width="100dp"
                 android:layout_height="40dp"
-                android:layout_marginEnd="24dp"
                 android:background="@drawable/rounded_box"
                 android:hint="Enter Height"
+                android:inputType="numberDecimal"
                 android:paddingStart="7dp"
                 android:textSize="14sp"
                 app:layout_constraintBaseline_toBaselineOf="@+id/heightText"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/guideline15" />
 
             <EditText
                 android:id="@+id/headEditText"
                 android:layout_width="100dp"
                 android:layout_height="40dp"
+                android:layout_marginTop="24dp"
                 android:background="@drawable/rounded_box"
+                android:inputType="numberDecimal"
                 android:paddingStart="7dp"
                 android:textSize="14sp"
-                app:layout_constraintBaseline_toBaselineOf="@+id/headText"
-                app:layout_constraintStart_toStartOf="@+id/guideline15" />
+                app:layout_constraintStart_toStartOf="@+id/guideline15"
+                app:layout_constraintTop_toBottomOf="@+id/weightEditText" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline15"
@@ -168,12 +170,14 @@
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_marginStart="8dp"
+                android:layout_marginTop="24dp"
                 android:layout_marginEnd="24dp"
                 android:background="@drawable/rounded_box"
                 android:entries="@array/measurement"
-                app:layout_constraintBaseline_toBaselineOf="@+id/headEditText"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/headEditText" />
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/headEditText"
+                app:layout_constraintTop_toBottomOf="@+id/weightSpinner" />
 
             <TextView
                 android:id="@+id/temperatureText"
@@ -188,10 +192,11 @@
                 android:id="@+id/temperatureEditText"
                 android:layout_width="100dp"
                 android:layout_height="40dp"
+                android:layout_marginTop="2dp"
                 android:background="@drawable/rounded_box"
                 android:inputType="numberDecimal"
-                app:layout_constraintBaseline_toBaselineOf="@+id/temperatureText"
-                app:layout_constraintStart_toStartOf="@+id/guideline15" />
+                app:layout_constraintStart_toStartOf="@+id/guideline15"
+                app:layout_constraintTop_toBottomOf="@+id/headEditText" />
 
             <Spinner
                 android:id="@+id/temperatureSpinner"
@@ -228,10 +233,10 @@
                 android:id="@+id/visitEditText"
                 android:layout_width="100dp"
                 android:layout_height="40dp"
+                android:layout_marginTop="3dp"
                 android:background="@drawable/rounded_box"
-                android:inputType="numberDecimal"
-                app:layout_constraintBaseline_toBaselineOf="@+id/visitTextView1"
-                app:layout_constraintStart_toStartOf="@+id/guideline15" />
+                app:layout_constraintStart_toStartOf="@+id/guideline15"
+                app:layout_constraintTop_toBottomOf="@+id/temperatureEditText" />
 
             <TextView
                 android:id="@+id/docTextView"
@@ -254,8 +259,58 @@
                 app:layout_constraintStart_toStartOf="@+id/docTextView"
                 app:layout_constraintTop_toBottomOf="@+id/docTextView" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:text="@string/weight"
+                app:layout_constraintEnd_toStartOf="@+id/guideline15"
+                app:layout_constraintHorizontal_bias="0.145"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/heightText" />
 
+            <EditText
+                android:id="@+id/weightEditText"
+                android:layout_width="100dp"
+                android:layout_height="42dp"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/rounded_box"
+                android:ems="10"
+                android:gravity="center"
+                android:hint="Enter Weight"
+                android:inputType="numberDecimal"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="@+id/guideline15"
+                app:layout_constraintTop_toBottomOf="@+id/heightEditText" />
+
+            <Spinner
+                android:id="@+id/weightSpinner"
+                android:layout_width="76dp"
+                android:layout_height="41dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/rounded_box"
+                android:entries="@array/weight"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.29"
+                app:layout_constraintStart_toEndOf="@+id/weightEditText"
+                app:layout_constraintTop_toBottomOf="@+id/heightEditText" />
+
+            <Spinner
+                android:id="@+id/heightSpinner"
+                android:layout_width="76dp"
+                android:layout_height="38dp"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/rounded_box"
+                android:entries="@array/height"
+                app:layout_constraintBottom_toTopOf="@+id/weightSpinner"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.3"
+                app:layout_constraintStart_toEndOf="@+id/heightEditText"
+                app:layout_constraintTop_toBottomOf="@+id/providerEditText" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
     <Button

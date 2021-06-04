@@ -1,139 +1,52 @@
 package com.example.downsconnect.objects;
 
+import com.example.downsconnect.MedicalActivity;
+
 public class MedicalInfo {
-    private int height, weight, headSize, dosage, childId, temperature, medicalID;
-    private long entryTime, doctorVisit;
-    private String vaccine, temperatureUnit, health, heightUnit, weightUnit, headSizeUnit, dosageUnit, notes, provider;
+    private String provider, headInfo, temperatureInfo, visit, height, weight;
+    private int childID, medicalID;
+    private long doctorDate;
 
-    public MedicalInfo(){
+    public MedicalInfo(){}
 
-    }
-    public int getHeight() {
-        return height;
-    }
-
-    public void setHeight(int height) {
-        this.height = height;
+    public String getProvider() {
+        return provider;
     }
 
-    public int getWeight() {
-        return weight;
+    public void setProvider(String provider) {
+        this.provider = provider;
     }
 
-    public void setWeight(int weight) {
-        this.weight = weight;
+    public String getHeadInfo() {
+        return headInfo;
     }
 
-    public int getHeadSize() {
-        return headSize;
+    public void setHeadInfo(String headInfo) {
+        this.headInfo = headInfo;
     }
 
-    public void setHeadSize(int headSize) {
-        this.headSize = headSize;
+    public String getTemperatureInfo() {
+        return temperatureInfo;
     }
 
-    public int getDosage() {
-        return dosage;
+    public void setTemperatureInfo(String temperatureInfo) {
+        this.temperatureInfo = temperatureInfo;
     }
 
-    public void setDosage(int dosage) {
-        this.dosage = dosage;
+    public String getVisit() {
+        return visit;
     }
 
-    public String getVaccine() {
-        return vaccine;
+    public void setVisit(String visit) {
+        this.visit = visit;
     }
 
-    public void setVaccine(String vaccine) {
-        this.vaccine = vaccine;
+    public int getChildID() {
+        return childID;
     }
 
-    public long getDoctorVisit() {
-        return doctorVisit;
-    }
-
-    public void setDoctorVisit(long doctorVisit) {
-        this.doctorVisit = doctorVisit;
-    }
-
-    public int getTemperature() {
-        return temperature;
-    }
-
-    public void setTemperature(int temperature) {
-        this.temperature = temperature;
-    }
-
-    public String getHealth() {
-        return health;
-    }
-
-    public void setHealth(String health) {
-        this.health = health;
-    }
-
-    public long getEntryTime() {
-        return entryTime;
-    }
-
-    public void setEntryTime(long entryTime) {
-        this.entryTime = entryTime;
-    }
-
-    public String getHeightUnit() {
-        return heightUnit;
-    }
-
-    public void setHeightUnit(String heightUnit) {
-        this.heightUnit = heightUnit;
-    }
-
-    public String getWeightUnit() {
-        return weightUnit;
-    }
-
-    public void setWeightUnit(String weightUnit) {
-        this.weightUnit = weightUnit;
-    }
-
-    public String getHeadSizeUnit() {
-        return headSizeUnit;
-    }
-
-    public void setHeadSizeUnit(String headSizeUnit) {
-        this.headSizeUnit = headSizeUnit;
-    }
-
-    public int getChildId() {
-        return childId;
-    }
-
-    public void setChildId(int childId) {
-        this.childId = childId;
-    }
-
-    public String getDosageUnit() {
-        return dosageUnit;
-    }
-
-    public void setDosageUnit(String dosageUnit) {
-        this.dosageUnit = dosageUnit;
-    }
-
-    public String getNotes() {
-        return notes;
-    }
-
-    public void setNotes(String notes) {
-        this.notes = notes;
-    }
-
-    public String getTemperatureUnit() {
-        return temperatureUnit;
-    }
-
-    public void setTemperatureUnit(String temperatureUnit) {
-        this.temperatureUnit = temperatureUnit;
+    public void setChildID(int childID) {
+        this.childID = childID;
     }
 
     public int getMedicalID() {
@@ -144,11 +57,27 @@ public class MedicalInfo {
         this.medicalID = medicalID;
     }
 
-    public String getProvider() {
-        return provider;
+    public String getHeight() {
+        return height;
     }
 
-    public void setProvider(String provider) {
-        this.provider = provider;
+    public void setHeight(String height) {
+        this.height = height;
+    }
+
+    public long getDoctorDate() {
+        return doctorDate;
+    }
+
+    public void setDoctorDate(long doctorDate) {
+        this.doctorDate = doctorDate;
+    }
+
+    public String getWeight() {
+        return weight;
+    }
+
+    public void setWeight(String weight) {
+        this.weight = weight;
     }
 }
