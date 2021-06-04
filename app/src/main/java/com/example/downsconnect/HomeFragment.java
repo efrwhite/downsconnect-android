@@ -220,7 +220,7 @@ public class HomeFragment extends Fragment {
         more.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), MoreActivity.class);
+                Intent intent = new Intent(getContext(), ChartActivity.class);
                 startActivity(intent);
             }
         });

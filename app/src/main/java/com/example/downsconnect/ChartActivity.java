@@ -19,6 +19,7 @@ import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class ChartActivity extends AppCompatActivity {
@@ -35,6 +36,8 @@ public class ChartActivity extends AppCompatActivity {
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         final int childID = sharedPreferences.getInt("name", 0);
+
+        List<String> xLabels = new ArrayList<>(Arrays.asList("2months", "4months", "6months", "8months", "10months", "12months", "14months", "16months", "18months", "20months", "22months", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"));
 
         ArrayList<Head> heads = new ArrayList<>();
         ArrayList<Head> other = new ArrayList<>();
@@ -117,11 +120,12 @@ public class ChartActivity extends AppCompatActivity {
 
         XAxis xAxis = lineChart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        xAxis.setAxisMinimum(1);
-        xAxis.setAxisMaximum(20);
+        xAxis.setAxisMinimum(0);
+        xAxis.setAxisMaximum(29);
         xAxis.setGranularity(1);
         lineChart.getAxisRight().setEnabled(false);
         lineChart.setVisibleXRangeMaximum(5);
+        lineChart.getXAxis().setValueFormatter(new com.github.mikephil.charting.formatter.IndexAxisValueFormatter(xLabels));
         //lineChart.setVisibleYRangeMaximum(50, YAxis.AxisDependency.LEFT);
 
         back.setOnClickListener(new View.OnClickListener() {

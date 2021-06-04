@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".DoctorsVisitActivity"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -16,23 +17,23 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SignInActivity"/>
-        <activity android:name=".SignUpActivity"/>
-        <activity android:name=".FeedActivity"/>
-        <activity android:name=".ActivityActivity"/>
+        <activity android:name=".SignInActivity" />
+        <activity android:name=".SignUpActivity" />
+        <activity android:name=".FeedActivity" />
+        <activity android:name=".ActivityActivity" />
         <activity android:name=".DiaryActivity" />
-        <activity android:name=".MedicalActivity"/>
-        <activity android:name=".MessageActivity"/>
-        <activity android:name=".MilestoneActivity"/>
-        <activity android:name=".MoodActivity"/>
-        <activity android:name=".MoreActivity"/>
-        <activity android:name=".BathroomActivity"/>
-        <activity android:name=".PhotoActivity"/>
-        <activity android:name=".ResourcesActivity"/>
-        <activity android:name=".SleepActivity"/>
-        <activity android:name=".ActivityContainer"/>
-        <activity android:name=".DetailedProfileActivity"/>
-        <activity android:name=".ChartActivity"/>
+        <activity android:name=".MedicalActivity" />
+        <activity android:name=".MessageActivity" />
+        <activity android:name=".MilestoneActivity" />
+        <activity android:name=".MoodActivity" />
+        <activity android:name=".MoreActivity" />
+        <activity android:name=".BathroomActivity" />
+        <activity android:name=".PhotoActivity" />
+        <activity android:name=".ResourcesActivity" />
+        <activity android:name=".SleepActivity" />
+        <activity android:name=".ActivityContainer" />
+        <activity android:name=".DetailedProfileActivity" />
+        <activity android:name=".ChartActivity" />
     </application>
 
 </manifest>

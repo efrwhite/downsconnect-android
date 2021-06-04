@@ -32,7 +32,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String[] COLUMN_4 = {"MoodID", "ChildID", "MoodType", "Time", "Notes", "EntryTime"};
     private static final String[] COLUMN_5 = {"SleepID", "ChildID", "SleepTime", "Duration", "Snoring" ,"Medication", "Supplements", "CPAP", "Other", "Study", "Unit", "Notes"};
     private static final String[] COLUMN_6 = {"EntryID", "EntryText", "EntryTime", "ChildID"};
-    private static final String[] COLUMN_7 = {"MedicalID", "ChildID", "Height", "HeightUnit", "Weight", "WeightUnit", "HeadSize", "HeadSizeUnit", "Health", "Vaccine", "Dosage", "DosageUnit", "DoctorsVisit", "Temperature", "TemperatureUnit", "Notes", "Provider", "EntryTime"};
+    private static final String[] COLUMN_7 = {"MedicalID", "ChildID", "Height", "Weight", "HeadSize", "DoctorsVisit", "Temperature", "Provider", "VisitNum"};
     private static final String[] COLUMN_8 = {"MilestoneID", "ChildID", "Rolling", "Sitting", "Standing", "Walking"};
     private static final String[] COLUMN_9 = {"BathroomID", "ChildID", "BathroomType", "TreatmentPlan", "Leak", "OpenAir", "DiaperCream", "Quantity", "PottyAccident", "DateOfLastStool", "Duration"};
     public DBHelper(Context context) {
@@ -102,22 +102,13 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE Medical(" +
                 "MedicalID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
                 "ChildID INTEGER, " +
-                "Height INTEGER, " +
-                "HeightUnit TEXT, " +
-                "Weight INTEGER, " +
-                "WeightUnit TEXT, " +
-                "HeadSize INTEGER, " +
-                "HeadSizeUnit TEXT, " +
-                "Health TEXT, " +
-                "Vaccine TEXT, " +
-                "Dosage INTEGER, " +
-                "DosageUnit TEXT, " +
+                "Height TEXT, " +
+                "Weight TEXT, " +
+                "HeadSize TEXT, " +
                 "DoctorsVisit INTEGER, " +
                 "Temperature INTEGER, " +
-                "TemperatureUnit TEXT, " +
-                "Notes TEXT, " +
                 "Provider TEXT, " +
-                "EntryTime INTEGER)");
+                "VisitNum TEXT)");
         db.execSQL("CREATE TABLE Milestone(" +
                 "MilestoneID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
                 "ChildID INTEGER, " +
@@ -264,28 +255,26 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    public void addMedical(MedicalInfo medicalInfo){
+    public boolean addMedical(MedicalInfo medicalInfo){
         ContentValues values = new ContentValues();
-        values.put(COLUMN_7[1], medicalInfo.getChildId());
+        values.put(COLUMN_7[1], medicalInfo.getChildID());
         values.put(COLUMN_7[2], medicalInfo.getHeight());
-        values.put(COLUMN_7[3], medicalInfo.getHeightUnit());
-        values.put(COLUMN_7[4], medicalInfo.getWeight());
-        values.put(COLUMN_7[5], medicalInfo.getWeightUnit());
-        values.put(COLUMN_7[6], medicalInfo.getHeadSize());
-        values.put(COLUMN_7[7], medicalInfo.getHeadSizeUnit());
-        values.put(COLUMN_7[8], medicalInfo.getHealth());
-        values.put(COLUMN_7[9], medicalInfo.getVaccine());
-        values.put(COLUMN_7[10], medicalInfo.getDosage());
-        values.put(COLUMN_7[11], medicalInfo.getDosageUnit());
-        values.put(COLUMN_7[12], medicalInfo.getDoctorVisit());
-        values.put(COLUMN_7[13], medicalInfo.getTemperature());
-        values.put(COLUMN_7[14], medicalInfo.getTemperatureUnit());
-        values.put(COLUMN_7[15], medicalInfo.getNotes());
-        values.put(COLUMN_7[16], medicalInfo.getProvider());
-        values.put(COLUMN_7[17], medicalInfo.getEntryTime());
+        values.put(COLUMN_7[3], medicalInfo.getWeight());
+        values.put(COLUMN_7[4], medicalInfo.getHeadInfo());
+        values.put(COLUMN_7[5], medicalInfo.getDoctorDate());
+        values.put(COLUMN_7[6], medicalInfo.getTemperatureInfo());
+        values.put(COLUMN_7[7], medicalInfo.getProvider());
+        values.put(COLUMN_7[8], medicalInfo.getVisit());
+
         SQLiteDatabase db = this.getWritableDatabase();
-        db.insert(TABLE_NAMES[6], null, values);
+        long result = db.insert(TABLE_NAMES[6], null, values);
         db.close();
+        if(result == -1){
+            return false;
+        }
+        else {
+            return true;
+        }
     }
 
     public boolean addBathroom(Bathroom bathroom){
@@ -489,68 +478,11 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     MedicalInfo findMedicalInfo(int medicalID){
-        String query = "SELECT * FROM Medical WHERE MedicalID = " + medicalID + ";";
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor c = db.rawQuery(query, null);
-        MedicalInfo medicalInfo = new MedicalInfo();
-        if(c.moveToFirst()) {
-            c.moveToFirst();
-            medicalInfo.setMedicalID(Integer.parseInt(c.getString(0)));
-            medicalInfo.setChildId(Integer.parseInt(c.getString(1)));
-            medicalInfo.setHeight(Integer.parseInt(c.getString(2)));
-            medicalInfo.setHeightUnit(c.getString(3));
-            medicalInfo.setWeight(Integer.parseInt(c.getString(4)));
-            medicalInfo.setWeightUnit(c.getString(5));
-            medicalInfo.setHeadSize(Integer.parseInt(c.getString(6)));
-            medicalInfo.setHeadSizeUnit(c.getString(7));
-            medicalInfo.setHealth(c.getString(8));
-            medicalInfo.setVaccine(c.getString(9));
-            medicalInfo.setDosage(Integer.parseInt(c.getString(10)));
-            medicalInfo.setDosageUnit(c.getString(11));
-            medicalInfo.setDoctorVisit(Integer.parseInt(c.getString(12)));
-            medicalInfo.setTemperature(Integer.parseInt(c.getString(13)));
-            medicalInfo.setTemperatureUnit(c.getString(14));
-            medicalInfo.setNotes(c.getString(15));
-            medicalInfo.setProvider(c.getString(16));
-            medicalInfo.setEntryTime(Integer.parseInt(c.getString(17)));
-        }
-        else{
-            medicalInfo = null;
-        }
-        db.close();
-        return medicalInfo;
+        return null;
     }
 
     ArrayList<MedicalInfo> getAllSpecificProvider(String provider){
-        ArrayList<MedicalInfo> medical = new ArrayList<>();
-        String query = "SELECT * FROM Medical WHERE Provider = '" + provider + "';";
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor c = db.rawQuery(query, null);
-        while(c.moveToNext()){
-            MedicalInfo medicalInfo = new MedicalInfo();
-            medicalInfo.setMedicalID(Integer.parseInt(c.getString(0)));
-            medicalInfo.setChildId(Integer.parseInt(c.getString(1)));
-            medicalInfo.setHeight(Integer.parseInt(c.getString(2)));
-            medicalInfo.setHeightUnit(c.getString(3));
-            medicalInfo.setWeight(Integer.parseInt(c.getString(4)));
-            medicalInfo.setWeightUnit(c.getString(5));
-            medicalInfo.setHeadSize(Integer.parseInt(c.getString(6)));
-            medicalInfo.setHeadSizeUnit(c.getString(7));
-            medicalInfo.setHealth(c.getString(8));
-            medicalInfo.setVaccine(c.getString(9));
-            medicalInfo.setDosage(Integer.parseInt(c.getString(10)));
-            medicalInfo.setDosageUnit(c.getString(11));
-            medicalInfo.setDoctorVisit(Integer.parseInt(c.getString(12)));
-            medicalInfo.setTemperature(Integer.parseInt(c.getString(13)));
-            medicalInfo.setTemperatureUnit(c.getString(14));
-            medicalInfo.setNotes(c.getString(15));
-            medicalInfo.setProvider(c.getString(16));
-            medicalInfo.setEntryTime(Integer.parseInt(c.getString(17)));
-            medical.add(medicalInfo);
-        }
-        c.close();
-        db.close();
-        return medical;
+        return null;
     }
 
     public boolean updateMilestone(Milestone milestone){
