@@ -97,7 +97,7 @@ public class HomeFragment extends Fragment {
         helper = new DBHelper(getContext());
         entries = new ArrayList<>();
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
-        final int childID = sharedPreferences.getInt("name", 0);
+        final int childID = sharedPreferences.getInt("name", 1);
 
 
         Button feed = view.findViewById(R.id.feedButton);
@@ -220,7 +220,7 @@ public class HomeFragment extends Fragment {
         more.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), ChartActivity.class);
+                Intent intent = new Intent(getContext(), MoreActivity.class);
                 startActivity(intent);
             }
         });

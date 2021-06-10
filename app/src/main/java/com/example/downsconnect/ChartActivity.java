@@ -32,10 +32,11 @@ public class ChartActivity extends AppCompatActivity {
 
         //Hardcoded values for practice, replace with actual national averages and child data later
         LineChart lineChart = (LineChart) findViewById(R.id.growth_chart);
-        Button back = new Button(this);
+        Button back = findViewById(R.id.backButton);
+
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        final int childID = sharedPreferences.getInt("name", 0);
+        final int childID = sharedPreferences.getInt("name", 1);
 
         List<String> xLabels = new ArrayList<>(Arrays.asList("2months", "4months", "6months", "8months", "10months", "12months", "14months", "16months", "18months", "20months", "22months", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"));
 

@@ -147,6 +147,11 @@
     <string name="medications2">Medications:</string>
     <string name="weight2">Weight:</string>
     <string name="cardio">Cardio</string>
+    <string name="provider_listing">Provider Listings</string>
+    <string name="heights">Height</string>
+    <string name="weights">Weight</string>
+    <string name="circumference">Head Circumference</string>
+    <string name="growth_charts">Growth Charts</string>
 
     <array name="gender">
         <item>Select</item>
@@ -243,6 +248,16 @@
         <item>secs</item>
         <item>mins</item>
         <item>hrs</item>
+    </array>
+    <array name="providers">
+        <item>Select</item>
+        <item>OT</item>
+        <item>PT</item>
+        <item>Speech</item>
+        <item>Hearing</item>
+        <item>Dental</item>
+        <item>Cardio</item>
+        <item>Ophthalmology</item>
     </array>
 
 </resources>

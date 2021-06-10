@@ -88,7 +88,7 @@ public class DiaperFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
-        final int childID = sharedPreferences.getInt("name", 0);
+        final int childID = sharedPreferences.getInt("name", 1);
 
         bathroom.setBathroomType("Diaper");
         bathroom.setChildID(childID);

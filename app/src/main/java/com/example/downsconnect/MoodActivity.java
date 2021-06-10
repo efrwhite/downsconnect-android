@@ -16,7 +16,7 @@ public class MoodActivity extends AppCompatActivity {
         setContentView(R.layout.activity_mood);
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        final int childID = sharedPreferences.getInt("name", 0);
+        final int childID = sharedPreferences.getInt("name", 1);
 
         final Button back = findViewById(R.id.backButton);
 

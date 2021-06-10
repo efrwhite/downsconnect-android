@@ -141,6 +141,7 @@ public class ProfilesFragment extends Fragment {
                                             .setPositiveButton("yes", new DialogInterface.OnClickListener() {
                                                 @Override
                                                 public void onClick(DialogInterface dialogInterface, int i) {
+                                                    Log.i("ChildID", String.valueOf(horizontalLayout.getId()));
                                                     SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
                                                     sharedPreferences.edit().putInt("name", horizontalLayout.getId()).commit();
 

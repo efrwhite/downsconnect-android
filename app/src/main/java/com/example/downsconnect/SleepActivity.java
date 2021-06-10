@@ -53,7 +53,7 @@ public class SleepActivity extends AppCompatActivity implements TimePickerDialog
         otherText = findViewById(R.id.otherEditText);
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        final int childID = sharedPreferences.getInt("name", 0);
+        final int childID = sharedPreferences.getInt("name", 1);
 
 
 
