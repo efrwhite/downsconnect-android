@@ -28,7 +28,7 @@
         app:layout_constraintTop_toTopOf="@+id/neckSafetyView" />
 
     <Button
-        android:id="@+id/backButton"
+        android:id="@+id/back_button"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginStart="8dp"

@@ -36,7 +36,7 @@ public class MilestoneActivity extends AppCompatActivity implements DatePickerDi
         setContentView(R.layout.activity_milestone);
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        final int childID = sharedPreferences.getInt("name", 0);
+        final int childID = sharedPreferences.getInt("name", 1);
 
         final Button back = findViewById(R.id.backButton);
         save = findViewById(R.id.saveButton);

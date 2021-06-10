@@ -29,6 +29,7 @@ public class DetailedProfileActivity extends AppCompatActivity implements DatePi
     private Calendar birthdayDate, due_Date;
     private Button back, save;
     private DBHelper helper;
+    private Child child = new Child();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +49,6 @@ public class DetailedProfileActivity extends AppCompatActivity implements DatePi
         image = findViewById(R.id.profileImageView);
 
         String childName = getIntent().getStringExtra("childName");
-        Child child;
         if (!childName.equals("None")) {
             child = helper.getChild(childName);
         if (child != null) {
@@ -78,7 +78,6 @@ public class DetailedProfileActivity extends AppCompatActivity implements DatePi
             public void onClick(View v) {
                 if (!fullName.getText().toString().equals("") && !gender.getSelectedItem().equals("Select") && !birthdayPicker.getText().toString().equals("")
                         && !dueDatePicker.getText().toString().equals("") && !bloodType.getSelectedItem().equals("Select")) {
-                    Child child = new Child();
                     String name = fullName.getText().toString();
                     if (!fullName.getText().toString().contains(" ")) {
                         AlertDialog a = new AlertDialog.Builder(save.getContext()).create();
@@ -89,8 +88,6 @@ public class DetailedProfileActivity extends AppCompatActivity implements DatePi
                         child.setFirstName(name.substring(0, name.indexOf(" ")));
                         child.setGender((String) gender.getSelectedItem());
                         child.setLastName(name.substring(name.indexOf(" ")));
-                        child.setBirthday(birthdayDate.getTimeInMillis());
-                        child.setDueDate(due_Date.getTimeInMillis());
                         child.setBloodType(bloodType.getSelectedItem().toString());
                         if (allergies.getText().toString().equals(" ")) {
                             child.setAllergies("None");
@@ -156,6 +153,7 @@ public class DetailedProfileActivity extends AppCompatActivity implements DatePi
     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
         if (birthday) {
             birthdayDate.set(year, month, day);
+            child.setBirthday(birthdayDate.getTimeInMillis());
             Calendar currentDate = Calendar.getInstance();
             long difference = currentDate.getTimeInMillis() - birthdayDate.getTimeInMillis();
             long days = difference / (24 * 60 * 60 * 1000);
@@ -166,6 +164,7 @@ public class DetailedProfileActivity extends AppCompatActivity implements DatePi
         }
         if (dueDate) {
             due_Date.set(year, month, day);
+            child.setDueDate(due_Date.getTimeInMillis());
             dueDatePicker.setText((month + 1) + "/" + day + "/" + year);
         }
     }

@@ -21,7 +21,7 @@ public class DiaryActivity extends AppCompatActivity {
         Calendar calendar = Calendar.getInstance();
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        final int childID = sharedPreferences.getInt("name", 0);
+        final int childID = sharedPreferences.getInt("name", 1);
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override

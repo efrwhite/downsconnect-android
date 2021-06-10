@@ -18,7 +18,7 @@ public class ActivityActivity extends AppCompatActivity {
         setContentView(R.layout.activity_activity);
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        final int childID = sharedPreferences.getInt("name", 0);
+        final int childID = sharedPreferences.getInt("name", 1);
 
         Calendar calendar = Calendar.getInstance();
         final Button back = findViewById(R.id.backButton);

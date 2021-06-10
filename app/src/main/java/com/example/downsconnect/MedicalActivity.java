@@ -1,14 +1,11 @@
 package com.example.downsconnect;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v4.media.session.MediaControllerCompat;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -24,12 +21,12 @@ import com.example.downsconnect.objects.MedicalInfo;
 import java.util.Calendar;
 
 public class MedicalActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
-    private EditText doctorDatePicker, height, weight, headSize, vaccine, dosage, temperature, notes;
+    private EditText doctorDatePicker, headSize, vaccine, dosage, temperature, notes;
     private Spinner heightUnit, weightUnit, headUnit, health, dosageUnit, temperatureUnit;
     private long doctorDate = 0;
     private long time;
     private MedicalInfo medicalInfo = new MedicalInfo();
-    private Button back, save, doctorVisitBtn;
+    private Button back, save, doctorVisitBtn, OTBtn, PTBtn, opthBtn, speech, hearing, dental, cardio, neck, height, weight, circumference;
     private DBHelper dbHelper;
     private Entry entry;
     @Override
@@ -38,7 +35,7 @@ public class MedicalActivity extends AppCompatActivity implements DatePickerDial
         setContentView(R.layout.activity_medical);
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        final int childID = sharedPreferences.getInt("name", 0);
+        final int childID = sharedPreferences.getInt("name", 1);
 
         dbHelper = new DBHelper(this);
         back = findViewById(R.id.backButton);
@@ -46,29 +43,122 @@ public class MedicalActivity extends AppCompatActivity implements DatePickerDial
         TextView currentTime = findViewById(R.id.current_time_text);
         doctorVisitBtn = findViewById(R.id.doctorVisitButton);
         doctorDatePicker = findViewById(R.id.rolledDatePicker);
-        //height = findViewById(R.id.measuredHeightEditText);
-        //heightUnit = findViewById(R.id.heightSpinner);
-        //weight = findViewById(R.id.measuredWeightEditText);
-        //weightUnit = findViewById(R.id.weightSpinner);
-        //headSize = findViewById(R.id.headSizeEditText);
-        //headUnit = findViewById(R.id.headSpinner);
-        //health = findViewById(R.id.healthSpinner);
-        //vaccine = findViewById(R.id.vaccineEditText);
-        //dosage = findViewById(R.id.dosageEditText);
-        //dosageUnit = findViewById(R.id.dosageSpinner);
-        temperature = findViewById(R.id.temperatureEditText);
-        temperatureUnit = findViewById(R.id.temperatureSpinner);
-        notes = findViewById(R.id.notesEditText);
-        entry = new Entry();
+        OTBtn = findViewById(R.id.occupationalTherapyButton);
+        PTBtn = findViewById(R.id.physicalTherapyButton);
+        opthBtn = findViewById(R.id.ophthamologyButton);
+        speech = findViewById(R.id.speechButton);
+        hearing = findViewById(R.id.hearingButton);
+        dental = findViewById(R.id.dentalButton);
+        cardio = findViewById(R.id.cardioButton);
+        neck = findViewById(R.id.neckSafetyButton);
+        height = findViewById(R.id.height_button);
+        weight = findViewById(R.id.weight_button);
+        circumference = findViewById(R.id.circumference_button);
 
-//        if(!notes.getText().toString().equals("")){
-//            medicalInfo.setNotes(notes.getText().toString());
-//        }
+        OTBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MedicalActivity.this, ProviderListingActivity.class);
+                intent.putExtra("type", "OT");
+                startActivity(intent);
+            }
+        });
+
+        PTBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MedicalActivity.this, ProviderListingActivity.class);
+                intent.putExtra("type", "PT");
+                startActivity(intent);
+            }
+        });
+
+        opthBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MedicalActivity.this, ProviderListingActivity.class);
+                intent.putExtra("type", "Ophthalmology");
+                startActivity(intent);
+            }
+        });
+
+        speech.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MedicalActivity.this, ProviderListingActivity.class);
+                intent.putExtra("type", "Speech");
+                startActivity(intent);
+            }
+        });
+
+        hearing.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MedicalActivity.this, ProviderListingActivity.class);
+                intent.putExtra("type", "Hearing");
+                startActivity(intent);
+            }
+        });
+
+        dental.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MedicalActivity.this, ProviderListingActivity.class);
+                intent.putExtra("type", "Dental");
+                startActivity(intent);
+            }
+        });
+
+        cardio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MedicalActivity.this, ProviderListingActivity.class);
+                intent.putExtra("type", "Cardio");
+                startActivity(intent);
+            }
+        });
+
+        neck.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MedicalActivity.this, ProviderListingActivity.class);
+                intent.putExtra("type", "Neck");
+                startActivity(intent);
+            }
+        });
+
 
         doctorVisitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MedicalActivity.this, DoctorsVisitActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        height.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MedicalActivity.this, ChartActivity.class);
+                intent.putExtra("chart", "height");
+                startActivity(intent);
+            }
+        });
+
+        weight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MedicalActivity.this, ChartActivity.class);
+                intent.putExtra("chart", "weight");
+                startActivity(intent);
+            }
+        });
+
+        circumference.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MedicalActivity.this, ChartActivity.class);
+                intent.putExtra("chart", "circumference");
                 startActivity(intent);
             }
         });

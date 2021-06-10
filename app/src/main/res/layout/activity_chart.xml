@@ -24,11 +24,11 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/moreView2"
         app:layout_constraintHorizontal_bias="0.39"
-        app:layout_constraintStart_toEndOf="@+id/backButton2"
+        app:layout_constraintStart_toEndOf="@+id/backButton"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/backButton2"
+        android:id="@+id/backButton"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginStart="8dp"

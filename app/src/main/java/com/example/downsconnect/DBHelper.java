@@ -86,14 +86,6 @@ public class DBHelper extends SQLiteOpenHelper {
                 "Study TEXT, " +
                 "Unit TEXT, " +
                 "Notes TEXT);");
-        db.execSQL("CREATE TABLE Bathroom(" +
-                "BathroomID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
-                "ChildID INTEGER, " +
-                "BathroomType TEXT, " +
-                "TreatmentPlan TEXT, " +
-                "DateOfLastStool INTEGER, " +
-                "Notes TEXT, " +
-                "EntryTime INTEGER)");
         db.execSQL("CREATE TABLE Entry(" +
                 "EntryID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
                 "EntryText TEXT, " +
@@ -106,7 +98,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 "Weight TEXT, " +
                 "HeadSize TEXT, " +
                 "DoctorsVisit INTEGER, " +
-                "Temperature INTEGER, " +
+                "Temperature TEXT, " +
                 "Provider TEXT, " +
                 "VisitNum TEXT)");
         db.execSQL("CREATE TABLE Milestone(" +
@@ -300,7 +292,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
-    Child getChild(String firstName){
+    public Child getChild(String firstName){
         String query = "SELECT * FROM Child WHERE FirstName = '" + firstName + "';";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor c = db.rawQuery(query, null);
@@ -325,7 +317,7 @@ public class DBHelper extends SQLiteOpenHelper {
         return child;
     }
 
-    String getChildName(int id){
+    public String getChildName(int id){
         String query = "SELECT * FROM Child WHERE ChildID = '" + id + "';";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor c = db.rawQuery(query, null);
@@ -342,7 +334,7 @@ public class DBHelper extends SQLiteOpenHelper {
         return childName;
     }
 
-    long getChildBirthday(int id){
+    public long getChildBirthday(int id){
         String query = "SELECT * FROM Child WHERE ChildID = '" + id + "';";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor c = db.rawQuery(query, null);
@@ -359,7 +351,7 @@ public class DBHelper extends SQLiteOpenHelper {
         return childBirthday;
     }
 
-    Milestone getMilestone(int childID){
+   public Milestone getMilestone(int childID){
         String query = "SELECT * FROM Milestone WHERE ChildID = '" + childID + "';";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor c = db.rawQuery(query, null);
@@ -381,7 +373,7 @@ public class DBHelper extends SQLiteOpenHelper {
         return milestone;
     }
 
-    AccountHolder getAccount(String user, String pass){
+   public AccountHolder getAccount(String user, String pass){
 //        String query = "SELECT * FROM AccountHolders WHERE Username = '" + user +
 //                "' AND Password = '" + pass + "';";
 
@@ -407,7 +399,7 @@ public class DBHelper extends SQLiteOpenHelper {
         return accountHolder;
     }
 
-    ArrayList<AccountHolder> getAllAccounts(){
+   public ArrayList<AccountHolder> getAllAccounts(){
         String query = "SELECT * FROM Account;";
         SQLiteDatabase db = getWritableDatabase();
         Cursor c = db.rawQuery(query, null);
@@ -432,7 +424,30 @@ public class DBHelper extends SQLiteOpenHelper {
         return accounts;
     }
 
-    ArrayList<Entry> getAllEntries(){
+    public ArrayList<MedicalInfo> getSpecificProviders(int childID, String provider){
+        String query = "SELECT * FROM Medical WHERE ChildID = '" + childID +
+                "' AND Provider = '" + provider + "';";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor c = db.rawQuery(query, null);
+        ArrayList<MedicalInfo> medicalInfos = new ArrayList<>();
+        while(c.moveToNext()){
+            MedicalInfo info = new MedicalInfo();
+            info.setMedicalID(c.getInt(0));
+            info.setChildID(c.getInt(1));
+            info.setHeight(c.getString(2));
+            info.setWeight(c.getString(3));
+            info.setHeadInfo(c.getString(4));
+            info.setDoctorDate(c.getLong(5));
+            info.setTemperatureInfo(c.getString(6));
+            info.setProvider(c.getString(7));
+            info.setVisit(c.getString(8));
+            medicalInfos.add(info);
+        }
+        c.close();
+        return medicalInfos;
+    }
+
+    public ArrayList<Entry> getAllEntries(){
         String query = "SELECT * FROM Entry;";
         SQLiteDatabase db = getWritableDatabase();
         Cursor c = db.rawQuery(query, null);
@@ -454,7 +469,7 @@ public class DBHelper extends SQLiteOpenHelper {
         return entries;
     }
 
-    ArrayList<Child> getAllChildren(){
+    public ArrayList<Child> getAllChildren(){
         String query = "SELECT * FROM Child;";
         SQLiteDatabase db = getWritableDatabase();
         Cursor c = db.rawQuery(query, null);
@@ -477,13 +492,10 @@ public class DBHelper extends SQLiteOpenHelper {
         return children;
     }
 
-    MedicalInfo findMedicalInfo(int medicalID){
+    public MedicalInfo findMedicalInfo(int medicalID){
         return null;
     }
 
-    ArrayList<MedicalInfo> getAllSpecificProvider(String provider){
-        return null;
-    }
 
     public boolean updateMilestone(Milestone milestone){
         SQLiteDatabase db = this.getWritableDatabase();

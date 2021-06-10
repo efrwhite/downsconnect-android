@@ -88,7 +88,7 @@ public class FluidFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
-        final int childID = sharedPreferences.getInt("name", 0);
+        final int childID = sharedPreferences.getInt("name", 1);
 
         saveBtn = view.findViewById(R.id.saveButton);
         notes = view.findViewById(R.id.editText);
