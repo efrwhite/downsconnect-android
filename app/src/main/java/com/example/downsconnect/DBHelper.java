@@ -13,6 +13,7 @@ import com.example.downsconnect.objects.Bathroom;
 import com.example.downsconnect.objects.Child;
 import com.example.downsconnect.objects.Entry;
 import com.example.downsconnect.objects.Feed;
+import com.example.downsconnect.objects.Height;
 import com.example.downsconnect.objects.MedicalInfo;
 import com.example.downsconnect.objects.Milestone;
 import com.example.downsconnect.objects.Mood;
@@ -32,7 +33,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String[] COLUMN_4 = {"MoodID", "ChildID", "MoodType", "Time", "Notes", "EntryTime"};
     private static final String[] COLUMN_5 = {"SleepID", "ChildID", "SleepTime", "Duration", "Snoring" ,"Medication", "Supplements", "CPAP", "Other", "Study", "Unit", "Notes"};
     private static final String[] COLUMN_6 = {"EntryID", "EntryText", "EntryTime", "ChildID"};
-    private static final String[] COLUMN_7 = {"MedicalID", "ChildID", "Height", "Weight", "HeadSize", "DoctorsVisit", "Temperature", "Provider", "VisitNum"};
+    private static final String[] COLUMN_7 = {"MedicalID", "ChildID", "Height", "Weight", "HeadSize", "DoctorsVisit", "Temperature", "Provider", "VisitNum", "ProviderType"};
     private static final String[] COLUMN_8 = {"MilestoneID", "ChildID", "Rolling", "Sitting", "Standing", "Walking"};
     private static final String[] COLUMN_9 = {"BathroomID", "ChildID", "BathroomType", "TreatmentPlan", "Leak", "OpenAir", "DiaperCream", "Quantity", "PottyAccident", "DateOfLastStool", "Duration"};
     public DBHelper(Context context) {
@@ -100,7 +101,8 @@ public class DBHelper extends SQLiteOpenHelper {
                 "DoctorsVisit INTEGER, " +
                 "Temperature TEXT, " +
                 "Provider TEXT, " +
-                "VisitNum TEXT)");
+                "VisitNum TEXT, " +
+                "ProviderType TEXT)");
         db.execSQL("CREATE TABLE Milestone(" +
                 "MilestoneID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
                 "ChildID INTEGER, " +
@@ -257,6 +259,7 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(COLUMN_7[6], medicalInfo.getTemperatureInfo());
         values.put(COLUMN_7[7], medicalInfo.getProvider());
         values.put(COLUMN_7[8], medicalInfo.getVisit());
+        values.put(COLUMN_7[9], medicalInfo.getProviderType());
 
         SQLiteDatabase db = this.getWritableDatabase();
         long result = db.insert(TABLE_NAMES[6], null, values);
@@ -373,6 +376,71 @@ public class DBHelper extends SQLiteOpenHelper {
         return milestone;
     }
 
+    public MedicalInfo getMedical(int medicalID){
+        String query = "SELECT * FROM Medical WHERE MedicalID = '" + medicalID + "';";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor c = db.rawQuery(query, null);
+        MedicalInfo info = new MedicalInfo();
+        if(c.moveToFirst()){
+            c.moveToFirst();
+            info.setMedicalID(c.getInt(0));
+            info.setMedicalID(c.getInt(1));
+            info.setHeight(c.getString(2));
+            info.setWeight(c.getString(3));
+            info.setHeadInfo(c.getString(4));
+            info.setDoctorDate(c.getLong(5));
+            info.setTemperatureInfo(c.getString(6));
+            info.setProvider(c.getString(7));
+            info.setVisit(c.getString(8));
+            info.setProviderType(c.getString(9));
+        }
+        else{
+            c.close();
+            info = null;
+        }
+        db.close();
+        return info;
+    }
+
+    public ArrayList<Integer> getHeight(int childID){
+        String query = "SELECT * FROM Medical WHERE ChildID = '" + childID +"';";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor c = db.rawQuery(query, null);
+        ArrayList<Integer> data = new ArrayList<>();
+        while(c.moveToNext()){
+            String text = c.getString(2);
+            int dataPoint = Integer.parseInt(text.substring(0, text.indexOf(" ")));
+            data.add(dataPoint);
+        }
+        return data;
+    }
+
+    public ArrayList<Integer> getWeight(int childID){
+        String query = "SELECT * FROM Medical WHERE ChildID = '" + childID +"';";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor c = db.rawQuery(query, null);
+        ArrayList<Integer> data = new ArrayList<>();
+        while(c.moveToNext()){
+            String text = c.getString(3);
+            int dataPoint = Integer.parseInt(text.substring(0, text.indexOf(" ")));
+            data.add(dataPoint);
+        }
+        return data;
+    }
+
+    public ArrayList<Integer> getHeadSizes(int childID){
+        String query = "SELECT * FROM Medical WHERE ChildID = '" + childID +"';";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor c = db.rawQuery(query, null);
+        ArrayList<Integer> data = new ArrayList<>();
+        while(c.moveToNext()){
+            String text = c.getString(4);
+            int dataPoint = Integer.parseInt(text.substring(0, text.indexOf(" ")));
+            data.add(dataPoint);
+        }
+        return data;
+    }
+
    public AccountHolder getAccount(String user, String pass){
 //        String query = "SELECT * FROM AccountHolders WHERE Username = '" + user +
 //                "' AND Password = '" + pass + "';";
@@ -424,9 +492,9 @@ public class DBHelper extends SQLiteOpenHelper {
         return accounts;
     }
 
-    public ArrayList<MedicalInfo> getSpecificProviders(int childID, String provider){
+    public ArrayList<MedicalInfo> getSpecificProviders(int childID, String providerType){
         String query = "SELECT * FROM Medical WHERE ChildID = '" + childID +
-                "' AND Provider = '" + provider + "';";
+                "' AND ProviderType = '" + providerType + "';";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor c = db.rawQuery(query, null);
         ArrayList<MedicalInfo> medicalInfos = new ArrayList<>();
@@ -475,7 +543,6 @@ public class DBHelper extends SQLiteOpenHelper {
         Cursor c = db.rawQuery(query, null);
         ArrayList<Child> children = new ArrayList<>();
         int x = 0;
-        Log.i("Count", String.valueOf(c.getColumnCount()));
         while(c.moveToNext()){
             Child child = new Child();
                 child.setChildID(c.getInt(0));

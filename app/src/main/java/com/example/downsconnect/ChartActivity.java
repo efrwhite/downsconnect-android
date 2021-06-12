@@ -10,7 +10,7 @@ import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.downsconnect.objects.Head;
+import com.example.downsconnect.objects.Point;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.Entry;
@@ -23,6 +23,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ChartActivity extends AppCompatActivity {
+    private DBHelper helper;
+    private ArrayList<Integer> data = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,82 +39,103 @@ public class ChartActivity extends AppCompatActivity {
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         final int childID = sharedPreferences.getInt("name", 1);
+        String chartType = getIntent().getStringExtra("chart");
+
+        helper = new DBHelper(this);
+
+        if(chartType.equals("Height")){
+            data = helper.getHeight(childID);
+        }
+        else if(chartType.equals("Weight")){
+            data = helper.getWeight(childID);
+        }
+        else{
+            data = helper.getHeadSizes(childID);
+        }
 
         List<String> xLabels = new ArrayList<>(Arrays.asList("2months", "4months", "6months", "8months", "10months", "12months", "14months", "16months", "18months", "20months", "22months", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"));
 
-        ArrayList<Head> heads = new ArrayList<>();
-        ArrayList<Head> other = new ArrayList<>();
-        Head head = new Head(45, 2);
-        Head head_two = new Head(50, 3);
-        Head head_three = new Head(63, 4);
-        Head head4 = new Head(64, 5);
-        Head head5 = new Head(44, 6);
-        Head head6 = new Head(52, 7);
-        Head head7 = new Head(78, 8);
-        Head head1 = new Head(78, 9);
-        Head head2 = new Head(80, 10);
-        Head head3 = new Head(75, 11);
-        Head head8 = new Head(99, 12);
-        heads.add(head);
-        heads.add(head_two);
-        heads.add(head_three);
-        heads.add(head4);
-        heads.add(head5);
-        heads.add(head6);
-        heads.add(head7);
-        heads.add(head1);
-        heads.add(head2);
-        heads.add(head3);
-        heads.add(head8);
+        ArrayList<Point> points = new ArrayList<>();
+        if(data.size() != 0){
+            int i = 0;
+            for(Integer ints: data){
+                Point point = new Point(i, ints);
+                points.add(point);
+                i++;
+            }
+        }
+        ArrayList<Point> other = new ArrayList<>();
+//        Point point = new Point(2, 55);
+//        Point point_two = new Point(3, 65);
+//        Point point_three = new Point( 4, 88);
+//        Point point4 = new Point( 5, 46);
+//        Point point5 = new Point( 6, 12);
+//        Point point6 = new Point( 7, 55);
+//        Point point7 = new Point( 8, 98);
+//        Point point1 = new Point( 9, 67);
+//        Point point2 = new Point( 10, 32);
+//        Point point3 = new Point( 11, 67);
+//        Point point8 = new Point( 12, 89);
+//        points.add(point);
+//        points.add(point_two);
+//        points.add(point_three);
+//        points.add(point4);
+//        points.add(point5);
+//        points.add(point6);
+//        points.add(point7);
+//        points.add(point1);
+//        points.add(point2);
+//        points.add(point3);
+//        points.add(point8);
 
         List<com.github.mikephil.charting.data.Entry> entries = new ArrayList<>();
-        for(Head h: heads){
-            entries.add(new com.github.mikephil.charting.data.Entry(h.getChildAge(), h.getHeadSize()));
+        for(Point h: points){
+            entries.add(new com.github.mikephil.charting.data.Entry(h.getX(), h.getY()));
         }
 
 
-        head8.setChildAge(2);
-        head3.setChildAge(3);
-        head2.setChildAge(4);
-        head1.setChildAge(5);
-        head7.setChildAge(6);
-        head6.setChildAge(7);
-        head5.setChildAge(8);
-        head4.setChildAge(9);
-        head_three.setChildAge(10);
-        head_two.setChildAge(11);
-        head.setChildAge(12);
+//        point8.setX(2);
+//        point3.setX(3);
+//        point2.setX(4);
+//        point1.setX(5);
+//        point7.setX(6);
+//        point6.setX(7);
+//        point5.setX(8);
+//        point4.setX(9);
+//        point_three.setX(10);
+//        point_two.setX(11);
+//        point.setX(12);
+//
+//
+//        other.add(point8);
+//        other.add(point3);
+//        other.add(point2);
+//        other.add(point1);
+//        other.add(point7);
+//        other.add(point6);
+//        other.add(point5);
+//        other.add(point4);
+//        other.add(point_three);
+//        other.add(point_two);
+//        other.add(point);
 
 
-        other.add(head8);
-        other.add(head3);
-        other.add(head2);
-        other.add(head1);
-        other.add(head7);
-        other.add(head6);
-        other.add(head5);
-        other.add(head4);
-        other.add(head_three);
-        other.add(head_two);
-        other.add(head);
-
-
-        List<Entry> newest = new ArrayList<>();
-        for(Head h: other){
-            newest.add(new Entry(h.getChildAge(), h.getHeadSize()));
-        }
+//        List<Entry> newest = new ArrayList<>();
+//        for(Point h: other){
+//            newest.add(new Entry(h.getX(), h.getY()));
+//        }
 
         LineDataSet dataSet = new LineDataSet(entries, "Your Child"); // add entries to dataset
         dataSet.setColor(Color.RED);
         dataSet.setValueTextColor(Color.BLACK); // styling, ...
 
-        LineDataSet set = new LineDataSet(newest, "Average");
-        set.setColor(Color.BLACK);
+        //LineDataSet set = new LineDataSet(newest, "Average");
+        //set.setColor(Color.BLACK);
         dataSet.setValueTextColor(Color.RED);
 
         List<ILineDataSet> dataSets = new ArrayList<>();
         dataSets.add(dataSet);
-        dataSets.add(set);
+        //dataSets.add(set);
 
         LineData lineData = new LineData(dataSets);
         lineChart.setData(lineData);

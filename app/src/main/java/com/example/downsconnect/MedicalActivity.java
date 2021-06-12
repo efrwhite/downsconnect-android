@@ -140,7 +140,7 @@ public class MedicalActivity extends AppCompatActivity implements DatePickerDial
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MedicalActivity.this, ChartActivity.class);
-                intent.putExtra("chart", "height");
+                intent.putExtra("chart", "Height");
                 startActivity(intent);
             }
         });
@@ -149,7 +149,7 @@ public class MedicalActivity extends AppCompatActivity implements DatePickerDial
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MedicalActivity.this, ChartActivity.class);
-                intent.putExtra("chart", "weight");
+                intent.putExtra("chart", "Weight");
                 startActivity(intent);
             }
         });
@@ -158,7 +158,7 @@ public class MedicalActivity extends AppCompatActivity implements DatePickerDial
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MedicalActivity.this, ChartActivity.class);
-                intent.putExtra("chart", "circumference");
+                intent.putExtra("chart", "HeadSize");
                 startActivity(intent);
             }
         });
@@ -177,10 +177,10 @@ public class MedicalActivity extends AppCompatActivity implements DatePickerDial
 
         if(hour >= 12){
             hour = hour - 12;
-            currentTime.setText("Today " + String.valueOf(hour) + ":" + realMins + "PM");
+            currentTime.setText("Today " + String.valueOf(hour) + ":" + realMins + " PM");
         }
         else{
-            currentTime.setText("Today " + String.valueOf(hour) + ":" + realMins + "AM");
+            currentTime.setText("Today " + String.valueOf(hour) + ":" + realMins + " AM");
         }
 
         back.setOnClickListener(new View.OnClickListener() {
