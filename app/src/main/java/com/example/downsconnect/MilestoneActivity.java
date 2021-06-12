@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.downsconnect.objects.Entry;
 import com.example.downsconnect.objects.Milestone;
 import com.example.downsconnect.objects.Month;
 
@@ -30,6 +31,7 @@ public class MilestoneActivity extends AppCompatActivity implements DatePickerDi
     private Button save;
     private TextView standAge, sitAge, walkAge, rollAge;
     private long childBirthday;
+    private Entry entry = new Entry();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,8 +39,13 @@ public class MilestoneActivity extends AppCompatActivity implements DatePickerDi
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         final int childID = sharedPreferences.getInt("name", 1);
+        helper = new DBHelper(this);
+
 
         final Button back = findViewById(R.id.backButton);
+        entry.setChildID(childID);
+        entry.setEntryText("Updated milestone information for " + helper.getChildName(childID));
+
         save = findViewById(R.id.saveButton);
         standing = findViewById(R.id.standingDatePicker);
         sitting = findViewById(R.id.sittingDatePicker);
@@ -58,7 +65,6 @@ public class MilestoneActivity extends AppCompatActivity implements DatePickerDi
         milestone.setSittingDate(0);
         milestone.setStandingDate(0);
 
-        helper = new DBHelper(this);
         final Milestone stone = helper.getMilestone(childID);
         childBirthday = helper.getChildBirthday(childID);
 
@@ -144,9 +150,11 @@ public class MilestoneActivity extends AppCompatActivity implements DatePickerDi
                 else{
                     if(stone != null){
                         val = helper.updateMilestone(milestone);
+                        entry.setEntryTime(Calendar.getInstance().getTimeInMillis());
                     }
                     else{
                         helper.addMilestone(milestone);
+                        entry.setEntryTime(Calendar.getInstance().getTimeInMillis());
                     }
 
                     Intent intent = new Intent(MilestoneActivity.this, ActivityContainer.class);

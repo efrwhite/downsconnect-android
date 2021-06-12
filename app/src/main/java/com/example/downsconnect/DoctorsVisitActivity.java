@@ -25,8 +25,9 @@ import java.util.Calendar;
 public class DoctorsVisitActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
     private EditText doctorDatePicker, height, headSize, temperature, visitNum, weight, provider;
     private long doctorDate = 0;
-    private Spinner headUnit, tempUnit, weightUnit, heightUnit;
+    private Spinner headUnit, tempUnit, weightUnit, heightUnit, providerType;
     private MedicalInfo medicalInfo = new MedicalInfo();
+
     private Button save;
     private Entry entry = new Entry();
     private DBHelper dbHelper;
@@ -44,8 +45,10 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
         doctorDatePicker = findViewById(R.id.doctorsDatePicker);
         dbHelper = new DBHelper(this);
         medicalInfo.setChildID(childID);
+
         save = findViewById(R.id.saveButton);
         provider = findViewById(R.id.providerEditText);
+        providerType = findViewById(R.id.providerSpinner);
         height = findViewById(R.id.heightEditText);
         headSize = findViewById(R.id.headEditText);
         headUnit = findViewById(R.id.headSpinner);
@@ -59,8 +62,6 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
         currentTime = findViewById(R.id.current_time_text);
         back = findViewById(R.id.backButton);
 
-        Log.i("long", String.valueOf(dbHelper.getChildBirthday(childID)));
-
         Calendar calendar = Calendar.getInstance();
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
         int minute = calendar.get(Calendar.MINUTE);
@@ -73,20 +74,16 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
         }
         if(hour >= 12){
             hour = hour - 12;
-            currentTime.setText("Today " + String.valueOf(hour) + ":" + realMins + "PM");
+            currentTime.setText("Today " + String.valueOf(hour) + ":" + realMins + " PM");
         }
         else{
-            currentTime.setText("Today " + String.valueOf(hour) + ":" + realMins + "AM");
+            currentTime.setText("Today " + String.valueOf(hour) + ":" + realMins + " AM");
         }
 
         long difference = Calendar.getInstance().getTimeInMillis() - dbHelper.getChildBirthday(childID);
         long days = difference / (24 * 60 * 60 * 1000);
         int months = (int) days / 30;
         int years = (int) days / 365;
-
-        Log.i("years", String.valueOf(years));
-        Log.i("days" , String.valueOf(days));
-        Log.i("months", String.valueOf(months));
 
         if(days < 31){
             ageText.setText(days + " days");
@@ -106,24 +103,30 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
                 showDatePickerDialog();
             }
         });
-
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DoctorsVisitActivity.this, MedicalActivity.class);
+                startActivity(intent);
+            }
+        });
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(!doctorDatePicker.getText().toString().equals("") && !provider.getText().toString().equals("Select")
                         && !height.getText().toString().equals("") && !headUnit.getSelectedItem().equals("Select")
                         && !tempUnit.getSelectedItem().equals("Select") && !visitNum.getText().toString().equals("") && !weight.getText().toString().equals("")
-                        && !heightUnit.getSelectedItem().equals("Select") && !weightUnit.getSelectedItem().equals("Select")){
+                        && !heightUnit.getSelectedItem().equals("Select") && !weightUnit.getSelectedItem().equals("Select") && !providerType.getSelectedItem().toString().equals("Select")){
                     medicalInfo.setProvider(provider.getText().toString());
-                    Log.i("Tye", provider.getText().toString());
                     medicalInfo.setHeight(height.getText().toString() + " " + heightUnit.getSelectedItem().toString());
+                    medicalInfo.setProviderType(providerType.getSelectedItem().toString());
                     medicalInfo.setWeight(weight.getText().toString() + " " + weightUnit.getSelectedItem().toString());
-                    medicalInfo.setHeadInfo(headSize.getText().toString() + headUnit.getSelectedItem().toString());
+                    medicalInfo.setHeadInfo(headSize.getText().toString() + " " + headUnit.getSelectedItem().toString());
                     medicalInfo.setTemperatureInfo(temperature.getText().toString() + " " + tempUnit.getSelectedItem().toString());
                     medicalInfo.setVisit(visitNum.getText().toString());
                     entry.setEntryTime(Calendar.getInstance().getTimeInMillis());
                     entry.setChildID(childID);
-                    entry.setEntryText("Saved " + medicalInfo.getProvider() + " appointment information for " + dbHelper.getChildName(childID));
+                    entry.setEntryText("Saved " + medicalInfo.getProviderType() + " appointment information for " + dbHelper.getChildName(childID));
                     dbHelper.addEntry(entry);
                     dbHelper.addMedical(medicalInfo);
                     Intent intent = new Intent(DoctorsVisitActivity.this, ActivityContainer.class);

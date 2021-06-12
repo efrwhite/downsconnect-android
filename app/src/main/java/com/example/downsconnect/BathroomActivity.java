@@ -50,10 +50,10 @@ public class BathroomActivity extends AppCompatActivity {
 
         if(hour >= 12){
             hour = hour - 12;
-            currentTime.setText("Today " + String.valueOf(hour) + ":" + realMins + "PM");
+            currentTime.setText("Today " + String.valueOf(hour) + ":" + realMins + " PM");
         }
         else{
-            currentTime.setText("Today " + String.valueOf(hour) + ":" + realMins + "AM");
+            currentTime.setText("Today " + String.valueOf(hour) + ":" + realMins + " AM");
         }
 
         back.setOnClickListener(new View.OnClickListener() {

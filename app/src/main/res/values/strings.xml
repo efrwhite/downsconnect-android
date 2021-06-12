@@ -152,6 +152,12 @@
     <string name="weights">Weight</string>
     <string name="circumference">Head Circumference</string>
     <string name="growth_charts">Growth Charts</string>
+    <string name="provider_type">Provider Type</string>
+    <string name="provider_name">Provider Name</string>
+    <string name="appointment_entry">Appointment Entry</string>
+    <string name="appointment_date">Appointment Date</string>
+    <string name="visit_age">Visit Age</string>
+    <string name="click">Click On A Entry To View More Information</string>
 
     <array name="gender">
         <item>Select</item>

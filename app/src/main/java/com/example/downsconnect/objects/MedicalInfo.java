@@ -3,7 +3,7 @@ package com.example.downsconnect.objects;
 import com.example.downsconnect.MedicalActivity;
 
 public class MedicalInfo {
-    private String provider, headInfo, temperatureInfo, visit, height, weight;
+    private String provider, headInfo, temperatureInfo, visit, height, weight, providerType;
     private int childID, medicalID;
     private long doctorDate;
 
@@ -79,5 +79,13 @@ public class MedicalInfo {
 
     public void setWeight(String weight) {
         this.weight = weight;
+    }
+
+    public String getProviderType() {
+        return providerType;
+    }
+
+    public void setProviderType(String providerType) {
+        this.providerType = providerType;
     }
 }

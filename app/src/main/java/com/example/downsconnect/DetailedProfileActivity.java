@@ -4,7 +4,9 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -18,6 +20,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.downsconnect.objects.Child;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class DetailedProfileActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
@@ -101,6 +104,11 @@ public class DetailedProfileActivity extends AppCompatActivity implements DatePi
                             child.setMedications(medications.getText().toString());
                         }
                         boolean result = helper.addChild(child);
+                        ArrayList<Child> children = helper.getAllChildren();
+                        if(children.size() == 1){
+                            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                            sharedPreferences.edit().putInt("name", children.get(0).getChildID()).commit();
+                        }
                         Log.i("child", String.valueOf(result));
                         Intent intent = new Intent(DetailedProfileActivity.this, ActivityContainer.class);
                         startActivity(intent);
