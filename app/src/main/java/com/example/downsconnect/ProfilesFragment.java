@@ -65,6 +65,15 @@ public class ProfilesFragment extends Fragment {
             }
         });
 
+        Button providerBtn = view.findViewById(R.id.addProviderButton);
+        providerBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), ProvidersActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     public void addChildren(){

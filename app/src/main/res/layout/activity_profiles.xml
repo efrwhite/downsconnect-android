@@ -26,6 +26,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/childrenScrollView" />
 
+    <View
+        android:id="@+id/providerView"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginTop="8dp"
+        android:background="#BAF3F7"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/parentsScrollView" />
+
     <TextView
         android:id="@+id/childrenText"
         android:layout_width="wrap_content"
@@ -48,6 +59,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/parentsView" />
 
+    <TextView
+        android:id="@+id/parentsText2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
+        android:text="@string/providers"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/providerView" />
+
     <Button
         android:id="@+id/addChildrenButton"
         android:layout_width="25dp"
@@ -67,6 +89,16 @@
         app:layout_constraintBottom_toBottomOf="@+id/parentsView"
         app:layout_constraintEnd_toEndOf="@+id/parentsView"
         app:layout_constraintTop_toTopOf="@+id/parentsView" />
+
+    <Button
+        android:id="@+id/addProviderButton"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/add_button"
+        app:layout_constraintBottom_toTopOf="@+id/providersScrollView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/providerView" />
 
     <ScrollView
         android:id="@+id/childrenScrollView"
@@ -94,6 +126,20 @@
 
         <LinearLayout
             android:id="@+id/careGiversLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+    </ScrollView>
+
+    <ScrollView
+        android:id="@+id/providersScrollView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/providerView">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" />

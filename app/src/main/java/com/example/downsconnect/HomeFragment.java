@@ -1,6 +1,5 @@
 package com.example.downsconnect;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -212,7 +211,7 @@ public class HomeFragment extends Fragment {
         diary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), DiaryActivity.class);
+                Intent intent = new Intent(getContext(), JournalActivity.class);
                 startActivity(intent);
             }
         });

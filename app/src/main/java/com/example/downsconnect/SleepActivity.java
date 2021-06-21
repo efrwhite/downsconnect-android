@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -25,13 +26,15 @@ import java.util.Calendar;
 public class SleepActivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener {
     private EditText sleepTimePicker;
     private CheckBox snoringYes, snoringNo, studyYes, studyNo, medication, supplements, cpap, other;
-    Boolean snoring, study;
+    Boolean snoring, study, isDrop;
     private EditText notes, wokeUp, otherText;
     private Spinner timeUnit;
     private String sleepTime, sleepNotes, timeWoke, unitTime, otherMeds, snoringDecision, studyDecision;
     private long timeSlept;
     private int duration;
     private DBHelper helper;
+    private Button drop;
+    private ScrollView scrollView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +54,25 @@ public class SleepActivity extends AppCompatActivity implements TimePickerDialog
         cpap = findViewById(R.id.cpapCheckBox);
         other = findViewById(R.id.otherCheckBox);
         otherText = findViewById(R.id.otherEditText);
+        study = false;
+        snoring = false;
+        isDrop = false;
+        drop = findViewById(R.id.dropDownButton);
+        scrollView = findViewById(R.id.scrollView3);
+        scrollView.setVisibility(View.INVISIBLE);
+
+        drop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isDrop = !isDrop;
+                if(isDrop){
+                    scrollView.setVisibility(View.VISIBLE);
+                }
+                else{
+                    scrollView.setVisibility(View.INVISIBLE);
+                }
+            }
+        });
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         final int childID = sharedPreferences.getInt("name", 1);
@@ -87,8 +109,7 @@ public class SleepActivity extends AppCompatActivity implements TimePickerDialog
                 timeWoke = wokeUp.getText().toString();
                 unitTime = timeUnit.getSelectedItem().toString();
                 duration = Integer.parseInt(wokeUp.getText().toString());
-                if(!sleepTime.equals(" ") && !timeWoke.equals(" ") && !unitTime.equals("Select")
-                    && study && snoring){
+                if(!sleepTime.equals(" ") && !timeWoke.equals(" ") && !unitTime.equals("Select")){
                     Sleep sleep = new Sleep();
                     Entry entry = new Entry();
                     Calendar calendar1 = Calendar.getInstance();
