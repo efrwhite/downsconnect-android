@@ -19,7 +19,7 @@
         android:id="@+id/diaryText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/diary"
+        android:text="@string/journal"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@+id/dairyView"
         app:layout_constraintEnd_toEndOf="@+id/dairyView"

@@ -11,11 +11,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Calendar;
 
-public class DiaryActivity extends AppCompatActivity {
+public class JournalActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_diary);
+        setContentView(R.layout.activity_journal);
 
         final Button back = findViewById(R.id.backButton);
         Calendar calendar = Calendar.getInstance();
@@ -26,7 +26,7 @@ public class DiaryActivity extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(DiaryActivity.this, ActivityContainer.class);
+                Intent intent = new Intent(JournalActivity.this, ActivityContainer.class);
                 startActivity(intent);
             }
         });

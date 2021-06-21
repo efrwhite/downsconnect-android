@@ -23,7 +23,7 @@
         <activity android:name=".SignUpActivity" />
         <activity android:name=".FeedActivity" />
         <activity android:name=".ActivityActivity" />
-        <activity android:name=".DiaryActivity" />
+        <activity android:name=".JournalActivity" />
         <activity android:name=".MedicalActivity" />
         <activity android:name=".MessageActivity" />
         <activity android:name=".MilestoneActivity" />
@@ -36,6 +36,7 @@
         <activity android:name=".ActivityContainer" />
         <activity android:name=".DetailedProfileActivity" />
         <activity android:name=".ChartActivity" />
+        <activity android:name=".ProvidersActivity"/>
     </application>
 
 </manifest>
