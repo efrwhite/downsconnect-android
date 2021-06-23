@@ -24,6 +24,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.downsconnect.objects.AccountHolder;
 import com.example.downsconnect.objects.Child;
+import com.example.downsconnect.objects.Provider;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
@@ -33,7 +34,8 @@ public class ProfilesFragment extends Fragment {
     private DBHelper helper;
     private ArrayList<Child> children = new ArrayList<>();
     private ArrayList<AccountHolder> accounts = new ArrayList<>();
-    private LinearLayout childLayout, caregiverLayout;
+    private ArrayList<Provider> providers = new ArrayList<>();
+    private LinearLayout childLayout, caregiverLayout, providerLayout;
     private Intent childIntent;
 
     @Override
@@ -49,13 +51,22 @@ public class ProfilesFragment extends Fragment {
 
         childLayout = getView().findViewById(R.id.childrenLinearLayout);
         childLayout.setGravity(Gravity.CENTER);
+
         caregiverLayout = getView().findViewById(R.id.careGiversLayout);
         caregiverLayout.setGravity(Gravity.CENTER);
+
+        providerLayout = getView().findViewById(R.id.providersLayout);
+        providerLayout.setGravity(Gravity.CENTER);
+
+//        TextView text = new TextView(getContext());
+//        text.setText("hi");
+//        providerLayout.addView(text);
 
         Button childrenBtn = view.findViewById(R.id.addChildrenButton);
         helper = new DBHelper(getContext());
         addChildren();
         addCareGivers();
+        addProviders();
         childrenBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -118,6 +129,7 @@ public class ProfilesFragment extends Fragment {
                             button.setWidth(10);
                             button.setId(child.getChildID());
                             button.setTag(child.getFirstName());
+
                             horizontalLayout.addView(view);
                             button.setOnClickListener(new View.OnClickListener() {
                                 @Override
@@ -249,5 +261,48 @@ public class ProfilesFragment extends Fragment {
             }
         });
 
+    }
+
+    public void addProviders(){
+        final ExecutorService service = Executors.newSingleThreadExecutor();
+        final Handler handler = new Handler(Looper.getMainLooper());
+
+        service.execute(new Runnable() {
+            @Override
+            public void run() {
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        providers = helper.getAllProviders();
+                        Log.i("jado", String.valueOf(providers.size()));
+                        for(Provider provider: providers){
+                            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                            LinearLayout.LayoutParams textParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                            ViewGroup.MarginLayoutParams marginLayoutParams = new ViewGroup.MarginLayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                            marginLayoutParams.setMargins(50, 0, 50,10);
+
+                            LinearLayout horizontalLayout = new LinearLayout(getContext());
+                            horizontalLayout.setTag(provider.getName() + "Layout");
+                            horizontalLayout.setOrientation(LinearLayout.HORIZONTAL);
+                            horizontalLayout.setLayoutParams(marginLayoutParams);
+
+                            layoutParams.setMargins(200, 0, 0, 30);
+                            textParams.setMargins(50, 0, 10, 30);
+
+                            TextView name = new TextView(getContext());
+                            name.setText(provider.getName());
+                            name.setTextSize(15);
+                            name.setWidth(250);
+                            name.setGravity(Gravity.CENTER_HORIZONTAL);
+                            name.setTextColor(Color.BLACK);
+                            name.setLayoutParams(textParams);
+                            horizontalLayout.addView(name);
+
+                            providerLayout.addView(horizontalLayout);
+                        }
+                    }
+                });
+            }
+        });
     }
 }
