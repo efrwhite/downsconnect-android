@@ -11,6 +11,8 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
+import android.widget.Adapter;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -19,13 +21,15 @@ import android.widget.TextView;
 
 import com.example.downsconnect.objects.Entry;
 import com.example.downsconnect.objects.MedicalInfo;
+import com.example.downsconnect.objects.Provider;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class DoctorsVisitActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
-    private EditText doctorDatePicker, height, headSize, temperature, visitNum, weight, provider;
+    private EditText doctorDatePicker, height, headSize, temperature, visitNum, weight;
     private long doctorDate = 0;
-    private Spinner headUnit, tempUnit, weightUnit, heightUnit, providerType;
+    private Spinner headUnit, tempUnit, weightUnit, heightUnit, providerType, provider;
     private MedicalInfo medicalInfo = new MedicalInfo();
 
     private Button save;
@@ -33,6 +37,8 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
     private DBHelper dbHelper;
     private TextView ageText, currentTime;
     private Button back;
+    private ArrayList<String> p_names = new ArrayList<>();
+    private ArrayList<Provider> providers = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,10 +50,17 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
 
         doctorDatePicker = findViewById(R.id.doctorsDatePicker);
         dbHelper = new DBHelper(this);
+        providers = dbHelper.getAllProviders();
+        if(providers.size() == 0 || dbHelper.getAllChildren().size() == 0){
+            AlertDialog a = new AlertDialog.Builder(save.getContext()).create();
+            a.setTitle("Missing Information");
+            a.setMessage("Please make sure you have at least one provider and one child");
+            a.show();
+        }
         medicalInfo.setChildID(childID);
 
         save = findViewById(R.id.saveButton);
-        provider = findViewById(R.id.providerEditText);
+        provider = findViewById(R.id.p_nameSpinner);
         providerType = findViewById(R.id.providerSpinner);
         height = findViewById(R.id.heightEditText);
         headSize = findViewById(R.id.headEditText);
@@ -95,6 +108,9 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
             ageText.setText(years + "yrs");
         }
 
+        loadSpinnerData();
+
+
 
 
         doctorDatePicker.setOnClickListener(new View.OnClickListener() {
@@ -113,11 +129,11 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!doctorDatePicker.getText().toString().equals("") && !provider.getText().toString().equals("Select")
+                if(!doctorDatePicker.getText().toString().equals("") && !provider.getSelectedItem().toString().equals("Select")
                         && !height.getText().toString().equals("") && !headUnit.getSelectedItem().equals("Select")
                         && !tempUnit.getSelectedItem().equals("Select") && !visitNum.getText().toString().equals("") && !weight.getText().toString().equals("")
                         && !heightUnit.getSelectedItem().equals("Select") && !weightUnit.getSelectedItem().equals("Select") && !providerType.getSelectedItem().toString().equals("Select")){
-                    medicalInfo.setProvider(provider.getText().toString());
+                    medicalInfo.setProvider(provider.getSelectedItem().toString());
                     medicalInfo.setHeight(height.getText().toString() + " " + heightUnit.getSelectedItem().toString());
                     medicalInfo.setProviderType(providerType.getSelectedItem().toString());
                     medicalInfo.setWeight(weight.getText().toString() + " " + weightUnit.getSelectedItem().toString());
@@ -157,5 +173,15 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
         doctorDate = calendar.getTimeInMillis();
         medicalInfo.setDoctorDate(doctorDate);
         doctorDatePicker.setText(month + "/" + day + "/" + year);
+    }
+
+    public void loadSpinnerData(){
+        p_names.add("Select");
+        for(Provider provide: providers){
+            p_names.add(provide.getName());
+        }
+        ArrayAdapter<String> providerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, p_names);
+        providerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        provider.setAdapter(providerAdapter);
     }
 }

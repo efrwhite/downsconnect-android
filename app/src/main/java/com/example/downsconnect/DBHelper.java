@@ -17,6 +17,7 @@ import com.example.downsconnect.objects.Height;
 import com.example.downsconnect.objects.MedicalInfo;
 import com.example.downsconnect.objects.Milestone;
 import com.example.downsconnect.objects.Mood;
+import com.example.downsconnect.objects.Provider;
 import com.example.downsconnect.objects.Sleep;
 
 import java.lang.reflect.Array;
@@ -26,7 +27,7 @@ import java.util.ArrayList;
 public class DBHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "downsconnect.db";
     private static final int DATABASE_VERSION = 1;
-    private static final String[] TABLE_NAMES = {"Account", "Child", "Feed", "Mood", "Sleep", "Entry", "Medical", "Milestone", "Bathroom"};
+    private static final String[] TABLE_NAMES = {"Account", "Child", "Feed", "Mood", "Sleep", "Entry", "Medical", "Milestone", "Bathroom", "Provider"};
     private static final String[] COLUMN_1 = {"AccountID","FirstName", "LastName", "Username", "Password", "Phone"};
     private static final String[] COLUMN_2 = {"ChildID", "FirstName", "LastName", "Gender", "BloodType", "DueDate", "Birthday", "Allergies", "Medications"};
     private static final String[] COLUMN_3 = {"FeedID", "ChildID", "Amount", "Substance", "Notes", "FoodUnit" , "EntryTime"};
@@ -36,6 +37,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String[] COLUMN_7 = {"MedicalID", "ChildID", "Height", "Weight", "HeadSize", "DoctorsVisit", "Temperature", "Provider", "VisitNum", "ProviderType"};
     private static final String[] COLUMN_8 = {"MilestoneID", "ChildID", "Rolling", "Sitting", "Standing", "Walking"};
     private static final String[] COLUMN_9 = {"BathroomID", "ChildID", "BathroomType", "TreatmentPlan", "Leak", "OpenAir", "DiaperCream", "Quantity", "PottyAccident", "DateOfLastStool", "Duration"};
+    private static final String[] COLUMN_10 = {"ProviderID", "ProviderName", "PracticeName", "Specialty", "Phone", "Fax", "Email", "Website", "Address", "State", "City", "Zip"};
     public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -122,6 +124,19 @@ public class DBHelper extends SQLiteOpenHelper {
                 "PottyAccident TEXT, " +
                 "DateOfLastStool INTEGER, " +
                 "Duration TEXT)");
+        db.execSQL("CREATE TABLE Provider(" +
+                "ProviderID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
+                "ProviderName TEXT, " +
+                "PracticeName TEXT, " +
+                "Specialty TEXT, " +
+                "Phone TEXT, " +
+                "Fax TEXT, " +
+                "Email TEXT, " +
+                "Website TEXT, " +
+                "Address TEXT, " +
+                "State TEXT, " +
+                "City TEXT, " +
+                "Zip TEXT)");
     }
 
     @Override
@@ -136,6 +151,7 @@ public class DBHelper extends SQLiteOpenHelper {
             db.execSQL("DROP TABLE IF EXISTS Medical");
             db.execSQL("DROP TABLE IF EXISTS Milestone");
             db.execSQL("DROP TABLE IF EXISTS Bathroom");
+            db.execSQL("DROP TABLE IF EXISTS Provider");
         }
     }
 
@@ -293,6 +309,30 @@ public class DBHelper extends SQLiteOpenHelper {
             return true;
         }
 
+    }
+
+    public boolean addProvider(Provider provider){
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_10[1], provider.getName());
+        values.put(COLUMN_10[2], provider.getPrac_name());
+        values.put(COLUMN_10[3], provider.getSpecialty());
+        values.put(COLUMN_10[4], provider.getPhone());
+        values.put(COLUMN_10[5], provider.getFax());
+        values.put(COLUMN_10[6], provider.getEmail());
+        values.put(COLUMN_10[7], provider.getWebsite());
+        values.put(COLUMN_10[8], provider.getAddress());
+        values.put(COLUMN_10[9], provider.getState());
+        values.put(COLUMN_10[10], provider.getCity());
+        values.put(COLUMN_10[11], provider.getZip());
+        SQLiteDatabase db = this.getWritableDatabase();
+        long result = db.insert(TABLE_NAMES[9], null, values);
+        db.close();
+        if(result == -1){
+            return false;
+        }
+        else{
+            return true;
+        }
     }
 
     public Child getChild(String firstName){
@@ -558,10 +598,30 @@ public class DBHelper extends SQLiteOpenHelper {
         //db.close();
         return children;
     }
-
-    public MedicalInfo findMedicalInfo(int medicalID){
-        return null;
-    }
+     public ArrayList<Provider> getAllProviders(){
+        String query = "SELECT * FROM Provider;";
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor c = db.rawQuery(query, null);
+        ArrayList<Provider> providers = new ArrayList<>();
+        while(c.moveToNext()){
+            Provider provider = new Provider();
+            provider.setProviderID(c.getInt(0));
+            provider.setName(c.getString(1));
+            provider.setPrac_name(c.getString(2));
+            provider.setSpecialty(c.getString(3));
+            provider.setPhone(c.getString(4));
+            provider.setFax(c.getString(5));
+            provider.setEmail(c.getString(6));
+            provider.setWebsite(c.getString(7));
+            provider.setAddress(c.getString(8));
+            provider.setState(c.getString(9));
+            provider.setCity(c.getString(10));
+            provider.setZip(c.getString(11));
+            providers.add(provider);
+        }
+        c.close();
+        return providers;
+     }
 
 
     public boolean updateMilestone(Milestone milestone){
