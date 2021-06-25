@@ -9,6 +9,7 @@ import android.os.strictmode.SqliteObjectLeakedViolation;
 import android.util.Log;
 
 import com.example.downsconnect.objects.AccountHolder;
+import com.example.downsconnect.objects.Activity;
 import com.example.downsconnect.objects.Bathroom;
 import com.example.downsconnect.objects.Child;
 import com.example.downsconnect.objects.Entry;
@@ -26,8 +27,8 @@ import java.util.ArrayList;
 
 public class DBHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "downsconnect.db";
-    private static final int DATABASE_VERSION = 1;
-    private static final String[] TABLE_NAMES = {"Account", "Child", "Feed", "Mood", "Sleep", "Entry", "Medical", "Milestone", "Bathroom", "Provider"};
+    private static final int DATABASE_VERSION = 2;
+    private static final String[] TABLE_NAMES = {"Account", "Child", "Feed", "Mood", "Sleep", "Entry", "Medical", "Milestone", "Bathroom", "Provider", "Activity"};
     private static final String[] COLUMN_1 = {"AccountID","FirstName", "LastName", "Username", "Password", "Phone"};
     private static final String[] COLUMN_2 = {"ChildID", "FirstName", "LastName", "Gender", "BloodType", "DueDate", "Birthday", "Allergies", "Medications"};
     private static final String[] COLUMN_3 = {"FeedID", "ChildID", "Amount", "Substance", "Notes", "FoodUnit" , "EntryTime"};
@@ -38,6 +39,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String[] COLUMN_8 = {"MilestoneID", "ChildID", "Rolling", "Sitting", "Standing", "Walking"};
     private static final String[] COLUMN_9 = {"BathroomID", "ChildID", "BathroomType", "TreatmentPlan", "Leak", "OpenAir", "DiaperCream", "Quantity", "PottyAccident", "DateOfLastStool", "Duration"};
     private static final String[] COLUMN_10 = {"ProviderID", "ProviderName", "PracticeName", "Specialty", "Phone", "Fax", "Email", "Website", "Address", "State", "City", "Zip"};
+    private static final String[] COLUMN_11 = {"ActivityID", "ChildID", "ActivityName", "EntryTime", "Duration", "DurationUnits" ,"Notes"};
     public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -137,6 +139,14 @@ public class DBHelper extends SQLiteOpenHelper {
                 "State TEXT, " +
                 "City TEXT, " +
                 "Zip TEXT)");
+        db.execSQL("CREATE TABLE Activity("+
+                "ActivityID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
+                "ChildID INTEGER, " +
+                "ActivityName TEXT, " +
+                "EntryTime INTEGER, " +
+                "Duration TEXT, " +
+                "DurationUnits TEXT, " +
+                "Notes TEXT)");
     }
 
     @Override
@@ -152,11 +162,12 @@ public class DBHelper extends SQLiteOpenHelper {
             db.execSQL("DROP TABLE IF EXISTS Milestone");
             db.execSQL("DROP TABLE IF EXISTS Bathroom");
             db.execSQL("DROP TABLE IF EXISTS Provider");
+            db.execSQL("DROP TABLE IF EXISTS Activity");
+
         }
     }
 
     public void deleteEntry(int id, String table){
-//        String tableID = table.substring(0, table.length() - 1);
         for(String name : TABLE_NAMES){
             if(name.equals(table)){
                 String query = "DELETE FROM " + table + " WHERE " + table + "ID = " + id + ";";
@@ -208,7 +219,7 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(COLUMN_3[5], feed.getFoodUnit());
         values.put(COLUMN_3[6], feed.getEntryTime());
         SQLiteDatabase db = this.getWritableDatabase();
-        db.insert(TABLE_NAMES[2], null, values);
+        long result = db.insert(TABLE_NAMES[2], null, values);
         db.close();
     }
 
@@ -249,7 +260,8 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(COLUMN_6[2], entry.getEntryTime());
         values.put(COLUMN_6[3], entry.getChildID());
         SQLiteDatabase db = this.getWritableDatabase();
-        db.insert(TABLE_NAMES[5], null, values);
+        long result = db.insert(TABLE_NAMES[5], null, values);
+        Log.i("e_res", String.valueOf(result));
         db.close();
     }
 
@@ -326,6 +338,25 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(COLUMN_10[11], provider.getZip());
         SQLiteDatabase db = this.getWritableDatabase();
         long result = db.insert(TABLE_NAMES[9], null, values);
+        db.close();
+        if(result == -1){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+
+    public boolean addActivity(Activity activity){
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_11[1], activity.getChildID());
+        values.put(COLUMN_11[2], activity.getChildActivity());
+        values.put(COLUMN_11[3], activity.getEntryTime());
+        values.put(COLUMN_11[4], activity.getDuration());
+        values.put(COLUMN_11[5], activity.getUnits());
+        values.put(COLUMN_11[6], activity.getNotes());
+        SQLiteDatabase db = this.getWritableDatabase();
+        long result = db.insert(TABLE_NAMES[10], null, values);
         db.close();
         if(result == -1){
             return false;
@@ -623,6 +654,25 @@ public class DBHelper extends SQLiteOpenHelper {
         return providers;
      }
 
+     public ArrayList<Activity> getAllActivities(){
+         String query = "SELECT * FROM Activity;";
+         SQLiteDatabase db = getWritableDatabase();
+         Cursor c = db.rawQuery(query, null);
+         ArrayList<Activity> activities = new ArrayList<>();
+         while(c.moveToNext()){
+             Activity activity = new Activity();
+             activity.setActivityID(c.getInt(0));
+             activity.setChildID(c.getInt(1));
+             activity.setChildActivity(c.getString(2));
+             activity.setEntryTime(c.getLong(3));
+             activity.setDuration(c.getString(4));
+             activity.setUnits(c.getString(5));
+             activity.setNotes(c.getString(6));
+             activities.add(activity);
+         }
+         c.close();
+         return activities;
+    }
 
     public boolean updateMilestone(Milestone milestone){
         SQLiteDatabase db = this.getWritableDatabase();
