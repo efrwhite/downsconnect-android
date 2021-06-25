@@ -172,6 +172,7 @@
     <string name="state">State</string>
     <string name="zip_code">Zip Code</string>
 
+
     <array name="gender">
         <item>Select</item>
         <item>Male</item>
@@ -259,8 +260,8 @@
     </array>
     <array name="sleep_time">
         <item>Select</item>
-        <item>hrs</item>
         <item>mins</item>
+        <item>hrs</item>
     </array>
     <array name="potty_time">
         <item>Select</item>
@@ -277,6 +278,19 @@
         <item>Dental</item>
         <item>Cardio</item>
         <item>Ophthalmology</item>
+    </array>
+    <array name="activities">
+        <item>Select</item>
+        <item>Playing Alone</item>
+        <item>Playing with Others</item>
+        <item>Crawling</item>
+        <item>Rolling Over</item>
+        <item>Sitting</item>
+        <item>Standing</item>
+        <item>Out for a walk</item>
+        <item>Listening to a story</item>
+        <item>Having a bath</item>
+        <item>Brushing Teeth</item>
     </array>
 
 </resources>
