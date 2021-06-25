@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -51,15 +52,22 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
         doctorDatePicker = findViewById(R.id.doctorsDatePicker);
         dbHelper = new DBHelper(this);
         providers = dbHelper.getAllProviders();
+        save = findViewById(R.id.saveButton);
         if(providers.size() == 0 || dbHelper.getAllChildren().size() == 0){
-            AlertDialog a = new AlertDialog.Builder(save.getContext()).create();
-            a.setTitle("Missing Information");
-            a.setMessage("Please make sure you have at least one provider and one child");
-            a.show();
-        }
+                    new AlertDialog.Builder(DoctorsVisitActivity.this)
+                            .setTitle("Missing Profiles")
+                            .setMessage("Please make sure you have at least one provider and one child in the profiles section")
+                            .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    Intent intent = new Intent(DoctorsVisitActivity.this, MainActivity.class);
+                                    startActivity(intent);
+                                }
+                            }).show();
+                }
         medicalInfo.setChildID(childID);
 
-        save = findViewById(R.id.saveButton);
+
         provider = findViewById(R.id.p_nameSpinner);
         providerType = findViewById(R.id.providerSpinner);
         height = findViewById(R.id.heightEditText);
