@@ -20,8 +20,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.downsconnect.objects.DateHandler;
 import com.example.downsconnect.objects.Entry;
-import com.example.downsconnect.objects.Month;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -40,7 +40,7 @@ public class HomeFragment extends Fragment {
     private LinearLayout entryLayout;
     private DBHelper helper;
     private ArrayList<Entry> entries;
-    private Month month = new Month();
+    private DateHandler month = new DateHandler();
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER

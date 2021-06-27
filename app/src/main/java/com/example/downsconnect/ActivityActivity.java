@@ -56,7 +56,7 @@ public class ActivityActivity extends AppCompatActivity {
         activity.setChildID(childID);
 
         durationText.setPaintFlags(durationText.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
-        activities = helper.getAllActivities();
+        activities = helper.getAllActivities(childID);
         Log.i("a_count", String.valueOf(activities.size()));
 
 
@@ -95,6 +95,14 @@ public class ActivityActivity extends AppCompatActivity {
             }
         });
 
+        history.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ActivityActivity.this, ActivityListingActivity.class);
+                startActivity(intent);
+            }
+        });
+
         final Button back = findViewById(R.id.backButton);
 
         back.setOnClickListener(new View.OnClickListener() {
@@ -112,11 +120,11 @@ public class ActivityActivity extends AppCompatActivity {
                         && !c_activity.getSelectedItem().toString().equals("Select")){
                     activity.setDuration(duration.getText().toString());
                     activity.setUnits(units.getSelectedItem().toString());
-                    activity.setChildActivity(c_activity.getSelectedItem().toString());
+                    activity.setChildActivity(helper.getChildName(childID) + " was " + c_activity.getSelectedItem().toString() + " for " + activity.getDuration() + " " + activity.getUnits());
                     Calendar cal = Calendar.getInstance();
                     activity.setEntryTime(cal.getTimeInMillis());
                     entry.setEntryTime(cal.getTimeInMillis());
-                    entry.setEntryText(helper.getChildName(childID) + " was " + activity.getChildActivity() + " for " + activity.getDuration() + " " + activity.getUnits());
+                    entry.setEntryText(activity.getChildActivity());
                     if(!notes.getText().toString().equals("")){
                         activity.setNotes(notes.getText().toString());
                     }
@@ -124,7 +132,6 @@ public class ActivityActivity extends AppCompatActivity {
                         activity.setNotes("");
                     }
                     boolean result = helper.addActivity(activity);
-                    Log.i("diditwork", String.valueOf(result));
                     helper.addEntry(entry);
                     Intent intent = new Intent(ActivityActivity.this, ActivityContainer.class);
                     startActivity(intent);

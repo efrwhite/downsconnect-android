@@ -16,16 +16,16 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.downsconnect.objects.DateHandler;
 import com.example.downsconnect.objects.Entry;
 import com.example.downsconnect.objects.Milestone;
-import com.example.downsconnect.objects.Month;
 
 import java.util.Calendar;
 
 public class MilestoneActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener{
     private boolean roll, walk, stand, sit, val;
     private EditText standing, sitting, rolling, walking;
-    private Month month_;
+    private DateHandler month_;
     private DBHelper helper;
     private Milestone milestone;
     private Button save;
@@ -55,7 +55,7 @@ public class MilestoneActivity extends AppCompatActivity implements DatePickerDi
         sitAge = findViewById(R.id.calcSittingAge);
         rollAge = findViewById(R.id.calcRolledOverAge);
         walkAge = findViewById(R.id.calcWalkingAge);
-        month_ = new Month();
+        month_ = new DateHandler();
         milestone = new Milestone();
 
 

@@ -10,8 +10,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.downsconnect.objects.DateHandler;
 import com.example.downsconnect.objects.MedicalInfo;
-import com.example.downsconnect.objects.Month;
 
 import java.util.Calendar;
 
@@ -20,7 +20,7 @@ public class MedicalListingsActivity extends AppCompatActivity {
     private Button back;
     private MedicalInfo info = new MedicalInfo();
     private DBHelper helper;
-    private Month month = new Month();
+    private DateHandler month = new DateHandler();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

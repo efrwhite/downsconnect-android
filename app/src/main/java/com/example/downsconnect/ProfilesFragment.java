@@ -274,7 +274,6 @@ public class ProfilesFragment extends Fragment {
                     @Override
                     public void run() {
                         providers = helper.getAllProviders();
-                        Log.i("jado", String.valueOf(providers.size()));
                         for(Provider provider: providers){
                             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                             LinearLayout.LayoutParams textParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);

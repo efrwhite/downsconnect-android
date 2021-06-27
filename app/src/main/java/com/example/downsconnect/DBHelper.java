@@ -654,8 +654,8 @@ public class DBHelper extends SQLiteOpenHelper {
         return providers;
      }
 
-     public ArrayList<Activity> getAllActivities(){
-         String query = "SELECT * FROM Activity;";
+     public ArrayList<Activity> getAllActivities(int childID){
+         String query = "SELECT * FROM Activity WHERE ChildID = '" + childID +"';";
          SQLiteDatabase db = getWritableDatabase();
          Cursor c = db.rawQuery(query, null);
          ArrayList<Activity> activities = new ArrayList<>();

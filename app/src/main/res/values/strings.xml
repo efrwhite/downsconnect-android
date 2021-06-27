@@ -171,6 +171,8 @@
     <string name="city">City</string>
     <string name="state">State</string>
     <string name="zip_code">Zip Code</string>
+    <string name="past_activities">Past Activities</string>
+    <string name="activities">Activities</string>
 
 
     <array name="gender">

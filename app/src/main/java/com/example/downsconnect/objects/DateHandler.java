@@ -1,7 +1,7 @@
 package com.example.downsconnect.objects;
 
-public class Month {
-    public Month(){
+public class DateHandler {
+    public DateHandler(){
 
     }
     public String getMonth(int month){
@@ -45,5 +45,9 @@ public class Month {
                 break;
         }
        return stringMonth;
+    }
+
+    public String writtenDate(int month, int day, int year){
+        return getMonth(month) + " " + day + ", " + year;
     }
 }
