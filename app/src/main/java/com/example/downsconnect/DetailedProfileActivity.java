@@ -19,6 +19,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.downsconnect.objects.Child;
+import com.example.downsconnect.objects.DateHandler;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -33,6 +34,7 @@ public class DetailedProfileActivity extends AppCompatActivity implements DatePi
     private Button back, save;
     private DBHelper helper;
     private Child child = new Child();
+    private DateHandler month = new DateHandler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,10 +61,10 @@ public class DetailedProfileActivity extends AppCompatActivity implements DatePi
             gender.setSelection(getIndex(gender, child.getGender()));
             Calendar birthday = Calendar.getInstance();
             birthday.setTimeInMillis(child.getBirthday());
-            birthdayPicker.setText(birthday.get(Calendar.MONTH) + 1+ "/" + birthday.get(Calendar.DATE) + "/" + birthday.get(Calendar.YEAR));
+            birthdayPicker.setText(month.writtenDate(birthday.get(Calendar.MONTH),birthday.get(Calendar.DATE) , birthday.get(Calendar.YEAR)));
             Calendar due = Calendar.getInstance();
             due.setTimeInMillis(child.getDueDate());
-            dueDatePicker.setText(due.get(Calendar.MONTH) + 1 + "/" + due.get(Calendar.DATE) + "/" + due.get(Calendar.YEAR));
+            dueDatePicker.setText(month.writtenDate(due.get(Calendar.MONTH),  due.get(Calendar.DATE) , due.get(Calendar.YEAR)));
             bloodType.setSelection(getIndex(bloodType, child.getBloodType()));
             allergies.setText(child.getAllergies());
             medications.setText(child.getMedications());

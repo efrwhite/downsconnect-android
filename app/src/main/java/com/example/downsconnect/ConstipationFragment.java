@@ -3,14 +3,12 @@ package com.example.downsconnect;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
 import android.preference.PreferenceManager;
@@ -20,14 +18,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.example.downsconnect.objects.Bathroom;
+import com.example.downsconnect.objects.DateHandler;
 import com.example.downsconnect.objects.Entry;
-import com.example.downsconnect.objects.Month;
 
 import java.util.Calendar;
-import java.util.Date;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -157,7 +153,7 @@ public class ConstipationFragment extends Fragment implements DatePickerDialog.O
     }
 
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-        Month month_ = new Month();
+        DateHandler month_ = new DateHandler();
         Calendar calendar = Calendar.getInstance();
         calendar.set(year, month, dayOfMonth);
         bathroom.setDateOfLastStool(calendar.getTimeInMillis());
@@ -169,7 +165,7 @@ public class ConstipationFragment extends Fragment implements DatePickerDialog.O
 //        // when dialog box is closed, below method will be called.
 //        public void onDateSet(DatePicker view, int selectedYear,
 //                              int selectedMonth, int selectedDay) {
-//            Month month_ = new Month();
+//            DateHandler month_ = new DateHandler();
 //            lastStoolDate.setText(month_.getMonth(selectedMonth) + " " + selectedDay + ", " + selectedYear);
 //
 //        }
