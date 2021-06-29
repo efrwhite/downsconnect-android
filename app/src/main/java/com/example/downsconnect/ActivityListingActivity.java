@@ -72,7 +72,7 @@ public class ActivityListingActivity extends AppCompatActivity {
 
 
             layoutParams.setMargins(200, 0, 0, 30);
-            textParams.setMargins(20, 0, 10, 30);
+            textParams.setMargins(20, 30, 10, 30);
 
             LinearLayout horizontalLayout = new LinearLayout(this);
             horizontalLayout.setTag(activity.getActivityID() + "Layout");

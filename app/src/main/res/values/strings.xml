@@ -173,6 +173,7 @@
     <string name="zip_code">Zip Code</string>
     <string name="past_activities">Past Activities</string>
     <string name="activities">Activities</string>
+    <string name="allergy_help_text">use commas to separate mulitple entires</string>
 
 
     <array name="gender">

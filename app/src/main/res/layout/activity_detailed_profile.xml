@@ -183,10 +183,10 @@
                 android:id="@+id/medicationsText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="8dp"
                 android:text="@string/medications"
                 app:layout_constraintStart_toStartOf="@+id/allergyText"
-                app:layout_constraintTop_toBottomOf="@+id/allergyText" />
+                app:layout_constraintTop_toBottomOf="@+id/textView27" />
 
             <EditText
                 android:id="@+id/medicationsEditText"
@@ -306,6 +306,17 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="parent" />
+
+            <TextView
+                android:id="@+id/textView27"
+                android:layout_width="114dp"
+                android:layout_height="29dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="2dp"
+                android:text="@string/allergy_help_text"
+                android:textSize="10sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/allergyText" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
