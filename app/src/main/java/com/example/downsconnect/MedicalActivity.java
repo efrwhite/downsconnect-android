@@ -28,7 +28,7 @@ public class MedicalActivity extends AppCompatActivity implements DatePickerDial
     private MedicalInfo medicalInfo = new MedicalInfo();
     private Button back, save, doctorVisitBtn, OTBtn, PTBtn, opthBtn, speech, hearing, dental, cardio, neck, height, weight, circumference;
     private DBHelper dbHelper;
-    private Entry entry;
+    private TextView allergyText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +54,17 @@ public class MedicalActivity extends AppCompatActivity implements DatePickerDial
         height = findViewById(R.id.height_button);
         weight = findViewById(R.id.weight_button);
         circumference = findViewById(R.id.circumference_button);
+        allergyText = findViewById(R.id.allergyListTextView);
+
+        String allergies = dbHelper.getAllergies(childID);
+        if(allergies != null && !allergies.equals("")) {
+            allergyText.setText(allergies);
+        }
+        else{
+            allergyText.setText("No Allergies");
+        }
+
+
 
         OTBtn.setOnClickListener(new View.OnClickListener() {
             @Override

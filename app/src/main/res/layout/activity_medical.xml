@@ -249,7 +249,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:text="@string/list_of_allergies"
                 android:textStyle="bold"
                 app:layout_constraintBaseline_toBaselineOf="@+id/allergiesText"
                 app:layout_constraintStart_toEndOf="@+id/allergiesText" />

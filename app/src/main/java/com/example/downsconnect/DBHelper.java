@@ -408,6 +408,23 @@ public class DBHelper extends SQLiteOpenHelper {
         return childName;
     }
 
+    public String getAllergies(int id){
+        String query = "SELECT * FROM Child WHERE ChildID = '" + id + "';";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor c = db.rawQuery(query, null);
+        String allergies;
+        if(c.moveToFirst()){
+            c.moveToFirst();
+            allergies = c.getString(7);
+        }
+        else{
+            c.close();
+            allergies = null;
+        }
+        db.close();
+        return allergies;
+    }
+
     public long getChildBirthday(int id){
         String query = "SELECT * FROM Child WHERE ChildID = '" + id + "';";
         SQLiteDatabase db = this.getWritableDatabase();
