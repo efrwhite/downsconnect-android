@@ -72,22 +72,13 @@
                 app:layout_constraintTop_toBottomOf="@+id/divider" />
 
             <TextView
-                android:id="@+id/vaccineText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:text="@string/vaccines"
-                app:layout_constraintStart_toStartOf="@+id/medicationsText"
-                app:layout_constraintTop_toBottomOf="@+id/medicationsText" />
-
-            <TextView
                 android:id="@+id/allergiesText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="16dp"
                 android:text="@string/allergies2"
-                app:layout_constraintStart_toStartOf="@+id/vaccineText"
-                app:layout_constraintTop_toBottomOf="@+id/vaccineText" />
+                app:layout_constraintStart_toStartOf="@+id/vaccineButton"
+                app:layout_constraintTop_toBottomOf="@+id/vaccineButton" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline2"
@@ -235,16 +226,6 @@
                 app:layout_constraintStart_toEndOf="@+id/medicationsText" />
 
             <TextView
-                android:id="@+id/vaccineRecordsTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:text="@string/vaccine_records"
-                android:textStyle="bold"
-                app:layout_constraintBaseline_toBaselineOf="@+id/vaccineText"
-                app:layout_constraintStart_toEndOf="@+id/vaccineText" />
-
-            <TextView
                 android:id="@+id/allergyListTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -316,6 +297,16 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/vaccineButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="#F1CC96"
+                android:text="@string/vaccine"
+                app:layout_constraintStart_toStartOf="@+id/medicationsText"
+                app:layout_constraintTop_toBottomOf="@+id/medicationsText" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
