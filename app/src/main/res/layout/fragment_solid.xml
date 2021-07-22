@@ -5,6 +5,27 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
+    <Spinner
+        android:id="@+id/modeEatingEditText2"
+        android:layout_width="181dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/rounded_box"
+        android:entries="@array/eating_mode"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/quantityEditText" />
+
+    <TextView
+        android:id="@+id/modeEatingText2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="28dp"
+        android:text="Mode of Eating"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/quantityText" />
+
     <TextView
         android:id="@+id/notesText"
         android:layout_width="wrap_content"
@@ -99,7 +120,7 @@
         android:id="@+id/addPhotoText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="136dp"
         android:text="@string/add_photo"
         app:layout_constraintStart_toStartOf="@+id/quantityText"
         app:layout_constraintTop_toBottomOf="@+id/quantityText" />
@@ -108,7 +129,8 @@
         android:id="@+id/addPhotobutton"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="36dp"
         android:background="@drawable/circle_blue"
         android:text="@string/plus"
         android:textColor="#FFF"

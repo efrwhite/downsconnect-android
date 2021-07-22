@@ -10,7 +10,7 @@
     <string name="milestone">Milestone</string>
     <string name="sign_in_out">Sign in/out</string>
     <string name="photo">Photo</string>
-    <string name="dairy">Dairy</string>
+    <string name="dairy">Journal</string>
     <string name="more">More</string>
     <string name="measured_height">Measured Height</string>
     <string name="measured_weight">Measured Weight</string>
@@ -51,7 +51,7 @@
     <string name="synced">Synced @</string>
     <string name="recent_entries">Recent Entries</string>
     <string name="summary">Summary</string>
-    <string name="diary">Diary</string>
+    <string name="diary">Journal</string>
     <string name="woke_up">Woke up</string>
     <string name="went_to_sleep">Went to sleep</string>
     <string name="enter_birthday">Enter Birthday</string>
@@ -234,6 +234,7 @@
     <array name="dosage">
         <item>Select</item>
         <item>mL</item>
+        <item>oz</item>
     </array>
     <array name="temperature">
         <item>Select</item>
@@ -297,6 +298,14 @@
         <item>Listening to a story</item>
         <item>Having a bath</item>
         <item>Brushing Teeth</item>
+    </array>
+    <array name="eating_mode">
+        <item>Select</item>
+        <item>Bottle</item>
+        <item>Cup</item>
+        <item>Nursing</item>
+        <item>G tube</item>
+        <item>NG tube</item>
     </array>
 
 </resources>

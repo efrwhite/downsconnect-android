@@ -50,9 +50,10 @@
         android:layout_height="40dp"
         android:layout_marginEnd="24dp"
         android:background="@drawable/rounded_box"
-        android:hint="@string/enter_time"
-        android:paddingStart="7dp"
         android:ems="10"
+        android:hint="@string/enter_time"
+        android:inputType="TODO"
+        android:paddingStart="7dp"
         android:textSize="14sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/eatText"
         app:layout_constraintEnd_toEndOf="parent"
@@ -72,17 +73,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.5" />
+        app:layout_constraintGuide_begin="206dp" />
 
     <Button
         android:id="@+id/saveButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
         android:text="@string/save"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/quantityText" />
+        tools:layout_editor_absoluteY="429dp" />
 
     <Spinner
         android:id="@+id/unitSpinner"
@@ -95,5 +95,82 @@
         app:layout_constraintBaseline_toBaselineOf="@+id/quantityEditText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/quantityEditText" />
+
+    <TextView
+        android:id="@+id/modeEatingText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="32dp"
+        android:text="Mode of Eating"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/quantityText" />
+
+    <Spinner
+        android:id="@+id/modeEatingEditText"
+        android:layout_width="181dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/rounded_box"
+        android:entries="@array/eating_mode"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/quantityEditText" />
+
+    <TextView
+        android:id="@+id/vitaminsText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:text="Please list any vitamins or supplements given with this feeding:"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/modeEatingEditText" />
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Iron"
+        app:layout_constraintTop_toBottomOf="@+id/vitaminsText"
+        tools:layout_editor_absoluteX="36dp" />
+
+    <CheckBox
+        android:id="@+id/checkBox2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Multivitamin"
+        tools:layout_editor_absoluteX="161dp"
+        tools:layout_editor_absoluteY="353dp" />
+
+    <CheckBox
+        android:id="@+id/checkBox3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Other"
+        app:layout_constraintTop_toBottomOf="@+id/checkBox"
+        tools:layout_editor_absoluteX="36dp" />
+
+    <EditText
+        android:id="@+id/editTextTextPersonName2"
+        android:layout_width="208dp"
+        android:layout_height="31dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        tools:layout_editor_absoluteX="162dp"
+        tools:layout_editor_absoluteY="416dp" />
+
+    <TextView
+        android:id="@+id/textView32"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="If other, please indicate:"
+        tools:layout_editor_absoluteX="167dp"
+        tools:layout_editor_absoluteY="390dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
