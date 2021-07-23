@@ -15,6 +15,7 @@ import com.example.downsconnect.objects.Child;
 import com.example.downsconnect.objects.Entry;
 import com.example.downsconnect.objects.Feed;
 import com.example.downsconnect.objects.Height;
+import com.example.downsconnect.objects.Image;
 import com.example.downsconnect.objects.MedicalInfo;
 import com.example.downsconnect.objects.Milestone;
 import com.example.downsconnect.objects.Mood;
@@ -27,8 +28,8 @@ import java.util.ArrayList;
 
 public class DBHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "downsconnect.db";
-    private static final int DATABASE_VERSION = 2;
-    private static final String[] TABLE_NAMES = {"Account", "Child", "Feed", "Mood", "Sleep", "Entry", "Medical", "Milestone", "Bathroom", "Provider", "Activity"};
+    private static final int DATABASE_VERSION = 3;
+    private static final String[] TABLE_NAMES = {"Account", "Child", "Feed", "Mood", "Sleep", "Entry", "Medical", "Milestone", "Bathroom", "Provider", "Activity", "Image"};
     private static final String[] COLUMN_1 = {"AccountID","FirstName", "LastName", "Username", "Password", "Phone"};
     private static final String[] COLUMN_2 = {"ChildID", "FirstName", "LastName", "Gender", "BloodType", "DueDate", "Birthday", "Allergies", "Medications"};
     private static final String[] COLUMN_3 = {"FeedID", "ChildID", "Amount", "Substance", "Notes", "FoodUnit" , "EntryTime"};
@@ -40,6 +41,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String[] COLUMN_9 = {"BathroomID", "ChildID", "BathroomType", "TreatmentPlan", "Leak", "OpenAir", "DiaperCream", "Quantity", "PottyAccident", "DateOfLastStool", "Duration"};
     private static final String[] COLUMN_10 = {"ProviderID", "ProviderName", "PracticeName", "Specialty", "Phone", "Fax", "Email", "Website", "Address", "State", "City", "Zip"};
     private static final String[] COLUMN_11 = {"ActivityID", "ChildID", "ActivityName", "EntryTime", "Duration", "DurationUnits" ,"Notes"};
+    private static final String[] COLUMN_12 = {"ImageID", "ChildID", "Image"};
     public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -147,6 +149,10 @@ public class DBHelper extends SQLiteOpenHelper {
                 "Duration TEXT, " +
                 "DurationUnits TEXT, " +
                 "Notes TEXT)");
+        db.execSQL("CREATE TABLE Image(" +
+                "ImageID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
+                "ChildID INTEGER, " +
+                "Image BLOB)");
     }
 
     @Override
@@ -163,6 +169,7 @@ public class DBHelper extends SQLiteOpenHelper {
             db.execSQL("DROP TABLE IF EXISTS Bathroom");
             db.execSQL("DROP TABLE IF EXISTS Provider");
             db.execSQL("DROP TABLE IF EXISTS Activity");
+            db.execSQL("DROP TABLE IF EXISTS Image");
 
         }
     }
@@ -366,6 +373,21 @@ public class DBHelper extends SQLiteOpenHelper {
         }
     }
 
+    public boolean addImage(Image image){
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_12[1], image.getChildID());
+        values.put(COLUMN_12[2], image.getImage());
+        SQLiteDatabase db = this.getWritableDatabase();
+        long result = db.insert(TABLE_NAMES[11], null, values);
+        db.close();
+        if(result == -1){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+
     public Child getChild(String firstName){
         String query = "SELECT * FROM Child WHERE FirstName = '" + firstName + "';";
         SQLiteDatabase db = this.getWritableDatabase();
@@ -527,6 +549,21 @@ public class DBHelper extends SQLiteOpenHelper {
             data.add(dataPoint);
         }
         return data;
+    }
+
+    public ArrayList<Image> getChildVaccines(int childID){
+        String query = "SELECT * FROM Image WHERE ChildID = '" + childID +"';";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor c = db.rawQuery(query, null);
+        ArrayList<Image> images = new ArrayList<>();
+        while(c.moveToNext()){
+            Image image = new Image();
+            image.setImageID(c.getInt(0));
+            image.setChildID(c.getInt(1));
+            image.setImage(c.getBlob(2));
+            images.add(image);
+        }
+        return images;
     }
 
    public AccountHolder getAccount(String user, String pass){

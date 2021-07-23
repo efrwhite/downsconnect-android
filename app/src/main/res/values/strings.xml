@@ -177,6 +177,9 @@
     <string name="take_pic">Take Picture</string>
     <string name="choose_pic">Choose a Picture</string>
     <string name="current_record">Current Record</string>
+    <string name="vaccine_screenshot_text">Upload pictures of your child\'s current vaccine history. \n Delete your current history if you wish to upload new records</string>
+    <string name="upload">Upload Records</string>
+    <string name="delete_history">Delete Current History</string>
 
 
     <array name="gender">
