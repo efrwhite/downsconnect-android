@@ -84,6 +84,11 @@
     <string name="amount_of_fluid">Amount of Fluid</string>
     <string name="enter_appointment_date">Enter Appointment Date</string>
     <string name="ate">Ate</string>
+    <string name="mode_of_eating">Mode of Eating</string>
+    <string name="mode_of_feeding">Mode of Feeding</string>
+    <string name="vitamin">Please list any vitamins or supplements given with this feeding:</string>
+    <string name="iron">Iron</string>
+    <string name="multivitamin">Multivitamin</string>
     <string name="add_photo">Add Photo</string>
     <string name="cpap">CPAP</string>
     <string name="other">Other</string>
@@ -95,7 +100,7 @@
     <string name="did_the_child_have_a_sleep_study_conducted_before_age_4">Did the child have a sleep study conducted before age 4?</string>
     <string name="check_all_that_apply">Check all that apply.</string>
     <string name="does_the_child_use_any_sleep_treatments">Does the child use any sleep treatments?</string>
-    <string name="additional_information">Additional Information</string>
+    <string name="additional_information">Provider Reports</string>
     <string name="tap_to_set"><![CDATA[<tap to set>]]></string>
     <string name="until">Until:</string>
     <string name="national_support_groups">National Support Groups</string>
@@ -128,7 +133,7 @@
     <string name="enter_provider_s_name">Enter Provider\'s Name</string>
     <string name="visit">visit.</string>
     <string name="this_is_the">This is the</string>
-    <string name="ophthamology">Ophthamology</string>
+    <string name="ophthamology">Ophthalmology</string>
     <string name="aap_guidelines_for_down_s_syndrome">AAP Guidelines for Down\'s Syndrome</string>
     <string name="calculated_height">Calculated Height</string>
     <string name="calculated_weight">Calculated Weight</string>
@@ -141,12 +146,12 @@
     <string name="speech">Speech</string>
     <string name="physical_therapy">Physical Therapy</string>
     <string name="occupational_therapy">Occupational Therapy</string>
-    <string name="doctor_visits">Doctor Visits</string>
+    <string name="doctor_visits">Add Doctor Visit...</string>
     <string name="allergies2">Allergies:</string>
     <string name="vaccines">Vaccines:</string>
     <string name="medications2">Medications:</string>
     <string name="weight2">Weight:</string>
-    <string name="cardio">Cardio</string>
+    <string name="cardio">Cardiology</string>
     <string name="provider_listing">Provider Listings</string>
     <string name="heights">Height</string>
     <string name="weights">Weight</string>
@@ -177,6 +182,7 @@
     <string name="take_pic">Take Picture</string>
     <string name="choose_pic">Choose a Picture</string>
     <string name="current_record">Current Record</string>
+    <string name="AAP_guidelines"><a href="https://www.healthychildren.org/English/health-issues/conditions/developmental-disabilities/Pages/Children-with-Down-Syndrome-Health-Care-Information-for-Families.aspx">AAP Guidelines for Down\'s Syndrome</a></string>
 
 
     <array name="gender">
@@ -304,6 +310,13 @@
         <item>Bottle</item>
         <item>Cup</item>
         <item>Nursing</item>
+        <item>G tube</item>
+        <item>NG tube</item>
+    </array>
+    <array name="feeding_mode">
+        <item>Select</item>
+        <item>Self-fed utensils</item>
+        <item>Other-fed utensils</item>
         <item>G tube</item>
         <item>NG tube</item>
     </array>

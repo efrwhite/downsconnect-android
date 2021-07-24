@@ -16,7 +16,7 @@
             android:id="@+id/bathroomView"
             android:layout_width="wrap_content"
             android:layout_height="56dp"
-            android:background="#FFBEBE"
+            android:background="@color/bMantis"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

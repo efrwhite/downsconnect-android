@@ -10,7 +10,7 @@
         android:id="@+id/moodView"
         android:layout_width="wrap_content"
         android:layout_height="56dp"
-        android:background="#C3FFCA"
+        android:background="@color/bJuneBud"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

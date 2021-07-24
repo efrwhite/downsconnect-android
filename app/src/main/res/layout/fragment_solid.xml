@@ -5,25 +5,88 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
+    <TextView
+        android:id="@+id/vitaminsText2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/vitamin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/modeEatingEditText2" />
+
+    <CheckBox
+        android:id="@+id/checkBox4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/multivitamin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/checkBox5"
+        app:layout_constraintTop_toBottomOf="@+id/vitaminsText2" />
+
+    <CheckBox
+        android:id="@+id/checkBox5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/iron"
+        app:layout_constraintStart_toStartOf="@+id/checkBox6"
+        app:layout_constraintTop_toBottomOf="@+id/vitaminsText2" />
+
+    <TextView
+        android:id="@+id/textView31"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/please_indicate"
+        app:layout_constraintBottom_toBottomOf="@+id/checkBox6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/checkBox6"
+        app:layout_constraintTop_toTopOf="@+id/checkBox6" />
+
+    <EditText
+        android:id="@+id/editTextTextPersonName3"
+        android:layout_width="188dp"
+        android:layout_height="26dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="@+id/textView31"
+        app:layout_constraintTop_toBottomOf="@+id/textView31" />
+
+    <CheckBox
+        android:id="@+id/checkBox6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/other"
+        app:layout_constraintEnd_toStartOf="@+id/textView31"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/checkBox5" />
+
     <Spinner
         android:id="@+id/modeEatingEditText2"
         android:layout_width="181dp"
         android:layout_height="40dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
         android:background="@drawable/rounded_box"
-        android:entries="@array/eating_mode"
+        android:entries="@array/feeding_mode"
+        app:layout_constraintBottom_toBottomOf="@+id/modeEatingText2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/quantityEditText" />
+        app:layout_constraintTop_toTopOf="@+id/modeEatingText2" />
 
     <TextView
         android:id="@+id/modeEatingText2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="28dp"
-        android:text="Mode of Eating"
-        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/mode_of_feeding"
+        app:layout_constraintStart_toStartOf="@+id/quantityText"
         app:layout_constraintTop_toBottomOf="@+id/quantityText" />
 
     <TextView
@@ -71,9 +134,9 @@
         android:layout_height="40dp"
         android:layout_marginEnd="24dp"
         android:background="@drawable/rounded_box"
+        android:ems="10"
         android:entries="@array/ate"
         android:paddingStart="7dp"
-        android:ems="10"
         android:textSize="14sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/eatText"
         app:layout_constraintEnd_toEndOf="parent"
@@ -120,10 +183,10 @@
         android:id="@+id/addPhotoText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="136dp"
+        android:layout_marginTop="24dp"
         android:text="@string/add_photo"
-        app:layout_constraintStart_toStartOf="@+id/quantityText"
-        app:layout_constraintTop_toBottomOf="@+id/quantityText" />
+        app:layout_constraintStart_toStartOf="@+id/modeEatingText2"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName3" />
 
     <Button
         android:id="@+id/addPhotobutton"
@@ -131,7 +194,7 @@
         android:layout_height="40dp"
         android:layout_marginStart="12dp"
         android:layout_marginTop="36dp"
-        android:background="@drawable/circle_blue"
+        android:background="@drawable/circle_bedazzledBlue"
         android:text="@string/plus"
         android:textColor="#FFF"
         app:layout_constraintStart_toStartOf="@+id/addPhotoText"

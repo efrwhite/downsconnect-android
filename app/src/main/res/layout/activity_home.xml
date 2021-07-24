@@ -10,7 +10,7 @@
         android:id="@+id/doctorsVisitView"
         android:layout_width="wrap_content"
         android:layout_height="60dp"
-        android:background="#BAF3F7"
+        android:background="@color/colorAccent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -20,7 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_marginTop="8dp"
-        android:background="#BAF3F7"
+        android:background="@color/colorAccent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signInOutText" />
@@ -30,7 +30,7 @@
         android:layout_width="75dp"
         android:layout_height="75dp"
         android:layout_marginTop="8dp"
-        android:background="@drawable/circle_yellow"
+        android:background="@drawable/circle_primary"
         app:layout_constraintEnd_toStartOf="@+id/guideline6"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -39,7 +39,7 @@
         android:id="@+id/activityButton"
         android:layout_width="75dp"
         android:layout_height="75dp"
-        android:background="@drawable/circle_pink"
+        android:background="@drawable/circle_queenBlue"
         app:layout_constraintBaseline_toBaselineOf="@+id/feedButton"
         app:layout_constraintEnd_toStartOf="@+id/guideline5"
         app:layout_constraintStart_toStartOf="@+id/guideline6" />
@@ -48,7 +48,7 @@
         android:id="@+id/sleepButton"
         android:layout_width="75dp"
         android:layout_height="75dp"
-        android:background="@drawable/circle_navy"
+        android:background="@drawable/circle_wintergreenDream"
         app:layout_constraintBaseline_toBaselineOf="@+id/activityButton"
         app:layout_constraintEnd_toStartOf="@+id/guideline7"
         app:layout_constraintStart_toStartOf="@+id/guideline5" />
@@ -57,7 +57,7 @@
         android:id="@+id/moodButton"
         android:layout_width="75dp"
         android:layout_height="75dp"
-        android:background="@drawable/circle_green"
+        android:background="@drawable/circle_bJuneBud"
         app:layout_constraintBaseline_toBaselineOf="@+id/sleepButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline7" />
@@ -67,7 +67,7 @@
         android:layout_width="75dp"
         android:layout_height="75dp"
         android:layout_marginTop="8dp"
-        android:background="@drawable/circle_purple"
+        android:background="@drawable/circle_bedazzledBlue"
         app:layout_constraintEnd_toStartOf="@+id/guideline6"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/feedText" />
@@ -76,7 +76,7 @@
         android:id="@+id/medicalButton"
         android:layout_width="75dp"
         android:layout_height="75dp"
-        android:background="@drawable/circle_red"
+        android:background="@drawable/circle_forestGreenCrayola"
         app:layout_constraintBaseline_toBaselineOf="@+id/resourcesButton"
         app:layout_constraintEnd_toStartOf="@+id/guideline5"
         app:layout_constraintStart_toStartOf="@+id/guideline6" />
@@ -85,7 +85,7 @@
         android:id="@+id/messageButton"
         android:layout_width="75dp"
         android:layout_height="75dp"
-        android:background="@drawable/circle_green"
+        android:background="@drawable/circle_aJuneBud"
         app:layout_constraintBaseline_toBaselineOf="@+id/medicalButton"
         app:layout_constraintEnd_toStartOf="@+id/guideline7"
         app:layout_constraintStart_toStartOf="@+id/guideline5" />
@@ -94,7 +94,7 @@
         android:id="@+id/milestoneButton"
         android:layout_width="75dp"
         android:layout_height="75dp"
-        android:background="@drawable/circle_yellow"
+        android:background="@drawable/circle_pear"
         app:layout_constraintBaseline_toBaselineOf="@+id/messageButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline7" />
@@ -104,7 +104,7 @@
         android:layout_width="75dp"
         android:layout_height="75dp"
         android:layout_marginTop="8dp"
-        android:background="@drawable/circle_navy"
+        android:background="@drawable/circle_aMantis"
         app:layout_constraintEnd_toStartOf="@+id/guideline6"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/resourcesText" />
@@ -113,7 +113,7 @@
         android:id="@+id/bathroomButton"
         android:layout_width="75dp"
         android:layout_height="75dp"
-        android:background="@drawable/circle_purple"
+        android:background="@drawable/circle_bMantis"
         app:layout_constraintBaseline_toBaselineOf="@+id/signoutButton"
         app:layout_constraintEnd_toStartOf="@+id/guideline5"
         app:layout_constraintStart_toStartOf="@+id/guideline6" />
@@ -122,7 +122,7 @@
         android:id="@+id/diaryButton"
         android:layout_width="75dp"
         android:layout_height="75dp"
-        android:background="@drawable/circle_pink"
+        android:background="@drawable/circle_aTitaniumYellow"
         app:layout_constraintBaseline_toBaselineOf="@+id/bathroomButton"
         app:layout_constraintEnd_toStartOf="@+id/guideline7"
         app:layout_constraintStart_toStartOf="@+id/guideline5" />
@@ -131,7 +131,7 @@
         android:id="@+id/moreButton"
         android:layout_width="75dp"
         android:layout_height="75dp"
-        android:background="@drawable/circle_red"
+        android:background="@drawable/circle_bTitaniumYellow"
         app:layout_constraintBaseline_toBaselineOf="@+id/diaryButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline7" />

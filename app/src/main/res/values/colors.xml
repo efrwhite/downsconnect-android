@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#BAF3F7</color>
+    <color name="colorPrimary">#3a4fa1 </color>
     <color name="colorPrimaryDark">#000</color>
-    <color name="colorAccent">#03DAC5</color>
+    <color name="colorAccent">#7fc0dc</color>
+    <color name="bedazzledBlue">#405F9A</color>
+    <color name="queenBlue">#456F93</color>
+    <color name="wintergreenDream">#508E84</color>
+    <color name="forestGreenCrayola">#5BAD75</color>
+    <color name="aMantis">#66CC66</color>
+    <color name="bMantis">#8AD359</color>
+    <color name="aJuneBud">#AEDA4C</color>
+    <color name="pear">#D2E13F</color>
+    <color name="aTitaniumYellow">#E4E539</color>
+    <color name="bTitaniumYellow">#F5E832</color>
+    <color name="bJuneBud">#C0DE46</color>
 </resources>
