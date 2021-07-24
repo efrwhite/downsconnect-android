@@ -1,0 +1,168 @@
+Index: build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>// Top-level build file where you can add configuration options common to all sub-projects/modules.\nbuildscript {\n    repositories {\n        google()\n        jcenter()\n        maven { url 'https://jitpack.io' }\n\n    }\n    dependencies {\n        classpath \"com.android.tools.build:gradle:4.0.1\"\n\n        // NOTE: Do not place your application dependencies here; they belong\n        // in the individual module build.gradle files\n    }\n}\n\nallprojects {\n    repositories {\n        google()\n        jcenter()\n        maven { url 'https://jitpack.io' }\n\n    }\n}\n\ntask clean(type: Delete) {\n    delete rootProject.buildDir\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- build.gradle	(revision 5c847c141835ee8a252d039114c1ebf86d689ae1)
++++ build.gradle	(date 1624173370410)
+@@ -7,7 +7,7 @@
+ 
+     }
+     dependencies {
+-        classpath "com.android.tools.build:gradle:4.0.1"
++        classpath 'com.android.tools.build:gradle:4.2.1'
+ 
+         // NOTE: Do not place your application dependencies here; they belong
+         // in the individual module build.gradle files
+Index: app/src/main/res/values/strings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><resources>\n    <string name=\"app_name\">DownsConnect</string>\n    <string name=\"feed\">Feed</string>\n    <string name=\"activity\">Activity</string>\n    <string name=\"sleep\">Sleep</string>\n    <string name=\"mood\">Mood</string>\n    <string name=\"resources\">Resources</string>\n    <string name=\"medical\">Medical</string>\n    <string name=\"message\">Message</string>\n    <string name=\"milestone\">Milestone</string>\n    <string name=\"sign_in_out\">Sign in/out</string>\n    <string name=\"photo\">Photo</string>\n    <string name=\"dairy\">Dairy</string>\n    <string name=\"more\">More</string>\n    <string name=\"measured_height\">Measured Height</string>\n    <string name=\"measured_weight\">Measured Weight</string>\n    <string name=\"head_size\">Head Size</string>\n    <string name=\"health\">Health</string>\n    <string name=\"vaccine\">Vaccine</string>\n    <string name=\"dosage\">Dosage</string>\n    <string name=\"doctor_s_visit\">Doctor\\'s Visit</string>\n    <string name=\"temperature\">Temperature</string>\n    <string name=\"notes\">Notes:</string>\n    <string name=\"save\">Save</string>\n    <string name=\"back\">Back</string>\n    <string name=\"bottle\">Bottle</string>\n    <string name=\"nursing\">Nursing</string>\n    <string name=\"solids\">Solids</string>\n    <string name=\"weight\">Weight</string>\n    <string name=\"profiles\">Profiles</string>\n    <string name=\"parents_caregivers\">Parents/Caregivers</string>\n    <string name=\"your_children\">Your Children(Click name to select child)</string>\n    <string name=\"gender\">Gender</string>\n    <string name=\"birthday\">Birthday</string>\n    <string name=\"due_date\">Due Date</string>\n    <string name=\"allergies\">Allergies</string>\n    <string name=\"medications\">Medications</string>\n    <string name=\"cancel\">Cancel</string>\n    <string name=\"sign_up\">Sign Up</string>\n    <string name=\"first_name\">First Name</string>\n    <string name=\"last_name\">Last Name</string>\n    <string name=\"username\">Username</string>\n    <string name=\"phone_number\">Phone Number</string>\n    <string name=\"password\">Password</string>\n    <string name=\"confirm_password\">Confirm Password</string>\n    <string name=\"sign_in\">Sign In</string>\n    <string name=\"history\">History</string>\n    <string name=\"graphs\">Graphs</string>\n    <string name=\"timeline\">Timeline</string>\n    <string name=\"mail\">Mail</string>\n    <string name=\"synced\">Synced @</string>\n    <string name=\"recent_entries\">Recent Entries</string>\n    <string name=\"summary\">Summary</string>\n    <string name=\"diary\">Diary</string>\n    <string name=\"woke_up\">Woke up</string>\n    <string name=\"went_to_sleep\">Went to sleep</string>\n    <string name=\"enter_birthday\">Enter Birthday</string>\n    <string name=\"enter_due_date\">Enter Due Date</string>\n\n    <string name=\"drawer_open\">Open navigation drawer</string>\n    <string name=\"drawer_close\">Close navigation drawer</string>\n    <!-- TODO: Remove or change this placeholder text -->\n    <string name=\"hello_blank_fragment\">Hello blank fragment</string>\n    <string name=\"bathroom\">Bathroom</string>\n    <string name=\"diaper\">Diaper</string>\n    <string name=\"potty\">Potty</string>\n    <string name=\"constipation\">Constipation</string>\n    <string name=\"profileBabyName\">First &amp; Last Name</string>\n\n    <string name=\"phone_list\">Phone List</string>\n    <string name=\"profile_status\">Profile Status</string>\n    <string name=\"plus\">+</string>\n    <string name=\"parent_description\">Each caregiver will be able to view and save entries</string>\n    <string name=\"phone_description\">This phone list will be visible by each caregiver</string>\n    <string name=\"inactive_profiles_are_hidden_on_your_homepage\">Inactive profiles are hidden on your homepage</string>\n    <string name=\"delete\">Delete</string>\n    <string name=\"accident\">Accident</string>\n    <string name=\"duration\">Duration</string>\n    <string name=\"diaper_cream\">Diaper Cream</string>\n    <string name=\"quantity\">Quantity</string>\n    <string name=\"enter_date\">Enter Date</string>\n    <string name=\"treatment_plan\">Treatment Plan</string>\n    <string name=\"enter_time\">Enter Time</string>\n    <string name=\"amount_of_fluid\">Amount of Fluid</string>\n    <string name=\"enter_appointment_date\">Enter Appointment Date</string>\n    <string name=\"ate\">Ate</string>\n    <string name=\"add_photo\">Add Photo</string>\n    <string name=\"cpap\">CPAP</string>\n    <string name=\"other\">Other</string>\n    <string name=\"please_indicate\">Please indicate:</string>\n    <string name=\"yes\">Yes</string>\n    <string name=\"no\">No</string>\n    <string name=\"supplements_ex_melatonin\">Supplements (ex: Melatonin)</string>\n    <string name=\"medication_detailed_in_medicine_area\">Medication (detailed in Medicine area)</string>\n    <string name=\"did_the_child_have_a_sleep_study_conducted_before_age_4\">Did the child have a sleep study conducted before age 4?</string>\n    <string name=\"check_all_that_apply\">Check all that apply.</string>\n    <string name=\"does_the_child_use_any_sleep_treatments\">Does the child use any sleep treatments?</string>\n    <string name=\"additional_information\">Additional Information</string>\n    <string name=\"tap_to_set\"><![CDATA[<tap to set>]]></string>\n    <string name=\"until\">Until:</string>\n    <string name=\"national_support_groups\">National Support Groups</string>\n    <string name=\"websites\">Websites</string>\n    <string name=\"books\">Books</string>\n    <string name=\"child_first_rolled_over\">Child first rolled over:</string>\n    <string name=\"child_first_sitting_up\">Child first sitting up:</string>\n    <string name=\"child_first_standing\">Child first standing:</string>\n    <string name=\"child_first_walking\">Child first walking:</string>\n    <string name=\"age\">Age</string>\n    <string name=\"neck_safety\">Neck Safety</string>\n    <string name=\"avoid_trampoline_use_under_the_age_of_6_and_under_close_supervision_over_6\">Avoid trampoline use under the age of 6 and under close supervision over 6</string>\n    <string name=\"neck_x_ray_only_for_symptomatic_children\">Neck x-ray only for symptomatic children</string>\n    <string name=\"may_require_neck_x_ray_for_participation_in_activities_like_special_olympics\">May require neck x-ray for participation in activities like Special Olympics</string>\n    <string name=\"symptoms_to_monitor_for\">Symptoms to monitor for:</string>\n    <string name=\"neck_pain\">- Neck pain</string>\n    <string name=\"back_or_leg_pain\">- Back or leg pain</string>\n    <string name=\"weakness\">- Weakness</string>\n    <string name=\"muscle_stiffening\">- Muscle stiffening</string>\n    <string name=\"changes_in_tone\">- Changes in tone</string>\n    <string name=\"gait_changes\">- Gait changes</string>\n    <string name=\"changes_in_bowel_or_bladder_function\">- Changes in bowel or bladder function</string>\n    <string name=\"open_air_accident\">Open Air Accident</string>\n    <string name=\"diaper_leak\">Diaper Leak</string>\n    <string name=\"head_circumference\">Head Circumference:</string>\n    <string name=\"height\">Height:</string>\n    <string name=\"provider\">Provider:</string>\n    <string name=\"date\">Date:</string>\n    <string name=\"child_s_age\">Child\\'s Age:</string>\n    <string name=\"enter_provider_s_name\">Enter Provider\\'s Name</string>\n    <string name=\"visit\">visit.</string>\n    <string name=\"this_is_the\">This is the</string>\n    <string name=\"ophthamology\">Ophthamology</string>\n    <string name=\"aap_guidelines_for_down_s_syndrome\">AAP Guidelines for Down\\'s Syndrome</string>\n    <string name=\"calculated_height\">Calculated Height</string>\n    <string name=\"calculated_weight\">Calculated Weight</string>\n    <string name=\"calculated_head_size\">Calculated Head Size</string>\n    <string name=\"list_of_medications\">List of Medications</string>\n    <string name=\"vaccine_records\">Vaccine Records</string>\n    <string name=\"list_of_allergies\">List of Allergies</string>\n    <string name=\"dental\">Dental</string>\n    <string name=\"hearing\">Hearing</string>\n    <string name=\"speech\">Speech</string>\n    <string name=\"physical_therapy\">Physical Therapy</string>\n    <string name=\"occupational_therapy\">Occupational Therapy</string>\n    <string name=\"doctor_visits\">Doctor Visits</string>\n    <string name=\"allergies2\">Allergies:</string>\n    <string name=\"vaccines\">Vaccines:</string>\n    <string name=\"medications2\">Medications:</string>\n    <string name=\"weight2\">Weight:</string>\n    <string name=\"cardio\">Cardio</string>\n    <string name=\"provider_listing\">Provider Listings</string>\n    <string name=\"heights\">Height</string>\n    <string name=\"weights\">Weight</string>\n    <string name=\"circumference\">Head Circumference</string>\n    <string name=\"growth_charts\">Growth Charts</string>\n    <string name=\"provider_type\">Provider Type</string>\n    <string name=\"provider_name\">Provider Name</string>\n    <string name=\"appointment_entry\">Appointment Entry</string>\n    <string name=\"appointment_date\">Appointment Date</string>\n    <string name=\"visit_age\">Visit Age</string>\n    <string name=\"click\">Click On A Entry To View More Information</string>\n\n    <array name=\"gender\">\n        <item>Select</item>\n        <item>Male</item>\n        <item>Female</item>\n    </array>\n    <array name=\"blood1\">\n        <item>Select</item>\n        <item>A</item>\n        <item>B</item>\n        <item>AB</item>\n        <item>O</item>\n    </array>\n    <array name=\"blood2\">\n        <item>Select</item>\n        <item>+</item>\n        <item>-</item>\n    </array>\n    <array name=\"height\">\n        <item>Select</item>\n        <item>cm</item>\n        <item>ft</item>\n    </array>\n    <array name=\"nursing\">\n        <item>Select</item>\n        <item>oz</item>\n        <item>tbsp</item>\n        <item>tsp</item>\n        <item>mL</item>\n    </array>\n    <array name=\"solids\">\n        <item>Select</item>\n        <item>oz</item>\n        <item>tbsp</item>\n        <item>tsp</item>\n    </array>\n    <array name=\"weight\">\n        <item>Select</item>\n        <item>lbs</item>\n        <item>kg</item>\n    </array>\n    <array name=\"measurement\">\n        <item>Select</item>\n        <item>inches</item>\n        <item>cm</item>\n    </array>\n    <array name=\"health\">\n        <item>Select</item>\n        <item>Excellent</item>\n        <item>Good</item>\n        <item>Fair</item>\n        <item>Poor</item>\n    </array>\n    <array name=\"dosage\">\n        <item>Select</item>\n        <item>mL</item>\n    </array>\n    <array name=\"temperature\">\n        <item>Select</item>\n        <item>F</item>\n        <item>C</item>\n    </array>\n    <array name=\"yn\">\n        <item>Select</item>\n        <item>Yes</item>\n        <item>No</item>\n    </array>\n    <array name=\"sml\">\n        <item>Select</item>\n        <item>Small</item>\n        <item>Medium</item>\n        <item>Large</item>\n    </array>\n    <array name=\"ate\">\n        <item>Select</item>\n        <item>Food</item>\n        <item>Snack</item>\n        <item>Refused Food</item>\n    </array>\n    <array name=\"food\">\n        <item>Select</item>\n        <item>cups</item>\n        <item>oz</item>\n        <item>grams</item>\n        <item>pieces</item>\n    </array>\n    <array name=\"sleep_time\">\n        <item>Select</item>\n        <item>hrs</item>\n        <item>mins</item>\n    </array>\n    <array name=\"potty_time\">\n        <item>Select</item>\n        <item>secs</item>\n        <item>mins</item>\n        <item>hrs</item>\n    </array>\n    <array name=\"providers\">\n        <item>Select</item>\n        <item>OT</item>\n        <item>PT</item>\n        <item>Speech</item>\n        <item>Hearing</item>\n        <item>Dental</item>\n        <item>Cardio</item>\n        <item>Ophthalmology</item>\n    </array>\n\n</resources>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/values/strings.xml	(revision 5c847c141835ee8a252d039114c1ebf86d689ae1)
++++ app/src/main/res/values/strings.xml	(date 1624325902916)
+@@ -214,6 +214,7 @@
+     <array name="dosage">
+         <item>Select</item>
+         <item>mL</item>
++        <item>oz</item>
+     </array>
+     <array name="temperature">
+         <item>Select</item>
+@@ -265,5 +266,13 @@
+         <item>Cardio</item>
+         <item>Ophthalmology</item>
+     </array>
++    <array name="eating_mode">
++        <item>Select</item>
++        <item>Bottle</item>
++        <item>Cup</item>
++        <item>Nursing</item>
++        <item>G tube</item>
++        <item>NG tube</item>
++    </array>
+ 
+ </resources>
+\ No newline at end of file
+Index: .idea/runConfigurations.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"RunConfigurationProducerService\">\n    <option name=\"ignoredProducers\">\n      <set>\n        <option value=\"org.jetbrains.plugins.gradle.execution.test.runner.AllInPackageGradleConfigurationProducer\" />\n        <option value=\"org.jetbrains.plugins.gradle.execution.test.runner.TestClassGradleConfigurationProducer\" />\n        <option value=\"org.jetbrains.plugins.gradle.execution.test.runner.TestMethodGradleConfigurationProducer\" />\n      </set>\n    </option>\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/runConfigurations.xml	(revision 5c847c141835ee8a252d039114c1ebf86d689ae1)
++++ .idea/runConfigurations.xml	(date 1624173309230)
+@@ -3,6 +3,7 @@
+   <component name="RunConfigurationProducerService">
+     <option name="ignoredProducers">
+       <set>
++        <option value="com.android.tools.idea.compose.preview.runconfiguration.ComposePreviewRunConfigurationProducer" />
+         <option value="org.jetbrains.plugins.gradle.execution.test.runner.AllInPackageGradleConfigurationProducer" />
+         <option value="org.jetbrains.plugins.gradle.execution.test.runner.TestClassGradleConfigurationProducer" />
+         <option value="org.jetbrains.plugins.gradle.execution.test.runner.TestMethodGradleConfigurationProducer" />
+Index: app/src/main/res/layout/fragment_fluid.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\n    xmlns:tools=\"http://schemas.android.com/tools\"\n    android:layout_width=\"match_parent\"\n    android:layout_height=\"wrap_content\">\n\n    <TextView\n        android:id=\"@+id/notesText\"\n        android:layout_width=\"wrap_content\"\n        android:layout_height=\"wrap_content\"\n        android:layout_marginStart=\"24dp\"\n        android:layout_marginTop=\"16dp\"\n        android:text=\"@string/notes\"\n        app:layout_constraintStart_toStartOf=\"parent\"\n        app:layout_constraintTop_toTopOf=\"parent\" />\n\n    <EditText\n        android:id=\"@+id/editText\"\n        android:layout_width=\"0dp\"\n        android:layout_height=\"100dp\"\n        android:layout_marginTop=\"8dp\"\n        android:layout_marginEnd=\"24dp\"\n        android:background=\"@drawable/rounded_box\"\n        app:layout_constraintEnd_toEndOf=\"parent\"\n        app:layout_constraintStart_toStartOf=\"@+id/notesText\"\n        app:layout_constraintTop_toBottomOf=\"@+id/notesText\" />\n\n    <TextView\n        android:id=\"@+id/eatText\"\n        android:layout_width=\"wrap_content\"\n        android:layout_height=\"wrap_content\"\n        android:layout_marginTop=\"24dp\"\n        android:text=\"Ate\"\n        app:layout_constraintStart_toStartOf=\"@+id/editText\"\n        app:layout_constraintTop_toBottomOf=\"@+id/editText\" />\n\n    <TextView\n        android:id=\"@+id/quantityText\"\n        android:layout_width=\"wrap_content\"\n        android:layout_height=\"wrap_content\"\n        android:layout_marginTop=\"32dp\"\n        android:text=\"@string/amount_of_fluid\"\n        app:layout_constraintStart_toStartOf=\"@+id/eatText\"\n        app:layout_constraintTop_toBottomOf=\"@+id/eatText\" />\n\n    <EditText\n        android:id=\"@+id/fluidFoodEditText\"\n        android:layout_width=\"0dp\"\n        android:layout_height=\"40dp\"\n        android:layout_marginEnd=\"24dp\"\n        android:background=\"@drawable/rounded_box\"\n        android:hint=\"@string/enter_time\"\n        android:paddingStart=\"7dp\"\n        android:ems=\"10\"\n        android:textSize=\"14sp\"\n        app:layout_constraintBaseline_toBaselineOf=\"@+id/eatText\"\n        app:layout_constraintEnd_toEndOf=\"parent\"\n        app:layout_constraintStart_toStartOf=\"@+id/guideline8\" />\n\n    <EditText\n        android:id=\"@+id/quantityEditText\"\n        android:layout_width=\"100dp\"\n        android:layout_height=\"40dp\"\n        android:background=\"@drawable/rounded_box\"\n        android:inputType=\"number\"\n        app:layout_constraintBaseline_toBaselineOf=\"@+id/quantityText\"\n        app:layout_constraintStart_toStartOf=\"@+id/guideline8\" />\n\n    <androidx.constraintlayout.widget.Guideline\n        android:id=\"@+id/guideline8\"\n        android:layout_width=\"wrap_content\"\n        android:layout_height=\"wrap_content\"\n        android:orientation=\"vertical\"\n        app:layout_constraintGuide_percent=\"0.5\" />\n\n    <Button\n        android:id=\"@+id/saveButton\"\n        android:layout_width=\"wrap_content\"\n        android:layout_height=\"wrap_content\"\n        android:layout_marginTop=\"32dp\"\n        android:text=\"@string/save\"\n        app:layout_constraintEnd_toEndOf=\"parent\"\n        app:layout_constraintStart_toStartOf=\"parent\"\n        app:layout_constraintTop_toBottomOf=\"@+id/quantityText\" />\n\n    <Spinner\n        android:id=\"@+id/unitSpinner\"\n        android:layout_width=\"0dp\"\n        android:layout_height=\"40dp\"\n        android:layout_marginStart=\"8dp\"\n        android:layout_marginEnd=\"24dp\"\n        android:background=\"@drawable/rounded_box\"\n        android:entries=\"@array/dosage\"\n        app:layout_constraintBaseline_toBaselineOf=\"@+id/quantityEditText\"\n        app:layout_constraintEnd_toEndOf=\"parent\"\n        app:layout_constraintStart_toEndOf=\"@+id/quantityEditText\" />\n\n</androidx.constraintlayout.widget.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/fragment_fluid.xml	(revision 5c847c141835ee8a252d039114c1ebf86d689ae1)
++++ app/src/main/res/layout/fragment_fluid.xml	(date 1624326381695)
+@@ -72,17 +72,16 @@
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:orientation="vertical"
+-        app:layout_constraintGuide_percent="0.5" />
++        app:layout_constraintGuide_begin="206dp" />
+ 
+     <Button
+         android:id="@+id/saveButton"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+-        android:layout_marginTop="32dp"
+         android:text="@string/save"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintStart_toStartOf="parent"
+-        app:layout_constraintTop_toBottomOf="@+id/quantityText" />
++        app:layout_constraintTop_toBottomOf="@+id/modeEatingText" />
+ 
+     <Spinner
+         android:id="@+id/unitSpinner"
+@@ -96,4 +95,23 @@
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintStart_toEndOf="@+id/quantityEditText" />
+ 
++    <TextView
++        android:id="@+id/modeEatingText"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:layout_marginStart="24dp"
++        android:layout_marginTop="32dp"
++        android:text="Mode of Eating"
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintTop_toBottomOf="@+id/quantityText" />
++
++    <Spinner
++        android:id="@+id/modeEatingEditText"
++        android:layout_width="181dp"
++        android:layout_height="40dp"
++        android:background="@drawable/rounded_box"
++        android:entries="@array/eating_mode"
++        tools:layout_editor_absoluteX="206dp"
++        tools:layout_editor_absoluteY="260dp" />
++
+ </androidx.constraintlayout.widget.ConstraintLayout>
+\ No newline at end of file
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_1_7\" project-jdk-name=\"1.8\" project-jdk-type=\"JavaSDK\">\n    <output url=\"file://$PROJECT_DIR$/build/classes\" />\n  </component>\n  <component name=\"ProjectType\">\n    <option name=\"id\" value=\"Android\" />\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/misc.xml	(revision 5c847c141835ee8a252d039114c1ebf86d689ae1)
++++ .idea/misc.xml	(date 1624173309218)
+@@ -1,6 +1,6 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" project-jdk-name="1.8" project-jdk-type="JavaSDK">
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+     <output url="file://$PROJECT_DIR$/build/classes" />
+   </component>
+   <component name="ProjectType">
+Index: .idea/compiler.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/compiler.xml	(date 1624173309223)
++++ .idea/compiler.xml	(date 1624173309223)
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="CompilerConfiguration">
++    <bytecodeTargetLevel target="11" />
++  </component>
++</project>
+\ No newline at end of file
+Index: gradle/wrapper/gradle-wrapper.properties
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>#Thu Feb 04 16:43:43 EST 2021\ndistributionBase=GRADLE_USER_HOME\ndistributionPath=wrapper/dists\nzipStoreBase=GRADLE_USER_HOME\nzipStorePath=wrapper/dists\ndistributionUrl=https\\://services.gradle.org/distributions/gradle-6.1.1-all.zip\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- gradle/wrapper/gradle-wrapper.properties	(revision 5c847c141835ee8a252d039114c1ebf86d689ae1)
++++ gradle/wrapper/gradle-wrapper.properties	(date 1624173370109)
+@@ -3,4 +3,4 @@
+ distributionPath=wrapper/dists
+ zipStoreBase=GRADLE_USER_HOME
+ zipStorePath=wrapper/dists
+-distributionUrl=https\://services.gradle.org/distributions/gradle-6.1.1-all.zip
++distributionUrl=https\://services.gradle.org/distributions/gradle-6.7.1-all.zip

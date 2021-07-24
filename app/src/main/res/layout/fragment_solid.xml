@@ -49,8 +49,8 @@
 
     <EditText
         android:id="@+id/editTextTextPersonName3"
-        android:layout_width="188dp"
-        android:layout_height="26dp"
+        android:layout_width="160dp"
+        android:layout_height="24dp"
         android:layout_marginTop="8dp"
         android:ems="10"
         android:inputType="textPersonName"
@@ -194,7 +194,7 @@
         android:layout_height="40dp"
         android:layout_marginStart="12dp"
         android:layout_marginTop="36dp"
-        android:background="@drawable/circle_bedazzledBlue"
+        android:background="@drawable/circle_bedazzledblue"
         android:text="@string/plus"
         android:textColor="#FFF"
         app:layout_constraintStart_toStartOf="@+id/addPhotoText"

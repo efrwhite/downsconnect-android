@@ -22,7 +22,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/childrenProfileView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/childrenProfileView"
-        app:srcCompat="@drawable/circle_wintergreenDream" />
+        app:srcCompat="@drawable/circle_wintergreendream" />
 
     <TextView
         android:id="@+id/ageText"
@@ -214,7 +214,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="8dp"
-                android:background="@drawable/circle_bedazzledBlue"
+                android:background="@drawable/circle_bedazzledblue"
                 android:text="@string/plus"
                 android:textColor="#FFF"
                 android:textSize="24sp"
@@ -247,7 +247,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="8dp"
-                android:background="@drawable/circle_bedazzledBlue"
+                android:background="@drawable/circle_bedazzledblue"
                 android:text="@string/plus"
                 android:textColor="#FFF"
                 android:textSize="24sp"

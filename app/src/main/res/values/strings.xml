@@ -149,6 +149,9 @@
     <string name="doctor_visits">Add Doctor Visit...</string>
     <string name="allergies2">Allergies:</string>
     <string name="vaccines">Vaccines:</string>
+    <string name="upload">Upload</string>
+    <string name="delete_history">Delete History</string>
+    <string name="vaccine_screenshot_text">Vaccine Screenshot Text</string>
     <string name="medications2">Medications:</string>
     <string name="weight2">Weight:</string>
     <string name="cardio">Cardiology</string>

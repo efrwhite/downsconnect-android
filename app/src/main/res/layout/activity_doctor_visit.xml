@@ -239,7 +239,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="8dp"
-                android:background="@drawable/circle_aJuneBud"
+                android:background="@drawable/circle_ajunebud"
                 android:text="@string/plus"
                 android:textColor="#FFF"
                 android:textSize="18sp"
