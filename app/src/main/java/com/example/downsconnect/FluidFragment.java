@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 
@@ -30,11 +31,12 @@ import java.util.Calendar;
  */
 public class FluidFragment extends Fragment {
     private Button saveBtn;
-    private EditText notes, fluidFood, quantity;
+    private EditText notes, fluidFood, quantity, otherText;
     private Spinner foodUnit;
     private DBHelper helper;
     private Feed feed;
     private Entry entry;
+    private CheckBox iron, vitamin, other;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -96,6 +98,12 @@ public class FluidFragment extends Fragment {
         foodUnit = view.findViewById(R.id.unitSpinner);
         quantity = view.findViewById(R.id.quantityEditText);
         helper = new DBHelper(getContext());
+        iron = view.findViewById(R.id.ironCheckbox);
+        vitamin = view.findViewById(R.id.vitaCheckbox);
+        other = view.findViewById(R.id.otherCheckbox);
+        otherText = view.findViewById(R.id.otherText);
+
+
 
         feed = new Feed();
         entry = new Entry();
@@ -116,6 +124,24 @@ public class FluidFragment extends Fragment {
                     }
                     else{
                         feed.setNotes("");
+                    }
+                    if(vitamin.isChecked()){
+                       feed.setVitamin("Yes");
+                    }
+                    else{
+                        feed.setVitamin("No");
+                    }
+                    if(iron.isChecked()){
+                        feed.setIron("Yes");
+                    }
+                    else{
+                        feed.setIron("No");
+                    }
+                    if(other.isChecked()){
+                        feed.setOther(otherText.getText().toString());
+                    }
+                    else{
+                        feed.setOther("None");
                     }
                     entry.setChildID(childID);
                     entry.setEntryText(helper.getChildName(childID) + " drank " + feed.getAmount() + feed.getFoodUnit() + " of " + feed.getSubstance());

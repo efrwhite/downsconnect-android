@@ -65,7 +65,7 @@
         android:id="@+id/tab_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#FCFDED"
+        android:background="#CED2EC"
         app:tabSelectedTextColor="@android:color/holo_blue_dark"
         app:tabTextColor="@android:color/secondary_text_dark" />
 

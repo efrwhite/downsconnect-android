@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 
@@ -30,11 +31,12 @@ import java.util.Calendar;
  */
 public class SolidFragment extends Fragment {
     private Button saveBtn;
-    private EditText notes, quantity;
+    private EditText notes, quantity, otherText;
     private Spinner foodUnit, solidFood;
     private Entry entry;
     private Feed feed;
     private DBHelper helper;
+    private CheckBox iron, vitamin, other;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -95,6 +97,11 @@ public class SolidFragment extends Fragment {
         solidFood = view.findViewById(R.id.solidFoodEditText);
         quantity = view.findViewById(R.id.quantityEditText);
         foodUnit = view.findViewById(R.id.unitSpinner);
+        iron = view.findViewById(R.id.ironCheck);
+        vitamin = view.findViewById(R.id.vitaCheck);
+        other = view.findViewById(R.id.otherCheck);
+        otherText = view.findViewById(R.id.o_text);
+
         feed = new Feed();
         helper = new DBHelper(getContext());
         entry = new Entry();
@@ -113,6 +120,24 @@ public class SolidFragment extends Fragment {
                     }
                     else{
                         feed.setNotes("");
+                    }
+                    if(vitamin.isChecked()){
+                        feed.setVitamin("Yes");
+                    }
+                    else{
+                        feed.setVitamin("No");
+                    }
+                    if(iron.isChecked()){
+                        feed.setIron("Yes");
+                    }
+                    else{
+                        feed.setIron("No");
+                    }
+                    if(other.isChecked()){
+                        feed.setOther(otherText.getText().toString());
+                    }
+                    else{
+                        feed.setOther("None");
                     }
                     feed.setEntryTime(calendar.getTimeInMillis());
                     entry.setChildID(childID);
