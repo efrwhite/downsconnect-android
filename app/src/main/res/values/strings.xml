@@ -186,8 +186,8 @@
     <string name="choose_pic">Choose a Picture</string>
     <string name="current_record">Current Record</string>
     <string name="AAP_guidelines"><a href="https://www.healthychildren.org/English/health-issues/conditions/developmental-disabilities/Pages/Children-with-Down-Syndrome-Health-Care-Information-for-Families.aspx">AAP Guidelines for Down\'s Syndrome</a></string>
-
-
+    <string name="fluid_ate">Fluid Ate</string>
+    <string name="fluid">Fluid</string>
     <array name="gender">
         <item>Select</item>
         <item>Male</item>

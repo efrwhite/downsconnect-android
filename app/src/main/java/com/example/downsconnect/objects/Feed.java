@@ -3,7 +3,7 @@ package com.example.downsconnect.objects;
 public class Feed {
     private int amount;
     private long entryTime;
-    private String substance, foodUnit, notes;
+    private String substance, foodUnit, notes, iron, vitamin, other;
     private int ChildID;
 
     public Feed(){
@@ -69,5 +69,29 @@ public class Feed {
 
     public void setEntryTime(long entryTime) {
         this.entryTime = entryTime;
+    }
+
+    public String getIron() {
+        return iron;
+    }
+
+    public void setIron(String iron) {
+        this.iron = iron;
+    }
+
+    public String getVitamin() {
+        return vitamin;
+    }
+
+    public void setVitamin(String vitamin) {
+        this.vitamin = vitamin;
+    }
+
+    public String getOther() {
+        return other;
+    }
+
+    public void setOther(String other) {
+        this.other = other;
     }
 }

@@ -56,13 +56,12 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/tab_layout"
-        app:tabTextColor="@android:color/secondary_text_dark"
+        android:background="#E2EFD3"
         app:tabSelectedTextColor="@android:color/holo_blue_dark"
-        android:background="#FCEAEA"
-        />
+        app:tabTextColor="@android:color/secondary_text_dark" />
 
     <androidx.viewpager.widget.ViewPager
         android:layout_width="match_parent"

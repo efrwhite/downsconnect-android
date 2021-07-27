@@ -32,7 +32,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String[] TABLE_NAMES = {"Account", "Child", "Feed", "Mood", "Sleep", "Entry", "Medical", "Milestone", "Bathroom", "Provider", "Activity", "Image"};
     private static final String[] COLUMN_1 = {"AccountID","FirstName", "LastName", "Username", "Password", "Phone"};
     private static final String[] COLUMN_2 = {"ChildID", "FirstName", "LastName", "Gender", "BloodType", "DueDate", "Birthday", "Allergies", "Medications"};
-    private static final String[] COLUMN_3 = {"FeedID", "ChildID", "Amount", "Substance", "Notes", "FoodUnit" , "EntryTime"};
+    private static final String[] COLUMN_3 = {"FeedID", "ChildID", "Amount", "Substance", "Notes", "FoodUnit" , "EntryTime", "Iron", "Vitamin", "Other"};
     private static final String[] COLUMN_4 = {"MoodID", "ChildID", "MoodType", "Time", "Notes", "EntryTime"};
     private static final String[] COLUMN_5 = {"SleepID", "ChildID", "SleepTime", "Duration", "Snoring" ,"Medication", "Supplements", "CPAP", "Other", "Study", "Unit", "Notes"};
     private static final String[] COLUMN_6 = {"EntryID", "EntryText", "EntryTime", "ChildID"};
@@ -72,7 +72,10 @@ public class DBHelper extends SQLiteOpenHelper {
                 "Substance TEXT, " +
                 "Notes TEXT, " +
                 "FoodUnit TEXT, " +
-                "EntryTime INTEGER);");
+                "EntryTime INTEGER, " +
+                "Iron TEXT, " + "" +
+                "Vitamin TEXT, " +
+                "Other TEXT);");
         db.execSQL("CREATE TABLE Mood(" +
                 "MoodID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
                 "ChildID INTEGER, " +
@@ -225,6 +228,9 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(COLUMN_3[4], feed.getNotes());
         values.put(COLUMN_3[5], feed.getFoodUnit());
         values.put(COLUMN_3[6], feed.getEntryTime());
+        values.put(COLUMN_3[6], feed.getIron());
+        values.put(COLUMN_3[6], feed.getVitamin());
+        values.put(COLUMN_3[6], feed.getOther());
         SQLiteDatabase db = this.getWritableDatabase();
         long result = db.insert(TABLE_NAMES[2], null, values);
         db.close();
