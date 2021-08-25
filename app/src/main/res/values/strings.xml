@@ -188,6 +188,8 @@
     <string name="AAP_guidelines"><a href="https://www.healthychildren.org/English/health-issues/conditions/developmental-disabilities/Pages/Children-with-Down-Syndrome-Health-Care-Information-for-Families.aspx">AAP Guidelines for Down\'s Syndrome</a></string>
     <string name="fluid_ate">Fluid Ate</string>
     <string name="fluid">Fluid</string>
+    <string name="title">Title</string>
+    <string name="msg">Message:</string>
     <array name="gender">
         <item>Select</item>
         <item>Male</item>
@@ -322,6 +324,20 @@
         <item>Other-fed utensils</item>
         <item>G tube</item>
         <item>NG tube</item>
+    </array>
+    <array name="mood">
+        <item>Select</item>
+        <item>Happy</item>
+        <item>Smiling</item>
+        <item>Laughing</item>
+        <item>Playful</item>
+        <item>Cooing</item>
+        <item>Fussy</item>
+        <item>Staring</item>
+        <item>Curious</item>
+        <item>Sad</item>
+        <item>Crying</item>
+        <item>Sleepy</item>
     </array>
 
 </resources>

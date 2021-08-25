@@ -30,12 +30,13 @@
 
     <ScrollView
         android:id="@+id/signUpScrollView"
-        android:layout_width="410dp"
+        android:layout_width="0dp"
         android:layout_height="438dp"
         android:paddingStart="20dp"
         android:paddingTop="15dp"
         android:paddingEnd="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signUpTextView">
 
