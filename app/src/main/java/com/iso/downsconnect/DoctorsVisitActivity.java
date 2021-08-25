@@ -91,8 +91,11 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
         else{
             realMins = String.valueOf(minute);
         }
-        if(hour >= 12){
+        if(hour > 12){
             hour = hour - 12;
+            currentTime.setText("Today " + String.valueOf(hour) + ":" + realMins + "PM");
+        }
+        else if(hour == 12){
             currentTime.setText("Today " + String.valueOf(hour) + ":" + realMins + "PM");
         }
         else{

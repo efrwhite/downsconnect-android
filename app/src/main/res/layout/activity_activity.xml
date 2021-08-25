@@ -12,6 +12,8 @@
         android:layout_height="100dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/rounded_box"
+        android:gravity="left"
+        android:inputType="textMultiLine|text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/notesText" />
