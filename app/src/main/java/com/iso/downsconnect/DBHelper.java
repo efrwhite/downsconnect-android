@@ -19,6 +19,7 @@ import com.iso.downsconnect.objects.Mood;
 import com.iso.downsconnect.objects.Provider;
 import com.iso.downsconnect.objects.Sleep;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class DBHelper extends SQLiteOpenHelper {
@@ -28,7 +29,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String[] COLUMN_1 = {"AccountID","FirstName", "LastName", "Username", "Password", "Phone"};
     private static final String[] COLUMN_2 = {"ChildID", "FirstName", "LastName", "Gender", "BloodType", "DueDate", "Birthday", "Allergies", "Medications"};
     private static final String[] COLUMN_3 = {"FeedID", "ChildID", "Amount", "Substance", "Notes", "FoodUnit" , "EntryTime", "Iron", "Vitamin", "Other"};
-    private static final String[] COLUMN_4 = {"MoodID", "ChildID", "MoodType", "Time", "Notes", "EntryTime"};
+    private static final String[] COLUMN_4 = {"MoodID", "ChildID", "MoodType", "Time", "Notes", "Units"};
     private static final String[] COLUMN_5 = {"SleepID", "ChildID", "SleepTime", "Duration", "Snoring" ,"Medication", "Supplements", "CPAP", "Other", "Study", "Unit", "Notes"};
     private static final String[] COLUMN_6 = {"EntryID", "EntryText", "EntryTime", "ChildID"};
     private static final String[] COLUMN_7 = {"MedicalID", "ChildID", "Height", "Weight", "HeadSize", "DoctorsVisit", "Temperature", "Provider", "VisitNum", "ProviderType"};
@@ -77,7 +78,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 "MoodType TEXT, " +
                 "Time TEXT, " +
                 "Notes TEXT, " +
-                "EntryTime INTEGER);");
+                "Units TEXT);");
         db.execSQL("CREATE TABLE Sleep(" +
                 "SleepID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
                 "ChildID INTEGER, " +
@@ -238,7 +239,7 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(COLUMN_4[2], mood.getMoodType());
         values.put(COLUMN_4[3], mood.getTime());
         values.put(COLUMN_4[4], mood.getNotes());
-        values.put(COLUMN_4[5], mood.getEntryTime());
+        values.put(COLUMN_4[5], mood.getUnits());
         SQLiteDatabase db = this.getWritableDatabase();
         db.insert(TABLE_NAMES[3], null, values);
         db.close();
@@ -726,6 +727,27 @@ public class DBHelper extends SQLiteOpenHelper {
          }
          c.close();
          return activities;
+    }
+
+    public ArrayList<Mood> getAllMoods() {
+        String query = "SELECT * FROM Mood;";
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor c = db.rawQuery(query, null);
+        ArrayList<Mood> moods = new ArrayList<>();
+
+        int x = 0;
+        while (c.moveToNext()) {
+            Mood mood = new Mood();
+            mood.setMoodID(c.getInt(0));
+            mood.setChildID(c.getInt(1));
+            mood.setMoodType(c.getString(2));
+            mood.setTime(c.getString(3));
+            mood.setNotes(c.getString(4));
+            mood.setUnits(c.getString(5));
+            moods.add(mood);
+        }
+        c.close();
+        return moods;
     }
 
     public boolean updateMilestone(Milestone milestone){

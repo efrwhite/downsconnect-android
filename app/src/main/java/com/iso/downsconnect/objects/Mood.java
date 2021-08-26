@@ -1,9 +1,8 @@
 package com.iso.downsconnect.objects;
 
 public class Mood {
-    private int moodID;
-    private long entryTime;
-    private String MoodType, time, notes;
+    private int moodID, childID;
+    private String MoodType, time, notes, units;
 
     public String getMoodType() {
         return MoodType;
@@ -37,11 +36,19 @@ public class Mood {
         this.moodID = moodID;
     }
 
-    public long getEntryTime() {
-        return entryTime;
+    public String getUnits() {
+        return units;
     }
 
-    public void setEntryTime(long entryTime) {
-        this.entryTime = entryTime;
+    public void setUnits(String units) {
+        this.units = units;
+    }
+
+    public int getChildID() {
+        return childID;
+    }
+
+    public void setChildID(int childID) {
+        this.childID = childID;
     }
 }

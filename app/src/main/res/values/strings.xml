@@ -289,6 +289,7 @@
     </array>
     <array name="providers">
         <item>Select</item>
+        <item>Pediatrician</item>
         <item>OT</item>
         <item>PT</item>
         <item>Speech</item>

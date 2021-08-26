@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 
-def keystorePropertiesFile = rootProject.file("C:\\AndroidValuables\\321Connect\\keystore.properties.txt")
+def keystorePropertiesFile = file("C:\\AndroidValuables\\321Connect\\keystore.properties.txt")
+def keystoreFile = file("C:\\AndroidValuables\\321Connect\\321key.jks")
 def keystoreProperties = new Properties()
 if (keystorePropertiesFile.exists()) {
     keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
@@ -11,7 +12,7 @@ android {
         release {
             keyAlias keystoreProperties['keyAlias']
             keyPassword keystoreProperties['keyPassword']
-            storeFile file(keystoreProperties['storeFile'])
+            storeFile = keystoreFile
             storePassword keystoreProperties['storePassword']
         }
     }
