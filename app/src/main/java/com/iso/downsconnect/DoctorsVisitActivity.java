@@ -65,6 +65,8 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
                 }
         medicalInfo.setChildID(childID);
 
+        //open panel for pediatrican like the sleep panel
+
 
         provider = findViewById(R.id.p_nameSpinner);
         providerType = findViewById(R.id.providerSpinner);
@@ -118,8 +120,6 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
         }
 
         loadSpinnerData();
-
-
 
 
         doctorDatePicker.setOnClickListener(new View.OnClickListener() {

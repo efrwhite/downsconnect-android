@@ -47,7 +47,7 @@
         app:layout_constraintTop_toBottomOf="@+id/moodView" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName3"
+        android:id="@+id/moodNotes"
         android:layout_width="0dp"
         android:layout_height="94dp"
         android:layout_marginStart="16dp"
@@ -79,10 +79,10 @@
         android:layout_marginTop="32dp"
         android:text="@string/mood"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName3" />
+        app:layout_constraintTop_toBottomOf="@+id/moodNotes" />
 
     <Spinner
-        android:id="@+id/spinner"
+        android:id="@+id/moodSpinner"
         android:layout_width="0dp"
         android:layout_height="34dp"
         android:layout_marginStart="16dp"
@@ -103,10 +103,10 @@
         android:layout_marginTop="24dp"
         android:text="@string/duration"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner" />
+        app:layout_constraintTop_toBottomOf="@+id/moodSpinner" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName4"
+        android:id="@+id/durationTimeText"
         android:layout_width="76dp"
         android:layout_height="35dp"
         android:layout_marginStart="16dp"
@@ -121,18 +121,18 @@
         app:layout_constraintTop_toBottomOf="@+id/textView37" />
 
     <Spinner
-        android:id="@+id/spinner2"
+        android:id="@+id/moodUnits"
         android:layout_width="56dp"
         android:layout_height="35dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/rounded_box"
         android:entries="@array/sleep_time"
-        app:layout_constraintStart_toEndOf="@+id/editTextTextPersonName4"
+        app:layout_constraintStart_toEndOf="@+id/durationTimeText"
         app:layout_constraintTop_toBottomOf="@+id/textView37" />
 
     <Button
-        android:id="@+id/button7"
+        android:id="@+id/moodSave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
