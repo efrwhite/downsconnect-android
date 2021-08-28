@@ -7,11 +7,11 @@
     <string name="resources">Resources</string>
     <string name="medical">Medical</string>
     <string name="message">Message</string>
-    <string name="milestone">Milestone</string>
+    <string name="milestone">Development</string>
     <string name="sign_in_out">Sign in/out</string>
     <string name="photo">Photo</string>
     <string name="dairy">Journal</string>
-    <string name="more">More</string>
+    <string name="more">Photo</string>
     <string name="measured_height">Measured Height</string>
     <string name="measured_weight">Measured Weight</string>
     <string name="head_size">Head Size</string>
@@ -185,11 +185,16 @@
     <string name="take_pic">Take Picture</string>
     <string name="choose_pic">Choose a Picture</string>
     <string name="current_record">Current Record</string>
-    <string name="AAP_guidelines"><a href="https://www.healthychildren.org/English/health-issues/conditions/developmental-disabilities/Pages/Children-with-Down-Syndrome-Health-Care-Information-for-Families.aspx">AAP Guidelines for Down\'s Syndrome</a></string>
+    <string name="AAP_guidelines">AAP Guidelines for Down\'s Syndrome</string>
     <string name="fluid_ate">Fluid Ate</string>
     <string name="fluid">Fluid</string>
     <string name="title">Title</string>
     <string name="msg">Message:</string>
+    <string name="NDSS">National Down Syndrome Society</string>
+    <string name="NDSC">National Down Syndrome Congress</string>
+    <string name="DSDN">Down Syndrome Diagnosis Network</string>
+
+
     <array name="gender">
         <item>Select</item>
         <item>Male</item>
