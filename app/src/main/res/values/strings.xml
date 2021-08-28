@@ -16,7 +16,7 @@
     <string name="measured_weight">Measured Weight</string>
     <string name="head_size">Head Size</string>
     <string name="health">Health</string>
-    <string name="vaccine">Vaccine</string>
+    <string name="vaccine">Vaccinations</string>
     <string name="dosage">Dosage</string>
     <string name="doctor_s_visit">Doctor\'s Visit</string>
     <string name="temperature">Temperature</string>

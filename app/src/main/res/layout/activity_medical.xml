@@ -62,16 +62,6 @@
 
 
             <TextView
-                android:id="@+id/medicationsText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:text="@string/medications2"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/divider" />
-
-            <TextView
                 android:id="@+id/allergiesText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -105,9 +95,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:background="#C3FFCA"
-                android:text="@string/occupational_therapy"
                 android:paddingStart="7dp"
                 android:paddingEnd="7dp"
+                android:text="@string/occupational_therapy"
                 app:layout_constraintStart_toStartOf="@+id/doctorVisitButton"
                 app:layout_constraintTop_toBottomOf="@+id/doctorVisitButton" />
 
@@ -117,9 +107,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:background="#BAF3F7"
-                android:text="@string/physical_therapy"
                 android:paddingStart="7dp"
                 android:paddingEnd="7dp"
+                android:text="@string/physical_therapy"
                 app:layout_constraintBaseline_toBaselineOf="@+id/doctorVisitButton"
                 app:layout_constraintStart_toEndOf="@+id/doctorVisitButton" />
 
@@ -129,9 +119,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:background="#FFD5EA"
-                android:text="@string/speech"
                 android:paddingStart="7dp"
                 android:paddingEnd="7dp"
+                android:text="@string/speech"
                 app:layout_constraintStart_toStartOf="@+id/occupationalTherapyButton"
                 app:layout_constraintTop_toBottomOf="@+id/occupationalTherapyButton" />
 
@@ -141,9 +131,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:background="#97B8F9"
-                android:text="@string/hearing"
                 android:paddingStart="7dp"
                 android:paddingEnd="7dp"
+                android:text="@string/hearing"
                 app:layout_constraintBaseline_toBaselineOf="@+id/speechButton"
                 app:layout_constraintStart_toEndOf="@+id/speechButton" />
 
@@ -153,9 +143,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:background="#FFBEBE"
-                android:text="@string/dental"
                 android:paddingStart="7dp"
                 android:paddingEnd="7dp"
+                android:text="@string/dental"
                 app:layout_constraintBaseline_toBaselineOf="@+id/hearingButton"
                 app:layout_constraintStart_toEndOf="@+id/hearingButton" />
 
@@ -165,9 +155,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:background="#BAF3F7"
-                android:text="@string/cardio"
                 android:paddingStart="7dp"
                 android:paddingEnd="7dp"
+                android:text="@string/cardio"
                 app:layout_constraintStart_toStartOf="@+id/speechButton"
                 app:layout_constraintTop_toBottomOf="@+id/speechButton" />
 
@@ -177,9 +167,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:background="#EFC7FC"
-                android:text="@string/ophthamology"
                 android:paddingStart="7dp"
                 android:paddingEnd="7dp"
+                android:text="@string/ophthamology"
                 app:layout_constraintBaseline_toBaselineOf="@+id/occupationalTherapyButton"
                 app:layout_constraintStart_toStartOf="@+id/guideline2" />
 
@@ -214,19 +204,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:text="@string/additional_information"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@+id/allergiesText"
                 app:layout_constraintTop_toBottomOf="@+id/allergiesText" />
-
-            <TextView
-                android:id="@+id/medicationsListTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:text="@string/list_of_medications"
-                android:textStyle="bold"
-                app:layout_constraintBaseline_toBaselineOf="@+id/medicationsText"
-                app:layout_constraintStart_toEndOf="@+id/medicationsText" />
 
             <TextView
                 android:id="@+id/allergyListTextView"
@@ -305,11 +286,27 @@
                 android:id="@+id/vaccineButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
                 android:background="#F1CC96"
+                android:paddingStart="7dp"
+                android:paddingEnd="7dp"
                 android:text="@string/vaccine"
-                app:layout_constraintStart_toStartOf="@+id/medicationsText"
-                app:layout_constraintTop_toBottomOf="@+id/medicationsText" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/height_button" />
+
+            <Button
+                android:id="@+id/medicationButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:background="#97B8F9"
+                android:paddingStart="7dp"
+                android:paddingEnd="7dp"
+                android:text="@string/medications"
+                app:layout_constraintStart_toEndOf="@+id/vaccineButton"
+                app:layout_constraintTop_toBottomOf="@+id/weight_button" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
