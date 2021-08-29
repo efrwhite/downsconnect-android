@@ -48,7 +48,7 @@
         app:layout_constraintTop_toBottomOf="@+id/resourcesView" />
 
     <TextView
-        android:id="@+id/textView33"
+        android:id="@+id/ndssText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -59,23 +59,23 @@
         app:layout_constraintTop_toBottomOf="@+id/nationalSupportText" />
 
     <TextView
-        android:id="@+id/textView39"
+        android:id="@+id/ndscText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="@string/NDSC"
         android:textColor="#0645AD"
-        app:layout_constraintStart_toStartOf="@+id/textView33"
-        app:layout_constraintTop_toBottomOf="@+id/textView33" />
+        app:layout_constraintStart_toStartOf="@+id/ndssText"
+        app:layout_constraintTop_toBottomOf="@+id/ndssText" />
 
     <TextView
-        android:id="@+id/textView40"
+        android:id="@+id/dsdnText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="@string/DSDN"
         android:textColor="#0645AD"
-        app:layout_constraintStart_toStartOf="@+id/textView39"
-        app:layout_constraintTop_toBottomOf="@+id/textView39" />
+        app:layout_constraintStart_toStartOf="@+id/ndscText"
+        app:layout_constraintTop_toBottomOf="@+id/ndscText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
