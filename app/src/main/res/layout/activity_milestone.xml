@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -21,153 +20,164 @@
         android:layout_height="wrap_content"
         android:text="@string/milestone"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/neckSafetyView"
-        app:layout_constraintEnd_toEndOf="@+id/neckSafetyView"
-        app:layout_constraintStart_toStartOf="@+id/neckSafetyView"
-        app:layout_constraintTop_toTopOf="@+id/neckSafetyView" />
+        tools:layout_editor_absoluteX="154dp"
+        tools:layout_editor_absoluteY="16dp" />
 
     <Button
         android:id="@+id/backButton"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginStart="8dp"
         android:background="@drawable/left_arrow"
-        app:layout_constraintBottom_toBottomOf="@+id/neckSafetyView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="3dp" />
 
     <TextView
-        android:id="@+id/rolledOverText"
+        android:id="@+id/rollOverText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="32dp"
         android:text="@string/child_first_rolled_over"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/neckSafetyView" />
+        tools:layout_editor_absoluteX="19dp"
+        tools:layout_editor_absoluteY="110dp" />
 
     <EditText
         android:id="@+id/rolledDatePicker"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_marginEnd="24dp"
+        android:layout_width="133dp"
+        android:layout_height="21dp"
         android:background="@drawable/rounded_box"
         android:focusable="false"
         android:hint="@string/enter_date"
         android:paddingStart="7dp"
         android:textSize="14sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/rolledOverText"
-        app:layout_constraintEnd_toStartOf="@+id/calcRolledOverAge"
-        app:layout_constraintStart_toStartOf="@+id/guideline14" />
+        app:layout_constraintBottom_toBottomOf="@+id/rollOverText"
+        app:layout_constraintTop_toTopOf="@+id/rollOverText"
+        app:layout_constraintVertical_bias="1.0"
+        tools:layout_editor_absoluteX="145dp" />
 
     <TextView
         android:id="@+id/calcRolledOverAge"
         android:layout_width="40dp"
         android:layout_height="22dp"
-        android:layout_marginEnd="8dp"
         android:text="@string/age"
         android:textSize="10sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/rolledDatePicker"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintBottom_toBottomOf="@+id/rolledDatePicker"
+        app:layout_constraintTop_toTopOf="@+id/rolledDatePicker"
+        tools:layout_editor_absoluteX="302dp" />
 
     <TextView
         android:id="@+id/sittingUpText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
         android:text="@string/child_first_sitting_up"
-        app:layout_constraintStart_toStartOf="@+id/rolledOverText"
-        app:layout_constraintTop_toBottomOf="@+id/rolledDatePicker" />
-
-    <TextView
-        android:id="@+id/firstStandingText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="@string/child_first_standing"
-        app:layout_constraintStart_toStartOf="@+id/sittingUpText"
-        app:layout_constraintTop_toBottomOf="@+id/sittingDatePicker" />
-
-    <TextView
-        android:id="@+id/firstWalkingText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="@string/child_first_walking"
-        app:layout_constraintStart_toStartOf="@+id/firstStandingText"
-        app:layout_constraintTop_toBottomOf="@+id/standingDatePicker" />
+        app:layout_constraintStart_toStartOf="@+id/rollOverText"
+        tools:layout_editor_absoluteY="155dp" />
 
     <EditText
         android:id="@+id/sittingDatePicker"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_marginEnd="24dp"
+        android:layout_width="135dp"
+        android:layout_height="19dp"
         android:background="@drawable/rounded_box"
         android:focusable="false"
         android:hint="@string/enter_date"
         android:paddingStart="7dp"
         android:textSize="14sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/sittingUpText"
-        app:layout_constraintEnd_toStartOf="@+id/calcSittingAge"
-        app:layout_constraintStart_toStartOf="@+id/guideline14" />
-
-    <EditText
-        android:id="@+id/standingDatePicker"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_marginEnd="24dp"
-        android:background="@drawable/rounded_box"
-        android:focusable="false"
-        android:hint="@string/enter_date"
-        android:paddingStart="7dp"
-        android:textSize="14sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/firstStandingText"
-        app:layout_constraintEnd_toStartOf="@+id/calcStandingAge"
-        app:layout_constraintStart_toStartOf="@+id/guideline14" />
-
-    <EditText
-        android:id="@+id/walkingDatePicker"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_marginEnd="24dp"
-        android:background="@drawable/rounded_box"
-        android:focusable="false"
-        android:hint="@string/enter_date"
-        android:paddingStart="7dp"
-        android:textSize="14sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/firstWalkingText"
-        app:layout_constraintEnd_toStartOf="@+id/calcWalkingAge"
-        app:layout_constraintStart_toStartOf="@+id/guideline14" />
+        app:layout_constraintBottom_toBottomOf="@+id/sittingUpText"
+        app:layout_constraintTop_toTopOf="@+id/sittingUpText"
+        tools:layout_editor_absoluteX="145dp" />
 
     <TextView
         android:id="@+id/calcSittingAge"
         android:layout_width="42dp"
         android:layout_height="24dp"
-        android:layout_marginEnd="8dp"
         android:text="@string/age"
         android:textSize="10sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/sittingDatePicker"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintBottom_toBottomOf="@+id/sittingDatePicker"
+        app:layout_constraintTop_toTopOf="@+id/sittingDatePicker"
+        tools:layout_editor_absoluteX="300dp" />
+
+    <TextView
+        android:id="@+id/crawlText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/child_first_crawl"
+        tools:layout_editor_absoluteX="19dp"
+        tools:layout_editor_absoluteY="191dp" />
+
+    <EditText
+        android:id="@+id/crawlDatePicker"
+        android:layout_width="111dp"
+        android:layout_height="26dp"
+        android:ems="10"
+        android:hint="@string/enter_date"
+        android:inputType="date"
+        android:textSize="14sp"
+        tools:layout_editor_absoluteX="178dp"
+        tools:layout_editor_absoluteY="193dp" />
+
+    <TextView
+        android:id="@+id/calcCrawlAge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/age"
+        tools:layout_editor_absoluteX="310dp"
+        tools:layout_editor_absoluteY="193dp" />
+
+    <TextView
+        android:id="@+id/firstStandingText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/child_first_standing"
+        tools:layout_editor_absoluteX="19dp"
+        tools:layout_editor_absoluteY="226dp" />
+
+    <EditText
+        android:id="@+id/standingDatePicker"
+        android:layout_width="117dp"
+        android:layout_height="24dp"
+        android:background="@drawable/rounded_box"
+        android:focusable="false"
+        android:hint="@string/enter_date"
+        android:paddingStart="7dp"
+        android:textSize="14sp"
+        tools:layout_editor_absoluteX="193dp"
+        tools:layout_editor_absoluteY="234dp" />
 
     <TextView
         android:id="@+id/calcStandingAge"
         android:layout_width="41dp"
         android:layout_height="22dp"
-        android:layout_marginEnd="8dp"
         android:text="@string/age"
         android:textSize="10sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/standingDatePicker"
-        app:layout_constraintEnd_toEndOf="parent" />
+        tools:layout_editor_absoluteX="319dp"
+        tools:layout_editor_absoluteY="234dp" />
+
+    <TextView
+        android:id="@+id/firstWalkingText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/child_first_walking_hold_yes"
+        tools:layout_editor_absoluteX="13dp"
+        tools:layout_editor_absoluteY="273dp" />
+
+    <EditText
+        android:id="@+id/walkingDatePicker"
+        android:layout_width="136dp"
+        android:layout_height="40dp"
+        android:background="@drawable/rounded_box"
+        android:focusable="false"
+        android:hint="@string/enter_date"
+        android:paddingStart="7dp"
+        android:textSize="14sp"
+        tools:layout_editor_absoluteX="183dp"
+        tools:layout_editor_absoluteY="273dp" />
 
     <TextView
         android:id="@+id/calcWalkingAge"
         android:layout_width="41dp"
         android:layout_height="30dp"
-        android:layout_marginEnd="4dp"
         android:text="@string/age"
         android:textSize="10sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/walkingDatePicker"
-        app:layout_constraintEnd_toEndOf="parent" />
+        tools:layout_editor_absoluteX="310dp"
+        tools:layout_editor_absoluteY="283dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline14"
@@ -180,10 +190,30 @@
         android:id="@+id/saveButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
         android:text="@string/save"
-        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="138dp"
+        tools:layout_editor_absoluteY="576dp" />
+
+    <ScrollView
+        android:layout_width="359dp"
+        android:layout_height="578dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/neckSafetyView">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/Physical"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/physical"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

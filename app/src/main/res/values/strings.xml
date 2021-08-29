@@ -106,10 +106,6 @@
     <string name="national_support_groups">National Support Groups</string>
     <string name="websites">Websites</string>
     <string name="books">Books</string>
-    <string name="child_first_rolled_over">Child first rolled over:</string>
-    <string name="child_first_sitting_up">Child first sitting up:</string>
-    <string name="child_first_standing">Child first standing:</string>
-    <string name="child_first_walking">Child first walking:</string>
     <string name="age">Age</string>
     <string name="neck_safety">Neck Safety</string>
     <string name="avoid_trampoline_use_under_the_age_of_6_and_under_close_supervision_over_6">Avoid trampoline use under the age of 6 and under close supervision over 6</string>
@@ -181,7 +177,7 @@
     <string name="zip_code">Zip Code</string>
     <string name="past_activities">Past Activities</string>
     <string name="activities">Activities</string>
-    <string name="allergy_help_text">use commas to separate mulitple entires</string>
+    <string name="allergy_help_text">use commas to separate multiple entries</string>
     <string name="take_pic">Take Picture</string>
     <string name="choose_pic">Choose a Picture</string>
     <string name="current_record">Current Record</string>
@@ -193,7 +189,36 @@
     <string name="NDSS">National Down Syndrome Society</string>
     <string name="NDSC">National Down Syndrome Congress</string>
     <string name="DSDN">Down Syndrome Diagnosis Network</string>
-
+    <string name="physical">Physical</string>
+    <string name="fine_motor">Fine Motor</string>
+    <string name="social">Social</string>
+    <string name="verbal">Verbal</string>
+    <string name="addl_dev_notes">Additional Development notes</string>
+    <string name="child_first_rolled_over">Child first rolls over</string>
+    <string name="child_first_sitting_up">Child first sits up</string>
+    <string name="child_first_crawl">Child first crawls/creeps</string>
+    <string name="child_first_standing">Child first pulls to standing</string>
+    <string name="child_first_walking_hold_yes">Child first walks holding on</string>
+    <string name="child_first_walking_hold_no">Child first walks without holding on</string>
+    <string name="child_first_jump">Child first jumps</string>
+    <string name="child_first_hold_object">Child first holds object</string>
+    <string name="child_first_hands_mouth">Child first hands to mouth</string>
+    <string name="child_first_pass_object">Child first passes object between hands</string>
+    <string name="child_first_pincer">Child first uses pincer grasp (pick up small object with thumb and pointer finger)</string>
+    <string name="child_first_cup">Child first drinks from a cup</string>
+    <string name="child_first_scribble">Child first scribbles</string>
+    <string name="child_first_self_feed">Child first feeds self with spoon</string>
+    <string name="child_first_points">Child first points</string>
+    <string name="child_first_emotion">Child first shows emotion</string>
+    <string name="child_first_affection">Child first shows affection</string>
+    <string name="child_first_interest">Child first interested and shows affection to other children</string>
+    <string name="child_first_coo">Child first coos</string>
+    <string name="child_first_babble">Child first babbles</string>
+    <string name="child_first_word">Child speaks first word</string>
+    <string name="child_first_short_sentence">Child speaks first two word sentence</string>
+    <string name="child_first_long_sentence">Child speaks first longer sentence</string>
+    <string name="child_startles">Child first startles</string>
+    <string name="child_turn_sound">Child first turns toward sound</string>
 
     <array name="gender">
         <item>Select</item>
