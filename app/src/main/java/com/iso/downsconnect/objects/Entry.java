@@ -1,7 +1,7 @@
 package com.iso.downsconnect.objects;
 
 public class Entry {
-    private int childID;
+    private int entryID, childID;
     private String entryText;
     private long entryTime;
 

@@ -4,27 +4,68 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.iso.downsconnect.objects.Entry;
+import com.iso.downsconnect.objects.Message;
 
 import java.util.Calendar;
 
 public class MessageActivity extends AppCompatActivity {
     private TextView currentTime;
+    private EditText messageText;
+    private Message message;
+    private DBHelper db;
+    private Button save;
+    private Entry entry;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message);
 
+
         final Button back = findViewById(R.id.backButton);
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         final int childID = sharedPreferences.getInt("name", 1);
 
         currentTime = findViewById(R.id.messageTime);
+        messageText = findViewById(R.id.messageEdit);
+        message = new Message();
+        message.setChildID(childID);
+        db = new DBHelper(this);
+        save = findViewById(R.id.messageSave);
+        entry = new Entry();
+
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!messageText.getText().toString().equals("")){
+                    message.setMessage(messageText.getText().toString());
+
+                    entry.setEntryText("Saved a message for " + db.getChildName(childID));
+                    entry.setEntryTime(Calendar.getInstance().getTimeInMillis());
+                    entry.setChildID(childID);
+
+                    boolean result = db.addMessage(message);
+                    Log.i("msgRes", String.valueOf(result));
+                    db.addEntry(entry);
+
+                    Toast.makeText(getApplicationContext(), "Message infomation saved", Toast.LENGTH_SHORT).show();
+
+                    Intent intent = new Intent(MessageActivity.this, ActivityContainer.class);
+                    startActivity(intent);
+
+                }
+            }
+        });
 
 
 
