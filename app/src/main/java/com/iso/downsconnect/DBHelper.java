@@ -13,7 +13,9 @@ import com.iso.downsconnect.objects.Child;
 import com.iso.downsconnect.objects.Entry;
 import com.iso.downsconnect.objects.Feed;
 import com.iso.downsconnect.objects.Image;
+import com.iso.downsconnect.objects.Journal;
 import com.iso.downsconnect.objects.MedicalInfo;
+import com.iso.downsconnect.objects.Message;
 import com.iso.downsconnect.objects.Milestone;
 import com.iso.downsconnect.objects.Mood;
 import com.iso.downsconnect.objects.Provider;
@@ -25,7 +27,7 @@ import java.util.ArrayList;
 public class DBHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "downsconnect.db";
     private static final int DATABASE_VERSION = 3;
-    private static final String[] TABLE_NAMES = {"Account", "Child", "Feed", "Mood", "Sleep", "Entry", "Medical", "Milestone", "Bathroom", "Provider", "Activity", "Image"};
+    private static final String[] TABLE_NAMES = {"Account", "Child", "Feed", "Mood", "Sleep", "Entry", "Medical", "Milestone", "Bathroom", "Provider", "Activity", "Image", "Message", "Journal"};
     private static final String[] COLUMN_1 = {"AccountID","FirstName", "LastName", "Username", "Password", "Phone"};
     private static final String[] COLUMN_2 = {"ChildID", "FirstName", "LastName", "Gender", "BloodType", "DueDate", "Birthday", "Allergies", "Medications"};
     private static final String[] COLUMN_3 = {"FeedID", "ChildID", "Amount", "Substance", "Notes", "FoodUnit" , "EntryTime", "Iron", "Vitamin", "Other"};
@@ -38,6 +40,8 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String[] COLUMN_10 = {"ProviderID", "ProviderName", "PracticeName", "Specialty", "Phone", "Fax", "Email", "Website", "Address", "State", "City", "Zip"};
     private static final String[] COLUMN_11 = {"ActivityID", "ChildID", "ActivityName", "EntryTime", "Duration", "DurationUnits" ,"Notes"};
     private static final String[] COLUMN_12 = {"ImageID", "ChildID", "Image"};
+    private static final String[] COLUMN_13 = {"MessageID", "ChildID", "Message"};
+    private static final String[] COLUMN_14 = {"JournalID", "ChildID", "Title", "Notes"};
     public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -152,6 +156,15 @@ public class DBHelper extends SQLiteOpenHelper {
                 "ImageID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
                 "ChildID INTEGER, " +
                 "Image BLOB)");
+        db.execSQL("CREATE TABLE Message(" +
+                "MessageID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
+                "ChildID INTEGER, " +
+                "Message TEXT)");
+        db.execSQL("CREATE TABLE Journal(" +
+                "JournalID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
+                "ChildID INTEGER, " +
+                "Title TEXT, " +
+                "Notes TEXT)");
     }
 
     @Override
@@ -169,6 +182,8 @@ public class DBHelper extends SQLiteOpenHelper {
             db.execSQL("DROP TABLE IF EXISTS Provider");
             db.execSQL("DROP TABLE IF EXISTS Activity");
             db.execSQL("DROP TABLE IF EXISTS Image");
+            db.execSQL("DROP TABLE IF EXISTS Message");
+            db.execSQL("DROP TABLE IF EXISTS Journal");
 
         }
     }
@@ -380,6 +395,38 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(COLUMN_12[2], image.getImage());
         SQLiteDatabase db = this.getWritableDatabase();
         long result = db.insert(TABLE_NAMES[11], null, values);
+        db.close();
+        if(result == -1){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+
+    public boolean addMessage(Message message){
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_13[1], message.getChildID());
+        values.put(COLUMN_13[2], message.getMessage());
+        SQLiteDatabase db = this.getWritableDatabase();
+        long result = db.insert(TABLE_NAMES[12], null, values);
+        db.close();
+        if(result == -1){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+
+    public boolean addJournal(Journal journal){
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_14[1], journal.getChildID());
+        values.put(COLUMN_14[2], journal.getTitle());
+        values.put(COLUMN_14[3], journal.getNotes());
+        SQLiteDatabase db = this.getWritableDatabase();
+        long result = db.insert(TABLE_NAMES[13], null, values);
+        db.close();
         db.close();
         if(result == -1){
             return false;

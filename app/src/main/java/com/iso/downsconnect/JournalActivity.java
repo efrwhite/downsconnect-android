@@ -4,16 +4,27 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.iso.downsconnect.objects.Entry;
+import com.iso.downsconnect.objects.Journal;
 
 import java.util.Calendar;
 
 public class JournalActivity extends AppCompatActivity {
     private TextView currentTime;
+    private EditText title, notes;
+    private Button save;
+    private Journal journal;
+    private Entry entry;
+    private DBHelper db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +36,37 @@ public class JournalActivity extends AppCompatActivity {
         final int childID = sharedPreferences.getInt("name", 1);
 
         currentTime = findViewById(R.id.diaryTime);
+        title = findViewById(R.id.journalTitle);
+        notes = findViewById(R.id.journalNotes);
+        save = findViewById(R.id.journalButton);
+        journal = new Journal();
+        entry = new Entry();
+        db = new DBHelper(this);
+
+        entry.setChildID(childID);
+        journal.setChildID(childID);
+
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!title.getText().toString().equals("") && !notes.getText().toString().equals("")){
+                    journal.setTitle(title.getText().toString());
+                    journal.setNotes(notes.getText().toString());
+
+                    entry.setEntryText("Saved a journal entry for " + db.getChildName(childID));
+                    entry.setEntryTime(Calendar.getInstance().getTimeInMillis());
+
+                    boolean result = db.addJournal(journal);
+                    Log.i("journRes", String.valueOf(result));
+                    db.addEntry(entry);
+
+                    Toast.makeText(getApplicationContext(), "Journal infomation saved", Toast.LENGTH_SHORT).show();
+
+                    Intent intent = new Intent(JournalActivity.this, ActivityContainer.class);
+                    startActivity(intent);
+                }
+            }
+        });
 
         Calendar calendar = Calendar.getInstance();
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
