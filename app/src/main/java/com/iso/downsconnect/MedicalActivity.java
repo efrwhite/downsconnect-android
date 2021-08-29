@@ -2,6 +2,7 @@ package com.iso.downsconnect;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
@@ -22,7 +23,7 @@ public class MedicalActivity extends AppCompatActivity{
     private MedicalInfo medicalInfo = new MedicalInfo();
     private Button back, save, doctorVisitBtn, OTBtn, PTBtn, opthBtn, speech, hearing, dental, cardio, neck, height, weight, circumference, vaccine;
     private DBHelper dbHelper;
-    private TextView allergyText;
+    private TextView allergyText, guidelines;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +51,7 @@ public class MedicalActivity extends AppCompatActivity{
         circumference = findViewById(R.id.circumference_button);
         allergyText = findViewById(R.id.allergyListTextView);
         vaccine = findViewById(R.id.vaccineButton);
+        guidelines = findViewById(R.id.guidelinesHyperlink);
 
         String allergies = dbHelper.getAllergies(childID);
         if(allergies != null && !allergies.equals("")) {
@@ -173,6 +175,17 @@ public class MedicalActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MedicalActivity.this, VaccineActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        guidelines.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_VIEW);
+                intent.addCategory(Intent.CATEGORY_BROWSABLE);
+                intent.setData(Uri.parse("https://pediatrics.aappublications.org/content/128/2/393"));
                 startActivity(intent);
             }
         });
