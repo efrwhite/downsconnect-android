@@ -101,6 +101,7 @@ public class ActivityActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ActivityActivity.this, ActivityListingActivity.class);
+                intent.putExtra("type", 0);
                 startActivity(intent);
             }
         });
@@ -127,13 +128,15 @@ public class ActivityActivity extends AppCompatActivity {
                     activity.setEntryTime(cal.getTimeInMillis());
                     entry.setEntryTime(cal.getTimeInMillis());
                     entry.setEntryText(activity.getChildActivity());
+                    entry.setEntryType("Activity");
                     if(!notes.getText().toString().equals("")){
                         activity.setNotes(notes.getText().toString());
                     }
                     else{
                         activity.setNotes("");
                     }
-                    boolean result = helper.addActivity(activity);
+                    long result = helper.addActivity(activity);
+                    entry.setForeignID(result);
                     helper.addEntry(entry);
                     Intent intent = new Intent(ActivityActivity.this, ActivityContainer.class);
                     startActivity(intent);

@@ -2,8 +2,9 @@ package com.iso.downsconnect.objects;
 
 public class Entry {
     private int entryID, childID;
-    private String entryText;
-    private long entryTime;
+    private String entryText, entryType;
+    private long entryTime, foreignID;
+
 
     public Entry(){
 
@@ -32,5 +33,29 @@ public class Entry {
 
     public void setEntryTime(long entryTime) {
         this.entryTime = entryTime;
+    }
+
+    public long getForeignID() {
+        return foreignID;
+    }
+
+    public void setForeignID(long foreignID) {
+        this.foreignID = foreignID;
+    }
+
+    public int getEntryID() {
+        return entryID;
+    }
+
+    public void setEntryID(int entryID) {
+        this.entryID = entryID;
+    }
+
+    public String getEntryType() {
+        return entryType;
+    }
+
+    public void setEntryType(String entryType) {
+        this.entryType = entryType;
     }
 }
