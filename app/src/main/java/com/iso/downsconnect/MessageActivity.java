@@ -53,9 +53,11 @@ public class MessageActivity extends AppCompatActivity {
                     entry.setEntryText("Saved a message for " + db.getChildName(childID));
                     entry.setEntryTime(Calendar.getInstance().getTimeInMillis());
                     entry.setChildID(childID);
+                    entry.setEntryType("Message");
 
-                    boolean result = db.addMessage(message);
+                    long result = db.addMessage(message);
                     Log.i("msgRes", String.valueOf(result));
+                    entry.setForeignID(result);
                     db.addEntry(entry);
 
                     Toast.makeText(getApplicationContext(), "Message infomation saved", Toast.LENGTH_SHORT).show();

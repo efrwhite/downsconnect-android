@@ -21,7 +21,7 @@ import com.iso.downsconnect.objects.Mood;
 import java.util.Calendar;
 
 public class MoodActivity extends AppCompatActivity {
-    private TextView currentTime;
+    private TextView currentTime, history;
     private EditText notes, time;
     private Spinner moodType, units;
     private Button save;
@@ -51,6 +51,7 @@ public class MoodActivity extends AppCompatActivity {
         units = findViewById(R.id.moodUnits);
         save = findViewById(R.id.moodSave);
         time = findViewById(R.id.durationTimeText);
+        history = findViewById(R.id.messageHistory);
 
 
         Calendar calendar = Calendar.getInstance();
@@ -82,6 +83,15 @@ public class MoodActivity extends AppCompatActivity {
             }
         });
 
+        history.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MoodActivity.this, ActivityListingActivity.class);
+                intent.putExtra("type", 1);
+                startActivity(intent);
+            }
+        });
+
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -101,8 +111,10 @@ public class MoodActivity extends AppCompatActivity {
                     entry.setChildID(childID);
                     entry.setEntryTime(Calendar.getInstance().getTimeInMillis());
                     entry.setEntryText(db.getChildName(childID) + " was " + mood.getMoodType() + " for " + mood.getTime() + mood.getUnits());
+                    entry.setEntryType("Mood");
 
-                    db.addMood(mood);
+                    long id = db.addMood(mood);
+                    entry.setForeignID(id);
                     db.addEntry(entry);
 
                     Intent intent = new Intent(MoodActivity.this, ActivityContainer.class);

@@ -33,7 +33,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String[] COLUMN_3 = {"FeedID", "ChildID", "Amount", "Substance", "Notes", "FoodUnit" , "EntryTime", "Iron", "Vitamin", "Other"};
     private static final String[] COLUMN_4 = {"MoodID", "ChildID", "MoodType", "Time", "Notes", "Units"};
     private static final String[] COLUMN_5 = {"SleepID", "ChildID", "SleepTime", "Duration", "Snoring" ,"Medication", "Supplements", "CPAP", "Other", "Study", "Unit", "Notes"};
-    private static final String[] COLUMN_6 = {"EntryID", "EntryText", "EntryTime", "ChildID"};
+    private static final String[] COLUMN_6 = {"EntryID", "EntryText", "EntryTime", "ChildID", "EntryType", "ForeignID"};
     private static final String[] COLUMN_7 = {"MedicalID", "ChildID", "Height", "Weight", "HeadSize", "DoctorsVisit", "Temperature", "Provider", "VisitNum", "ProviderType"};
     private static final String[] COLUMN_8 = {"MilestoneID", "ChildID", "Rolling", "Sitting", "Standing", "Walking"};
     private static final String[] COLUMN_9 = {"BathroomID", "ChildID", "BathroomType", "TreatmentPlan", "Leak", "OpenAir", "DiaperCream", "Quantity", "PottyAccident", "DateOfLastStool", "Duration"};
@@ -100,7 +100,9 @@ public class DBHelper extends SQLiteOpenHelper {
                 "EntryID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
                 "EntryText TEXT, " +
                 "EntryTime INTEGER, " +
-                "ChildID INTEGER)");
+                "ChildID INTEGER, " +
+                "EntryType TEXT, " +
+                "ForeignID INTEGER)");
         db.execSQL("CREATE TABLE Medical(" +
                 "MedicalID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
                 "ChildID INTEGER, " +
@@ -248,7 +250,7 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
 
-    public void addMood(Mood mood){
+    public long addMood(Mood mood){
         ContentValues values = new ContentValues();
         values.put(COLUMN_4[1], mood.getMoodID());
         values.put(COLUMN_4[2], mood.getMoodType());
@@ -256,8 +258,9 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(COLUMN_4[4], mood.getNotes());
         values.put(COLUMN_4[5], mood.getUnits());
         SQLiteDatabase db = this.getWritableDatabase();
-        db.insert(TABLE_NAMES[3], null, values);
+        long result = db.insert(TABLE_NAMES[3], null, values);
         db.close();
+        return result;
     }
 
     public void addSleep(Sleep sleep){
@@ -283,6 +286,8 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(COLUMN_6[1], entry.getEntryText());
         values.put(COLUMN_6[2], entry.getEntryTime());
         values.put(COLUMN_6[3], entry.getChildID());
+        values.put(COLUMN_6[4], entry.getEntryType());
+        values.put(COLUMN_6[5], entry.getForeignID());
         SQLiteDatabase db = this.getWritableDatabase();
         long result = db.insert(TABLE_NAMES[5], null, values);
         db.close();
@@ -370,7 +375,7 @@ public class DBHelper extends SQLiteOpenHelper {
         }
     }
 
-    public boolean addActivity(Activity activity){
+    public long addActivity(Activity activity){
         ContentValues values = new ContentValues();
         values.put(COLUMN_11[1], activity.getChildID());
         values.put(COLUMN_11[2], activity.getChildActivity());
@@ -381,12 +386,7 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         long result = db.insert(TABLE_NAMES[10], null, values);
         db.close();
-        if(result == -1){
-            return false;
-        }
-        else{
-            return true;
-        }
+        return result;
     }
 
     public boolean addImage(Image image){
@@ -404,19 +404,14 @@ public class DBHelper extends SQLiteOpenHelper {
         }
     }
 
-    public boolean addMessage(Message message){
+    public long addMessage(Message message){
         ContentValues values = new ContentValues();
         values.put(COLUMN_13[1], message.getChildID());
         values.put(COLUMN_13[2], message.getMessage());
         SQLiteDatabase db = this.getWritableDatabase();
         long result = db.insert(TABLE_NAMES[12], null, values);
         db.close();
-        if(result == -1){
-            return false;
-        }
-        else{
-            return true;
-        }
+        return result;
     }
 
     public boolean addJournal(Journal journal){
@@ -614,6 +609,47 @@ public class DBHelper extends SQLiteOpenHelper {
         return images;
     }
 
+    public Message getMessage(int id){
+        String query = "SELECT * FROM Message WHERE MessageID = '" + id + "';";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor c = db.rawQuery(query, null);
+        Message message = new Message();
+        if(c.moveToFirst()){
+            c.moveToFirst();
+            message.setMessageID(c.getInt(0));
+            message.setChildID(c.getInt(1));
+            message.setMessage(c.getString(2));
+        }
+        else{
+            c.close();
+            message = null;
+        }
+        db.close();
+        return message;
+    }
+
+    public Mood getMood(int id){
+        String query = "SELECT * FROM Message WHERE MoodID = '" + id + "';";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor c = db.rawQuery(query, null);
+        Mood mood = new Mood();
+        if(c.moveToFirst()) {
+            c.moveToFirst();
+            mood.setMoodID(c.getInt(0));
+            mood.setChildID(c.getInt(1));
+            mood.setMoodType(c.getString(2));
+            mood.setTime(c.getString(3));
+            mood.setNotes(c.getString(4));
+            mood.setUnits(c.getString(5));
+        }
+            else{
+                c.close();
+                mood = null;
+            }
+            db.close();
+            return mood;
+        }
+
    public AccountHolder getAccount(String user, String pass){
 //        String query = "SELECT * FROM AccountHolders WHERE Username = '" + user +
 //                "' AND Password = '" + pass + "';";
@@ -710,6 +746,41 @@ public class DBHelper extends SQLiteOpenHelper {
         return entries;
     }
 
+    public <T> ArrayList<T> getSpecificEntries(String type){
+        String query = "SELECT * FROM Entry WHERE EntryType = '" + type + "';";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor c = db.rawQuery(query, null);
+        ArrayList<T> items = new ArrayList<>();
+        switch(type){
+            case "Message":
+                ArrayList<Message> messages = new ArrayList<>();
+                while(c.moveToNext()){
+                    items.add((T) getMessage(c.getInt(0)));
+                }
+                return items;
+        }
+        return null;
+    }
+
+    public ArrayList<Entry> getListing(String type){
+        String query = "SELECT * FROM Entry WHERE EntryType = '" + type + "';";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor c = db.rawQuery(query, null);
+        ArrayList<Entry> entries = new ArrayList<>();
+        while(c.moveToNext()){
+            Entry entry = new Entry();
+            entry.setEntryID(c.getInt(0));
+            entry.setEntryText(c.getString(1));
+            entry.setEntryTime(c.getLong(2));
+            entry.setChildID(c.getInt(3));
+            entry.setEntryType(c.getString(4));
+            entry.setForeignID(c.getInt(5));
+            entries.add(entry);
+        }
+        c.close();
+        return entries;
+    }
+
     public ArrayList<Child> getAllChildren(){
         String query = "SELECT * FROM Child;";
         SQLiteDatabase db = getWritableDatabase();
@@ -795,6 +866,41 @@ public class DBHelper extends SQLiteOpenHelper {
         }
         c.close();
         return moods;
+    }
+
+    public ArrayList<Message> getAllMessages(){
+        String query = "SELECT * FROM Message;";
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor c = db.rawQuery(query, null);
+        ArrayList<Message> messages = new ArrayList<>();
+
+        while(c.moveToNext()){
+            Message message = new Message();
+            message.setMessageID(c.getInt(0));
+            message.setChildID(c.getInt(1));
+            message.setMessage(c.getString(2));
+            messages.add(message);
+        }
+        c.close();
+        return messages;
+    }
+
+    public ArrayList<Journal> getAllJournals(){
+        String query = "SELECT * FROM Journal;";
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor c = db.rawQuery(query, null);
+        ArrayList<Journal> journals = new ArrayList<>();
+
+        while(c.moveToNext()){
+            Journal journal = new Journal();
+            journal.setJournalID(c.getInt(0));
+            journal.setChildID(c.getInt(1));
+            journal.setTitle(c.getString(2));
+            journal.setNotes(c.getString(3));
+            journals.add(journal);
+        }
+        c.close();
+        return journals;
     }
 
     public boolean updateMilestone(Milestone milestone){
