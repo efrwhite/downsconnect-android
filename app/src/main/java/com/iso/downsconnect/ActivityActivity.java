@@ -100,7 +100,7 @@ public class ActivityActivity extends AppCompatActivity {
         history.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ActivityActivity.this, ActivityListingActivity.class);
+                Intent intent = new Intent(ActivityActivity.this, ListingActivity.class);
                 intent.putExtra("type", 0);
                 startActivity(intent);
             }

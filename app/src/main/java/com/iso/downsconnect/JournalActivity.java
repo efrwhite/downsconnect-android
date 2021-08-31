@@ -19,7 +19,7 @@ import com.iso.downsconnect.objects.Journal;
 import java.util.Calendar;
 
 public class JournalActivity extends AppCompatActivity {
-    private TextView currentTime;
+    private TextView currentTime, history;
     private EditText title, notes;
     private Button save;
     private Journal journal;
@@ -39,12 +39,22 @@ public class JournalActivity extends AppCompatActivity {
         title = findViewById(R.id.journalTitle);
         notes = findViewById(R.id.journalNotes);
         save = findViewById(R.id.journalButton);
+        history = findViewById(R.id.journalHistory);
         journal = new Journal();
         entry = new Entry();
         db = new DBHelper(this);
 
         entry.setChildID(childID);
         journal.setChildID(childID);
+
+        history.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(JournalActivity.this, ListingActivity.class);
+                intent.putExtra("type", 3);
+                startActivity(intent);
+            }
+        });
 
         save.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,9 +65,11 @@ public class JournalActivity extends AppCompatActivity {
 
                     entry.setEntryText("Saved a journal entry for " + db.getChildName(childID));
                     entry.setEntryTime(Calendar.getInstance().getTimeInMillis());
+                    entry.setEntryType("Journal");
 
-                    boolean result = db.addJournal(journal);
+                    long result = db.addJournal(journal);
                     Log.i("journRes", String.valueOf(result));
+                    entry.setForeignID(result);
                     db.addEntry(entry);
 
                     Toast.makeText(getApplicationContext(), "Journal infomation saved", Toast.LENGTH_SHORT).show();

@@ -66,6 +66,7 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
         medicalInfo.setChildID(childID);
 
         //open panel for pediatrican like the sleep panel
+        //panel shouldn't open if other doctor type is selected
 
 
         provider = findViewById(R.id.p_nameSpinner);
