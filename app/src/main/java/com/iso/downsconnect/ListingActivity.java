@@ -29,7 +29,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-public class ActivityListingActivity extends AppCompatActivity {
+public class ListingActivity extends AppCompatActivity {
     private Button back;
     private DBHelper helper;
     private ArrayList<Activity> activities = new ArrayList<>();
@@ -63,17 +63,33 @@ public class ActivityListingActivity extends AppCompatActivity {
             addMoods(childID);
         }
 
+        if(type == 2){
+            addMessages(childID);
+        }
+
+        if(type == 3){
+            addJournals(childID);
+        }
+
 
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(type == 0) {
-                    Intent intent = new Intent(ActivityListingActivity.this, ActivityActivity.class);
+                    Intent intent = new Intent(ListingActivity.this, ActivityActivity.class);
                     startActivity(intent);
                 }
                 if(type == 1){
-                    Intent intent = new Intent(ActivityListingActivity.this, MoodActivity.class);
+                    Intent intent = new Intent(ListingActivity.this, MoodActivity.class);
+                    startActivity(intent);
+                }
+                if(type == 2){
+                    Intent intent = new Intent(ListingActivity.this, MessageActivity.class);
+                    startActivity(intent);
+                }
+                if(type == 3){
+                    Intent intent = new Intent(ListingActivity.this, JournalActivity.class);
                     startActivity(intent);
                 }
             }
@@ -143,9 +159,39 @@ public class ActivityListingActivity extends AppCompatActivity {
         TextView listText = findViewById(R.id.listingText);
         listText.setText("Moods");
 
-        entries = helper.getListing("Mood");
+        entries = helper.getListing("Mood", childID);
         Log.i("conut", String.valueOf(entries.size()));
 
+        buildLayout("Mood");
+    }
+
+    private void addMessages(int childID){
+        TextView title = findViewById(R.id.listingTitle);
+        title.setText("Past Messages");
+
+        TextView listText = findViewById(R.id.listingText);
+        listText.setText("Messages");
+
+        entries = helper.getListing("Message", childID);
+        Log.i("conut", String.valueOf(entries.size()));
+
+        buildLayout("Message");
+    }
+
+    private void addJournals(int childID){
+        TextView title = findViewById(R.id.listingTitle);
+        title.setText("Past Journal Entries");
+
+        TextView listText = findViewById(R.id.listingText);
+        listText.setText("Journals");
+
+        entries = helper.getListing("Journal", childID);
+        Log.i("conut", String.valueOf(entries.size()));
+
+        buildLayout("Journal");
+    }
+
+    private void buildLayout(String type) {
         for(Entry entry: entries){
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             LinearLayout.LayoutParams textParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -185,7 +231,15 @@ public class ActivityListingActivity extends AppCompatActivity {
             mainLayout.addView(horizontalLayout);
 
             TextView c_activity = new TextView(this);
-            c_activity.setText(entry.getEntryText());
+            if(type.equals("Message")){
+                c_activity.setText(helper.getMessage((int) entry.getForeignID()).getMessage());
+            }
+            else if(type.equals("Journal")){
+                c_activity.setText(helper.getJournal((int) entry.getForeignID()).getNotes());
+            }
+            else {
+                c_activity.setText(entry.getEntryText());
+            }
             c_activity.setTextSize(15);
             c_activity.setWidth(500);
             c_activity.setTextColor(Color.BLACK);

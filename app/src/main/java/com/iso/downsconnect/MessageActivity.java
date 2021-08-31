@@ -19,7 +19,7 @@ import com.iso.downsconnect.objects.Message;
 import java.util.Calendar;
 
 public class MessageActivity extends AppCompatActivity {
-    private TextView currentTime;
+    private TextView currentTime, history;
     private EditText messageText;
     private Message message;
     private DBHelper db;
@@ -38,6 +38,7 @@ public class MessageActivity extends AppCompatActivity {
 
         currentTime = findViewById(R.id.messageTime);
         messageText = findViewById(R.id.messageEdit);
+        history = findViewById(R.id.msgHistory);
         message = new Message();
         message.setChildID(childID);
         db = new DBHelper(this);
@@ -66,6 +67,15 @@ public class MessageActivity extends AppCompatActivity {
                     startActivity(intent);
 
                 }
+            }
+        });
+
+        history.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MessageActivity.this, ListingActivity.class);
+                intent.putExtra("type", 2);
+                startActivity(intent);
             }
         });
 

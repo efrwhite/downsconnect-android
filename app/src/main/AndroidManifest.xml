@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name="com.iso.downsconnect.VaccineActivity"></activity>
-        <activity android:name="com.iso.downsconnect.ActivityListingActivity" />
+        <activity android:name="com.iso.downsconnect.ListingActivity" />
         <activity android:name="com.iso.downsconnect.MedicalListingsActivity" />
         <activity android:name="com.iso.downsconnect.ProviderListingActivity" />
         <activity android:name="com.iso.downsconnect.DoctorsVisitActivity" />

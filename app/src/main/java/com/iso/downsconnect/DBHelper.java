@@ -414,7 +414,7 @@ public class DBHelper extends SQLiteOpenHelper {
         return result;
     }
 
-    public boolean addJournal(Journal journal){
+    public long addJournal(Journal journal){
         ContentValues values = new ContentValues();
         values.put(COLUMN_14[1], journal.getChildID());
         values.put(COLUMN_14[2], journal.getTitle());
@@ -423,12 +423,7 @@ public class DBHelper extends SQLiteOpenHelper {
         long result = db.insert(TABLE_NAMES[13], null, values);
         db.close();
         db.close();
-        if(result == -1){
-            return false;
-        }
-        else{
-            return true;
-        }
+        return result;
     }
 
     public Child getChild(String firstName){
@@ -628,6 +623,26 @@ public class DBHelper extends SQLiteOpenHelper {
         return message;
     }
 
+    public Journal getJournal(int id){
+        String query = "SELECT * FROM Journal WHERE JournalID = '" + id + "';";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor c = db.rawQuery(query, null);
+        Journal journal = new Journal();
+        if(c.moveToFirst()){
+            c.moveToFirst();
+            journal.setJournalID(c.getInt(0));
+            journal.setChildID(c.getInt(1));
+            journal.setTitle(c.getString(2));
+            journal.setNotes(c.getString(3));
+        }
+        else{
+            c.close();
+            journal = null;
+        }
+        db.close();
+        return journal;
+    }
+
     public Mood getMood(int id){
         String query = "SELECT * FROM Message WHERE MoodID = '" + id + "';";
         SQLiteDatabase db = this.getWritableDatabase();
@@ -762,8 +777,9 @@ public class DBHelper extends SQLiteOpenHelper {
         return null;
     }
 
-    public ArrayList<Entry> getListing(String type){
-        String query = "SELECT * FROM Entry WHERE EntryType = '" + type + "';";
+    public ArrayList<Entry> getListing(String type, int childID){
+        String query = "SELECT * FROM Entry WHERE EntryType = '" + type +
+               "' AND ChildID = '" + childID + "';";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor c = db.rawQuery(query, null);
         ArrayList<Entry> entries = new ArrayList<>();
