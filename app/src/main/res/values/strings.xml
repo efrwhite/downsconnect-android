@@ -219,6 +219,46 @@
     <string name="child_first_long_sentence">Child speaks first longer sentence</string>
     <string name="child_startles">Child first startles</string>
     <string name="child_turn_sound">Child first turns toward sound</string>
+    <string name="eye_exam">Did your child have an eye exam?</string>
+    <string name="abn_eye_exam">If the results of the eye exam were abnormal, was your child referred to ophthalmology?</string>
+    <string name="assess_appt">Assessment appointment date:</string>
+    <string name="provider_list">Provider:</string>
+    <string name="ecg">Did your child have an electrocardiogram (ECG) or did someone talk to you about their heart?</string>
+    <string name="abn_ecg">If the results of the ECG were abnormal, was your child referred to cardiology?</string>
+    <string name="nb_hearing">Did your child complete a newborn hearing screening?</string>
+    <string name="abn_nb_hearing">If the results of the hearing screening were abnormal, was your child referred for follow-up?</string>
+    <string name="nb_metabolism">Did your child complete a newborn metabolic screening?</string>
+    <string name="abn_followup">If the results of the screening were abnormal, was your child referred for follow-up?</string>
+    <string name="genetic_testing">Did your child complete a chromosomal analysis/genetic testing?</string>
+    <string name="dev_referral">Monitoring development: Have you completed a referral for Early Intervention?</string>
+    <string name="feedings">Do you have any concerns about your child\'s feedings?</string>
+    <string name="stooling">Do you have any concerns about your child\'s stooling?</string>
+    <string name="sleeping">Do you have any concerns about your child\'s sleeping?</string>
+    <string name="hypotonia">Have you been told that your child has hypotonia?</string>
+    <string name="slow_feeding">Have you been told that your child has slow feeding?</string>
+    <string name="choking">Has your child ever choked while feeding?</string>
+    <string name="respira_issues">Has your child had recurrent or persistent respiratory symptoms?</string>
+    <string name="failure_to_thrive">Have you been told that your child has failure to thrive?</string>
+    <string name="swallowing_radiograph">If you have answered Yes to any of these questions, it is recommended that you have a radiographic swallowing assessment.</string>
+    <string name="dev_concerns">Do you have any concerns about development? Review Early Intervention referrals.</string>
+    <string name="next_eye_exam">Time for your child\'s next eye exam (ophthalmology) visit.</string>
+    <string name="appt_date">Appointment Date:</string>
+    <string name="next_hearing">Time for your child\'s next hearing screening visit.</string>
+    <string name="thyroid">Did your child complete a thyroid screening?</string>
+    <string name="dental_screen">Time for your child\'s dental screening visit.</string>
+    <string name="hemoglobin">Did your child complete a hemoglobin screening?</string>
+    <string name="celiac">Did your child complete a celiac screening?</string>
+    <string name="sleep_study">Have you scheduled a sleep study for your child?</string>
+    <string name="pneum_vaccine">Has your child been given the 23-valent pneumococcal vaccine?</string>
+    <string name="school_iep">Discuss development, preschool plan/preparations/IEP planning.</string>
+    <string name="neck_safety_plan">Discuss neck safety and symptoms to monitor for with your provider at this visit.</string>
+    <string name="atlantoaxial"> - Monitoring for atlantoaxial instability</string>
+    <string name="imaging_req"> - Imaging is not required unless symptoms develop</string>
+    <string name="sleep_study_rec">Sleep study should be completed by age 4 if not yet completed.</string>
+    <string name="iep_review">Review IEP and services</string>
+    <string name="care_transition_plan">Have you arranged for the transition of care for your child?</string>
+    <string name="nb_opening">Shortly after your child was born, your child will usually have a number of tests and procedures done. The following questions are gathering that information.</string>
+
 
     <array name="gender">
         <item>Select</item>
