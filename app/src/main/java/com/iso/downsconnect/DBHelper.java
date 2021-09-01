@@ -524,6 +524,34 @@ public class DBHelper extends SQLiteOpenHelper {
         return milestone;
     }
 
+    public Provider getProvider(int providerID){
+        String query = "SELECT * FROM Provider WHERE ProviderID = '" + providerID + "';";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor c = db.rawQuery(query, null);
+        Provider provider = new Provider();
+        if(c.moveToFirst()){
+            c.moveToFirst();
+            provider.setProviderID(c.getInt(0));
+            provider.setName(c.getString(1));
+            provider.setPrac_name(c.getString(2));
+            provider.setSpecialty(c.getString(3));
+            provider.setPhone(c.getString(4));
+            provider.setFax(c.getString(5));
+            provider.setEmail(c.getString(6));
+            provider.setWebsite(c.getString(7));
+            provider.setAddress(c.getString(8));
+            provider.setState(c.getString(9));
+            provider.setCity(c.getString(10));
+            provider.setZip(c.getString(11));
+        }
+        else{
+            c.close();
+            provider = null;
+        }
+        db.close();
+        return provider;
+    }
+
     public MedicalInfo getMedical(int medicalID){
         String query = "SELECT * FROM Medical WHERE MedicalID = '" + medicalID + "';";
         SQLiteDatabase db = this.getWritableDatabase();
@@ -927,7 +955,37 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(COLUMN_8[4], milestone.getStandingDate());
         values.put(COLUMN_8[5], milestone.getWalkingDate());
         return db.update(TABLE_NAMES[7], values, COLUMN_8[1] + "=" + milestone.getChildId(), null) > 0;
+    }
 
+    public boolean updateChild(Child child){
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_2[1], child.getFirstName());
+        values.put(COLUMN_2[2], child.getLastName());
+        values.put(COLUMN_2[3], child.getGender());
+        values.put(COLUMN_2[4], child.getBloodType());
+        values.put(COLUMN_2[5], child.getDueDate());
+        values.put(COLUMN_2[6], child.getBirthday());
+        values.put(COLUMN_2[7], child.getAllergies());
+        values.put(COLUMN_2[8], child.getMedications());
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.update(TABLE_NAMES[1], values, COLUMN_2[0] + "=" + child.getChildID(), null) > 0;
+    }
+
+    public boolean updateProvider(Provider provider){
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_10[1], provider.getName());
+        values.put(COLUMN_10[2], provider.getPrac_name());
+        values.put(COLUMN_10[3], provider.getSpecialty());
+        values.put(COLUMN_10[4], provider.getPhone());
+        values.put(COLUMN_10[5], provider.getFax());
+        values.put(COLUMN_10[6], provider.getEmail());
+        values.put(COLUMN_10[7], provider.getWebsite());
+        values.put(COLUMN_10[8], provider.getAddress());
+        values.put(COLUMN_10[9], provider.getState());
+        values.put(COLUMN_10[10], provider.getCity());
+        values.put(COLUMN_10[11], provider.getZip());
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.update(TABLE_NAMES[9], values, COLUMN_10[0] + "=" + provider.getProviderID(), null) > 0;
     }
 
 }

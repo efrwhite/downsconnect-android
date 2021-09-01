@@ -52,7 +52,7 @@ public class DetailedProfileActivity extends AppCompatActivity implements DatePi
         dueDatePicker = findViewById(R.id.dueDatePicker);
         image = findViewById(R.id.profileImageView);
 
-        String childName = getIntent().getStringExtra("childName");
+        final String childName = getIntent().getStringExtra("childName");
         if (!childName.equals("None")) {
             child = helper.getChild(childName);
         if (child != null) {
@@ -104,7 +104,12 @@ public class DetailedProfileActivity extends AppCompatActivity implements DatePi
                         } else {
                             child.setMedications(medications.getText().toString());
                         }
-                        boolean result = helper.addChild(child);
+                        if(!childName.equals("None")){
+                            helper.updateChild(child);
+                        }
+                        else {
+                            boolean result = helper.addChild(child);
+                        }
                         ArrayList<Child> children = helper.getAllChildren();
                         if(children.size() == 1){
                             SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
@@ -177,6 +182,7 @@ public class DetailedProfileActivity extends AppCompatActivity implements DatePi
         }
     }
 
+    //get index of selection in a spinner
     private int getIndex(Spinner spinner, String myString) {
         for (int i = 0; i < spinner.getCount(); i++) {
             if (spinner.getItemAtPosition(i).toString().equalsIgnoreCase(myString)) {

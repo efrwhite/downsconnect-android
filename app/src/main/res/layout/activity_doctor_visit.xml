@@ -67,7 +67,9 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:focusableInTouchMode="true">
 
             <TextView
                 android:id="@+id/dateText"
@@ -126,6 +128,7 @@
                 android:layout_width="100dp"
                 android:layout_height="40dp"
                 android:background="@drawable/rounded_box"
+                android:focusable="auto"
                 android:hint="Enter Height"
                 android:inputType="numberDecimal"
                 android:paddingStart="7dp"
@@ -222,6 +225,9 @@
                 android:layout_height="40dp"
                 android:layout_marginTop="3dp"
                 android:background="@drawable/rounded_box"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="@+id/guideline15"
                 app:layout_constraintTop_toBottomOf="@+id/temperatureEditText" />
 
@@ -229,10 +235,10 @@
                 android:id="@+id/docTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginStart="24dp"
                 android:text="Documentation"
-                app:layout_constraintStart_toStartOf="@+id/visitTextView1"
-                app:layout_constraintTop_toBottomOf="@+id/visitTextView1" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/scrollView6" />
 
             <Button
                 android:id="@+id/button6"
@@ -328,6 +334,24 @@
                 app:layout_constraintHorizontal_bias="0.041"
                 app:layout_constraintStart_toStartOf="@+id/guideline15"
                 app:layout_constraintTop_toBottomOf="@+id/doctorsDatePicker" />
+
+            <ScrollView
+                android:id="@+id/scrollView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/visitEditText">
+
+                <FrameLayout
+                    android:id="@+id/ageLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp">
+
+                </FrameLayout>
+            </ScrollView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

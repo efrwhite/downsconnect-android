@@ -1,6 +1,7 @@
 package com.iso.downsconnect;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -10,11 +11,14 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -38,6 +42,7 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
     private Button back;
     private ArrayList<String> p_names = new ArrayList<>();
     private ArrayList<Provider> providers = new ArrayList<>();
+    private FrameLayout ageLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +51,9 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         final int childID = sharedPreferences.getInt("name", 1);
+
+        final FragmentManager fragmentManager = getSupportFragmentManager();
+
 
         doctorDatePicker = findViewById(R.id.doctorsDatePicker);
         dbHelper = new DBHelper(this);
@@ -83,6 +91,11 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
         ageText = findViewById(R.id.calcAgeText);
         currentTime = findViewById(R.id.current_time_text);
         back = findViewById(R.id.backButton);
+        ageLayout = findViewById(R.id.ageLayout);
+
+        ageLayout.setVisibility(View.INVISIBLE);
+
+
 
         Calendar calendar = Calendar.getInstance();
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
@@ -120,7 +133,53 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
             ageText.setText(years + "yrs");
         }
 
+        //Display questions based on which visit for the pediatrican the child is currenlty on
+
         loadSpinnerData();
+
+        providerType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String selected = parent.getItemAtPosition(position).toString();
+//                Log.i("ariana" , String.valueOf(position));
+//                Log.i("theText", selected);
+                if(selected.equals("Pediatrician")){
+                    ageLayout.setVisibility(View.VISIBLE);
+                    String age = ageText.getText().toString();
+                    if(age.contains("days") || age.equals(" 1 month")){
+                        age = "Newborn";
+                    }
+                    switch (age){
+                        case "2 months":
+                            visitNum.setText("2 months");
+                            TwoMonthFragment twoMonthFragment = new TwoMonthFragment();
+                            fragmentManager.beginTransaction().replace(R.id.ageLayout, twoMonthFragment).commit();
+                            break;
+                        case "Newborn":
+                            visitNum.setText("Newborn");
+                            NewBornFragment newBornFragment = new NewBornFragment();
+                            fragmentManager.beginTransaction().replace(R.id.ageLayout, newBornFragment).commit();
+                    }
+//                    if(age.equals("2 months")){
+//                        visitNum.setText("2 months");
+//                        TwoMonthFragment twoMonthFragment = new TwoMonthFragment();
+//                        fragmentManager.beginTransaction().replace(R.id.ageLayout, twoMonthFragment).commit();
+//
+//                    }
+
+//                    if(age.contains("days") || age.equals(" 1 month")){
+//                        visitNum.setText("Newborn");
+//                        NewBornFragment newBornFragment = new NewBornFragment();
+//                        fragmentManager.beginTransaction().replace(R.id.ageLayout, newBornFragment).commit();
+//                    }
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
 
         doctorDatePicker.setOnClickListener(new View.OnClickListener() {
