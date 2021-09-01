@@ -28,6 +28,8 @@ public class ProvidersActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         final int childID = sharedPreferences.getInt("name", 1);
 
+        final int p_name = getIntent().getIntExtra("p_name", -1);
+
         final Button back = findViewById(R.id.backButton);
         name = findViewById(R.id.providerName);
         specialty = findViewById(R.id.specialtySpinner);
@@ -43,6 +45,31 @@ public class ProvidersActivity extends AppCompatActivity {
         practice = findViewById(R.id.practiceEdit);
         save = findViewById(R.id.saveButton);
         helper = new DBHelper(this);
+
+        //set information for exisitng provider if one is provided
+        if(p_name != -1) {
+            provider = helper.getProvider(p_name);
+            if (provider != null) {
+                name.setText(provider.getName());
+                //calls private method getIndex
+                specialty.setSelection(getIndex(specialty, provider.getSpecialty()));
+                number.setText(provider.getPhone());
+                fax.setText(provider.getFax());
+                email.setText(provider.getEmail());
+                website.setText(provider.getWebsite());
+                state.setText(provider.getState());
+                city.setText(provider.getCity());
+                zip.setText(provider.getZip());
+                practice.setText(provider.getPrac_name());
+                if (provider.getAddress().contains(";")) {
+                    String address = provider.getAddress();
+                    address_one.setText(provider.getAddress().substring(0, address.indexOf(";")));
+                    address_two.setText(provider.getAddress().substring(address.indexOf(";")));
+                } else {
+                    address_one.setText(provider.getAddress());
+                }
+            }
+        }
 
 
         back.setOnClickListener(new View.OnClickListener() {
@@ -80,7 +107,13 @@ public class ProvidersActivity extends AppCompatActivity {
                     provider.setState(state.getText().toString());
                     provider.setCity(city.getText().toString());
                     provider.setZip(zip.getText().toString());
-                    boolean num = helper.addProvider(provider);
+
+                    if(p_name != -1){
+                        helper.updateProvider(provider);
+                    }
+                    else {
+                        boolean num = helper.addProvider(provider);
+                    }
                     Intent intent = new Intent(ProvidersActivity.this, ActivityContainer.class);
                     startActivity(intent);
                 }
@@ -92,5 +125,17 @@ public class ProvidersActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    //get index of selection in a spinner
+    private int getIndex(Spinner spinner, String myString) {
+        for (int i = 0; i < spinner.getCount(); i++) {
+            if (spinner.getItemAtPosition(i).toString().equalsIgnoreCase(myString)) {
+                return i;
+            }
+        }
+
+        return 0;
+
     }
 }

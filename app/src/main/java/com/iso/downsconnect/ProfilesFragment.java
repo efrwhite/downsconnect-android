@@ -81,6 +81,7 @@ public class ProfilesFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), ProvidersActivity.class);
+                intent.putExtra("p_name", -1);
                 startActivity(intent);
             }
         });
@@ -180,8 +181,8 @@ public class ProfilesFragment extends Fragment {
 
     public void delete(final Button button, final String type){
         new AlertDialog.Builder(getContext())
-                .setTitle("Delete Child")
-                .setMessage("Are you sure you want to this child account")
+                .setTitle("Delete Profile")
+                .setMessage("Are you sure you want to this" + type + " account")
                 .setPositiveButton("yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -189,9 +190,13 @@ public class ProfilesFragment extends Fragment {
                             helper.deleteEntry(button.getId(), "Child");
                             childLayout.removeView(getView().findViewWithTag(button.getTag() + "Layout"));
                         }
-                        else{
+                        else if (type.equals("Account")){
                             helper.deleteEntry(button.getId(), "Account");
                             caregiverLayout.removeView(getView().findViewById(button.getId()));
+                        }
+                        else{
+                            helper.deleteEntry(button.getId(), "Provider");
+                            providerLayout.removeView(getView().findViewById(button.getId()));
                         }
                     }
                 })
@@ -271,7 +276,7 @@ public class ProfilesFragment extends Fragment {
                     @Override
                     public void run() {
                         providers = helper.getAllProviders();
-                        for(Provider provider: providers){
+                        for(final Provider provider: providers){
                             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                             LinearLayout.LayoutParams textParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                             ViewGroup.MarginLayoutParams marginLayoutParams = new ViewGroup.MarginLayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -281,6 +286,7 @@ public class ProfilesFragment extends Fragment {
                             horizontalLayout.setTag(provider.getName() + "Layout");
                             horizontalLayout.setOrientation(LinearLayout.HORIZONTAL);
                             horizontalLayout.setLayoutParams(marginLayoutParams);
+                            horizontalLayout.setId(provider.getProviderID());
 
                             layoutParams.setMargins(200, 0, 0, 30);
                             textParams.setMargins(50, 0, 10, 30);
@@ -293,6 +299,34 @@ public class ProfilesFragment extends Fragment {
                             name.setTextColor(Color.BLACK);
                             name.setLayoutParams(textParams);
                             horizontalLayout.addView(name);
+
+                            final Button remove = new Button(getContext());
+                            remove.setText("Delete");
+                            remove.setWidth(10);
+                            remove.setHeight(10);
+                            remove.setId(provider.getProviderID());
+                            remove.setLayoutParams(layoutParams);
+                            remove.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    delete(remove, "Provider");
+                                }
+                            });
+                            horizontalLayout.addView(remove);
+
+                            final Button change = new Button(getContext());
+                            change.setText("Edit");
+                            change.setHeight(10);
+                            change.setWidth(10);
+                            change.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    Intent intent = new Intent(getContext(), ProvidersActivity.class);
+                                    intent.putExtra("p_name", provider.getProviderID());
+                                    startActivity(intent);
+                                }
+                            });
+                            horizontalLayout.addView(change);
 
                             providerLayout.addView(horizontalLayout);
                         }
