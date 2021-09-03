@@ -31,172 +31,10 @@
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="3dp" />
 
-    <TextView
-        android:id="@+id/rollOverText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/child_first_rolled_over"
-        tools:layout_editor_absoluteX="19dp"
-        tools:layout_editor_absoluteY="110dp" />
-
-    <EditText
-        android:id="@+id/rolledDatePicker"
-        android:layout_width="133dp"
-        android:layout_height="21dp"
-        android:background="@drawable/rounded_box"
-        android:focusable="false"
-        android:hint="@string/enter_date"
-        android:paddingStart="7dp"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@+id/rollOverText"
-        app:layout_constraintTop_toTopOf="@+id/rollOverText"
-        app:layout_constraintVertical_bias="1.0"
-        tools:layout_editor_absoluteX="145dp" />
-
-    <TextView
-        android:id="@+id/calcRolledOverAge"
-        android:layout_width="40dp"
-        android:layout_height="22dp"
-        android:text="@string/age"
-        android:textSize="10sp"
-        app:layout_constraintBottom_toBottomOf="@+id/rolledDatePicker"
-        app:layout_constraintTop_toTopOf="@+id/rolledDatePicker"
-        tools:layout_editor_absoluteX="302dp" />
-
-    <TextView
-        android:id="@+id/sittingUpText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/child_first_sitting_up"
-        app:layout_constraintStart_toStartOf="@+id/rollOverText"
-        tools:layout_editor_absoluteY="155dp" />
-
-    <EditText
-        android:id="@+id/sittingDatePicker"
-        android:layout_width="135dp"
-        android:layout_height="19dp"
-        android:background="@drawable/rounded_box"
-        android:focusable="false"
-        android:hint="@string/enter_date"
-        android:paddingStart="7dp"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@+id/sittingUpText"
-        app:layout_constraintTop_toTopOf="@+id/sittingUpText"
-        tools:layout_editor_absoluteX="145dp" />
-
-    <TextView
-        android:id="@+id/calcSittingAge"
-        android:layout_width="42dp"
-        android:layout_height="24dp"
-        android:text="@string/age"
-        android:textSize="10sp"
-        app:layout_constraintBottom_toBottomOf="@+id/sittingDatePicker"
-        app:layout_constraintTop_toTopOf="@+id/sittingDatePicker"
-        tools:layout_editor_absoluteX="300dp" />
-
-    <TextView
-        android:id="@+id/crawlText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/child_first_crawl"
-        tools:layout_editor_absoluteX="19dp"
-        tools:layout_editor_absoluteY="191dp" />
-
-    <EditText
-        android:id="@+id/crawlDatePicker"
-        android:layout_width="111dp"
-        android:layout_height="26dp"
-        android:ems="10"
-        android:hint="@string/enter_date"
-        android:inputType="date"
-        android:textSize="14sp"
-        tools:layout_editor_absoluteX="178dp"
-        tools:layout_editor_absoluteY="193dp" />
-
-    <TextView
-        android:id="@+id/calcCrawlAge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/age"
-        tools:layout_editor_absoluteX="310dp"
-        tools:layout_editor_absoluteY="193dp" />
-
-    <TextView
-        android:id="@+id/firstStandingText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/child_first_standing"
-        tools:layout_editor_absoluteX="19dp"
-        tools:layout_editor_absoluteY="226dp" />
-
-    <EditText
-        android:id="@+id/standingDatePicker"
-        android:layout_width="117dp"
-        android:layout_height="24dp"
-        android:background="@drawable/rounded_box"
-        android:focusable="false"
-        android:hint="@string/enter_date"
-        android:paddingStart="7dp"
-        android:textSize="14sp"
-        tools:layout_editor_absoluteX="193dp"
-        tools:layout_editor_absoluteY="234dp" />
-
-    <TextView
-        android:id="@+id/calcStandingAge"
-        android:layout_width="41dp"
-        android:layout_height="22dp"
-        android:text="@string/age"
-        android:textSize="10sp"
-        tools:layout_editor_absoluteX="319dp"
-        tools:layout_editor_absoluteY="234dp" />
-
-    <TextView
-        android:id="@+id/firstWalkingText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/child_first_walking_hold_yes"
-        tools:layout_editor_absoluteX="13dp"
-        tools:layout_editor_absoluteY="273dp" />
-
-    <EditText
-        android:id="@+id/walkingDatePicker"
-        android:layout_width="136dp"
-        android:layout_height="40dp"
-        android:background="@drawable/rounded_box"
-        android:focusable="false"
-        android:hint="@string/enter_date"
-        android:paddingStart="7dp"
-        android:textSize="14sp"
-        tools:layout_editor_absoluteX="183dp"
-        tools:layout_editor_absoluteY="273dp" />
-
-    <TextView
-        android:id="@+id/calcWalkingAge"
-        android:layout_width="41dp"
-        android:layout_height="30dp"
-        android:text="@string/age"
-        android:textSize="10sp"
-        tools:layout_editor_absoluteX="310dp"
-        tools:layout_editor_absoluteY="283dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline14"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.5" />
-
-    <Button
-        android:id="@+id/saveButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/save"
-        tools:layout_editor_absoluteX="138dp"
-        tools:layout_editor_absoluteY="576dp" />
-
     <ScrollView
-        android:layout_width="359dp"
-        android:layout_height="578dp"
+        android:layout_width="422dp"
+        android:layout_height="1873dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/neckSafetyView">
@@ -208,10 +46,461 @@
 
             <TextView
                 android:id="@+id/Physical"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="@string/physical"
                 android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView104"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/child_first_rolled_over" />
+
+            <EditText
+                android:id="@+id/editTextDate2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8sp"
+                android:ems="10"
+                android:inputType="date" />
+
+            <TextView
+                android:id="@+id/textView105"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/child_first_sitting_up" />
+
+            <EditText
+                android:id="@+id/editTextDate3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8sp"
+                android:ems="10"
+                android:inputType="date" />
+
+            <TextView
+                android:id="@+id/textView106"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/child_first_crawl" />
+
+            <EditText
+                android:id="@+id/editTextDate4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8sp"
+                android:ems="10"
+                android:inputType="date" />
+
+            <TextView
+                android:id="@+id/textView107"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/child_first_standing" />
+
+            <EditText
+                android:id="@+id/editTextDate5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8sp"
+                android:ems="10"
+                android:inputType="date" />
+
+            <TextView
+                android:id="@+id/textView108"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/child_first_walking_hold_yes" />
+
+            <EditText
+                android:id="@+id/editTextDate6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8sp"
+                android:ems="10"
+                android:inputType="date" />
+
+            <TextView
+                android:id="@+id/textView109"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/child_first_walking_hold_no" />
+
+            <EditText
+                android:id="@+id/editTextDate7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8sp"
+                android:ems="10"
+                android:inputType="date" />
+
+            <TextView
+                android:id="@+id/textView110"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/child_first_jump" />
+
+            <EditText
+                android:id="@+id/editTextDate8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8sp"
+                android:ems="10"
+                android:inputType="date" />
+
+            <TextView
+                android:id="@+id/physical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/fine_motor"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView111"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/child_first_hold_object" />
+
+            <EditText
+                android:id="@+id/editTextDate9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8sp"
+                android:ems="10"
+                android:inputType="date" />
+
+            <TextView
+                android:id="@+id/textView112"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/child_first_hands_mouth" />
+
+            <EditText
+                android:id="@+id/editTextDate10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8sp"
+                android:ems="10"
+                android:inputType="date" />
+
+            <TextView
+                android:id="@+id/textView113"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/child_first_pass_object" />
+
+            <EditText
+                android:id="@+id/editTextDate11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8sp"
+                android:ems="10"
+                android:inputType="date" />
+
+            <TextView
+                android:id="@+id/textView114"
+                android:layout_width="390dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/child_first_pincer" />
+
+            <EditText
+                android:id="@+id/editTextDate12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8sp"
+                android:ems="10"
+                android:inputType="date" />
+
+            <TextView
+                android:id="@+id/textView115"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/child_first_cup" />
+
+            <EditText
+                android:id="@+id/editTextDate13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8sp"
+                android:ems="10"
+                android:inputType="date" />
+
+            <TextView
+                android:id="@+id/textView116"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/child_first_scribble" />
+
+            <EditText
+                android:id="@+id/editTextDate14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8sp"
+                android:ems="10"
+                android:inputType="date" />
+
+            <TextView
+                android:id="@+id/textView117"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/child_first_self_feed" />
+
+            <EditText
+                android:id="@+id/editTextDate15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8sp"
+                android:ems="10"
+                android:inputType="date" />
+
+            <TextView
+                android:id="@+id/physical2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/social"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView118"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/child_first_points" />
+
+            <EditText
+                android:id="@+id/editTextDate16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8sp"
+                android:ems="10"
+                android:inputType="date" />
+
+            <TextView
+                android:id="@+id/textView119"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/child_first_emotion" />
+
+            <EditText
+                android:id="@+id/editTextDate17"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8sp"
+                android:ems="10"
+                android:inputType="date" />
+
+            <TextView
+                android:id="@+id/textView120"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/child_first_affection" />
+
+            <EditText
+                android:id="@+id/editTextDate18"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8sp"
+                android:ems="10"
+                android:inputType="date" />
+
+            <TextView
+                android:id="@+id/textView121"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/child_first_interest" />
+
+            <EditText
+                android:id="@+id/editTextDate19"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8sp"
+                android:ems="10"
+                android:inputType="date" />
+
+            <TextView
+                android:id="@+id/physical3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/verbal"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView125"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/child_first_coo" />
+
+            <EditText
+                android:id="@+id/editTextDate23"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8sp"
+                android:ems="10"
+                android:inputType="date" />
+
+            <TextView
+                android:id="@+id/textView126"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/child_first_babble" />
+
+            <EditText
+                android:id="@+id/editTextDate24"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8sp"
+                android:ems="10"
+                android:inputType="date" />
+
+            <TextView
+                android:id="@+id/textView127"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/child_first_word" />
+
+            <EditText
+                android:id="@+id/editTextDate25"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8sp"
+                android:ems="10"
+                android:inputType="date" />
+
+            <TextView
+                android:id="@+id/textView128"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/child_first_short_sentence" />
+
+            <EditText
+                android:id="@+id/editTextDate26"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8sp"
+                android:ems="10"
+                android:inputType="date" />
+
+            <TextView
+                android:id="@+id/textView129"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/child_first_long_sentence" />
+
+            <EditText
+                android:id="@+id/editTextDate29"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8sp"
+                android:ems="10"
+                android:inputType="date" />
+
+            <TextView
+                android:id="@+id/physical4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/hearing"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView132"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/child_startles" />
+
+            <EditText
+                android:id="@+id/editTextDate30"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8sp"
+                android:ems="10"
+                android:inputType="date" />
+
+            <TextView
+                android:id="@+id/textView133"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/child_turn_sound" />
+
+            <EditText
+                android:id="@+id/editTextDate31"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8sp"
+                android:ems="10"
+                android:inputType="date" />
+
+            <TextView
+                android:id="@+id/physical5"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/notes"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/editTextDate37"
+                android:layout_width="match_parent"
+                android:layout_height="89dp"
+                android:layout_marginLeft="8sp"
+                android:ems="10"
+                android:inputType="date" />
+
+            <EditText
+                android:id="@+id/editTextTextMultiLine2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:gravity="start|top"
+                android:inputType="textMultiLine" />
 
         </LinearLayout>
     </ScrollView>
