@@ -5,14 +5,336 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textView57"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:text="This is the nine years old visit page."
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/nine_year_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16sp"
+                android:text="Nine year old Provider Visit"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/eyeexam51"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/next_hearing"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/assessApptDate49"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/appt_date" />
+
+            <EditText
+                android:id="@+id/assessDate49"
+                android:layout_width="match_parent"
+                android:layout_height="47dp"
+                android:layout_marginLeft="16sp"
+                android:ems="10"
+                android:inputType="date" />
+
+            <TextView
+                android:id="@+id/providers49"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/provider" />
+
+            <TextView
+                android:id="@+id/textView57"
+                android:layout_width="match_parent"
+                android:layout_height="47dp"
+                android:layout_marginLeft="16sp"
+                android:text="**This will be a scrollable list of providers from the provider list." />
+
+            <TextView
+                android:id="@+id/eyeexam52"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/dental_screen"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/assessApptDate50"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/appt_date" />
+
+            <EditText
+                android:id="@+id/assessDate50"
+                android:layout_width="match_parent"
+                android:layout_height="47dp"
+                android:layout_marginLeft="16sp"
+                android:ems="10"
+                android:inputType="date" />
+
+            <TextView
+                android:id="@+id/providers50"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/provider" />
+
+            <TextView
+                android:id="@+id/textView92"
+                android:layout_width="match_parent"
+                android:layout_height="47dp"
+                android:layout_marginLeft="16sp"
+                android:text="**This will be a scrollable list of providers from the provider list." />
+
+            <TextView
+                android:id="@+id/eyeexam53"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/thyroid"
+                android:textStyle="bold" />
+
+            <CheckBox
+                android:id="@+id/checkBoxYes106"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16sp"
+                android:text="@string/yes" />
+
+            <CheckBox
+                android:id="@+id/checkBoxNo107"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16sp"
+                android:text="@string/no" />
+
+            <TextView
+                android:id="@+id/abnEyeExam26"
+                android:layout_width="match_parent"
+                android:layout_height="38dp"
+                android:layout_marginStart="8sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/abn_followup" />
+
+            <CheckBox
+                android:id="@+id/checkBoxYes107"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16sp"
+                android:text="@string/yes" />
+
+            <CheckBox
+                android:id="@+id/checkBoxNo108"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16sp"
+                android:text="@string/no" />
+
+            <TextView
+                android:id="@+id/assessApptDate51"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/assess_appt" />
+
+            <EditText
+                android:id="@+id/assessDate51"
+                android:layout_width="match_parent"
+                android:layout_height="47dp"
+                android:layout_marginLeft="16sp"
+                android:ems="10"
+                android:inputType="date" />
+
+            <TextView
+                android:id="@+id/providers51"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/provider" />
+
+            <TextView
+                android:id="@+id/textView93"
+                android:layout_width="match_parent"
+                android:layout_height="47dp"
+                android:layout_marginLeft="16sp"
+                android:text="**This will be a scrollable list of providers from the provider list." />
+
+            <TextView
+                android:id="@+id/eyeexam54"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/hemoglobin"
+                android:textStyle="bold" />
+
+            <CheckBox
+                android:id="@+id/checkBoxYes108"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16sp"
+                android:text="@string/yes" />
+
+            <CheckBox
+                android:id="@+id/checkBoxNo109"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16sp"
+                android:text="@string/no" />
+
+            <TextView
+                android:id="@+id/abnEyeExam27"
+                android:layout_width="match_parent"
+                android:layout_height="38dp"
+                android:layout_marginStart="8sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/abn_followup" />
+
+            <CheckBox
+                android:id="@+id/checkBoxYes109"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16sp"
+                android:text="@string/yes" />
+
+            <CheckBox
+                android:id="@+id/checkBoxNo110"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16sp"
+                android:text="@string/no" />
+
+            <TextView
+                android:id="@+id/assessApptDate52"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/assess_appt" />
+
+            <EditText
+                android:id="@+id/assessDate52"
+                android:layout_width="match_parent"
+                android:layout_height="47dp"
+                android:layout_marginLeft="16sp"
+                android:ems="10"
+                android:inputType="date" />
+
+            <TextView
+                android:id="@+id/providers52"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/provider" />
+
+            <TextView
+                android:id="@+id/textView94"
+                android:layout_width="match_parent"
+                android:layout_height="47dp"
+                android:layout_marginLeft="16sp"
+                android:text="**This will be a scrollable list of providers from the provider list." />
+
+            <TextView
+                android:id="@+id/dev_referral68"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/feedings" />
+
+            <CheckBox
+                android:id="@+id/checkBoxYes110"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16sp"
+                android:layout_marginTop="0sp"
+                android:text="@string/yes" />
+
+            <CheckBox
+                android:id="@+id/checkBoxNo111"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16sp"
+                android:text="@string/no" />
+
+            <TextView
+                android:id="@+id/dev_referral69"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/stooling" />
+
+            <CheckBox
+                android:id="@+id/checkBoxYes111"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16sp"
+                android:layout_marginTop="0sp"
+                android:text="@string/yes" />
+
+            <CheckBox
+                android:id="@+id/checkBoxNo112"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16sp"
+                android:text="@string/no" />
+
+            <TextView
+                android:id="@+id/dev_referral70"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/sleeping" />
+
+            <CheckBox
+                android:id="@+id/checkBoxYes112"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16sp"
+                android:layout_marginTop="0sp"
+                android:text="@string/yes" />
+
+            <CheckBox
+                android:id="@+id/checkBoxNo113"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16sp"
+                android:text="@string/no" />
+
+            <TextView
+                android:id="@+id/dev_referral71"
+                android:layout_width="match_parent"
+                android:layout_height="33dp"
+                android:layout_marginLeft="8sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/iep_review" />
+        </LinearLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

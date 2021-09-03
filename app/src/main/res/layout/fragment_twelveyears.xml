@@ -5,14 +5,122 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textView40"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:text="This is the page for the 12 years old visit."
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/twelve_year_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16sp"
+                android:text="Twelve year old Provider Visit"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/eyeexam63"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/next_eye_exam"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/assessApptDate61"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/appt_date" />
+
+            <EditText
+                android:id="@+id/assessDate61"
+                android:layout_width="match_parent"
+                android:layout_height="47dp"
+                android:layout_marginLeft="16sp"
+                android:ems="10"
+                android:inputType="date" />
+
+            <TextView
+                android:id="@+id/providers61"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/provider" />
+
+            <TextView
+                android:id="@+id/textView40"
+                android:layout_width="match_parent"
+                android:layout_height="47dp"
+                android:layout_marginLeft="16sp"
+                android:text="**This will be a scrollable list of providers from the provider list." />
+
+            <TextView
+                android:id="@+id/eyeexam64"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/care_transition_plan"
+                android:textStyle="bold" />
+
+            <CheckBox
+                android:id="@+id/checkBoxYes127"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16sp"
+                android:text="@string/yes" />
+
+            <CheckBox
+                android:id="@+id/checkBoxNo128"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16sp"
+                android:text="@string/no" />
+
+            <TextView
+                android:id="@+id/assessApptDate62"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/appt_date" />
+
+            <EditText
+                android:id="@+id/assessDate62"
+                android:layout_width="match_parent"
+                android:layout_height="47dp"
+                android:layout_marginLeft="16sp"
+                android:ems="10"
+                android:inputType="date" />
+
+            <TextView
+                android:id="@+id/providers62"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/provider" />
+
+            <TextView
+                android:id="@+id/textView103"
+                android:layout_width="match_parent"
+                android:layout_height="47dp"
+                android:layout_marginLeft="16sp"
+                android:text="**This will be a scrollable list of providers from the provider list." />
+        </LinearLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
