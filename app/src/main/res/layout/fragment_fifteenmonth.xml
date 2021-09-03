@@ -98,6 +98,29 @@
                 android:text="@string/no" />
 
             <TextView
+                android:id="@+id/dev_referral38"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8sp"
+                android:layout_marginTop="8sp"
+                android:text="@string/sleep_study" />
+
+            <CheckBox
+                android:id="@+id/checkBoxYes61"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16sp"
+                android:layout_marginTop="0sp"
+                android:text="@string/yes" />
+
+            <CheckBox
+                android:id="@+id/checkBoxNo62"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16sp"
+                android:text="@string/no" />
+
+            <TextView
                 android:id="@+id/dev_referral21"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
