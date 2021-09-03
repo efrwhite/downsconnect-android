@@ -1,4 +1,4 @@
-package com.iso.downsconnect;
+package com.iso.downsconnect.fragments;
 
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -14,28 +14,30 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.iso.downsconnect.ActivityContainer;
+import com.iso.downsconnect.DBHelper;
+import com.iso.downsconnect.R;
+import com.iso.downsconnect.objects.Bathroom;
 import com.iso.downsconnect.objects.Entry;
-import com.iso.downsconnect.objects.Feed;
 
 import java.util.Calendar;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link FluidFragment#newInstance} factory method to
+ * Use the {@link DiaperFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FluidFragment extends Fragment {
-    private Button saveBtn;
-    private EditText notes, fluidFood, quantity, otherText;
-    private Spinner foodUnit;
+public class DiaperFragment extends Fragment {
+    private Bathroom bathroom = new Bathroom();
     private DBHelper helper;
-    private Feed feed;
-    private Entry entry;
-    private CheckBox iron, vitamin, other;
+    private Entry entry = new Entry();
+    private EditText notes;
+    private Spinner diaperLeak, openAir, cream, quantity;
+    private Button save;
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -46,7 +48,7 @@ public class FluidFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public FluidFragment() {
+    public DiaperFragment() {
         // Required empty public constructor
     }
 
@@ -56,11 +58,11 @@ public class FluidFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment FluidFragment.
+     * @return A new instance of fragment DiaperFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static FluidFragment newInstance(String param1, String param2) {
-        FluidFragment fragment = new FluidFragment();
+    public static DiaperFragment newInstance(String param1, String param2) {
+        DiaperFragment fragment = new DiaperFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -81,7 +83,7 @@ public class FluidFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_fluid, container, false);
+        return inflater.inflate(R.layout.fragment_diaper, container, false);
     }
 
     @Override
@@ -91,72 +93,56 @@ public class FluidFragment extends Fragment {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         final int childID = sharedPreferences.getInt("name", 1);
 
-        saveBtn = view.findViewById(R.id.saveButton);
+        bathroom.setBathroomType("Diaper");
+        bathroom.setChildID(childID);
+        bathroom.setDateOfLastStool(-1);
+        bathroom.setTreatmentPlan("None");
+        bathroom.setPottyAccident("None");
+        bathroom.setDuration("None");
+
+        diaperLeak = view.findViewById(R.id.leakSpinner);
+        openAir = view.findViewById(R.id.openAirSpinner);
+        cream = view.findViewById(R.id.diaperCreamSpinner);
+        quantity = view.findViewById(R.id.quantitySpinner);
         notes = view.findViewById(R.id.editText);
-        fluidFood = view.findViewById(R.id.fluidFoodEditText);
-        foodUnit = view.findViewById(R.id.unitSpinner);
-        quantity = view.findViewById(R.id.quantityEditText);
+        save = view.findViewById(R.id.saveButton);
         helper = new DBHelper(getContext());
-        iron = view.findViewById(R.id.ironCheckbox);
-        vitamin = view.findViewById(R.id.vitaCheckbox);
-        other = view.findViewById(R.id.otherCheckbox);
-        otherText = view.findViewById(R.id.otherText);
 
 
-
-        feed = new Feed();
-        entry = new Entry();
-
-
-        saveBtn.setOnClickListener(new View.OnClickListener() {
+        save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!fluidFood.getText().toString().equals("") && !foodUnit.getSelectedItem().equals("Select") && !quantity.getText().toString().equals("")){
-                    feed.setChildID(childID);
-                    feed.setAmount(Integer.parseInt(quantity.getText().toString()));
-                    feed.setSubstance(fluidFood.getText().toString());
-                    feed.setFoodUnit(foodUnit.getSelectedItem().toString());
-                    Calendar calendar = Calendar.getInstance();
-                    feed.setEntryTime(calendar.getTimeInMillis());
+                if(!diaperLeak.getSelectedItem().equals("Select") && !openAir.getSelectedItem().equals("Select")
+                    && !cream.getSelectedItem().equals("Select") && !quantity.getSelectedItem().equals("Select")){
                     if(!notes.getText().toString().equals("")){
-                        feed.setNotes(notes.getText().toString());
+                        bathroom.setNotes(notes.getText().toString());
                     }
                     else{
-                        feed.setNotes("");
+                        bathroom.setNotes("None");
                     }
-                    if(vitamin.isChecked()){
-                       feed.setVitamin("Yes");
-                    }
-                    else{
-                        feed.setVitamin("No");
-                    }
-                    if(iron.isChecked()){
-                        feed.setIron("Yes");
-                    }
-                    else{
-                        feed.setIron("No");
-                    }
-                    if(other.isChecked()){
-                        feed.setOther(otherText.getText().toString());
-                    }
-                    else{
-                        feed.setOther("None");
-                    }
+                    bathroom.setDiaperCream(cream.getSelectedItem().toString());
+                    bathroom.setLeak(diaperLeak.getSelectedItem().toString());
+                    bathroom.setOpenAir(openAir.getSelectedItem().toString());
+                    bathroom.setQuantity(quantity.getSelectedItem().toString());
+                    entry.setEntryText(helper.getChildName(childID) + " had an accident in their diaper");
+                    entry.setEntryTime(Calendar.getInstance().getTimeInMillis());
                     entry.setChildID(childID);
-                    entry.setEntryText(helper.getChildName(childID) + " drank " + feed.getAmount() + feed.getFoodUnit() + " of " + feed.getSubstance());
-                    entry.setEntryTime(calendar.getTimeInMillis());
-                    helper.addFeed(feed);
+
                     helper.addEntry(entry);
+                    helper.addBathroom(bathroom);
                     Intent intent = new Intent(getContext(), ActivityContainer.class);
                     startActivity(intent);
                 }
                 else{
-                    AlertDialog a = new AlertDialog.Builder(saveBtn.getContext()).create();
+                    AlertDialog a = new AlertDialog.Builder(save.getContext()).create();
                     a.setTitle("Missing Information");
                     a.setMessage("Please make sure you've filled out the necessary information");
                     a.show();
                 }
             }
         });
+
+
+
     }
 }

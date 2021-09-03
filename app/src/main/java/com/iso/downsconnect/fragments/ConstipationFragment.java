@@ -1,6 +1,8 @@
-package com.iso.downsconnect;
+package com.iso.downsconnect.fragments;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -14,27 +16,29 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.Spinner;
 
+import com.iso.downsconnect.ActivityContainer;
+import com.iso.downsconnect.DBHelper;
+import com.iso.downsconnect.R;
 import com.iso.downsconnect.objects.Bathroom;
+import com.iso.downsconnect.objects.DateHandler;
 import com.iso.downsconnect.objects.Entry;
 
 import java.util.Calendar;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link DiaperFragment#newInstance} factory method to
+ * Use the {@link ConstipationFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class DiaperFragment extends Fragment {
+public class ConstipationFragment extends Fragment implements DatePickerDialog.OnDateSetListener {
+    private EditText lastStoolDate, treatment, notes;
+    private Button save;
     private Bathroom bathroom = new Bathroom();
     private DBHelper helper;
-    private Entry entry = new Entry();
-    private EditText notes;
-    private Spinner diaperLeak, openAir, cream, quantity;
-    private Button save;
-
+    private Entry entry;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -45,7 +49,7 @@ public class DiaperFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public DiaperFragment() {
+    public ConstipationFragment() {
         // Required empty public constructor
     }
 
@@ -55,11 +59,11 @@ public class DiaperFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment DiaperFragment.
+     * @return A new instance of fragment ConstipationFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static DiaperFragment newInstance(String param1, String param2) {
-        DiaperFragment fragment = new DiaperFragment();
+    public static ConstipationFragment newInstance(String param1, String param2) {
+        ConstipationFragment fragment = new ConstipationFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -80,7 +84,7 @@ public class DiaperFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_diaper, container, false);
+        return inflater.inflate(R.layout.fragment_constipation, container, false);
     }
 
     @Override
@@ -90,43 +94,42 @@ public class DiaperFragment extends Fragment {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         final int childID = sharedPreferences.getInt("name", 1);
 
-        bathroom.setBathroomType("Diaper");
+        bathroom.setBathroomType("Constipation");
         bathroom.setChildID(childID);
-        bathroom.setDateOfLastStool(-1);
-        bathroom.setTreatmentPlan("None");
+        bathroom.setDiaperCream("None");
+        bathroom.setOpenAir("None");
+        bathroom.setLeak("None");
+        bathroom.setQuantity("None");
         bathroom.setPottyAccident("None");
         bathroom.setDuration("None");
 
-        diaperLeak = view.findViewById(R.id.leakSpinner);
-        openAir = view.findViewById(R.id.openAirSpinner);
-        cream = view.findViewById(R.id.diaperCreamSpinner);
-        quantity = view.findViewById(R.id.quantitySpinner);
+        lastStoolDate = view.findViewById(R.id.stoolDateEditText);
+        lastStoolDate.setFocusable(false);
+        treatment = view.findViewById(R.id.quantityEditText);
         notes = view.findViewById(R.id.editText);
         save = view.findViewById(R.id.saveButton);
         helper = new DBHelper(getContext());
+        entry = new Entry();
 
-
+        lastStoolDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDatePickerDialog();
+            }
+        });
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!diaperLeak.getSelectedItem().equals("Select") && !openAir.getSelectedItem().equals("Select")
-                    && !cream.getSelectedItem().equals("Select") && !quantity.getSelectedItem().equals("Select")){
+                if(!lastStoolDate.getText().toString().equals("") && !treatment.getText().toString().equals("")){
                     if(!notes.getText().toString().equals("")){
                         bathroom.setNotes(notes.getText().toString());
                     }
-                    else{
-                        bathroom.setNotes("None");
-                    }
-                    bathroom.setDiaperCream(cream.getSelectedItem().toString());
-                    bathroom.setLeak(diaperLeak.getSelectedItem().toString());
-                    bathroom.setOpenAir(openAir.getSelectedItem().toString());
-                    bathroom.setQuantity(quantity.getSelectedItem().toString());
-                    entry.setEntryText(helper.getChildName(childID) + " had an accident in their diaper");
-                    entry.setEntryTime(Calendar.getInstance().getTimeInMillis());
-                    entry.setChildID(childID);
-
-                    helper.addEntry(entry);
+                    bathroom.setTreatmentPlan(treatment.getText().toString());
                     helper.addBathroom(bathroom);
+                    entry.setChildID(childID);
+                    entry.setEntryText(helper.getChildName(childID) + " was constipated, treated with " + bathroom.getTreatmentPlan());
+                    entry.setEntryTime(Calendar.getInstance().getTimeInMillis());
+                    helper.addEntry(entry);
                     Intent intent = new Intent(getContext(), ActivityContainer.class);
                     startActivity(intent);
                 }
@@ -138,8 +141,36 @@ public class DiaperFragment extends Fragment {
                 }
             }
         });
-
-
-
     }
+
+    private void showDatePickerDialog() {
+        Calendar cal = Calendar.getInstance();
+        @SuppressLint("ResourceType") DatePickerDialog datePicker = new DatePickerDialog(getContext(), 2,
+                this,
+                cal.get(Calendar.YEAR),
+                cal.get(Calendar.MONTH),
+                cal.get(Calendar.DAY_OF_MONTH));
+        datePicker.setCancelable(false);
+        datePicker.setTitle("Select the date");
+        datePicker.show();
+    }
+
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+        DateHandler month_ = new DateHandler();
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(year, month, dayOfMonth);
+        bathroom.setDateOfLastStool(calendar.getTimeInMillis());
+        lastStoolDate.setText(month_.getMonth(month) + " " + dayOfMonth + ", " + year);
+    }
+
+//    private DatePickerDialog.OnDateSetListener datePickerListener = new DatePickerDialog.OnDateSetListener() {
+//
+//        // when dialog box is closed, below method will be called.
+//        public void onDateSet(DatePicker view, int selectedYear,
+//                              int selectedMonth, int selectedDay) {
+//            DateHandler month_ = new DateHandler();
+//            lastStoolDate.setText(month_.getMonth(selectedMonth) + " " + selectedDay + ", " + selectedYear);
+//
+//        }
+//    };
 }

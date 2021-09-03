@@ -15,6 +15,8 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
+import com.iso.downsconnect.fragments.FluidFragment;
+import com.iso.downsconnect.fragments.SolidFragment;
 
 import java.util.ArrayList;
 import java.util.Calendar;

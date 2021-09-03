@@ -12,6 +12,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.navigation.NavigationView;
+import com.iso.downsconnect.fragments.HomeFragment;
+import com.iso.downsconnect.fragments.ListEntriesFragment;
+import com.iso.downsconnect.fragments.ProfilesFragment;
 
 public class TestActivity extends AppCompatActivity {
     private DrawerLayout mDrawer;

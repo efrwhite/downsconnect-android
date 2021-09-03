@@ -1,4 +1,4 @@
-package com.iso.downsconnect;
+package com.iso.downsconnect.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,12 +8,14 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
+import com.iso.downsconnect.R;
+
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link FeedFragment#newInstance} factory method to
+ * Use the {@link BathroomFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FeedFragment extends Fragment {
+public class BathroomFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -24,7 +26,7 @@ public class FeedFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public FeedFragment() {
+    public BathroomFragment() {
         // Required empty public constructor
     }
 
@@ -37,8 +39,8 @@ public class FeedFragment extends Fragment {
      * @return A new instance of fragment DiaperFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static FeedFragment newInstance(String param1, String param2) {
-        FeedFragment fragment = new FeedFragment();
+    public static BathroomFragment newInstance(String param1, String param2) {
+        BathroomFragment fragment = new BathroomFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -58,7 +60,7 @@ public class FeedFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_feed, container, false);
+        View view = inflater.inflate(R.layout.fragment_bathroom, container, false);
 
         TextView textView = view.findViewById(R.id.text_view);
 
