@@ -11,6 +11,9 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.iso.downsconnect.fragments.HomeFragment;
+import com.iso.downsconnect.fragments.ListEntriesFragment;
+import com.iso.downsconnect.fragments.ProfilesFragment;
 import com.iso.downsconnect.objects.Child;
 import com.google.android.material.navigation.NavigationView;
 
@@ -36,6 +39,7 @@ public class ActivityContainer extends AppCompatActivity {
         final Fragment homeFragment = new HomeFragment();
         final Fragment profileFragment = new ProfilesFragment();
 
+        //go to profiles section when user first logs in or has no children
         ArrayList<Child> children = helper.getAllChildren();
         if(children.size() == 0){
             fragmentManager.beginTransaction().replace(R.id.flContent, profileFragment).commit();

@@ -1,8 +1,6 @@
-package com.iso.downsconnect;
+package com.iso.downsconnect.fragments;
 
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
-import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -16,26 +14,30 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 
+import com.iso.downsconnect.ActivityContainer;
+import com.iso.downsconnect.DBHelper;
+import com.iso.downsconnect.R;
 import com.iso.downsconnect.objects.Bathroom;
-import com.iso.downsconnect.objects.DateHandler;
 import com.iso.downsconnect.objects.Entry;
 
 import java.util.Calendar;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link ConstipationFragment#newInstance} factory method to
+ * Use the {@link PottyFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ConstipationFragment extends Fragment implements DatePickerDialog.OnDateSetListener {
-    private EditText lastStoolDate, treatment, notes;
-    private Button save;
+public class PottyFragment extends Fragment {
     private Bathroom bathroom = new Bathroom();
+    private Entry entry = new Entry();
+    private EditText notes, duration;
+    private Spinner units, accident;
     private DBHelper helper;
-    private Entry entry;
+    private Button save;
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -46,7 +48,7 @@ public class ConstipationFragment extends Fragment implements DatePickerDialog.O
     private String mParam1;
     private String mParam2;
 
-    public ConstipationFragment() {
+    public PottyFragment() {
         // Required empty public constructor
     }
 
@@ -56,11 +58,11 @@ public class ConstipationFragment extends Fragment implements DatePickerDialog.O
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment ConstipationFragment.
+     * @return A new instance of fragment PottyFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static ConstipationFragment newInstance(String param1, String param2) {
-        ConstipationFragment fragment = new ConstipationFragment();
+    public static PottyFragment newInstance(String param1, String param2) {
+        PottyFragment fragment = new PottyFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -81,7 +83,7 @@ public class ConstipationFragment extends Fragment implements DatePickerDialog.O
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_constipation, container, false);
+        return inflater.inflate(R.layout.fragment_potty, container, false);
     }
 
     @Override
@@ -91,41 +93,39 @@ public class ConstipationFragment extends Fragment implements DatePickerDialog.O
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         final int childID = sharedPreferences.getInt("name", 1);
 
-        bathroom.setBathroomType("Constipation");
+        bathroom.setBathroomType("Potty");
         bathroom.setChildID(childID);
         bathroom.setDiaperCream("None");
         bathroom.setOpenAir("None");
         bathroom.setLeak("None");
         bathroom.setQuantity("None");
-        bathroom.setPottyAccident("None");
-        bathroom.setDuration("None");
+        bathroom.setDateOfLastStool(-1);
+        bathroom.setTreatmentPlan("None");
 
-        lastStoolDate = view.findViewById(R.id.stoolDateEditText);
-        lastStoolDate.setFocusable(false);
-        treatment = view.findViewById(R.id.quantityEditText);
-        notes = view.findViewById(R.id.editText);
-        save = view.findViewById(R.id.saveButton);
         helper = new DBHelper(getContext());
-        entry = new Entry();
-
-        lastStoolDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showDatePickerDialog();
-            }
-        });
+        notes =  view.findViewById(R.id.editText);
+        accident = view.findViewById(R.id.accidentEditText);
+        units = view.findViewById(R.id.unitsSpinner);
+        duration = view.findViewById(R.id.durationEditText);
+        save = view.findViewById(R.id.saveButton);
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!lastStoolDate.getText().toString().equals("") && !treatment.getText().toString().equals("")){
-                    if(!notes.getText().toString().equals("")){
-                        bathroom.setNotes(notes.getText().toString());
+                if(!accident.getSelectedItem().equals("") && !duration.getText().toString().equals("")
+                        && !units.getSelectedItem().equals("Select")){
+                    bathroom.setDuration(duration.getText().toString() + " " + units.getSelectedItem().toString());
+                    bathroom.setPottyAccident(accident.getSelectedItem().toString());
+                    String entryText = helper.getChildName(childID) + " went potty for " + bathroom.getDuration();
+                    if(units.getSelectedItem().equals("Yes")){
+                        entryText = entryText + ". It was an accident";
                     }
-                    bathroom.setTreatmentPlan(treatment.getText().toString());
-                    helper.addBathroom(bathroom);
+                    else{
+                        entryText = entryText + ". It wasn't an accident";
+                    }
+                    entry.setEntryText(entryText);
                     entry.setChildID(childID);
-                    entry.setEntryText(helper.getChildName(childID) + " was constipated, treated with " + bathroom.getTreatmentPlan());
                     entry.setEntryTime(Calendar.getInstance().getTimeInMillis());
+                    helper.addBathroom(bathroom);
                     helper.addEntry(entry);
                     Intent intent = new Intent(getContext(), ActivityContainer.class);
                     startActivity(intent);
@@ -138,36 +138,6 @@ public class ConstipationFragment extends Fragment implements DatePickerDialog.O
                 }
             }
         });
-    }
 
-    private void showDatePickerDialog() {
-        Calendar cal = Calendar.getInstance();
-        @SuppressLint("ResourceType") DatePickerDialog datePicker = new DatePickerDialog(getContext(), 2,
-                this,
-                cal.get(Calendar.YEAR),
-                cal.get(Calendar.MONTH),
-                cal.get(Calendar.DAY_OF_MONTH));
-        datePicker.setCancelable(false);
-        datePicker.setTitle("Select the date");
-        datePicker.show();
     }
-
-    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-        DateHandler month_ = new DateHandler();
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(year, month, dayOfMonth);
-        bathroom.setDateOfLastStool(calendar.getTimeInMillis());
-        lastStoolDate.setText(month_.getMonth(month) + " " + dayOfMonth + ", " + year);
-    }
-
-//    private DatePickerDialog.OnDateSetListener datePickerListener = new DatePickerDialog.OnDateSetListener() {
-//
-//        // when dialog box is closed, below method will be called.
-//        public void onDateSet(DatePicker view, int selectedYear,
-//                              int selectedMonth, int selectedDay) {
-//            DateHandler month_ = new DateHandler();
-//            lastStoolDate.setText(month_.getMonth(selectedMonth) + " " + selectedDay + ", " + selectedYear);
-//
-//        }
-//    };
 }

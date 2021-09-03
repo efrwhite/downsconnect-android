@@ -1,4 +1,4 @@
-package com.iso.downsconnect;
+package com.iso.downsconnect.fragments;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +19,20 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.iso.downsconnect.ActivityActivity;
+import com.iso.downsconnect.BathroomActivity;
+import com.iso.downsconnect.DBHelper;
+import com.iso.downsconnect.FeedActivity;
+import com.iso.downsconnect.JournalActivity;
+import com.iso.downsconnect.MainActivity;
+import com.iso.downsconnect.MedicalActivity;
+import com.iso.downsconnect.MessageActivity;
+import com.iso.downsconnect.MilestoneActivity;
+import com.iso.downsconnect.MoodActivity;
+import com.iso.downsconnect.MoreActivity;
+import com.iso.downsconnect.R;
+import com.iso.downsconnect.ResourcesActivity;
+import com.iso.downsconnect.SleepActivity;
 import com.iso.downsconnect.objects.DateHandler;
 import com.iso.downsconnect.objects.Entry;
 

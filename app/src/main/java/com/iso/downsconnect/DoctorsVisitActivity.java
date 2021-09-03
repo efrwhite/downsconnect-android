@@ -1,6 +1,7 @@
 package com.iso.downsconnect;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import android.annotation.SuppressLint;
@@ -11,7 +12,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -22,6 +22,8 @@ import android.widget.FrameLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.iso.downsconnect.fragments.NewBornFragment;
+import com.iso.downsconnect.fragments.TwoMonthFragment;
 import com.iso.downsconnect.objects.Entry;
 import com.iso.downsconnect.objects.MedicalInfo;
 import com.iso.downsconnect.objects.Provider;
@@ -34,7 +36,8 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
     private long doctorDate = 0;
     private Spinner headUnit, tempUnit, weightUnit, heightUnit, providerType, provider;
     private MedicalInfo medicalInfo = new MedicalInfo();
-
+    private Fragment fragment;
+    private Class fragmentClass;
     private Button save;
     private Entry entry = new Entry();
     private DBHelper dbHelper;
@@ -43,6 +46,7 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
     private ArrayList<String> p_names = new ArrayList<>();
     private ArrayList<Provider> providers = new ArrayList<>();
     private FrameLayout ageLayout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,7 +100,7 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
         ageLayout.setVisibility(View.INVISIBLE);
 
 
-
+        //Calculate current time
         Calendar calendar = Calendar.getInstance();
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
         int minute = calendar.get(Calendar.MINUTE);
@@ -118,6 +122,7 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
             currentTime.setText("Today " + String.valueOf(hour) + ":" + realMins + "AM");
         }
 
+        //calculate child's current age
         long difference = Calendar.getInstance().getTimeInMillis() - dbHelper.getChildBirthday(childID);
         long days = difference / (24 * 60 * 60 * 1000);
         int months = (int) days / 30;
@@ -141,37 +146,31 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String selected = parent.getItemAtPosition(position).toString();
-//                Log.i("ariana" , String.valueOf(position));
-//                Log.i("theText", selected);
+                //check to see if selected item is pediatrician
                 if(selected.equals("Pediatrician")){
                     ageLayout.setVisibility(View.VISIBLE);
                     String age = ageText.getText().toString();
                     if(age.contains("days") || age.equals(" 1 month")){
                         age = "Newborn";
                     }
+                    //set fragment class to appropriate fragment depending on child's age
                     switch (age){
-                        case "2 months":
-                            visitNum.setText("2 months");
-                            TwoMonthFragment twoMonthFragment = new TwoMonthFragment();
-                            fragmentManager.beginTransaction().replace(R.id.ageLayout, twoMonthFragment).commit();
-                            break;
                         case "Newborn":
+                            fragment = new NewBornFragment();
+                            fragmentClass = NewBornFragment.class;
                             visitNum.setText("Newborn");
-                            NewBornFragment newBornFragment = new NewBornFragment();
-                            fragmentManager.beginTransaction().replace(R.id.ageLayout, newBornFragment).commit();
-                    }
-//                    if(age.equals("2 months")){
-//                        visitNum.setText("2 months");
-//                        TwoMonthFragment twoMonthFragment = new TwoMonthFragment();
-//                        fragmentManager.beginTransaction().replace(R.id.ageLayout, twoMonthFragment).commit();
-//
-//                    }
+                            break;
+                        case "2 months":
+                            fragment = new TwoMonthFragment();
+                            visitNum.setText("2 months");
+                            break;
+                        case "4 months":
+                            visitNum.setText("4 months");
 
-//                    if(age.contains("days") || age.equals(" 1 month")){
-//                        visitNum.setText("Newborn");
-//                        NewBornFragment newBornFragment = new NewBornFragment();
-//                        fragmentManager.beginTransaction().replace(R.id.ageLayout, newBornFragment).commit();
-//                    }
+
+                    }
+                    //create new instance of the fragment and display it to the user
+                    fragmentManager.beginTransaction().replace(R.id.ageLayout, fragment).commit();
                 }
             }
 
@@ -198,6 +197,7 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //save visit info
                 if(!doctorDatePicker.getText().toString().equals("") && !provider.getSelectedItem().toString().equals("Select")
                         && !height.getText().toString().equals("") && !headUnit.getSelectedItem().equals("Select")
                         && !tempUnit.getSelectedItem().equals("Select") && !visitNum.getText().toString().equals("") && !weight.getText().toString().equals("")
@@ -209,11 +209,30 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
                     medicalInfo.setHeadInfo(headSize.getText().toString() + " " + headUnit.getSelectedItem().toString());
                     medicalInfo.setTemperatureInfo(temperature.getText().toString() + " " + tempUnit.getSelectedItem().toString());
                     medicalInfo.setVisit(visitNum.getText().toString());
+
                     entry.setEntryTime(Calendar.getInstance().getTimeInMillis());
                     entry.setChildID(childID);
                     entry.setEntryText("Saved " + medicalInfo.getProviderType() + " appointment information for " + dbHelper.getChildName(childID));
+
+                    long id = dbHelper.addMedical(medicalInfo);
+                    entry.setForeignID(id);
                     dbHelper.addEntry(entry);
-                    dbHelper.addMedical(medicalInfo);
+
+                    ageLayout.setVisibility(View.VISIBLE);
+                    String age = ageText.getText().toString();
+                    if(age.contains("days") || age.equals(" 1 month")){
+                        age = "Newborn";
+                    }
+
+                    switch (age){
+                        case "Newborn":
+                            NewBornFragment newBornFragment = new NewBornFragment();
+                            newBornFragment.saveInfo();
+                            break;
+                    }
+
+
+
                     Intent intent = new Intent(DoctorsVisitActivity.this, ActivityContainer.class);
                     startActivity(intent);
                 }
@@ -245,6 +264,7 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
     }
 
     public void loadSpinnerData(){
+        //loads all the providers currently saved in db
         p_names.add("Select");
         for(Provider provide: providers){
             p_names.add(provide.getName());

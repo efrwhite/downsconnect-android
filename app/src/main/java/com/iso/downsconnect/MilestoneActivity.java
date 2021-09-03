@@ -47,14 +47,14 @@ public class MilestoneActivity extends AppCompatActivity implements DatePickerDi
         entry.setEntryText("Updated milestone information for " + helper.getChildName(childID));
 
         save = findViewById(R.id.saveButton);
-        standing = findViewById(R.id.standingDatePicker);
-        sitting = findViewById(R.id.sittingDatePicker);
-        rolling = findViewById(R.id.rolledDatePicker);
-        walking = findViewById(R.id.walkingDatePicker);
-        standAge = findViewById(R.id.calcStandingAge);
-        sitAge = findViewById(R.id.calcSittingAge);
-        rollAge = findViewById(R.id.calcRolledOverAge);
-        walkAge = findViewById(R.id.calcWalkingAge);
+//        standing = findViewById(R.id.standingDatePicker);
+//        sitting = findViewById(R.id.sittingDatePicker);
+//        rolling = findViewById(R.id.rolledDatePicker);
+//        walking = findViewById(R.id.walkingDatePicker);
+//        standAge = findViewById(R.id.calcStandingAge);
+//        sitAge = findViewById(R.id.calcSittingAge);
+//        rollAge = findViewById(R.id.calcRolledOverAge);
+//        walkAge = findViewById(R.id.calcWalkingAge);
         month_ = new DateHandler();
         milestone = new Milestone();
 
@@ -138,30 +138,30 @@ public class MilestoneActivity extends AppCompatActivity implements DatePickerDi
         }
 
 
-        save.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(rolling.getText().toString().equals("") && walking.getText().toString().equals("") && sitting.getText().toString().equals("") && standing.getText().toString().equals("")){
-                    AlertDialog a = new AlertDialog.Builder(save.getContext()).create();
-                    a.setTitle("Missing Information");
-                    a.setMessage("Please make sure you've filled out the necessary information");
-                    a.show();
-                }
-                else{
-                    if(stone != null){
-                        val = helper.updateMilestone(milestone);
-                        entry.setEntryTime(Calendar.getInstance().getTimeInMillis());
-                    }
-                    else{
-                        helper.addMilestone(milestone);
-                        entry.setEntryTime(Calendar.getInstance().getTimeInMillis());
-                    }
-
-                    Intent intent = new Intent(MilestoneActivity.this, ActivityContainer.class);
-                    startActivity(intent);
-                }
-            }
-        });
+//        save.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if(rolling.getText().toString().equals("") && walking.getText().toString().equals("") && sitting.getText().toString().equals("") && standing.getText().toString().equals("")){
+//                    AlertDialog a = new AlertDialog.Builder(save.getContext()).create();
+//                    a.setTitle("Missing Information");
+//                    a.setMessage("Please make sure you've filled out the necessary information");
+//                    a.show();
+//                }
+//                else{
+//                    if(stone != null){
+//                        val = helper.updateMilestone(milestone);
+//                        entry.setEntryTime(Calendar.getInstance().getTimeInMillis());
+//                    }
+//                    else{
+//                        helper.addMilestone(milestone);
+//                        entry.setEntryTime(Calendar.getInstance().getTimeInMillis());
+//                    }
+//
+//                    Intent intent = new Intent(MilestoneActivity.this, ActivityContainer.class);
+//                    startActivity(intent);
+//                }
+//            }
+//        });
 
 
         back.setOnClickListener(new View.OnClickListener() {
@@ -172,49 +172,49 @@ public class MilestoneActivity extends AppCompatActivity implements DatePickerDi
             }
         });
 
-        standing.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                stand = true;
-                roll = false;
-                walk = false;
-                sit = false;
-                showDatePickerDialog();
-            }
-        });
-
-        sitting.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sit = true;
-                roll = false;
-                walk = false;
-                stand = false;
-                showDatePickerDialog();
-            }
-        });
-
-        rolling.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                roll = true;
-                walk = false;
-                stand = false;
-                sit = false;
-                showDatePickerDialog();
-            }
-        });
-
-        walking.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                walk = true;
-                roll = false;
-                stand = false;
-                sit = false;
-                showDatePickerDialog();
-            }
-        });
+//        standing.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                stand = true;
+//                roll = false;
+//                walk = false;
+//                sit = false;
+//                showDatePickerDialog();
+//            }
+//        });
+//
+//        sitting.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                sit = true;
+//                roll = false;
+//                walk = false;
+//                stand = false;
+//                showDatePickerDialog();
+//            }
+//        });
+//
+//        rolling.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                roll = true;
+//                walk = false;
+//                stand = false;
+//                sit = false;
+//                showDatePickerDialog();
+//            }
+//        });
+//
+//        walking.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                walk = true;
+//                roll = false;
+//                stand = false;
+//                sit = false;
+//                showDatePickerDialog();
+//            }
+//        });
     }
 
     private void showDatePickerDialog() {

@@ -305,7 +305,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    public boolean addMedical(MedicalInfo medicalInfo){
+    public long addMedical(MedicalInfo medicalInfo){
         ContentValues values = new ContentValues();
         values.put(COLUMN_7[1], medicalInfo.getChildID());
         values.put(COLUMN_7[2], medicalInfo.getHeight());
@@ -320,12 +320,7 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         long result = db.insert(TABLE_NAMES[6], null, values);
         db.close();
-        if(result == -1){
-            return false;
-        }
-        else {
-            return true;
-        }
+        return result;
     }
 
     public boolean addBathroom(Bathroom bathroom){

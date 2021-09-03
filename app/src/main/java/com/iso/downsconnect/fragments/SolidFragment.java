@@ -1,4 +1,4 @@
-package com.iso.downsconnect;
+package com.iso.downsconnect.fragments;
 
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -18,6 +18,9 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.iso.downsconnect.ActivityContainer;
+import com.iso.downsconnect.DBHelper;
+import com.iso.downsconnect.R;
 import com.iso.downsconnect.objects.Entry;
 import com.iso.downsconnect.objects.Feed;
 

@@ -37,7 +37,6 @@ public class MedicalActivity extends AppCompatActivity{
         save = findViewById(R.id.saveButton);
         TextView currentTime = findViewById(R.id.current_time_text);
         doctorVisitBtn = findViewById(R.id.doctorVisitButton);
-        doctorDatePicker = findViewById(R.id.rolledDatePicker);
         OTBtn = findViewById(R.id.occupationalTherapyButton);
         PTBtn = findViewById(R.id.physicalTherapyButton);
         opthBtn = findViewById(R.id.ophthamologyButton);

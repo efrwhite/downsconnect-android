@@ -1,4 +1,4 @@
-package com.iso.downsconnect;
+package com.iso.downsconnect.fragments;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -22,6 +22,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.iso.downsconnect.DBHelper;
+import com.iso.downsconnect.DetailedProfileActivity;
+import com.iso.downsconnect.ProvidersActivity;
+import com.iso.downsconnect.R;
 import com.iso.downsconnect.objects.AccountHolder;
 import com.iso.downsconnect.objects.Child;
 import com.iso.downsconnect.objects.Provider;
