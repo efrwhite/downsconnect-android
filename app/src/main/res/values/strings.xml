@@ -410,5 +410,29 @@
         <item>Crying</item>
         <item>Sleepy</item>
     </array>
+    <array name="visits">
+        <item>Select</item>
+        <item>Newborn</item>
+        <item>Two months</item>
+        <item>Four months</item>
+        <item>Six months</item>
+        <item>Nine months</item>
+        <item>Twelve months</item>
+        <item>Fifteen months</item>
+        <item>Eighteen months</item>
+        <item>Two years</item>
+        <item>Thirty months</item>
+        <item>Three years</item>
+        <item>Four years</item>
+        <item>Five years</item>
+        <item>Six years</item>
+        <item>Seven years</item>
+        <item>Eight years</item>
+        <item>Nine years</item>
+        <item>Ten years</item>
+        <item>Eleven years</item>
+        <item>Twelve years</item>
+        <item>Not an age-scheduled visit</item>
+    </array>
 
 </resources>

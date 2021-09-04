@@ -20,6 +20,7 @@ import com.iso.downsconnect.objects.Milestone;
 import com.iso.downsconnect.objects.Mood;
 import com.iso.downsconnect.objects.Provider;
 import com.iso.downsconnect.objects.Sleep;
+import com.iso.downsconnect.objects.VisitInfo;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -27,7 +28,7 @@ import java.util.ArrayList;
 public class DBHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "downsconnect.db";
     private static final int DATABASE_VERSION = 3;
-    private static final String[] TABLE_NAMES = {"Account", "Child", "Feed", "Mood", "Sleep", "Entry", "Medical", "Milestone", "Bathroom", "Provider", "Activity", "Image", "Message", "Journal"};
+    private static final String[] TABLE_NAMES = {"Account", "Child", "Feed", "Mood", "Sleep", "Entry", "Medical", "Milestone", "Bathroom", "Provider", "Activity", "Image", "Message", "Journal", "VisitInfo"};
     private static final String[] COLUMN_1 = {"AccountID","FirstName", "LastName", "Username", "Password", "Phone"};
     private static final String[] COLUMN_2 = {"ChildID", "FirstName", "LastName", "Gender", "BloodType", "DueDate", "Birthday", "Allergies", "Medications"};
     private static final String[] COLUMN_3 = {"FeedID", "ChildID", "Amount", "Substance", "Notes", "FoodUnit" , "EntryTime", "Iron", "Vitamin", "Other"};
@@ -42,6 +43,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String[] COLUMN_12 = {"ImageID", "ChildID", "Image"};
     private static final String[] COLUMN_13 = {"MessageID", "ChildID", "Message"};
     private static final String[] COLUMN_14 = {"JournalID", "ChildID", "Title", "Notes"};
+    private static final String[] COLUMN_15 = {"VisitInfoID", "ChildID", "MedicalInfoID", "CheckAnswers", "AppointmentDates", "AppointmentProviders"};
     public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -167,6 +169,13 @@ public class DBHelper extends SQLiteOpenHelper {
                 "ChildID INTEGER, " +
                 "Title TEXT, " +
                 "Notes TEXT)");
+        db.execSQL("CREATE TABLE VisitInfo(" +
+                "VisitInfoID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
+                "ChildID INTEGER, " +
+                "MedicalInfoID INTEGER, " +
+                "CheckAnswers TEXT, " +
+                "AppointmentDates TEXT, "+
+                "AppointmentProviders TEXT)");
     }
 
     @Override
@@ -186,6 +195,7 @@ public class DBHelper extends SQLiteOpenHelper {
             db.execSQL("DROP TABLE IF EXISTS Image");
             db.execSQL("DROP TABLE IF EXISTS Message");
             db.execSQL("DROP TABLE IF EXISTS Journal");
+            db.execSQL("DROP TABLE IF EXISTS VisitInfo");
 
         }
     }
@@ -419,6 +429,20 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
         db.close();
         return result;
+    }
+
+    public long addVisit(VisitInfo visitInfo){
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_15[1], visitInfo.getChildID());
+        values.put(COLUMN_15[2], visitInfo.getMedicalInfoID());
+        values.put(COLUMN_15[3], visitInfo.getAnswers());
+        values.put(COLUMN_15[4], visitInfo.getDates());
+        values.put(COLUMN_15[5], visitInfo.getProviders());
+        SQLiteDatabase db = this.getWritableDatabase();
+        long result = db.insert(TABLE_NAMES[14], null, values);
+        db.close();
+        return result;
+
     }
 
     public Child getChild(String firstName){

@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -22,8 +23,27 @@ import android.widget.FrameLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.iso.downsconnect.fragments.EightYearFragment;
+import com.iso.downsconnect.fragments.EighteenMonthFragment;
+import com.iso.downsconnect.fragments.ElevenYearFragment;
+import com.iso.downsconnect.fragments.FifteenMonthFragment;
+import com.iso.downsconnect.fragments.FiveYearFragment;
+import com.iso.downsconnect.fragments.FourMonthFragment;
+import com.iso.downsconnect.fragments.FourYearFragment;
 import com.iso.downsconnect.fragments.NewBornFragment;
+import com.iso.downsconnect.fragments.NineMonthFragment;
+import com.iso.downsconnect.fragments.NineYearFragment;
+import com.iso.downsconnect.fragments.NoAgeFragment;
+import com.iso.downsconnect.fragments.SevenYearFragment;
+import com.iso.downsconnect.fragments.SixMonthFragment;
+import com.iso.downsconnect.fragments.SixYearFragment;
+import com.iso.downsconnect.fragments.TenYearFragment;
+import com.iso.downsconnect.fragments.ThirtyMonthsFragment;
+import com.iso.downsconnect.fragments.ThreeYearFragment;
+import com.iso.downsconnect.fragments.TwelveMonthFragment;
+import com.iso.downsconnect.fragments.TwelveYearFragment;
 import com.iso.downsconnect.fragments.TwoMonthFragment;
+import com.iso.downsconnect.fragments.TwoYearFragment;
 import com.iso.downsconnect.objects.Entry;
 import com.iso.downsconnect.objects.MedicalInfo;
 import com.iso.downsconnect.objects.Provider;
@@ -32,12 +52,11 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 public class DoctorsVisitActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
-    private EditText doctorDatePicker, height, headSize, temperature, visitNum, weight;
+    private EditText doctorDatePicker, height, headSize, temperature, weight;
     private long doctorDate = 0;
-    private Spinner headUnit, tempUnit, weightUnit, heightUnit, providerType, provider;
+    private Spinner headUnit, tempUnit, weightUnit, heightUnit, providerType, provider, visitNum;
     private MedicalInfo medicalInfo = new MedicalInfo();
     private Fragment fragment;
-    private Class fragmentClass;
     private Button save;
     private Entry entry = new Entry();
     private DBHelper dbHelper;
@@ -46,6 +65,11 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
     private ArrayList<String> p_names = new ArrayList<>();
     private ArrayList<Provider> providers = new ArrayList<>();
     private FrameLayout ageLayout;
+    private String age;
+    private NewBornFragment newBornFragment = new NewBornFragment();
+    private TwoMonthFragment twoMonthFragment = new TwoMonthFragment();
+    private FourMonthFragment fourMonthFragment = new FourMonthFragment();
+    private SixMonthFragment sixMonthFragment = new SixMonthFragment();
 
 
     @Override
@@ -88,7 +112,7 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
         headUnit = findViewById(R.id.headSpinner);
         tempUnit = findViewById(R.id.temperatureSpinner);
         temperature = findViewById(R.id.temperatureEditText);
-        visitNum = findViewById(R.id.visitEditText);
+        visitNum = findViewById(R.id.visitSpinner);
         weight = findViewById(R.id.weightEditText);
         weightUnit = findViewById(R.id.weightSpinner);
         heightUnit = findViewById(R.id.heightSpinner);
@@ -97,7 +121,7 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
         back = findViewById(R.id.backButton);
         ageLayout = findViewById(R.id.ageLayout);
 
-        ageLayout.setVisibility(View.INVISIBLE);
+        visitNum.setEnabled(false);
 
 
         //Calculate current time
@@ -142,34 +166,120 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
 
         loadSpinnerData();
 
+//        providerType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                String selected = parent.getItemAtPosition(position).toString();
+//                //check to see if selected item is pediatrician
+//
+//                if(selected.equals("Pediatrician")){
+//                    ageLayout.setVisibility(View.VISIBLE);
+//                    age = ageText.getText().toString();
+//                    if(age.contains("days") || age.equals(" 1 month")){
+//                        age = "Newborn";
+//                    }
+//                    //set fragment class to appropriate fragment depending on child's age
+//                    switch (age){
+//                        case "Newborn":
+//                            fragment = newBornFragment;
+//                            break;
+//                        case "2 months":
+//                            fragment = new TwoMonthFragment();
+//                            break;
+//                        case "4 months":
+//
+//                    }
+//                    //create new instance of the fragment and display it to the user
+//                    fragmentManager.beginTransaction().replace(R.id.ageLayout, fragment).commit();
+//                }
+//            }
         providerType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String selected = parent.getItemAtPosition(position).toString();
-                //check to see if selected item is pediatrician
                 if(selected.equals("Pediatrician")){
-                    ageLayout.setVisibility(View.VISIBLE);
-                    String age = ageText.getText().toString();
-                    if(age.contains("days") || age.equals(" 1 month")){
-                        age = "Newborn";
-                    }
-                    //set fragment class to appropriate fragment depending on child's age
-                    switch (age){
-                        case "Newborn":
-                            fragment = new NewBornFragment();
-                            fragmentClass = NewBornFragment.class;
-                            visitNum.setText("Newborn");
-                            break;
-                        case "2 months":
-                            fragment = new TwoMonthFragment();
-                            visitNum.setText("2 months");
-                            break;
-                        case "4 months":
-                            visitNum.setText("4 months");
+                    visitNum.setEnabled(true);
+                }
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
 
-                    }
-                    //create new instance of the fragment and display it to the user
+            }
+        });
+
+        visitNum.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String selected = parent.getItemAtPosition(position).toString();
+                //check to see if selected item is pediatrician
+                switch (selected) {
+                    case "Newborn":
+                        fragment = newBornFragment;
+                        break;
+                    case "Two months":
+                        fragment = twoMonthFragment;
+                        break;
+                    case "Four months":
+                        fragment = fourMonthFragment;
+                        break;
+                    case "Six months":
+                        fragment = sixMonthFragment;
+                        break;
+                    case "Nine months":
+                        fragment = new NineMonthFragment();
+                        break;
+                    case "Twelve months":
+                        fragment = new TwelveMonthFragment();
+                        break;
+                    case "Fifteen months":
+                        fragment = new FifteenMonthFragment();
+                        break;
+                    case "Eighteen months":
+                        fragment = new EighteenMonthFragment();
+                        break;
+                    case "Two years":
+                        fragment = new TwoYearFragment();
+                        break;
+                    case "Thirty months":
+                        fragment = new ThirtyMonthsFragment();
+                        break;
+                    case "Three years":
+                        fragment = new ThreeYearFragment();
+                        break;
+                    case "Four years":
+                        fragment = new FourYearFragment();
+                        break;
+                    case "Five years":
+                        fragment = new FiveYearFragment();
+                        break;
+                    case "Six years":
+                        fragment = new SixYearFragment();
+                        break;
+                    case "Seven years":
+                        fragment = new SevenYearFragment();
+                        break;
+                    case "Eight years":
+                        fragment = new EightYearFragment();
+                        break;
+                    case "Nine years":
+                        fragment = new NineYearFragment();
+                        break;
+                    case "Ten years":
+                        fragment = new TenYearFragment();
+                        break;
+                    case "Eleven years":
+                        fragment = new ElevenYearFragment();
+                        break;
+                    case "Twelve years":
+                        fragment = new TwelveYearFragment();
+                        break;
+                    case "Not an age-scheduled visit":
+                        fragment = new NoAgeFragment();
+                        break;
+
+                }
+                if(!selected.equals("Select")) {
                     fragmentManager.beginTransaction().replace(R.id.ageLayout, fragment).commit();
                 }
             }
@@ -198,45 +308,51 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
             @Override
             public void onClick(View v) {
                 //save visit info
-                if(!doctorDatePicker.getText().toString().equals("") && !provider.getSelectedItem().toString().equals("Select")
-                        && !height.getText().toString().equals("") && !headUnit.getSelectedItem().equals("Select")
-                        && !tempUnit.getSelectedItem().equals("Select") && !visitNum.getText().toString().equals("") && !weight.getText().toString().equals("")
-                        && !heightUnit.getSelectedItem().equals("Select") && !weightUnit.getSelectedItem().equals("Select") && !providerType.getSelectedItem().toString().equals("Select")){
-                    medicalInfo.setProvider(provider.getSelectedItem().toString());
-                    medicalInfo.setHeight(height.getText().toString() + " " + heightUnit.getSelectedItem().toString());
-                    medicalInfo.setProviderType(providerType.getSelectedItem().toString());
-                    medicalInfo.setWeight(weight.getText().toString() + " " + weightUnit.getSelectedItem().toString());
-                    medicalInfo.setHeadInfo(headSize.getText().toString() + " " + headUnit.getSelectedItem().toString());
-                    medicalInfo.setTemperatureInfo(temperature.getText().toString() + " " + tempUnit.getSelectedItem().toString());
-                    medicalInfo.setVisit(visitNum.getText().toString());
+                boolean validate = false;
+                if(age.equals("Newborn")){
+                    validate = newBornFragment.validate();
+                }
+                if(validate) {
+                    if (!doctorDatePicker.getText().toString().equals("") && !provider.getSelectedItem().toString().equals("Select")
+                            && !height.getText().toString().equals("") && !headUnit.getSelectedItem().equals("Select")
+                            && !tempUnit.getSelectedItem().equals("Select") && !weight.getText().toString().equals("")
+                            && !heightUnit.getSelectedItem().equals("Select") && !weightUnit.getSelectedItem().equals("Select") && !providerType.getSelectedItem().toString().equals("Select")) {
+                        medicalInfo.setProvider(provider.getSelectedItem().toString());
+                        medicalInfo.setHeight(height.getText().toString() + " " + heightUnit.getSelectedItem().toString());
+                        medicalInfo.setProviderType(providerType.getSelectedItem().toString());
+                        medicalInfo.setWeight(weight.getText().toString() + " " + weightUnit.getSelectedItem().toString());
+                        medicalInfo.setHeadInfo(headSize.getText().toString() + " " + headUnit.getSelectedItem().toString());
+                        medicalInfo.setTemperatureInfo(temperature.getText().toString() + " " + tempUnit.getSelectedItem().toString());
+//                        medicalInfo.setVisit(visitNum.getText().toString());
 
-                    entry.setEntryTime(Calendar.getInstance().getTimeInMillis());
-                    entry.setChildID(childID);
-                    entry.setEntryText("Saved " + medicalInfo.getProviderType() + " appointment information for " + dbHelper.getChildName(childID));
+                        entry.setEntryTime(Calendar.getInstance().getTimeInMillis());
+                        entry.setChildID(childID);
+                        entry.setEntryText("Saved " + medicalInfo.getProviderType() + " appointment information for " + dbHelper.getChildName(childID));
 
-                    long id = dbHelper.addMedical(medicalInfo);
-                    entry.setForeignID(id);
-                    dbHelper.addEntry(entry);
+                        long id = dbHelper.addMedical(medicalInfo);
+                        entry.setForeignID(id);
+                        dbHelper.addEntry(entry);
 
-                    ageLayout.setVisibility(View.VISIBLE);
-                    String age = ageText.getText().toString();
-                    if(age.contains("days") || age.equals(" 1 month")){
-                        age = "Newborn";
+                        ageLayout.setVisibility(View.VISIBLE);
+                        String age = ageText.getText().toString();
+                        if (age.contains("days") || age.equals(" 1 month")) {
+                            age = "Newborn";
+                        }
+
+                        switch (age) {
+                            case "Newborn":
+                                NewBornFragment newBornFragment = new NewBornFragment();
+                                newBornFragment.saveInfo();
+                                break;
+                        }
+
+
+                        Intent intent = new Intent(DoctorsVisitActivity.this, ActivityContainer.class);
+                        startActivity(intent);
                     }
-
-                    switch (age){
-                        case "Newborn":
-                            NewBornFragment newBornFragment = new NewBornFragment();
-                            newBornFragment.saveInfo();
-                            break;
-                    }
-
-
-
-                    Intent intent = new Intent(DoctorsVisitActivity.this, ActivityContainer.class);
-                    startActivity(intent);
                 }
                 else{
+                    Log.i("Valley2", String.valueOf(validate));
                     AlertDialog a = new AlertDialog.Builder(save.getContext()).create();
                     a.setTitle("Missing Information");
                     a.setMessage("Please make sure you've filled out the necessary information");
