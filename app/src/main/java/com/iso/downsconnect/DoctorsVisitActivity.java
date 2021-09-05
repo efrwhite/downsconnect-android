@@ -65,7 +65,6 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
     private ArrayList<String> p_names = new ArrayList<>();
     private ArrayList<Provider> providers = new ArrayList<>();
     private FrameLayout ageLayout;
-    private String age;
     private NewBornFragment newBornFragment = new NewBornFragment();
     private TwoMonthFragment twoMonthFragment = new TwoMonthFragment();
     private FourMonthFragment fourMonthFragment = new FourMonthFragment();
@@ -100,9 +99,6 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
                             }).show();
                 }
         medicalInfo.setChildID(childID);
-
-        //open panel for pediatrican like the sleep panel
-        //panel shouldn't open if other doctor type is selected
 
 
         provider = findViewById(R.id.p_nameSpinner);
@@ -196,6 +192,7 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
         providerType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                //Enable the age spinner only if the visit is of type "Pediatrician"
                 String selected = parent.getItemAtPosition(position).toString();
                 if(selected.equals("Pediatrician")){
                     visitNum.setEnabled(true);
@@ -212,7 +209,7 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String selected = parent.getItemAtPosition(position).toString();
-                //check to see if selected item is pediatrician
+                //Load appropriate fragment depending on what age the user picks
                 switch (selected) {
                     case "Newborn":
                         fragment = newBornFragment;
@@ -309,6 +306,7 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
             public void onClick(View v) {
                 //save visit info
                 boolean validate = false;
+                String age = ageText.getText().toString();
                 if(age.equals("Newborn")){
                     validate = newBornFragment.validate();
                 }
@@ -334,11 +332,6 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
                         dbHelper.addEntry(entry);
 
                         ageLayout.setVisibility(View.VISIBLE);
-                        String age = ageText.getText().toString();
-                        if (age.contains("days") || age.equals(" 1 month")) {
-                            age = "Newborn";
-                        }
-
                         switch (age) {
                             case "Newborn":
                                 NewBornFragment newBornFragment = new NewBornFragment();
@@ -352,7 +345,6 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
                     }
                 }
                 else{
-                    Log.i("Valley2", String.valueOf(validate));
                     AlertDialog a = new AlertDialog.Builder(save.getContext()).create();
                     a.setTitle("Missing Information");
                     a.setMessage("Please make sure you've filled out the necessary information");

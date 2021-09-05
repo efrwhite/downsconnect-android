@@ -266,13 +266,12 @@
                 android:layout_marginTop="8sp"
                 android:text="@string/providers" />
 
-            <TextView
-                android:id="@+id/textView61"
+            <Spinner
+                android:id="@+id/twoMSpinner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16sp"
-                android:layout_marginTop="8sp"
-                android:text="**This will be a scrollable list of providers from the provider list." />
+                android:layout_marginTop="8sp" />
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

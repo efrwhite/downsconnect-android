@@ -61,12 +61,11 @@
                 android:layout_marginTop="8sp"
                 android:text="@string/provider" />
 
-            <TextView
-                android:id="@+id/textView45"
+            <Spinner
+                android:id="@+id/Spin5_1"
                 android:layout_width="match_parent"
                 android:layout_height="47dp"
-                android:layout_marginLeft="16sp"
-                android:text="**This will be a scrollable list of providers from the provider list." />
+                android:layout_marginLeft="16sp" />
 
             <TextView
                 android:id="@+id/eyeexam33"
@@ -101,12 +100,11 @@
                 android:layout_marginTop="8sp"
                 android:text="@string/provider" />
 
-            <TextView
-                android:id="@+id/textView55"
+            <Spinner
+                android:id="@+id/Spin5_2"
                 android:layout_width="match_parent"
                 android:layout_height="47dp"
-                android:layout_marginLeft="16sp"
-                android:text="**This will be a scrollable list of providers from the provider list." />
+                android:layout_marginLeft="16sp" />
 
             <TextView
                 android:id="@+id/eyeexam34"
@@ -141,12 +139,11 @@
                 android:layout_marginTop="8sp"
                 android:text="@string/provider" />
 
-            <TextView
-                android:id="@+id/textView80"
+            <Spinner
+                android:id="@+id/Spin5_3"
                 android:layout_width="match_parent"
                 android:layout_height="47dp"
-                android:layout_marginLeft="16sp"
-                android:text="**This will be a scrollable list of providers from the provider list." />
+                android:layout_marginLeft="16sp" />
 
             <TextView
                 android:id="@+id/eyeexam36"
@@ -217,12 +214,11 @@
                 android:layout_marginTop="8sp"
                 android:text="@string/provider" />
 
-            <TextView
-                android:id="@+id/textView81"
+            <Spinner
+                android:id="@+id/Spin5_4"
                 android:layout_width="match_parent"
                 android:layout_height="47dp"
-                android:layout_marginLeft="16sp"
-                android:text="**This will be a scrollable list of providers from the provider list." />
+                android:layout_marginLeft="16sp" />
 
             <TextView
                 android:id="@+id/eyeexam37"
@@ -293,12 +289,11 @@
                 android:layout_marginTop="8sp"
                 android:text="@string/provider" />
 
-            <TextView
-                android:id="@+id/textView82"
+            <Spinner
+                android:id="@+id/Spin5_5"
                 android:layout_width="match_parent"
                 android:layout_height="47dp"
-                android:layout_marginLeft="16sp"
-                android:text="**This will be a scrollable list of providers from the provider list." />
+                android:layout_marginLeft="16sp" />
 
             <TextView
                 android:id="@+id/dev_referral48"
