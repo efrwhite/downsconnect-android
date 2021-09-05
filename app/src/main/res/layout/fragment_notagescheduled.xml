@@ -17,9 +17,9 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextTextMultiLine"
-        android:layout_width="312dp"
-        android:layout_height="241dp"
+        android:id="@+id/noAgeNotes"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
         android:ems="10"
         android:gravity="start|top"
         android:inputType="textMultiLine"

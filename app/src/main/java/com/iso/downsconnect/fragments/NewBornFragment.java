@@ -10,13 +10,18 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.iso.downsconnect.DBHelper;
 import com.iso.downsconnect.R;
 import com.iso.downsconnect.objects.MedicalInfo;
+import com.iso.downsconnect.objects.Provider;
 import com.iso.downsconnect.objects.VisitInfo;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,6 +34,9 @@ public class NewBornFragment extends Fragment {
     private EditText date1, date2, date3, date4, date5;
     private Spinner provider1, provider2, provider3, provider4, provider5;
     private VisitInfo visitInfo = new VisitInfo();
+    private ArrayList<String> p_names = new ArrayList<>();
+    private ArrayList<Provider> providers = new ArrayList<>();
+    private DBHelper dbHelper;
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -82,6 +90,9 @@ public class NewBornFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        dbHelper = new DBHelper(getContext());
+        providers = dbHelper.getAllProviders();
+
         yes1 = view.findViewById(R.id.checkBoxYes11);
         yes2 = view.findViewById(R.id.checkBoxYes2);
         yes3 = view.findViewById(R.id.checkBoxYes3);
@@ -110,6 +121,37 @@ public class NewBornFragment extends Fragment {
         date4 = view.findViewById(R.id.assessDate4);
         date5 = view.findViewById(R.id.assessDate5);
 
+        provider1 = view.findViewById(R.id.provider1);
+        provider2 = view.findViewById(R.id.provider2);
+        provider3 = view.findViewById(R.id.provider3);
+        provider4 = view.findViewById(R.id.provider4);
+        provider5 = view.findViewById(R.id.provider5);
+
+        setRegularListener(yes1, no1, "yes");
+        setRegularListener(yes3, no3, "yes");
+        setRegularListener(yes5, no5, "yes");
+        setRegularListener(yes7, no7, "yes");
+        setRegularListener(yes9, no9, "yes");
+
+        setRegularListener(no1, yes1, "no");
+        setRegularListener(no3, yes3, "no");
+        setRegularListener(no5, yes5, "no");
+        setRegularListener(no7, yes7, "no");
+        setRegularListener(no9, yes9, "no");
+
+        setToggleListener(yes2, no2, "yes", date1, provider1);
+        setToggleListener(yes4, no4, "yes", date2, provider2);
+        setToggleListener(yes6, no6, "yes", date3, provider3);
+        setToggleListener(yes8, no8, "yes", date4, provider4);
+        setToggleListener(yes10, no10, "yes", date5, provider5);
+
+        setToggleListener(no2, yes2, "no", date1, provider1);
+        setToggleListener(no4, yes4, "no", date2, provider2);
+        setToggleListener(no6, yes6, "no", date3, provider3);
+        setToggleListener(no8, yes8, "no", date4, provider4);
+        setToggleListener(no10, yes10, "no", date5, provider5);
+
+        loadSpinnerData();
 
     }
 
@@ -117,6 +159,9 @@ public class NewBornFragment extends Fragment {
     public void saveInfo(){
        int one = selectedCheckbox(yes1, no1);
        int two = selectedCheckbox(yes2, no2);
+        if(two == 2){
+            provider1.setEnabled(false);
+        }
        int three = selectedCheckbox(yes3, no3);
        int four = selectedCheckbox(yes4, no4);
        int five = selectedCheckbox(yes5, no5);
@@ -150,7 +195,7 @@ public class NewBornFragment extends Fragment {
             else{
                 visitInfo.setAnswers(visitInfo.getAnswers().concat("; ").concat(two.getText().toString()));
             }
-            return 1;
+            return 2;
         }
         else{
             return -1;
@@ -162,5 +207,63 @@ public class NewBornFragment extends Fragment {
                 && (yes5.isChecked() || no5.isChecked()) && (yes6.isChecked() || no6.isChecked()) && (yes7.isChecked() || no7.isChecked()) && (yes8.isChecked() || no8.isChecked())
                 && (yes9.isChecked() || no9.isChecked()) && (yes10.isChecked() || no10.isChecked()) && !date1.getText().toString().equals("") && !date2.getText().toString().equals("")
                 && !date3.getText().toString().equals("") && !date4.getText().toString().equals("") && !date5.getText().toString().equals("");
+    }
+
+    public void loadSpinnerData(){
+        //loads all the providers currently saved in db
+        p_names.add("Select");
+        for(Provider provide: providers){
+            p_names.add(provide.getName());
+        }
+        ArrayAdapter<String> providerAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item, p_names);
+        providerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        provider1.setAdapter(providerAdapter);
+        provider2.setAdapter(providerAdapter);
+        provider3.setAdapter(providerAdapter);
+        provider4.setAdapter(providerAdapter);
+        provider5.setAdapter(providerAdapter);
+
+    }
+
+    public void setToggleListener(final CheckBox checkBox1, final CheckBox checkBox2, String type, final EditText date, final Spinner provider){
+        if(type.equals("yes")){
+            checkBox1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    checkBox2.setChecked(false);
+                    date.setEnabled(true);
+                    provider.setEnabled(true);
+                }
+            });
+        }
+        else if(type.equals("no")){
+            checkBox1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    checkBox2.setChecked(false);
+                    date.setEnabled(false);
+                    provider.setEnabled(false);
+                }
+            });
+        }
+    }
+
+    private void setRegularListener(final CheckBox checkBox1, final CheckBox checkBox2, String type){
+        if(type.equals("yes")){
+            checkBox1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    checkBox2.setChecked(false);
+                }
+            });
+        }
+        else if(type.equals("no")){
+            checkBox1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    checkBox2.setChecked(false);
+                }
+            });
+        }
     }
 }

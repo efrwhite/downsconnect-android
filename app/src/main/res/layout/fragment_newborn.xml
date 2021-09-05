@@ -95,12 +95,11 @@
                 android:layout_marginTop="8sp"
                 android:text="@string/provider" />
 
-            <TextView
-                android:id="@+id/textView62"
+            <Spinner
+                android:id="@+id/provider1"
                 android:layout_width="231dp"
                 android:layout_height="47dp"
-                android:layout_marginLeft="16sp"
-                android:text="**This will be a scrollable list of providers from the provider list." />
+                android:layout_marginLeft="16sp" />
 
             <TextView
                 android:id="@+id/eyeexam2"
@@ -171,12 +170,11 @@
                 android:layout_marginTop="8sp"
                 android:text="@string/provider" />
 
-            <TextView
-                android:id="@+id/textView63"
-                android:layout_width="370dp"
+            <Spinner
+                android:id="@+id/provider2"
+                android:layout_width="231dp"
                 android:layout_height="46dp"
-                android:layout_marginLeft="16sp"
-                android:text="**This will be a scrollable list of providers from the provider list." />
+                android:layout_marginLeft="16sp" />
 
             <TextView
                 android:id="@+id/eyeexam3"
@@ -247,12 +245,11 @@
                 android:layout_marginTop="8sp"
                 android:text="@string/provider" />
 
-            <TextView
-                android:id="@+id/textView64"
-                android:layout_width="wrap_content"
+            <Spinner
+                android:id="@+id/provider3"
+                android:layout_width="231dp"
                 android:layout_height="47dp"
-                android:layout_marginLeft="16sp"
-                android:text="**This will be a scrollable list of providers from the provider list." />
+                android:layout_marginLeft="16sp" />
 
             <TextView
                 android:id="@+id/eyeexam4"
@@ -323,12 +320,11 @@
                 android:layout_marginTop="8sp"
                 android:text="@string/provider" />
 
-            <TextView
-                android:id="@+id/textView65"
-                android:layout_width="375dp"
+            <Spinner
+                android:id="@+id/provider4"
+                android:layout_width="231dp"
                 android:layout_height="48dp"
-                android:layout_marginLeft="16sp"
-                android:text="**This will be a scrollable list of providers from the provider list." />
+                android:layout_marginLeft="16sp" />
 
             <TextView
                 android:id="@+id/eyeexam5"
@@ -399,12 +395,11 @@
                 android:layout_marginTop="8sp"
                 android:text="@string/provider" />
 
-            <TextView
-                android:id="@+id/textView66"
-                android:layout_width="381dp"
+            <Spinner
+                android:id="@+id/provider5"
+                android:layout_width="231dp"
                 android:layout_height="46dp"
-                android:layout_marginLeft="16sp"
-                android:text="**This will be a scrollable list of providers from the provider list." />
+                android:layout_marginLeft="16sp" />
         </LinearLayout>
     </ScrollView>
 
