@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.iso.downsconnect.DBHelper;
+import com.iso.downsconnect.helpers.DBHelper;
 import com.iso.downsconnect.R;
 import com.iso.downsconnect.objects.Provider;
 import com.iso.downsconnect.objects.VisitInfo;

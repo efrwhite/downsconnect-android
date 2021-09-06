@@ -14,8 +14,9 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-import com.iso.downsconnect.DBHelper;
+import com.iso.downsconnect.helpers.DBHelper;
 import com.iso.downsconnect.R;
+import com.iso.downsconnect.objects.MedicalInfo;
 import com.iso.downsconnect.objects.Provider;
 
 import java.util.ArrayList;
@@ -33,6 +34,7 @@ public class TwoMonthFragment extends Fragment {
     private ArrayList<String> p_names = new ArrayList<>();
     private ArrayList<Provider> providers = new ArrayList<>();
     private DBHelper dbHelper;
+    private MedicalInfo medicalInfo;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -87,6 +89,7 @@ public class TwoMonthFragment extends Fragment {
 
         dbHelper = new DBHelper(getContext());
         providers = dbHelper.getAllProviders();
+        medicalInfo = new MedicalInfo();
 
         yes1 = view.findViewById(R.id.checkBoxYes11);
         no1 = view.findViewById(R.id.checkBoxNo11);
@@ -132,6 +135,61 @@ public class TwoMonthFragment extends Fragment {
         setToggleListener(no9, yes9, "no", date, provider);
 
         loadSpinnerData();
+    }
+
+    public MedicalInfo saveInfo(){
+        int one = selectedCheckbox(yes1, no1, 1);
+        int two = selectedCheckbox(yes2, no2, 2);
+        int three = selectedCheckbox(yes3, no3, 2);
+        int four = selectedCheckbox(yes4, no4, 2);
+        int five = selectedCheckbox(yes5, no5, 2);
+        int six = selectedCheckbox(yes6, no6, 2);
+        int seven = selectedCheckbox(yes7, no7, 2);
+        int eight = selectedCheckbox(yes8, no8, 2);
+        int nine = selectedCheckbox(yes9, no9, 2);
+
+        if(one == -1 || two == -1 || three == -1 || four == -1 || five == -1 || six == -1 || seven == -1 || eight == -1 || nine == -1){
+            return null;
+        }
+
+        boolean written = false;
+        if(yes9.isChecked()){
+            if(!date.getText().toString().equals("") && !provider.getSelectedItem().toString().equals("Select")){
+                if(!written) {
+                    medicalInfo.setDates(date.getText().toString());
+                    medicalInfo.setProviders(provider.getSelectedItem().toString());
+                    written = true;
+                }
+            }
+            else{
+                return null;
+            }
+        }
+        return medicalInfo;
+    }
+
+    public int selectedCheckbox(CheckBox one, CheckBox two, int first){
+        if(one.isChecked()){
+            if(first == 1){
+                medicalInfo.setAnswers(one.getText().toString());
+            }
+            else{
+                medicalInfo.setAnswers(medicalInfo.getAnswers().concat(",").concat(one.getText().toString()));
+            }
+            return 1;
+        }
+        else if(two.isChecked()){
+            if(first == 1){
+                medicalInfo.setAnswers(two.getText().toString());
+            }
+            else{
+                medicalInfo.setAnswers(medicalInfo.getAnswers().concat(",").concat(two.getText().toString()));
+            }
+            return 2;
+        }
+        else{
+            return -1;
+        }
     }
 
     public void loadSpinnerData(){

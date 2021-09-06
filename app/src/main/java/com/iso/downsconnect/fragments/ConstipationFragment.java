@@ -20,10 +20,10 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 
 import com.iso.downsconnect.ActivityContainer;
-import com.iso.downsconnect.DBHelper;
+import com.iso.downsconnect.helpers.DBHelper;
 import com.iso.downsconnect.R;
 import com.iso.downsconnect.objects.Bathroom;
-import com.iso.downsconnect.objects.DateHandler;
+import com.iso.downsconnect.helpers.DateHandler;
 import com.iso.downsconnect.objects.Entry;
 
 import java.util.Calendar;

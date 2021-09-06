@@ -10,7 +10,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.iso.downsconnect.objects.DateHandler;
+import com.iso.downsconnect.helpers.DBHelper;
+import com.iso.downsconnect.helpers.DateHandler;
 import com.iso.downsconnect.objects.MedicalInfo;
 
 import java.util.Calendar;

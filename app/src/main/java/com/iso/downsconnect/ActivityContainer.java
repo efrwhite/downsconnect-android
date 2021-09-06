@@ -14,6 +14,7 @@ import androidx.fragment.app.FragmentManager;
 import com.iso.downsconnect.fragments.HomeFragment;
 import com.iso.downsconnect.fragments.ListEntriesFragment;
 import com.iso.downsconnect.fragments.ProfilesFragment;
+import com.iso.downsconnect.helpers.DBHelper;
 import com.iso.downsconnect.objects.Child;
 import com.google.android.material.navigation.NavigationView;
 

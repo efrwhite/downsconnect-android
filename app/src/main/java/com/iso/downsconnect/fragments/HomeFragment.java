@@ -21,7 +21,7 @@ import androidx.fragment.app.Fragment;
 
 import com.iso.downsconnect.ActivityActivity;
 import com.iso.downsconnect.BathroomActivity;
-import com.iso.downsconnect.DBHelper;
+import com.iso.downsconnect.helpers.DBHelper;
 import com.iso.downsconnect.FeedActivity;
 import com.iso.downsconnect.JournalActivity;
 import com.iso.downsconnect.MainActivity;
@@ -33,7 +33,7 @@ import com.iso.downsconnect.MoreActivity;
 import com.iso.downsconnect.R;
 import com.iso.downsconnect.ResourcesActivity;
 import com.iso.downsconnect.SleepActivity;
-import com.iso.downsconnect.objects.DateHandler;
+import com.iso.downsconnect.helpers.DateHandler;
 import com.iso.downsconnect.objects.Entry;
 
 import java.text.DateFormat;

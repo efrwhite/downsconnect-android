@@ -12,6 +12,7 @@ import android.widget.EditText;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.iso.downsconnect.helpers.DBHelper;
 import com.iso.downsconnect.objects.AccountHolder;
 
 public class SignUpActivity extends AppCompatActivity {
