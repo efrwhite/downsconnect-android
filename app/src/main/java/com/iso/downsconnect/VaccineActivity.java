@@ -18,7 +18,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.widget.Button;
@@ -26,8 +25,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.iso.downsconnect.helpers.DBHelper;
 import com.iso.downsconnect.objects.Image;
-import com.iso.downsconnect.objects.ImageHelper;
+import com.iso.downsconnect.helpers.ImageHelper;
 
 import java.io.File;
 import java.io.FileOutputStream;

@@ -11,6 +11,8 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.iso.downsconnect.helpers.DBHelper;
+
 public class SignInActivity extends AppCompatActivity {
     private DBHelper db;
     private Button signIn;

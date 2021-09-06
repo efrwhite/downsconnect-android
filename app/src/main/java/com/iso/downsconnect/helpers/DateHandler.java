@@ -1,4 +1,4 @@
-package com.iso.downsconnect.objects;
+package com.iso.downsconnect.helpers;
 
 public class DateHandler {
     public DateHandler(){

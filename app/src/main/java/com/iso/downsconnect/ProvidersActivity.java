@@ -12,6 +12,7 @@ import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.iso.downsconnect.helpers.DBHelper;
 import com.iso.downsconnect.objects.Provider;
 
 public class ProvidersActivity extends AppCompatActivity {

@@ -1,4 +1,4 @@
-package com.iso.downsconnect;
+package com.iso.downsconnect.helpers;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -35,7 +35,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String[] COLUMN_4 = {"MoodID", "ChildID", "MoodType", "Time", "Notes", "Units"};
     private static final String[] COLUMN_5 = {"SleepID", "ChildID", "SleepTime", "Duration", "Snoring" ,"Medication", "Supplements", "CPAP", "Other", "Study", "Unit", "Notes"};
     private static final String[] COLUMN_6 = {"EntryID", "EntryText", "EntryTime", "ChildID", "EntryType", "ForeignID"};
-    private static final String[] COLUMN_7 = {"MedicalID", "ChildID", "Height", "Weight", "HeadSize", "DoctorsVisit", "Temperature", "Provider", "VisitNum", "ProviderType"};
+    private static final String[] COLUMN_7 = {"MedicalID", "ChildID", "Height", "Weight", "HeadSize", "DoctorsVisit", "Temperature", "Provider", "VisitNum", "ProviderType", "CheckAnswers", "AppointmentDates", "AppointmentProviders"};
     private static final String[] COLUMN_8 = {"MilestoneID", "ChildID", "Rolling", "Sitting", "Standing", "Walking"};
     private static final String[] COLUMN_9 = {"BathroomID", "ChildID", "BathroomType", "TreatmentPlan", "Leak", "OpenAir", "DiaperCream", "Quantity", "PottyAccident", "DateOfLastStool", "Duration"};
     private static final String[] COLUMN_10 = {"ProviderID", "ProviderName", "PracticeName", "Specialty", "Phone", "Fax", "Email", "Website", "Address", "State", "City", "Zip"};
@@ -43,7 +43,6 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String[] COLUMN_12 = {"ImageID", "ChildID", "Image"};
     private static final String[] COLUMN_13 = {"MessageID", "ChildID", "Message"};
     private static final String[] COLUMN_14 = {"JournalID", "ChildID", "Title", "Notes"};
-    private static final String[] COLUMN_15 = {"VisitInfoID", "ChildID", "MedicalInfoID", "CheckAnswers", "AppointmentDates", "AppointmentProviders"};
     public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -115,7 +114,10 @@ public class DBHelper extends SQLiteOpenHelper {
                 "Temperature TEXT, " +
                 "Provider TEXT, " +
                 "VisitNum TEXT, " +
-                "ProviderType TEXT)");
+                "ProviderType TEXT, " +
+                "CheckAnswers TEXT, " +
+                "AppointmentDates TEXT, "+
+                "AppointmentProviders TEXT)");
         db.execSQL("CREATE TABLE Milestone(" +
                 "MilestoneID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
                 "ChildID INTEGER, " +
@@ -169,13 +171,6 @@ public class DBHelper extends SQLiteOpenHelper {
                 "ChildID INTEGER, " +
                 "Title TEXT, " +
                 "Notes TEXT)");
-        db.execSQL("CREATE TABLE VisitInfo(" +
-                "VisitInfoID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
-                "ChildID INTEGER, " +
-                "MedicalInfoID INTEGER, " +
-                "CheckAnswers TEXT, " +
-                "AppointmentDates TEXT, "+
-                "AppointmentProviders TEXT)");
     }
 
     @Override
@@ -195,7 +190,6 @@ public class DBHelper extends SQLiteOpenHelper {
             db.execSQL("DROP TABLE IF EXISTS Image");
             db.execSQL("DROP TABLE IF EXISTS Message");
             db.execSQL("DROP TABLE IF EXISTS Journal");
-            db.execSQL("DROP TABLE IF EXISTS VisitInfo");
 
         }
     }
@@ -326,6 +320,9 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(COLUMN_7[7], medicalInfo.getProvider());
         values.put(COLUMN_7[8], medicalInfo.getVisit());
         values.put(COLUMN_7[9], medicalInfo.getProviderType());
+        values.put(COLUMN_7[10], medicalInfo.getAnswers());
+        values.put(COLUMN_7[11], medicalInfo.getDates());
+        values.put(COLUMN_7[12], medicalInfo.getProviders());
 
         SQLiteDatabase db = this.getWritableDatabase();
         long result = db.insert(TABLE_NAMES[6], null, values);
@@ -429,20 +426,6 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
         db.close();
         return result;
-    }
-
-    public long addVisit(VisitInfo visitInfo){
-        ContentValues values = new ContentValues();
-        values.put(COLUMN_15[1], visitInfo.getChildID());
-        values.put(COLUMN_15[2], visitInfo.getMedicalInfoID());
-        values.put(COLUMN_15[3], visitInfo.getAnswers());
-        values.put(COLUMN_15[4], visitInfo.getDates());
-        values.put(COLUMN_15[5], visitInfo.getProviders());
-        SQLiteDatabase db = this.getWritableDatabase();
-        long result = db.insert(TABLE_NAMES[14], null, values);
-        db.close();
-        return result;
-
     }
 
     public Child getChild(String firstName){
@@ -964,6 +947,34 @@ public class DBHelper extends SQLiteOpenHelper {
         }
         c.close();
         return journals;
+    }
+
+    public ArrayList<MedicalInfo> getAllMedical(){
+        String query = "SELECT * FROM Medical;";
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor c = db.rawQuery(query, null);
+        ArrayList<MedicalInfo> medicalInfos = new ArrayList<>();
+
+        while(c.moveToNext()){
+            MedicalInfo medicalInfo = new MedicalInfo();
+            medicalInfo.setMedicalID(c.getInt(0));
+            medicalInfo.setChildID(c.getInt(1));
+            medicalInfo.setHeight(c.getString(2));
+            medicalInfo.setWeight(c.getString(3));
+            medicalInfo.setHeadInfo(c.getString(4));
+            medicalInfo.setDoctorDate(c.getLong(5));
+            medicalInfo.setTemperatureInfo(c.getString(6));
+            medicalInfo.setProvider(c.getString(7));
+            medicalInfo.setVisit(c.getString(8));
+            medicalInfo.setProviderType(c.getString(9));
+            medicalInfo.setAnswers(c.getString(10));
+            medicalInfo.setDates(c.getString(11));
+            medicalInfo.setProviders(c.getString(12));
+            medicalInfos.add(medicalInfo);
+        }
+
+        c.close();
+        return medicalInfos;
     }
 
     public boolean updateMilestone(Milestone milestone){

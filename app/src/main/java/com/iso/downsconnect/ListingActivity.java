@@ -14,14 +14,12 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.iso.downsconnect.helpers.DBHelper;
 import com.iso.downsconnect.objects.Activity;
-import com.iso.downsconnect.objects.DateHandler;
+import com.iso.downsconnect.helpers.DateHandler;
 import com.iso.downsconnect.objects.Entry;
 import com.iso.downsconnect.objects.Journal;
 import com.iso.downsconnect.objects.Message;
-import com.iso.downsconnect.objects.Mood;
-
-import org.w3c.dom.Text;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

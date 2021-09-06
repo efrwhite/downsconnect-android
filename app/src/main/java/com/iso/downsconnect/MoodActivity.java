@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.iso.downsconnect.helpers.DBHelper;
 import com.iso.downsconnect.objects.Entry;
 import com.iso.downsconnect.objects.Mood;
 

@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.iso.downsconnect.helpers.DBHelper;
 import com.iso.downsconnect.objects.MedicalInfo;
 
 import java.util.Calendar;
