@@ -1,7 +1,7 @@
 package com.iso.downsconnect.objects;
 
 public class MedicalInfo {
-    private String provider, headInfo, temperatureInfo, visit, height, weight, providerType, answers, dates, providers;
+    private String provider, headInfo, temperatureInfo, visit, height, weight, providerType, answers, dates, providers, notes;
     private int childID, medicalID;
     private long doctorDate;
 
@@ -109,5 +109,13 @@ public class MedicalInfo {
 
     public void setProviders(String providers) {
         this.providers = providers;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
     }
 }

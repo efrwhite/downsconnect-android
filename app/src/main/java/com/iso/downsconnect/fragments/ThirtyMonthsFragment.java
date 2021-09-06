@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment;
 
 import com.iso.downsconnect.helpers.DBHelper;
 import com.iso.downsconnect.R;
+import com.iso.downsconnect.objects.MedicalInfo;
 import com.iso.downsconnect.objects.Provider;
 import com.iso.downsconnect.objects.VisitInfo;
 
@@ -29,6 +30,7 @@ public class ThirtyMonthsFragment extends Fragment {
     private ArrayList<String> p_names = new ArrayList<>();
     private ArrayList<Provider> providers = new ArrayList<>();
     private DBHelper dbHelper;
+    private MedicalInfo medicalInfo;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -41,6 +43,7 @@ public class ThirtyMonthsFragment extends Fragment {
 
         dbHelper = new DBHelper(getContext());
         providers = dbHelper.getAllProviders();
+        medicalInfo = new MedicalInfo();
 
         yes1 = view.findViewById(R.id.checkBoxYes55);
         no1 = view.findViewById(R.id.checkBoxNo56);
@@ -56,16 +59,62 @@ public class ThirtyMonthsFragment extends Fragment {
         provider2 = view.findViewById(R.id.Spin30_2);
 
 
-        setRegularListener(yes1, no1, "yes");
-        setRegularListener(yes3, no3, "yes");
-        setRegularListener(yes2, no2, "yes");
-
-        setRegularListener(no1, yes1, "no");
-        setRegularListener(no3, yes3, "no");
-        setRegularListener(no2, yes2, "no");
-
+        setRegularListener(yes1, no1);
+        setRegularListener(yes3, no3);
+        setRegularListener(yes2, no2);
         loadSpinnerData();
 
+    }
+
+    public MedicalInfo saveInfo(){
+        medicalInfo.setNotes("None");
+        if(!date1.getText().toString().equals("") && !provider1.getSelectedItem().toString().equals("Select")){
+            medicalInfo.setDates(date1.getText().toString());
+            medicalInfo.setProviders(provider1.getSelectedItem().toString());
+        }
+        else{
+            return null;
+        }
+
+        if(!date2.getText().toString().equals("") && !provider2.getSelectedItem().toString().equals("Select")){
+            medicalInfo.setDates(medicalInfo.getDates() + "," + date2.getText().toString());
+            medicalInfo.setProviders(medicalInfo.getProviders() + "," + provider2.getSelectedItem().toString());
+        }
+        else{
+            return null;
+        }
+        int one = selectedCheckbox(yes1, no1, 1);
+        int two = selectedCheckbox(yes2, no2, 2);
+        int three = selectedCheckbox(yes3, no3, 2);
+
+        if(one == -1 || two == -1 || three == -1){
+            return null;
+        }
+        return medicalInfo;
+    }
+
+    public int selectedCheckbox(CheckBox one, CheckBox two, int first){
+        if(one.isChecked()){
+            if(first == 1){
+                medicalInfo.setAnswers(one.getText().toString());
+            }
+            else{
+                medicalInfo.setAnswers(medicalInfo.getAnswers().concat(",").concat(one.getText().toString()));
+            }
+            return 1;
+        }
+        else if(two.isChecked()){
+            if(first == 1){
+                medicalInfo.setAnswers(two.getText().toString());
+            }
+            else{
+                medicalInfo.setAnswers(medicalInfo.getAnswers().concat(",").concat(two.getText().toString()));
+            }
+            return 2;
+        }
+        else{
+            return -1;
+        }
     }
 
     public void loadSpinnerData(){
@@ -81,22 +130,18 @@ public class ThirtyMonthsFragment extends Fragment {
 
     }
 
-    private void setRegularListener(final CheckBox checkBox1, final CheckBox checkBox2, String type){
-        if(type.equals("yes")){
-            checkBox1.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    checkBox2.setChecked(false);
-                }
-            });
-        }
-        else if(type.equals("no")){
-            checkBox1.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    checkBox2.setChecked(false);
-                }
-            });
-        }
+    private void setRegularListener(final CheckBox checkBox1, final CheckBox checkBox2){
+        checkBox1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkBox2.setChecked(false);
+            }
+        });
+        checkBox2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkBox1.setChecked(false);
+            }
+        });
     }
 }
