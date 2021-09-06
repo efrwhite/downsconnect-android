@@ -45,7 +45,6 @@ import com.iso.downsconnect.fragments.TwelveYearFragment;
 import com.iso.downsconnect.fragments.TwoMonthFragment;
 import com.iso.downsconnect.fragments.TwoYearFragment;
 import com.iso.downsconnect.helpers.DBHelper;
-import com.iso.downsconnect.helpers.FragmentData;
 import com.iso.downsconnect.objects.Entry;
 import com.iso.downsconnect.objects.MedicalInfo;
 import com.iso.downsconnect.objects.Provider;
@@ -72,6 +71,23 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
     private TwoMonthFragment twoMonthFragment = new TwoMonthFragment();
     private FourMonthFragment fourMonthFragment = new FourMonthFragment();
     private SixMonthFragment sixMonthFragment = new SixMonthFragment();
+    private NineMonthFragment nineMonthFragment = new NineMonthFragment();
+    private TwelveMonthFragment twelveMonthFragment = new TwelveMonthFragment();
+    private FifteenMonthFragment fifteenMonthFragment = new FifteenMonthFragment();
+    private EighteenMonthFragment eighteenMonthFragment = new EighteenMonthFragment();
+    private ThirtyMonthsFragment thirtyMonthsFragment = new ThirtyMonthsFragment();
+    private TwoYearFragment twoYearFragment = new TwoYearFragment();
+    private ThreeYearFragment threeYearFragment = new ThreeYearFragment();
+    private FourYearFragment fourYearFragment = new FourYearFragment();
+    private FiveYearFragment fiveYearFragment = new FiveYearFragment();
+    private SixYearFragment sixYearFragment = new SixYearFragment();
+    private SevenYearFragment sevenYearFragment = new SevenYearFragment();
+    private EightYearFragment eightYearFragment = new EightYearFragment();
+    private NineYearFragment nineYearFragment = new NineYearFragment();
+    private TenYearFragment tenYearFragment = new TenYearFragment();
+    private ElevenYearFragment elevenYearFragment = new ElevenYearFragment();
+    private TwelveYearFragment twelveYearFragment = new TwelveYearFragment();
+    private NoAgeFragment noAgeFragment = new NoAgeFragment();
 
 
     @Override
@@ -128,7 +144,7 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
         //Calculate current time
         Calendar calendar = Calendar.getInstance();
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
-        int minute = calendar.get(Calendar.MINUTE);
+        final int minute = calendar.get(Calendar.MINUTE);
         String realMins;
         if (minute <= 10) {
             realMins = "0" + minute;
@@ -200,55 +216,55 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
                         fragment = sixMonthFragment;
                         break;
                     case "Nine months":
-                        fragment = new NineMonthFragment();
+                        fragment = nineMonthFragment;
                         break;
                     case "Twelve months":
-                        fragment = new TwelveMonthFragment();
+                        fragment = twelveMonthFragment;
                         break;
                     case "Fifteen months":
-                        fragment = new FifteenMonthFragment();
+                        fragment = fifteenMonthFragment;
                         break;
                     case "Eighteen months":
-                        fragment = new EighteenMonthFragment();
+                        fragment = eighteenMonthFragment;
                         break;
                     case "Two years":
-                        fragment = new TwoYearFragment();
+                        fragment = twoYearFragment;
                         break;
                     case "Thirty months":
-                        fragment = new ThirtyMonthsFragment();
+                        fragment = thirtyMonthsFragment;
                         break;
                     case "Three years":
-                        fragment = new ThreeYearFragment();
+                        fragment = threeYearFragment;
                         break;
                     case "Four years":
-                        fragment = new FourYearFragment();
+                        fragment = fourYearFragment;
                         break;
                     case "Five years":
-                        fragment = new FiveYearFragment();
+                        fragment = fiveYearFragment;
                         break;
                     case "Six years":
-                        fragment = new SixYearFragment();
+                        fragment = sixYearFragment;
                         break;
                     case "Seven years":
-                        fragment = new SevenYearFragment();
+                        fragment = sevenYearFragment;
                         break;
                     case "Eight years":
-                        fragment = new EightYearFragment();
+                        fragment = eightYearFragment;
                         break;
                     case "Nine years":
-                        fragment = new NineYearFragment();
+                        fragment = nineYearFragment;
                         break;
                     case "Ten years":
-                        fragment = new TenYearFragment();
+                        fragment = tenYearFragment;
                         break;
                     case "Eleven years":
-                        fragment = new ElevenYearFragment();
+                        fragment = elevenYearFragment;
                         break;
                     case "Twelve years":
-                        fragment = new TwelveYearFragment();
+                        fragment = twelveYearFragment;
                         break;
                     case "Not an age-scheduled visit":
-                        fragment = new NoAgeFragment();
+                        fragment = noAgeFragment;
                         break;
 
                 }
@@ -298,6 +314,7 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
                         else{
                             displayErrorMessage("Missing Visit Information", "Please make sure you've filled in the visit information");
                         }
+                        break;
                         case "Two months":
                             medicalInfo = twoMonthFragment.saveInfo();
                             if (medicalInfo != null) {
@@ -306,6 +323,177 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
                             else{
                                 displayErrorMessage("Missing Visit Information", "Please make sure you've filled in the visit information");
                             }
+                            break;
+                        case "Four months":
+                            medicalInfo = fourMonthFragment.saveInfo();
+                            if (medicalInfo != null) {
+                                addInfo(childID, age);
+                            }
+                            else{
+                                displayErrorMessage("Missing Visit Information", "Please make sure you've filled in the visit information");
+                            }
+                            break;
+                        case "Six months":
+                            medicalInfo = sixMonthFragment.saveInfo();
+                            if (medicalInfo != null) {
+                                addInfo(childID, age);
+                            }
+                            else{
+                                displayErrorMessage("Missing Visit Information", "Please make sure you've filled in the visit information");
+                            }
+                            break;
+                        case "Nine months":
+                            medicalInfo = nineMonthFragment.saveInfo();
+                            if (medicalInfo != null) {
+                                addInfo(childID, age);
+                            }
+                            else{
+                                displayErrorMessage("Missing Visit Information", "Please make sure you've filled in the visit information");
+                            }
+                            break;
+                        case "Twelve months":
+                            medicalInfo = twelveMonthFragment.saveInfo();
+                            if (medicalInfo != null) {
+                                addInfo(childID, age);
+                            }
+                            else{
+                                displayErrorMessage("Missing Visit Information", "Please make sure you've filled in the visit information");
+                            }
+                            break;
+                        case "Fifteen months":
+                            medicalInfo = fifteenMonthFragment.saveInfo();
+                            if (medicalInfo != null) {
+                                addInfo(childID, age);
+                            }
+                            else{
+                                displayErrorMessage("Missing Visit Information", "Please make sure you've filled in the visit information");
+                            }
+                            break;
+                        case "Eighteen months":
+                            medicalInfo = eighteenMonthFragment.saveInfo();
+                            if (medicalInfo != null) {
+                                addInfo(childID, age);
+                            }
+                            else{
+                                displayErrorMessage("Missing Visit Information", "Please make sure you've filled in the visit information");
+                            }
+                            break;
+                        case "Thirty months":
+                            medicalInfo = thirtyMonthsFragment.saveInfo();
+                            if (medicalInfo != null) {
+                                addInfo(childID, age);
+                            }
+                            else{
+                                displayErrorMessage("Missing Visit Information", "Please make sure you've filled in the visit information");
+                            }
+                            break;
+                        case "Two years":
+                        medicalInfo = twoYearFragment.saveInfo();
+                        if (medicalInfo != null) {
+                            addInfo(childID, age);
+                        }
+                        else{
+                            displayErrorMessage("Missing Visit Information", "Please make sure you've filled in the visit information");
+                        }
+                        break;
+                        case "Three years":
+                            medicalInfo = threeYearFragment.saveInfo();
+                            if (medicalInfo != null) {
+                                addInfo(childID, age);
+                            }
+                            else{
+                                displayErrorMessage("Missing Visit Information", "Please make sure you've filled in the visit information");
+                            }
+                            break;
+                        case "Four years":
+                            medicalInfo = fourYearFragment.saveInfo();
+                            if (medicalInfo != null) {
+                                addInfo(childID, age);
+                            }
+                            else{
+                                displayErrorMessage("Missing Visit Information", "Please make sure you've filled in the visit information");
+                            }
+                            break;
+                        case "Five years":
+                            medicalInfo = fiveYearFragment.saveInfo();
+                            if (medicalInfo != null) {
+                                addInfo(childID, age);
+                            }
+                            else{
+                                displayErrorMessage("Missing Visit Information", "Please make sure you've filled in the visit information");
+                            }
+                            break;
+                        case "Six years":
+                            medicalInfo = sixYearFragment.saveInfo();
+                            if (medicalInfo != null) {
+                                addInfo(childID, age);
+                            }
+                            else{
+                                displayErrorMessage("Missing Visit Information", "Please make sure you've filled in the visit information");
+                            }
+                            break;
+                        case "Seven years":
+                            medicalInfo = sevenYearFragment.saveInfo();
+                            if (medicalInfo != null) {
+                                addInfo(childID, age);
+                            }
+                            else{
+                                displayErrorMessage("Missing Visit Information", "Please make sure you've filled in the visit information");
+                            }
+                            break;
+                        case "Eight years":
+                            medicalInfo = eightYearFragment.saveInfo();
+                            if (medicalInfo != null) {
+                                addInfo(childID, age);
+                            }
+                            else{
+                                displayErrorMessage("Missing Visit Information", "Please make sure you've filled in the visit information");
+                            }
+                            break;
+                        case "Nine years":
+                            medicalInfo = nineYearFragment.saveInfo();
+                            if (medicalInfo != null) {
+                                addInfo(childID, age);
+                            }
+                            else{
+                                displayErrorMessage("Missing Visit Information", "Please make sure you've filled in the visit information");
+                            }
+                            break;
+                        case "Ten years":
+                            medicalInfo = tenYearFragment.saveInfo();
+                            if (medicalInfo != null) {
+                                addInfo(childID, age);
+                            }
+                            else{
+                                displayErrorMessage("Missing Visit Information", "Please make sure you've filled in the visit information");
+                            }
+                            break;
+                        case "Eleven years":
+                            medicalInfo = elevenYearFragment.saveInfo();
+                            if (medicalInfo != null) {
+                                addInfo(childID, age);
+                            }
+                            else{
+                                displayErrorMessage("Missing Visit Information", "Please make sure you've filled in the visit information");
+                            }
+                            break;
+                        case "Twelve years":
+                        medicalInfo = twelveYearFragment.saveInfo();
+                        if (medicalInfo != null) {
+                            addInfo(childID, age);
+                        }
+                        else{
+                            displayErrorMessage("Missing Visit Information", "Please make sure you've filled in the visit information");
+                        }
+                        break;
+                        case "Not an age-scheduled visit":
+                            medicalInfo = noAgeFragment.saveInfo();
+                            if (medicalInfo != null) {
+                                addInfo(childID, age);
+                            }else{
+                                displayErrorMessage("Missing Visit Information", "Please make sure you've filled in the visit information");
+                            }
+                            break;
                     }
                 }
                 else{

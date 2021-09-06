@@ -11,9 +11,11 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.iso.downsconnect.R;
+import com.iso.downsconnect.objects.MedicalInfo;
 
 public class NoAgeFragment extends Fragment {
     private EditText notes;
+    private MedicalInfo medicalInfo;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -24,5 +26,16 @@ public class NoAgeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         notes = view.findViewById(R.id.noAgeNotes);
+        medicalInfo = new MedicalInfo();
+    }
+
+    public MedicalInfo saveInfo(){
+        if(!notes.getText().toString().equals("")){
+            medicalInfo.setNotes(notes.getText().toString());
+        }
+        else {
+            medicalInfo.setNotes("None");
+        }
+        return medicalInfo;
     }
 }

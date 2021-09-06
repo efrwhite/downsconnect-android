@@ -35,7 +35,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String[] COLUMN_4 = {"MoodID", "ChildID", "MoodType", "Time", "Notes", "Units"};
     private static final String[] COLUMN_5 = {"SleepID", "ChildID", "SleepTime", "Duration", "Snoring" ,"Medication", "Supplements", "CPAP", "Other", "Study", "Unit", "Notes"};
     private static final String[] COLUMN_6 = {"EntryID", "EntryText", "EntryTime", "ChildID", "EntryType", "ForeignID"};
-    private static final String[] COLUMN_7 = {"MedicalID", "ChildID", "Height", "Weight", "HeadSize", "DoctorsVisit", "Temperature", "Provider", "VisitNum", "ProviderType", "CheckAnswers", "AppointmentDates", "AppointmentProviders"};
+    private static final String[] COLUMN_7 = {"MedicalID", "ChildID", "Height", "Weight", "HeadSize", "DoctorsVisit", "Temperature", "Provider", "VisitNum", "ProviderType", "CheckAnswers", "AppointmentDates", "AppointmentProviders", "Notes"};
     private static final String[] COLUMN_8 = {"MilestoneID", "ChildID", "Rolling", "Sitting", "Standing", "Walking"};
     private static final String[] COLUMN_9 = {"BathroomID", "ChildID", "BathroomType", "TreatmentPlan", "Leak", "OpenAir", "DiaperCream", "Quantity", "PottyAccident", "DateOfLastStool", "Duration"};
     private static final String[] COLUMN_10 = {"ProviderID", "ProviderName", "PracticeName", "Specialty", "Phone", "Fax", "Email", "Website", "Address", "State", "City", "Zip"};
@@ -117,7 +117,8 @@ public class DBHelper extends SQLiteOpenHelper {
                 "ProviderType TEXT, " +
                 "CheckAnswers TEXT, " +
                 "AppointmentDates TEXT, "+
-                "AppointmentProviders TEXT)");
+                "AppointmentProviders TEXT, " +
+                "Notes TEXT)");
         db.execSQL("CREATE TABLE Milestone(" +
                 "MilestoneID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
                 "ChildID INTEGER, " +
@@ -323,6 +324,7 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(COLUMN_7[10], medicalInfo.getAnswers());
         values.put(COLUMN_7[11], medicalInfo.getDates());
         values.put(COLUMN_7[12], medicalInfo.getProviders());
+        values.put(COLUMN_7[13], medicalInfo.getNotes());
 
         SQLiteDatabase db = this.getWritableDatabase();
         long result = db.insert(TABLE_NAMES[6], null, values);
@@ -571,6 +573,10 @@ public class DBHelper extends SQLiteOpenHelper {
             info.setProvider(c.getString(7));
             info.setVisit(c.getString(8));
             info.setProviderType(c.getString(9));
+            info.setAnswers(c.getString(10));
+            info.setDates(c.getString(11));
+            info.setProviders(c.getString(12));
+            info.setNotes(c.getString(13));
         }
         else{
             c.close();
@@ -970,6 +976,7 @@ public class DBHelper extends SQLiteOpenHelper {
             medicalInfo.setAnswers(c.getString(10));
             medicalInfo.setDates(c.getString(11));
             medicalInfo.setProviders(c.getString(12));
+            medicalInfo.setNotes(c.getString(13));
             medicalInfos.add(medicalInfo);
         }
 

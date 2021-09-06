@@ -113,26 +113,16 @@ public class TwoMonthFragment extends Fragment {
         date = view.findViewById(R.id.editTextDate);
         provider = view.findViewById(R.id.twoMSpinner);
 
-        setRegularListener(yes1, no1, "yes");
-        setRegularListener(yes2, no2, "yes");
-        setRegularListener(yes3, no3, "yes");
-        setRegularListener(yes4, no4, "yes");
-        setRegularListener(yes5, no5, "yes");
-        setRegularListener(yes6, no6, "yes");
-        setRegularListener(yes7, no7, "yes");
-        setRegularListener(yes8, no8, "yes");
+        setRegularListener(yes1, no1);
+        setRegularListener(yes2, no2);
+        setRegularListener(yes3, no3);
+        setRegularListener(yes4, no4);
+        setRegularListener(yes5, no5);
+        setRegularListener(yes6, no6);
+        setRegularListener(yes7, no7);
+        setRegularListener(yes8, no8);
 
-        setRegularListener(no1, yes1, "no");
-        setRegularListener(no2, yes2, "no");
-        setRegularListener(no3, yes3, "no");
-        setRegularListener(no4, yes4, "no");
-        setRegularListener(no5, yes5, "no");
-        setRegularListener(no6, yes6, "no");
-        setRegularListener(no7, yes7, "no");
-        setRegularListener(no8, yes8, "no");
-
-        setToggleListener(yes9, no9, "yes", date, provider);
-        setToggleListener(no9, yes9, "no", date, provider);
+        setToggleListener(yes9, no9, date, provider);
 
         loadSpinnerData();
     }
@@ -204,45 +194,37 @@ public class TwoMonthFragment extends Fragment {
 
     }
 
-    public void setToggleListener(final CheckBox checkBox1, final CheckBox checkBox2, String type, final EditText date, final Spinner provider){
-        if(type.equals("yes")){
-            checkBox1.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    checkBox2.setChecked(false);
-                    date.setEnabled(true);
-                    provider.setEnabled(true);
-                }
-            });
-        }
-        else if(type.equals("no")){
-            checkBox1.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    checkBox2.setChecked(false);
-                    date.setEnabled(false);
-                    provider.setEnabled(false);
-                }
-            });
-        }
+    public void setToggleListener(final CheckBox checkBox1, final CheckBox checkBox2, final EditText date, final Spinner provider){
+        checkBox1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkBox2.setChecked(false);
+                date.setEnabled(true);
+                provider.setEnabled(true);
+            }
+        });
+        checkBox2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkBox1.setChecked(false);
+                date.setEnabled(false);
+                provider.setEnabled(false);
+            }
+        });
     }
 
-    private void setRegularListener(final CheckBox checkBox1, final CheckBox checkBox2, String type){
-        if(type.equals("yes")){
-            checkBox1.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    checkBox2.setChecked(false);
-                }
-            });
-        }
-        else if(type.equals("no")){
-            checkBox1.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    checkBox2.setChecked(false);
-                }
-            });
-        }
+    private void setRegularListener(final CheckBox checkBox1, final CheckBox checkBox2){
+        checkBox1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkBox2.setChecked(false);
+            }
+        });
+        checkBox2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkBox1.setChecked(false);
+            }
+        });
     }
 }
