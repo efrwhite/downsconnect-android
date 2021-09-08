@@ -38,7 +38,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/saveButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/neckSafetyView">
@@ -495,18 +495,23 @@
                 android:layout_width="match_parent"
                 android:layout_height="89dp"
                 android:layout_marginLeft="8sp"
+                android:background="@drawable/rounded_box"
                 android:ems="10"
-                android:inputType="date" />
-
-            <EditText
-                android:id="@+id/editTextTextMultiLine2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:gravity="start|top"
-                android:inputType="textMultiLine" />
+                android:inputType="date"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp" />
 
         </LinearLayout>
     </ScrollView>
+
+    <Button
+        android:id="@+id/saveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/save"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

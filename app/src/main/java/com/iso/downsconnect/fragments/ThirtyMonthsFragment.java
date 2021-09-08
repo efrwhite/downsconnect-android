@@ -17,7 +17,6 @@ import com.iso.downsconnect.helpers.DBHelper;
 import com.iso.downsconnect.R;
 import com.iso.downsconnect.objects.MedicalInfo;
 import com.iso.downsconnect.objects.Provider;
-import com.iso.downsconnect.objects.VisitInfo;
 
 import java.util.ArrayList;
 
@@ -26,7 +25,6 @@ public class ThirtyMonthsFragment extends Fragment {
             no1, no2, no3;
     private EditText date1, date2;
     private Spinner provider1, provider2;
-    private VisitInfo visitInfo = new VisitInfo();
     private ArrayList<String> p_names = new ArrayList<>();
     private ArrayList<Provider> providers = new ArrayList<>();
     private DBHelper dbHelper;

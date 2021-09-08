@@ -17,7 +17,6 @@ import com.iso.downsconnect.helpers.DBHelper;
 import com.iso.downsconnect.R;
 import com.iso.downsconnect.objects.MedicalInfo;
 import com.iso.downsconnect.objects.Provider;
-import com.iso.downsconnect.objects.VisitInfo;
 
 import java.util.ArrayList;
 

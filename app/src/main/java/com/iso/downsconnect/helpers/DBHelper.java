@@ -20,9 +20,7 @@ import com.iso.downsconnect.objects.Milestone;
 import com.iso.downsconnect.objects.Mood;
 import com.iso.downsconnect.objects.Provider;
 import com.iso.downsconnect.objects.Sleep;
-import com.iso.downsconnect.objects.VisitInfo;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class DBHelper extends SQLiteOpenHelper {
@@ -36,7 +34,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String[] COLUMN_5 = {"SleepID", "ChildID", "SleepTime", "Duration", "Snoring" ,"Medication", "Supplements", "CPAP", "Other", "Study", "Unit", "Notes"};
     private static final String[] COLUMN_6 = {"EntryID", "EntryText", "EntryTime", "ChildID", "EntryType", "ForeignID"};
     private static final String[] COLUMN_7 = {"MedicalID", "ChildID", "Height", "Weight", "HeadSize", "DoctorsVisit", "Temperature", "Provider", "VisitNum", "ProviderType", "CheckAnswers", "AppointmentDates", "AppointmentProviders", "Notes"};
-    private static final String[] COLUMN_8 = {"MilestoneID", "ChildID", "Rolling", "Sitting", "Standing", "Walking"};
+    private static final String[] COLUMN_8 = {"MilestoneID", "ChildID", "Roll", "Walk", "Stand", "Sit", "Crawl", "NoHandWalk", "Jump", "Holds", "HandMouth", "Passes", "Pincher", "Drinks", "Scribbles", "SpoonFeed", "Points", "Emotion", "Affection", "Interest", "Coos", "Babbles", "Speaks", "TwoWords", "Sentence", "Startles", "Turns"};
     private static final String[] COLUMN_9 = {"BathroomID", "ChildID", "BathroomType", "TreatmentPlan", "Leak", "OpenAir", "DiaperCream", "Quantity", "PottyAccident", "DateOfLastStool", "Duration"};
     private static final String[] COLUMN_10 = {"ProviderID", "ProviderName", "PracticeName", "Specialty", "Phone", "Fax", "Email", "Website", "Address", "State", "City", "Zip"};
     private static final String[] COLUMN_11 = {"ActivityID", "ChildID", "ActivityName", "EntryTime", "Duration", "DurationUnits" ,"Notes"};
@@ -122,10 +120,31 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE Milestone(" +
                 "MilestoneID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
                 "ChildID INTEGER, " +
-                "Rolling INTEGER, " +
-                "Sitting INTEGER, " +
-                "Standing INTEGER, " +
-                "Walking INTEGER)");
+                "Roll TEXT, " +
+                "Walk TEXT, " +
+                "Stand TEXT, " +
+                "Sit TEXT, " +
+                "Crawl TEXT, " +
+                "NoHandWalk TEXT, " +
+                "Jump TEXT, " +
+                "Holds TEXT, " +
+                "HandMouth TEXT, " +
+                "Passes TEXT, " +
+                "Pincher TEXT, " +
+                "Drinks TEXT, " +
+                "Scribbles TEXT, " +
+                "SpoonFeed TEXT, " +
+                "Points TEXT, " +
+                "Emotion TEXT, " +
+                "Affection TEXT, " +
+                "Interest TEXT, " +
+                "Coos TEXT, " +
+                "Babbles TEXT, " +
+                "Speaks TEXT, " +
+                "TwoWords TEXT, " +
+                "Sentence TEXT, " +
+                "Startles TEXT, " +
+                "Turns TEXT)");
         db.execSQL("CREATE TABLE Bathroom(" +
                 "BathroomID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
                 "ChildID INTEGER, " +
@@ -298,16 +317,38 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    public void addMilestone(Milestone milestone){
+    public long addMilestone(Milestone milestone){
         ContentValues values = new ContentValues();
         SQLiteDatabase db = this.getWritableDatabase();
         values.put(COLUMN_8[1], milestone.getChildId());
-        values.put(COLUMN_8[2], milestone.getRollingDate());
-        values.put(COLUMN_8[3], milestone.getSittingDate());
-        values.put(COLUMN_8[4], milestone.getStandingDate());
-        values.put(COLUMN_8[5], milestone.getWalkingDate());
-        db.insert(TABLE_NAMES[7], null, values);
+        values.put(COLUMN_8[2], milestone.getRoll());
+        values.put(COLUMN_8[3], milestone.getWalk());
+        values.put(COLUMN_8[4], milestone.getStand());
+        values.put(COLUMN_8[5], milestone.getSit());
+        values.put(COLUMN_8[6], milestone.getCrawl());
+        values.put(COLUMN_8[7], milestone.getNh_walk());
+        values.put(COLUMN_8[8], milestone.getJump());
+        values.put(COLUMN_8[9], milestone.getHolds());
+        values.put(COLUMN_8[10], milestone.getHands_mouth());
+        values.put(COLUMN_8[11], milestone.getPasses());
+        values.put(COLUMN_8[12], milestone.getPincher());
+        values.put(COLUMN_8[13], milestone.getDrinks());
+        values.put(COLUMN_8[14], milestone.getScribbles());
+        values.put(COLUMN_8[15], milestone.getFeed_spoon());
+        values.put(COLUMN_8[16], milestone.getPoints());
+        values.put(COLUMN_8[17], milestone.getEmotion());
+        values.put(COLUMN_8[18], milestone.getAffection());
+        values.put(COLUMN_8[19], milestone.getInterest());
+        values.put(COLUMN_8[20], milestone.getCoos());
+        values.put(COLUMN_8[21], milestone.getBabbles());
+        values.put(COLUMN_8[22], milestone.getSpeaks());
+        values.put(COLUMN_8[23], milestone.getTwo_word());
+        values.put(COLUMN_8[24], milestone.getSentence());
+        values.put(COLUMN_8[25], milestone.getStartles());
+        values.put(COLUMN_8[26], milestone.getTurns());
+        long result = db.insert(TABLE_NAMES[7], null, values);
         db.close();
+        return result;
     }
 
     public long addMedical(MedicalInfo medicalInfo){
@@ -515,10 +556,31 @@ public class DBHelper extends SQLiteOpenHelper {
             c.moveToFirst();
             milestone.setMilestoneId(c.getInt(0));
             milestone.setChildId(c.getInt(1));
-            milestone.setRollingDate(c.getLong(2));
-            milestone.setSittingDate(c.getLong(3));
-            milestone.setStandingDate(c.getLong(4));
-            milestone.setWalkingDate(c.getLong(5));
+            milestone.setRoll(c.getString(2));
+            milestone.setWalk(c.getString(3));
+            milestone.setStand(c.getString(4));
+            milestone.setSit(c.getString(5));
+            milestone.setCrawl(c.getString(6));
+            milestone.setNh_walk(c.getString(7));
+            milestone.setJump(c.getString(8));
+            milestone.setHolds(c.getString(9));
+            milestone.setHands_mouth(c.getString(10));
+            milestone.setPasses(c.getString(11));
+            milestone.setPincher(c.getString(12));
+            milestone.setDrinks(c.getString(13));
+            milestone.setScribbles(c.getString(14));
+            milestone.setFeed_spoon(c.getString(15));
+            milestone.setPoints(c.getString(16));
+            milestone.setEmotion(c.getString(17));
+            milestone.setAffection(c.getString(18));
+            milestone.setInterest(c.getString(19));
+            milestone.setCoos(c.getString(20));
+            milestone.setBabbles(c.getString(21));
+            milestone.setSpeaks(c.getString(22));
+            milestone.setTwo_word(c.getString(23));
+            milestone.setSentence(c.getString(24));
+            milestone.setStartles(c.getString(25));
+            milestone.setTurns(c.getString(26));
         }
         else{
             c.close();
@@ -987,10 +1049,31 @@ public class DBHelper extends SQLiteOpenHelper {
     public boolean updateMilestone(Milestone milestone){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(COLUMN_8[2], milestone.getRollingDate());
-        values.put(COLUMN_8[3], milestone.getSittingDate());
-        values.put(COLUMN_8[4], milestone.getStandingDate());
-        values.put(COLUMN_8[5], milestone.getWalkingDate());
+        values.put(COLUMN_8[2], milestone.getRoll());
+        values.put(COLUMN_8[3], milestone.getWalk());
+        values.put(COLUMN_8[4], milestone.getStand());
+        values.put(COLUMN_8[5], milestone.getSit());
+        values.put(COLUMN_8[6], milestone.getCrawl());
+        values.put(COLUMN_8[7], milestone.getNh_walk());
+        values.put(COLUMN_8[8], milestone.getJump());
+        values.put(COLUMN_8[9], milestone.getHolds());
+        values.put(COLUMN_8[10], milestone.getHands_mouth());
+        values.put(COLUMN_8[11], milestone.getPasses());
+        values.put(COLUMN_8[12], milestone.getPincher());
+        values.put(COLUMN_8[13], milestone.getDrinks());
+        values.put(COLUMN_8[14], milestone.getScribbles());
+        values.put(COLUMN_8[15], milestone.getFeed_spoon());
+        values.put(COLUMN_8[16], milestone.getPoints());
+        values.put(COLUMN_8[17], milestone.getEmotion());
+        values.put(COLUMN_8[18], milestone.getAffection());
+        values.put(COLUMN_8[19], milestone.getInterest());
+        values.put(COLUMN_8[20], milestone.getCoos());
+        values.put(COLUMN_8[21], milestone.getBabbles());
+        values.put(COLUMN_8[22], milestone.getSpeaks());
+        values.put(COLUMN_8[23], milestone.getTwo_word());
+        values.put(COLUMN_8[24], milestone.getSentence());
+        values.put(COLUMN_8[25], milestone.getStartles());
+        values.put(COLUMN_8[26], milestone.getTurns());
         return db.update(TABLE_NAMES[7], values, COLUMN_8[1] + "=" + milestone.getChildId(), null) > 0;
     }
 

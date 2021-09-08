@@ -1,6 +1,5 @@
 package com.iso.downsconnect.fragments;
 
-import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -17,10 +16,8 @@ import android.widget.Spinner;
 
 import com.iso.downsconnect.helpers.DBHelper;
 import com.iso.downsconnect.R;
-import com.iso.downsconnect.helpers.FragmentData;
 import com.iso.downsconnect.objects.MedicalInfo;
 import com.iso.downsconnect.objects.Provider;
-import com.iso.downsconnect.objects.VisitInfo;
 
 import java.util.ArrayList;
 
