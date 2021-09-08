@@ -10,13 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.iso.downsconnect.helpers.DBHelper;
 import com.iso.downsconnect.R;
 import com.iso.downsconnect.objects.MedicalInfo;
-import com.iso.downsconnect.objects.Provider;
-import com.iso.downsconnect.objects.VisitInfo;
-
-import java.util.ArrayList;
 
 public class FifteenMonthFragment extends Fragment {
     private CheckBox yes1, yes2, yes3, yes4, yes5,
