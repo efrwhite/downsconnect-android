@@ -125,10 +125,12 @@ public class ConstipationFragment extends Fragment implements DatePickerDialog.O
                         bathroom.setNotes(notes.getText().toString());
                     }
                     bathroom.setTreatmentPlan(treatment.getText().toString());
-                    helper.addBathroom(bathroom);
+                    long id = helper.addBathroom(bathroom);
                     entry.setChildID(childID);
+                    entry.setEntryType("Bathroom");
                     entry.setEntryText(helper.getChildName(childID) + " was constipated, treated with " + bathroom.getTreatmentPlan());
                     entry.setEntryTime(Calendar.getInstance().getTimeInMillis());
+                    entry.setForeignID(id);
                     helper.addEntry(entry);
                     Intent intent = new Intent(getContext(), ActivityContainer.class);
                     startActivity(intent);

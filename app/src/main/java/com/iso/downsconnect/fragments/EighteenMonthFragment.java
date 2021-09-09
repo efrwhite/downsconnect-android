@@ -172,4 +172,51 @@ public class EighteenMonthFragment extends Fragment {
                 }
             });
     }
+
+    public void setData(MedicalInfo info){
+        String[] answers = info.getAnswers().split(",");
+        String[] dates = info.getDates().split(",");
+        String[] providers = info.getProviders().split(",");
+        if(answers[0].equals("yes")){
+            yes1.setChecked(true);
+        }
+        else{
+            no1.setChecked(true);
+        }
+        if(answers[1].equals("yes")){
+            yes2.setChecked(true);
+        }
+        else{
+            no2.setChecked(true);
+        }
+        if(answers[2].equals("yes")){
+            yes3.setChecked(true);
+        }
+        else{
+            no3.setChecked(true);
+        }
+        if(answers[3].equals("yes")){
+            yes4.setChecked(true);
+        }
+        else{
+            no4.setChecked(true);
+        }
+
+        date1.setText(dates[0]);
+        date2.setText(dates[1]);
+
+        provider1.setSelection(getIndex(provider1, providers[0]));
+        provider2.setSelection(getIndex(provider2, providers[1]));
+    }
+
+    private int getIndex(Spinner spinner, String myString) {
+        for (int i = 0; i < spinner.getCount(); i++) {
+            if (spinner.getItemAtPosition(i).toString().equalsIgnoreCase(myString)) {
+                return i;
+            }
+        }
+
+        return 0;
+
+    }
 }

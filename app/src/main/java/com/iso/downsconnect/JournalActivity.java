@@ -31,6 +31,9 @@ public class JournalActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_journal);
 
+        Intent i = getIntent();
+        String journID = i.getStringExtra("journID");
+
         final Button back = findViewById(R.id.backButton);
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
@@ -44,6 +47,13 @@ public class JournalActivity extends AppCompatActivity {
         journal = new Journal();
         entry = new Entry();
         db = new DBHelper(this);
+
+        if(!journID.equals("-1")){
+            journal = db.getJournal(Integer.parseInt(journID));
+            save.setEnabled(false);
+            title.setText(journal.getTitle());
+            notes.setText(journal.getNotes());
+        }
 
         entry.setChildID(childID);
         journal.setChildID(childID);

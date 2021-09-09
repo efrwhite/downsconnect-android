@@ -32,6 +32,9 @@ public class MessageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message);
 
+        Intent intent = getIntent();
+        String msgID = intent.getStringExtra("msgID");
+        int id = Integer.parseInt(msgID);
 
         final Button back = findViewById(R.id.backButton);
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
@@ -45,6 +48,12 @@ public class MessageActivity extends AppCompatActivity {
         db = new DBHelper(this);
         save = findViewById(R.id.messageSave);
         entry = new Entry();
+
+        if(id != -1){
+            save.setEnabled(false);
+            message = db.getMessage(id);
+            messageText.setText(message.getMessage());
+        }
 
         save.setOnClickListener(new View.OnClickListener() {
             @Override

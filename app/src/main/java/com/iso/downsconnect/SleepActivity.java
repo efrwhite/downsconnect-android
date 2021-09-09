@@ -21,7 +21,10 @@ import com.iso.downsconnect.helpers.DBHelper;
 import com.iso.downsconnect.objects.Entry;
 import com.iso.downsconnect.objects.Sleep;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 public class SleepActivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener {
     private EditText sleepTimePicker;
@@ -39,6 +42,10 @@ public class SleepActivity extends AppCompatActivity implements TimePickerDialog
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sleep);
+
+        Intent intent = getIntent();
+        String msgID = intent.getStringExtra("sleepID");
+        int id = Integer.parseInt(msgID);
 
         helper = new DBHelper(this);
         sleepTimePicker = findViewById(R.id.sleepTimePicker);
@@ -60,6 +67,72 @@ public class SleepActivity extends AppCompatActivity implements TimePickerDialog
         drop = findViewById(R.id.dropDownButton);
         scrollView = findViewById(R.id.scrollView3);
         scrollView.setVisibility(View.INVISIBLE);
+        final Button back = findViewById(R.id.backButton);
+        final Button save = findViewById(R.id.saveButton);
+
+        if(id != -1){
+            save.setEnabled(false);
+            Sleep sleep = helper.getSleep(id);
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTimeInMillis(sleep.getSleepTime());
+            Date dat = calendar.getTime();
+            DateFormat formatter = new SimpleDateFormat("hh:mm a");
+            String time = formatter.format(dat);
+
+            sleepTimePicker.setText( time);
+            wokeUp.setText(String.valueOf(sleep.getDuration()));
+            timeUnit.setSelection(getIndex(timeUnit, sleep.getUnit()));
+            if(!sleep.getNotes().equals("None")){
+                notes.setText(sleep.getNotes());
+            }
+            if(!sleep.getCPAP().equals("no")){
+                cpap.setChecked(true);
+                isDrop = true;
+                scrollView.setVisibility(View.VISIBLE);
+            }
+            else {
+                cpap.setChecked(false);
+            }
+
+            if(!sleep.getSnoring().equals("no")){
+                snoringYes.setChecked(true);
+                isDrop = true;
+                scrollView.setVisibility(View.VISIBLE);
+            }
+            else{
+                snoringNo.setChecked(true);
+            }
+
+            if(!sleep.getMedication().equals("no")){
+                medication.setChecked(true);
+                isDrop = true;
+                scrollView.setVisibility(View.VISIBLE);
+            }
+
+            if(!sleep.getSupplements().equals("no")){
+                supplements.setChecked(true);
+                isDrop = true;
+                scrollView.setVisibility(View.VISIBLE);
+            }
+
+            if(!sleep.getOther().equals("no")){
+                other.setChecked(true);
+                isDrop = true;
+                otherText.setText(sleep.getOther());
+                scrollView.setVisibility(View.VISIBLE);
+            }
+
+            if(!sleep.getStudy().equals("no")){
+                studyYes.setChecked(true);
+                isDrop = true;
+                scrollView.setVisibility(View.VISIBLE);
+            }
+            else{
+                studyNo.setChecked(true);
+            }
+
+
+        }
 
         drop.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,8 +152,6 @@ public class SleepActivity extends AppCompatActivity implements TimePickerDialog
 
 
 
-        final Button back = findViewById(R.id.backButton);
-        final Button save = findViewById(R.id.saveButton);
         TextView currentTime = findViewById(R.id.current_time_text);
 
         Calendar calendar = Calendar.getInstance();
@@ -118,6 +189,7 @@ public class SleepActivity extends AppCompatActivity implements TimePickerDialog
                     Calendar calendar1 = Calendar.getInstance();
                     entry.setEntryTime(calendar1.getTimeInMillis());
                     entry.setChildID(childID);
+                    entry.setEntryType("Sleep");
                     sleep.setChildID(childID);
                     entry.setEntryText(helper.getChildName(childID) + " slept for " + duration + unitTime);
                     sleep.setSleepTime(timeSlept);
@@ -127,8 +199,18 @@ public class SleepActivity extends AppCompatActivity implements TimePickerDialog
                     else{
                         sleep.setNotes("None");
                     }
-                    sleep.setSnoring(snoringDecision);
-                    sleep.setStudy(studyDecision);
+                    if(snoringYes.isChecked()) {
+                        sleep.setSnoring("yes");
+                    }
+                    else{
+                        sleep.setSnoring("no");
+                    }
+                    if(studyYes.isChecked()) {
+                        sleep.setStudy("yes");
+                    }
+                    else{
+                        sleep.setStudy("no");
+                    }
                     sleep.setUnit(unitTime);
                     sleep.setDuration(duration);
                     if(medication.isChecked()){
@@ -155,7 +237,8 @@ public class SleepActivity extends AppCompatActivity implements TimePickerDialog
                     else{
                         sleep.setOther("no");
                     }
-                    helper.addSleep(sleep);
+                    long id = helper.addSleep(sleep);
+                    entry.setForeignID(id);
                     helper.addEntry(entry);
                     Intent intent = new Intent(SleepActivity.this, ActivityContainer.class);
                     startActivity(intent);
@@ -285,6 +368,17 @@ public class SleepActivity extends AppCompatActivity implements TimePickerDialog
 
     @Override
     public void onPointerCaptureChanged(boolean hasCapture) {
+
+    }
+
+    private int getIndex(Spinner spinner, String myString) {
+        for (int i = 0; i < spinner.getCount(); i++) {
+            if (spinner.getItemAtPosition(i).toString().equalsIgnoreCase(myString)) {
+                return i;
+            }
+        }
+
+        return 0;
 
     }
 }

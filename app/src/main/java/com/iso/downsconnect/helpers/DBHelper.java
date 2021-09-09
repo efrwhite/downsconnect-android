@@ -257,7 +257,7 @@ public class DBHelper extends SQLiteOpenHelper {
         }
     }
 
-    public void addFeed(Feed feed){
+    public long addFeed(Feed feed){
         ContentValues values = new ContentValues();
         values.put(COLUMN_3[1], feed.getChildID());
         values.put(COLUMN_3[2], feed.getAmount());
@@ -271,6 +271,7 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         long result = db.insert(TABLE_NAMES[2], null, values);
         db.close();
+        return result;
     }
 
 
@@ -287,7 +288,7 @@ public class DBHelper extends SQLiteOpenHelper {
         return result;
     }
 
-    public void addSleep(Sleep sleep){
+    public long addSleep(Sleep sleep){
         ContentValues values = new ContentValues();
         values.put(COLUMN_5[1], sleep.getChildID());
         values.put(COLUMN_5[2], sleep.getSleepTime());
@@ -301,11 +302,12 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(COLUMN_5[10], sleep.getUnit());
         values.put(COLUMN_5[11], sleep.getNotes());
         SQLiteDatabase db = this.getWritableDatabase();
-        db.insert(TABLE_NAMES[4], null, values);
+        long result = db.insert(TABLE_NAMES[4], null, values);
         db.close();
+        return result;
     }
 
-    public void addEntry(Entry entry){
+    public long addEntry(Entry entry){
         ContentValues values = new ContentValues();
         values.put(COLUMN_6[1], entry.getEntryText());
         values.put(COLUMN_6[2], entry.getEntryTime());
@@ -315,6 +317,7 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         long result = db.insert(TABLE_NAMES[5], null, values);
         db.close();
+        return result;
     }
 
     public long addMilestone(Milestone milestone){
@@ -373,7 +376,7 @@ public class DBHelper extends SQLiteOpenHelper {
         return result;
     }
 
-    public boolean addBathroom(Bathroom bathroom){
+    public long addBathroom(Bathroom bathroom){
         ContentValues values = new ContentValues();
         values.put(COLUMN_9[1], bathroom.getChildID());
         values.put(COLUMN_9[2], bathroom.getBathroomType());
@@ -387,12 +390,7 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         long result = db.insert(TABLE_NAMES[8], null, values);
         db.close();
-        if(result == -1){
-            return false;
-        }
-        else{
-            return true;
-        }
+        return result;
 
     }
 
@@ -618,6 +616,57 @@ public class DBHelper extends SQLiteOpenHelper {
         return provider;
     }
 
+    public Activity getActivity(int id){
+        String query = "SELECT * FROM Activity WHERE ActivityID = '" + id + "';";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor c = db.rawQuery(query, null);
+        Activity activity = new Activity();
+        if(c.moveToFirst()){
+            c.moveToFirst();
+            activity.setActivityID(c.getInt(0));
+            activity.setChildID(c.getInt(1));
+            activity.setChildActivity(c.getString(2));
+            activity.setEntryTime(c.getLong(3));
+            activity.setDuration(c.getString(4));
+            activity.setUnits(c.getString(5));
+            activity.setNotes(c.getString(6));
+        }
+        else{
+            c.close();
+            activity = null;
+        }
+        db.close();
+        return activity;
+    }
+
+    public Sleep getSleep(int id){
+        String query = "SELECT * FROM Sleep WHERE SleepID = '" + id + "';";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor c = db.rawQuery(query, null);
+        Sleep sleep = new Sleep();
+        if(c.moveToFirst()){
+            c.moveToFirst();
+            sleep.setSleepID(c.getInt(0));
+            sleep.setChildID(c.getInt(1));
+            sleep.setSleepTime(c.getLong(2));
+            sleep.setDuration(c.getInt(3));
+            sleep.setSnoring(c.getString(4));
+            sleep.setMedication(c.getString(5));
+            sleep.setSupplements(c.getString(6));
+            sleep.setCPAP(c.getString(7));
+            sleep.setOther(c.getString(8));
+            sleep.setStudy(c.getString(9));
+            sleep.setUnit(c.getString(10));
+            sleep.setNotes(c.getString(11));
+        }
+        else{
+            c.close();
+            sleep = null;
+        }
+        db.close();
+        return sleep;
+    }
+
     public MedicalInfo getMedical(int medicalID){
         String query = "SELECT * FROM Medical WHERE MedicalID = '" + medicalID + "';";
         SQLiteDatabase db = this.getWritableDatabase();
@@ -742,7 +791,7 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     public Mood getMood(int id){
-        String query = "SELECT * FROM Message WHERE MoodID = '" + id + "';";
+        String query = "SELECT * FROM Mood WHERE MoodID = '" + id + "';";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor c = db.rawQuery(query, null);
         Mood mood = new Mood();
@@ -848,9 +897,12 @@ public class DBHelper extends SQLiteOpenHelper {
             if(x == 0) {
                 c.moveToFirst();
             }
+                entry.setEntryID(c.getInt(0));
                 entry.setEntryText(c.getString(1));
                 entry.setEntryTime(c.getLong(2));
                 entry.setChildID(c.getInt(3));
+                entry.setEntryType(c.getString(4));
+                entry.setForeignID(c.getInt(5));
                 entries.add(entry);
                 x++;
         }

@@ -35,6 +35,10 @@ public class ActivityActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_activity);
 
+        Intent intent = getIntent();
+        String msgID = intent.getStringExtra("activityID");
+        int id = Integer.parseInt(msgID);
+
         helper = new DBHelper(this);
         currentTime = findViewById(R.id.timeText);
         c_activity = findViewById(R.id.activitySpinner);
@@ -53,10 +57,22 @@ public class ActivityActivity extends AppCompatActivity {
         activity = new Activity();
 
         entry.setChildID(childID);
+        entry.setEntryType("Activity");
         activity.setChildID(childID);
 
         durationText.setPaintFlags(durationText.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         activities = helper.getAllActivities(childID);
+
+        if(id != -1){
+            activity = helper.getActivity(id);
+            save.setEnabled(false);
+            c_activity.setSelection(getIndex(c_activity, activity.getChildActivity()));
+            duration.setText(activity.getDuration());
+            if(!activity.getNotes().equals("")){
+                notes.setText(activity.getNotes());
+            }
+            units.setSelection(getIndex(units, activity.getUnits()));
+        }
 
 
 
@@ -124,11 +140,11 @@ public class ActivityActivity extends AppCompatActivity {
                         && !c_activity.getSelectedItem().toString().equals("Select")){
                     activity.setDuration(duration.getText().toString());
                     activity.setUnits(units.getSelectedItem().toString());
-                    activity.setChildActivity(helper.getChildName(childID) + " was " + c_activity.getSelectedItem().toString() + " for " + activity.getDuration() + " " + activity.getUnits());
+                    activity.setChildActivity(c_activity.getSelectedItem().toString());
                     Calendar cal = Calendar.getInstance();
                     activity.setEntryTime(cal.getTimeInMillis());
                     entry.setEntryTime(cal.getTimeInMillis());
-                    entry.setEntryText(activity.getChildActivity());
+                    entry.setEntryText(helper.getChildName(childID) + " was " + c_activity.getSelectedItem().toString() + " for " + activity.getDuration() + " " + activity.getUnits());
                     entry.setEntryType("Activity");
                     if(!notes.getText().toString().equals("")){
                         activity.setNotes(notes.getText().toString());
@@ -144,5 +160,17 @@ public class ActivityActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    //get index of selection in a spinner
+    private int getIndex(Spinner spinner, String myString) {
+        for (int i = 0; i < spinner.getCount(); i++) {
+            if (spinner.getItemAtPosition(i).toString().equalsIgnoreCase(myString)) {
+                return i;
+            }
+        }
+
+        return 0;
+
     }
 }

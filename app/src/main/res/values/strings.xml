@@ -56,6 +56,7 @@
     <string name="went_to_sleep">Went to sleep</string>
     <string name="enter_birthday">Enter Birthday</string>
     <string name="enter_due_date">Enter Due Date</string>
+    <string name="entries">Entires</string>
 
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>

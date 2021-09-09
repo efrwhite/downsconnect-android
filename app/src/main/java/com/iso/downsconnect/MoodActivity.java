@@ -37,6 +37,10 @@ public class MoodActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         final int childID = sharedPreferences.getInt("name", 1);
 
+        Intent intent = getIntent();
+        String msgID = intent.getStringExtra("moodID");
+        int id = Integer.parseInt(msgID);
+
 
         mood = new Mood();
         entry = new Entry();
@@ -53,6 +57,17 @@ public class MoodActivity extends AppCompatActivity {
         save = findViewById(R.id.moodSave);
         time = findViewById(R.id.durationTimeText);
         history = findViewById(R.id.messageHistory);
+
+        if(id != -1){
+            save.setEnabled(false);
+            mood = db.getMood(id);
+            moodType.setSelection(getIndex(moodType, mood.getMoodType()));
+            units.setSelection(getIndex(units, mood.getUnits()));
+            time.setText(mood.getTime());
+            if(!mood.getNotes().equals("")){
+                notes.setText(mood.getNotes());
+            }
+        }
 
 
         Calendar calendar = Calendar.getInstance();
@@ -80,6 +95,7 @@ public class MoodActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MoodActivity.this, ActivityContainer.class);
+                intent.putExtra("moodID", "-1");
                 startActivity(intent);
             }
         });
@@ -107,6 +123,9 @@ public class MoodActivity extends AppCompatActivity {
                     if(!notes.getText().toString().equals("")){
                         mood.setNotes(notes.getText().toString());
                     }
+                    else{
+                        mood.setNotes("");
+                    }
                     Toast.makeText(getApplicationContext(), "Mood infomation saved", Toast.LENGTH_SHORT).show();
 
                     entry.setChildID(childID);
@@ -129,5 +148,16 @@ public class MoodActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private int getIndex(Spinner spinner, String myString) {
+        for (int i = 0; i < spinner.getCount(); i++) {
+            if (spinner.getItemAtPosition(i).toString().equalsIgnoreCase(myString)) {
+                return i;
+            }
+        }
+
+        return 0;
+
     }
 }

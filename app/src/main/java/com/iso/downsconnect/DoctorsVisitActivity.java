@@ -92,6 +92,7 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor_visit);
 
