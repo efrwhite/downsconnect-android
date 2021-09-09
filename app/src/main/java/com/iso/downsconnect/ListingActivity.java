@@ -76,18 +76,22 @@ public class ListingActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(type == 0) {
                     Intent intent = new Intent(ListingActivity.this, ActivityActivity.class);
+                    intent.putExtra("activityID", "-1");
                     startActivity(intent);
                 }
                 if(type == 1){
                     Intent intent = new Intent(ListingActivity.this, MoodActivity.class);
+                    intent.putExtra("moodID", "-1");
                     startActivity(intent);
                 }
                 if(type == 2){
                     Intent intent = new Intent(ListingActivity.this, MessageActivity.class);
+                    intent.putExtra("msgID", "-1");
                     startActivity(intent);
                 }
                 if(type == 3){
                     Intent intent = new Intent(ListingActivity.this, JournalActivity.class);
+                    intent.putExtra("journID", "-1");
                     startActivity(intent);
                 }
             }
@@ -97,57 +101,67 @@ public class ListingActivity extends AppCompatActivity {
     }
 
     private void addActivites(int childID){
-        activities = helper.getAllActivities(childID);
-        for(Activity activity: activities){
-            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            LinearLayout.LayoutParams textParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            ViewGroup.MarginLayoutParams marginLayoutParams = new ViewGroup.MarginLayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            marginLayoutParams.setMargins(20, 0, 50,10);
+        TextView title = findViewById(R.id.listingTitle);
+        title.setText("Past Activities");
 
-            LinearLayout mainLayout = new LinearLayout(this);
-            mainLayout.setTag(activity.getActivityID() + "Layout");
-            mainLayout.setOrientation(LinearLayout.HORIZONTAL);
-            mainLayout.setLayoutParams(marginLayoutParams);
+        TextView listText = findViewById(R.id.listingText);
+        listText.setText("Activities");
 
+        entries = helper.getListing("Activity", childID);
+        Log.i("conut", String.valueOf(entries.size()));
 
-            layoutParams.setMargins(200, 0, 0, 30);
-            textParams.setMargins(20, 30, 10, 30);
-
-            LinearLayout horizontalLayout = new LinearLayout(this);
-            horizontalLayout.setTag(activity.getActivityID() + "Layout");
-            horizontalLayout.setOrientation(LinearLayout.HORIZONTAL);
-            horizontalLayout.setLayoutParams(marginLayoutParams);
-
-            LinearLayout horizontalLayout2 = new LinearLayout(this);
-            horizontalLayout2.setTag(activity.getActivityID() + "Layout2");
-            horizontalLayout2.setOrientation(LinearLayout.HORIZONTAL);
-            //horizontalLayout2.setLayoutParams(marginLayoutParams);
-
-            TextView date = new TextView(this);
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTimeInMillis(activity.getEntryTime());
-            Date dat = calendar.getTime();
-            DateFormat formatter = new SimpleDateFormat("h:mm a");
-            String time = formatter.format(dat);
-
-            date.setText(dateHandler.getMonth(calendar.get(Calendar.MONTH)) + " " + calendar.get(Calendar.DATE) + ", " + calendar.get(Calendar.YEAR) + " at: " + time);
-            date.setTextSize(15);
-            date.setTextColor(Color.BLACK);
-            date.setWidth(500);
-            date.setLayoutParams(textParams);
-            horizontalLayout.addView(date);
-            mainLayout.addView(horizontalLayout);
-
-            TextView c_activity = new TextView(this);
-            c_activity.setText(activity.getChildActivity());
-            c_activity.setTextSize(15);
-            c_activity.setWidth(500);
-            c_activity.setTextColor(Color.BLACK);
-            c_activity.setLayoutParams(textParams);
-            horizontalLayout.addView(c_activity);
-
-            linearLayout.addView(mainLayout);
-        }
+        buildLayout("Activity");
+//        activities = helper.getAllActivities(childID);
+//        for(Activity activity: activities){
+//            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+//            LinearLayout.LayoutParams textParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+//            ViewGroup.MarginLayoutParams marginLayoutParams = new ViewGroup.MarginLayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+//            marginLayoutParams.setMargins(20, 0, 50,10);
+//
+//            LinearLayout mainLayout = new LinearLayout(this);
+//            mainLayout.setTag(activity.getActivityID() + "Layout");
+//            mainLayout.setOrientation(LinearLayout.HORIZONTAL);
+//            mainLayout.setLayoutParams(marginLayoutParams);
+//
+//
+//            layoutParams.setMargins(200, 0, 0, 30);
+//            textParams.setMargins(20, 30, 10, 30);
+//
+//            LinearLayout horizontalLayout = new LinearLayout(this);
+//            horizontalLayout.setTag(activity.getActivityID() + "Layout");
+//            horizontalLayout.setOrientation(LinearLayout.HORIZONTAL);
+//            horizontalLayout.setLayoutParams(marginLayoutParams);
+//
+//            LinearLayout horizontalLayout2 = new LinearLayout(this);
+//            horizontalLayout2.setTag(activity.getActivityID() + "Layout2");
+//            horizontalLayout2.setOrientation(LinearLayout.HORIZONTAL);
+//            //horizontalLayout2.setLayoutParams(marginLayoutParams);
+//
+//            TextView date = new TextView(this);
+//            Calendar calendar = Calendar.getInstance();
+//            calendar.setTimeInMillis(activity.getEntryTime());
+//            Date dat = calendar.getTime();
+//            DateFormat formatter = new SimpleDateFormat("h:mm a");
+//            String time = formatter.format(dat);
+//
+//            date.setText(dateHandler.getMonth(calendar.get(Calendar.MONTH)) + " " + calendar.get(Calendar.DATE) + ", " + calendar.get(Calendar.YEAR) + " at: " + time);
+//            date.setTextSize(15);
+//            date.setTextColor(Color.BLACK);
+//            date.setWidth(500);
+//            date.setLayoutParams(textParams);
+//            horizontalLayout.addView(date);
+//            mainLayout.addView(horizontalLayout);
+//
+//            TextView c_activity = new TextView(this);
+//            c_activity.setText(activity.getChildActivity());
+//            c_activity.setTextSize(15);
+//            c_activity.setWidth(500);
+//            c_activity.setTextColor(Color.BLACK);
+//            c_activity.setLayoutParams(textParams);
+//            horizontalLayout.addView(c_activity);
+//
+//            linearLayout.addView(mainLayout);
+//        }
     }
 
     private void addMoods(int childID){

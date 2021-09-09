@@ -148,7 +148,9 @@ public class FluidFragment extends Fragment {
                     entry.setChildID(childID);
                     entry.setEntryText(helper.getChildName(childID) + " drank " + feed.getAmount() + feed.getFoodUnit() + " of " + feed.getSubstance());
                     entry.setEntryTime(calendar.getTimeInMillis());
-                    helper.addFeed(feed);
+                    long id = helper.addFeed(feed);
+                    entry.setForeignID(id);
+                    entry.setEntryType("Feed");
                     helper.addEntry(entry);
                     Intent intent = new Intent(getContext(), ActivityContainer.class);
                     startActivity(intent);

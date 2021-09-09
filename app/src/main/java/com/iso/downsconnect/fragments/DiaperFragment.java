@@ -127,9 +127,12 @@ public class DiaperFragment extends Fragment {
                     entry.setEntryText(helper.getChildName(childID) + " had an accident in their diaper");
                     entry.setEntryTime(Calendar.getInstance().getTimeInMillis());
                     entry.setChildID(childID);
+                    entry.setEntryType("Bathroom");
 
+
+                    long id = helper.addBathroom(bathroom);
+                    entry.setForeignID(id);
                     helper.addEntry(entry);
-                    helper.addBathroom(bathroom);
                     Intent intent = new Intent(getContext(), ActivityContainer.class);
                     startActivity(intent);
                 }
@@ -141,8 +144,5 @@ public class DiaperFragment extends Fragment {
                 }
             }
         });
-
-
-
     }
 }

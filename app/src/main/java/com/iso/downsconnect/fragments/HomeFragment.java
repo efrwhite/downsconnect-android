@@ -153,6 +153,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), FeedActivity.class);
+                intent.putExtra("feedID", "-1");
                 startActivity(intent);
             }
         });
@@ -161,6 +162,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), ActivityActivity.class);
+                intent.putExtra("activityID", "-1");
                 startActivity(intent);
             }
         });
@@ -169,6 +171,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), SleepActivity.class);
+                intent.putExtra("sleepID", "-1");
                 startActivity(intent);
             }
         });
@@ -177,6 +180,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), MoodActivity.class);
+                intent.putExtra("moodID", "-1");
                 startActivity(intent);
             }
         });
@@ -201,6 +205,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), MessageActivity.class);
+                intent.putExtra("msgID", "-1");
                 startActivity(intent);
             }
         });
@@ -225,6 +230,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), JournalActivity.class);
+                intent.putExtra("journID", "-1");
                 startActivity(intent);
             }
         });

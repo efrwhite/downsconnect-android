@@ -145,8 +145,11 @@ public class SolidFragment extends Fragment {
                     entry.setChildID(childID);
                     entry.setEntryTime(calendar.getTimeInMillis());
                     entry.setEntryText(helper.getChildName(childID) + " ate " + feed.getAmount() + feed.getFoodUnit() + " of " + feed.getSubstance());
+                    long result = helper.addFeed(feed);
+                    entry.setForeignID(result);
+                    entry.setEntryType("Feed");
                     helper.addEntry(entry);
-                    helper.addFeed(feed);
+
 
                     Intent intent = new Intent(getContext(), ActivityContainer.class);
                     startActivity(intent);

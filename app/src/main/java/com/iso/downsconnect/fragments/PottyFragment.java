@@ -125,7 +125,9 @@ public class PottyFragment extends Fragment {
                     entry.setEntryText(entryText);
                     entry.setChildID(childID);
                     entry.setEntryTime(Calendar.getInstance().getTimeInMillis());
-                    helper.addBathroom(bathroom);
+                    long id = helper.addBathroom(bathroom);
+                    entry.setForeignID(id);
+                    entry.setEntryType("Bathroom");
                     helper.addEntry(entry);
                     Intent intent = new Intent(getContext(), ActivityContainer.class);
                     startActivity(intent);

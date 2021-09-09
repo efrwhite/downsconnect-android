@@ -140,6 +140,7 @@ public class MedicalActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MedicalActivity.this, DoctorsVisitActivity.class);
+                intent.putExtra("medID", -1);
                 startActivity(intent);
             }
         });
