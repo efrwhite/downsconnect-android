@@ -185,7 +185,7 @@ public class ProfilesFragment extends Fragment {
     public void delete(final Button button, final String type){
         new AlertDialog.Builder(getContext())
                 .setTitle("Delete Profile")
-                .setMessage("Are you sure you want to this" + type + " account")
+                .setMessage("Are you sure you want to delete this " + type + " account")
                 .setPositiveButton("yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -193,11 +193,11 @@ public class ProfilesFragment extends Fragment {
                             helper.deleteEntry(button.getId(), "Child");
                             childLayout.removeView(getView().findViewWithTag(button.getTag() + "Layout"));
                         }
-                        else if (type.equals("Account")){
-                            helper.deleteEntry(button.getId(), "Account");
-                            caregiverLayout.removeView(getView().findViewById(button.getId()));
-                        }
-                        else{
+//                        else if (type.equals("Account")){
+//                            helper.deleteEntry(button.getId(), "Account");
+//                            caregiverLayout.removeView(getView().findViewById(button.getId()));
+//                        }
+                        else if (type.equals("Provider")){
                             helper.deleteEntry(button.getId(), "Provider");
                             providerLayout.removeView(getView().findViewById(button.getId()));
                         }
