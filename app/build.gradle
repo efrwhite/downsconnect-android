@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 
-def keystorePropertiesFile = file("C:\\AndroidValuables\\321Connect\\keystore.properties.txt")
-def keystoreFile = file("C:\\AndroidValuables\\321Connect\\321key.jks")
+def keystorePropertiesFile = file("//Users/elizabethwhitebaker/Desktop/321Connect/downsconnect-android/321Connect/keystore.properties.txt")
+def keystoreFile = file("//Users/elizabethwhitebaker/Desktop/321Connect/downsconnect-android/321Connect/321key.jks")
 def keystoreProperties = new Properties()
 if (keystorePropertiesFile.exists()) {
     keystoreProperties.load(new FileInputStream(keystorePropertiesFile))

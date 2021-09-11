@@ -18,3 +18,4 @@
 321Connect/keystore.properties.txt
 321Connect/private_key.pepk
 *.gradle
+*.gradle
