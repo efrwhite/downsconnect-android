@@ -198,8 +198,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="@string/ate"
-                app:layout_constraintEnd_toStartOf="@+id/guideline8"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/quantityText"
                 app:layout_constraintTop_toBottomOf="@+id/editText" />
 
             <Spinner
@@ -223,8 +222,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:text="@string/quantity"
-                app:layout_constraintEnd_toStartOf="@+id/guideline8"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/modeEatingText2"
                 app:layout_constraintTop_toBottomOf="@+id/eatText" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
