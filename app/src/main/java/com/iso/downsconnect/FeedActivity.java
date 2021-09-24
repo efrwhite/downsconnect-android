@@ -17,6 +17,8 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
 import com.iso.downsconnect.fragments.FluidFragment;
 import com.iso.downsconnect.fragments.SolidFragment;
+import com.iso.downsconnect.helpers.DBHelper;
+import com.iso.downsconnect.objects.Feed;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -26,7 +28,10 @@ public class FeedActivity extends AppCompatActivity {
 
     TabLayout tabLayout;
     ViewPager viewPager;
-
+    private DBHelper helper;
+    private Feed feed = new Feed();
+    private SolidFragment solidFragment = new SolidFragment();
+    private FluidFragment fluidFragment = new FluidFragment();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +42,13 @@ public class FeedActivity extends AppCompatActivity {
 
         tabLayout = findViewById(R.id.tab_layout);
         viewPager = findViewById(R.id.view_pager);
+        helper = new DBHelper(this);
+
+        Intent intent = getIntent();
+        String msgID = intent.getStringExtra("feedID");
+        int id = Integer.parseInt(msgID);
+
+        String type = intent.getStringExtra("type");
 
         Calendar calendar = Calendar.getInstance();
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
@@ -72,9 +84,28 @@ public class FeedActivity extends AppCompatActivity {
         arrayList.add("Fluid");
         arrayList.add("Solid");
 
+        if(id != -1){
+            feed = helper.getFeed(id);
+            Bundle bun = new Bundle();
+            bun.putSerializable("feed", feed);
+            solidFragment.setArguments(bun);
+            fluidFragment.setArguments(bun);
+        }
+
         prepareViewPager(viewPager,arrayList);
 
         tabLayout.setupWithViewPager(viewPager);
+
+        if(id != -1) {
+            if (type.equals("Fluid")) {
+                TabLayout.Tab tab = tabLayout.getTabAt(0);
+                tab.select();
+            }
+            else if (type.equals("Solid")){
+                TabLayout.Tab tab = tabLayout.getTabAt(1);
+                tab.select();
+            }
+        }
     }
 
     private void prepareViewPager(ViewPager viewPager, ArrayList<String> arrayList) {
@@ -82,8 +113,8 @@ public class FeedActivity extends AppCompatActivity {
 
         //FeedFragment fragment = new FeedFragment();
 
-        adapter.addFragment(new FluidFragment(), "Fluid");
-        adapter.addFragment(new SolidFragment(), "Solid");
+        adapter.addFragment(fluidFragment, "Fluid");
+        adapter.addFragment(solidFragment, "Solid");
 
 //        for (int i=0; i<arrayList.size(); i++){
 //            Bundle bundle = new Bundle();

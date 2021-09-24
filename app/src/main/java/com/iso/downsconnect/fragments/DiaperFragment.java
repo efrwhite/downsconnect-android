@@ -83,6 +83,9 @@ public class DiaperFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        if (getArguments() != null) {
+            bathroom = (Bathroom) getArguments().getSerializable("bathroom");
+        }
         return inflater.inflate(R.layout.fragment_diaper, container, false);
     }
 
@@ -93,12 +96,14 @@ public class DiaperFragment extends Fragment {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         final int childID = sharedPreferences.getInt("name", 1);
 
-        bathroom.setBathroomType("Diaper");
-        bathroom.setChildID(childID);
-        bathroom.setDateOfLastStool(-1);
-        bathroom.setTreatmentPlan("None");
-        bathroom.setPottyAccident("None");
-        bathroom.setDuration("None");
+        if (bathroom.getBathroomType() == null) {
+            bathroom.setBathroomType("None");
+            bathroom.setChildID(childID);
+            bathroom.setDateOfLastStool(-1);
+            bathroom.setTreatmentPlan("None");
+            bathroom.setPottyAccident("None");
+            bathroom.setDuration("None");
+        }
 
         diaperLeak = view.findViewById(R.id.leakSpinner);
         openAir = view.findViewById(R.id.openAirSpinner);
@@ -108,18 +113,22 @@ public class DiaperFragment extends Fragment {
         save = view.findViewById(R.id.saveButton);
         helper = new DBHelper(getContext());
 
+        if (bathroom.getBathroomType().equals("Diaper")) {
+            setInfo();
+        }
+
 
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!diaperLeak.getSelectedItem().equals("Select") && !openAir.getSelectedItem().equals("Select")
-                    && !cream.getSelectedItem().equals("Select") && !quantity.getSelectedItem().equals("Select")){
-                    if(!notes.getText().toString().equals("")){
-                        bathroom.setNotes(notes.getText().toString());
+                if (!diaperLeak.getSelectedItem().equals("Select") && !openAir.getSelectedItem().equals("Select")
+                        && !cream.getSelectedItem().equals("Select") && !quantity.getSelectedItem().equals("Select")) {
+                    if (!notes.getText().toString().equals("")) {
+                        bathroom.setDuration(notes.getText().toString());
+                    } else {
+                        bathroom.setDuration("None");
                     }
-                    else{
-                        bathroom.setNotes("None");
-                    }
+                    bathroom.setBathroomType("Diaper");
                     bathroom.setDiaperCream(cream.getSelectedItem().toString());
                     bathroom.setLeak(diaperLeak.getSelectedItem().toString());
                     bathroom.setOpenAir(openAir.getSelectedItem().toString());
@@ -135,8 +144,7 @@ public class DiaperFragment extends Fragment {
                     helper.addEntry(entry);
                     Intent intent = new Intent(getContext(), ActivityContainer.class);
                     startActivity(intent);
-                }
-                else{
+                } else {
                     AlertDialog a = new AlertDialog.Builder(save.getContext()).create();
                     a.setTitle("Missing Information");
                     a.setMessage("Please make sure you've filled out the necessary information");
@@ -144,5 +152,25 @@ public class DiaperFragment extends Fragment {
                 }
             }
         });
+    }
+
+    public void setInfo() {
+        save.setEnabled(false);
+        diaperLeak.setSelection(getIndex(diaperLeak, bathroom.getLeak()));
+        openAir.setSelection(getIndex(openAir, bathroom.getOpenAir()));
+        cream.setSelection(getIndex(cream, bathroom.getDiaperCream()));
+        quantity.setSelection(getIndex(quantity, bathroom.getQuantity()));
+        if (bathroom.getNotes() != null) {
+            notes.setText(bathroom.getDuration());
+        }
+    }
+
+    private int getIndex(Spinner spinner, String myString) {
+        for (int i = 0; i < spinner.getCount(); i++) {
+            if (spinner.getItemAtPosition(i).toString().equalsIgnoreCase(myString)) {
+                return i;
+            }
+        }
+        return 0;
     }
 }

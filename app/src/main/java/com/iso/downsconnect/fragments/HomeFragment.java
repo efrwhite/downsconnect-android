@@ -222,6 +222,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), BathroomActivity.class);
+                intent.putExtra("bathID", "-1");
                 startActivity(intent);
             }
         });

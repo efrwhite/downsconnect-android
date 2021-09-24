@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import com.iso.downsconnect.ActivityContainer;
 import com.iso.downsconnect.helpers.DBHelper;
@@ -26,7 +27,10 @@ import com.iso.downsconnect.objects.Bathroom;
 import com.iso.downsconnect.helpers.DateHandler;
 import com.iso.downsconnect.objects.Entry;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -39,6 +43,7 @@ public class ConstipationFragment extends Fragment implements DatePickerDialog.O
     private Bathroom bathroom = new Bathroom();
     private DBHelper helper;
     private Entry entry;
+    private DateHandler handler = new DateHandler();
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -84,6 +89,9 @@ public class ConstipationFragment extends Fragment implements DatePickerDialog.O
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        if (getArguments() != null) {
+            bathroom = (Bathroom) getArguments().getSerializable("bathroom");
+        }
         return inflater.inflate(R.layout.fragment_constipation, container, false);
     }
 
@@ -94,14 +102,16 @@ public class ConstipationFragment extends Fragment implements DatePickerDialog.O
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         final int childID = sharedPreferences.getInt("name", 1);
 
-        bathroom.setBathroomType("Constipation");
-        bathroom.setChildID(childID);
-        bathroom.setDiaperCream("None");
-        bathroom.setOpenAir("None");
-        bathroom.setLeak("None");
-        bathroom.setQuantity("None");
-        bathroom.setPottyAccident("None");
-        bathroom.setDuration("None");
+        if (bathroom.getBathroomType() == null) {
+            bathroom.setBathroomType("None");
+            bathroom.setChildID(childID);
+            bathroom.setDiaperCream("None");
+            bathroom.setOpenAir("None");
+            bathroom.setLeak("None");
+            bathroom.setQuantity("None");
+            bathroom.setPottyAccident("None");
+            bathroom.setDuration("None");
+        }
 
         lastStoolDate = view.findViewById(R.id.stoolDateEditText);
         lastStoolDate.setFocusable(false);
@@ -110,6 +120,10 @@ public class ConstipationFragment extends Fragment implements DatePickerDialog.O
         save = view.findViewById(R.id.saveButton);
         helper = new DBHelper(getContext());
         entry = new Entry();
+
+        if (bathroom.getBathroomType().equals("Constipation")) {
+            setInfo();
+        }
 
         lastStoolDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,8 +136,12 @@ public class ConstipationFragment extends Fragment implements DatePickerDialog.O
             public void onClick(View v) {
                 if(!lastStoolDate.getText().toString().equals("") && !treatment.getText().toString().equals("")){
                     if(!notes.getText().toString().equals("")){
-                        bathroom.setNotes(notes.getText().toString());
+                        bathroom.setDuration(notes.getText().toString());
                     }
+                    else{
+                        bathroom.setDuration("None");
+                    }
+                    bathroom.setBathroomType("Constipation");
                     bathroom.setTreatmentPlan(treatment.getText().toString());
                     long id = helper.addBathroom(bathroom);
                     entry.setChildID(childID);
@@ -165,14 +183,26 @@ public class ConstipationFragment extends Fragment implements DatePickerDialog.O
         lastStoolDate.setText(month_.getMonth(month) + " " + dayOfMonth + ", " + year);
     }
 
-//    private DatePickerDialog.OnDateSetListener datePickerListener = new DatePickerDialog.OnDateSetListener() {
-//
-//        // when dialog box is closed, below method will be called.
-//        public void onDateSet(DatePicker view, int selectedYear,
-//                              int selectedMonth, int selectedDay) {
-//            DateHandler month_ = new DateHandler();
-//            lastStoolDate.setText(month_.getMonth(selectedMonth) + " " + selectedDay + ", " + selectedYear);
-//
-//        }
-//    };
+    public void setInfo(){
+        save.setEnabled(false);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(bathroom.getDateOfLastStool());
+        lastStoolDate.setText(handler.getMonth(calendar.get(Calendar.MONTH)) + " " + calendar.get(Calendar.DATE) + ", " + calendar.get(Calendar.YEAR));
+        if(!bathroom.getDuration().equals("None")){
+            notes.setText(bathroom.getDuration());
+        }
+        treatment.setText(bathroom.getTreatmentPlan());
+
+    }
+
+    private int getIndex(Spinner spinner, String myString) {
+        for (int i = 0; i < spinner.getCount(); i++) {
+            if (spinner.getItemAtPosition(i).toString().equalsIgnoreCase(myString)) {
+                return i;
+            }
+        }
+
+        return 0;
+
+    }
 }

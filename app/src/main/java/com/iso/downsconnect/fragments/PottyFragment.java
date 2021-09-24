@@ -83,6 +83,9 @@ public class PottyFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        if(getArguments() != null) {
+            bathroom = (Bathroom) getArguments().getSerializable("bathroom");
+        }
         return inflater.inflate(R.layout.fragment_potty, container, false);
     }
 
@@ -93,14 +96,16 @@ public class PottyFragment extends Fragment {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         final int childID = sharedPreferences.getInt("name", 1);
 
-        bathroom.setBathroomType("Potty");
-        bathroom.setChildID(childID);
-        bathroom.setDiaperCream("None");
-        bathroom.setOpenAir("None");
-        bathroom.setLeak("None");
-        bathroom.setQuantity("None");
-        bathroom.setDateOfLastStool(-1);
-        bathroom.setTreatmentPlan("None");
+        if(bathroom.getBathroomType() == null) {
+            bathroom.setBathroomType("None");
+            bathroom.setChildID(childID);
+            bathroom.setDiaperCream("None");
+            bathroom.setOpenAir("None");
+            bathroom.setLeak("None");
+            bathroom.setQuantity("None");
+            bathroom.setDateOfLastStool(-1);
+            bathroom.setTreatmentPlan("None");
+        }
 
         helper = new DBHelper(getContext());
         notes =  view.findViewById(R.id.editText);
@@ -108,15 +113,20 @@ public class PottyFragment extends Fragment {
         units = view.findViewById(R.id.unitsSpinner);
         duration = view.findViewById(R.id.durationEditText);
         save = view.findViewById(R.id.saveButton);
+
+        if(bathroom.getBathroomType().equals("Potty")){
+            setInfo();
+        }
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(!accident.getSelectedItem().equals("") && !duration.getText().toString().equals("")
                         && !units.getSelectedItem().equals("Select")){
+                    bathroom.setBathroomType("Potty");
                     bathroom.setDuration(duration.getText().toString() + " " + units.getSelectedItem().toString());
                     bathroom.setPottyAccident(accident.getSelectedItem().toString());
                     String entryText = helper.getChildName(childID) + " went potty for " + bathroom.getDuration();
-                    if(units.getSelectedItem().equals("Yes")){
+                    if(accident.getSelectedItem().equals("Yes")){
                         entryText = entryText + ". It was an accident";
                     }
                     else{
@@ -140,6 +150,25 @@ public class PottyFragment extends Fragment {
                 }
             }
         });
+
+    }
+
+    public void setInfo(){
+        save.setEnabled(false);
+        duration.setText(bathroom.getDuration().substring(0, bathroom.getDuration().indexOf(" ")));
+        units.setSelection(getIndex(units, bathroom.getDuration().substring(bathroom.getDuration().indexOf(" ") + 1)));
+        accident.setSelection(getIndex(accident, bathroom.getPottyAccident()));
+
+    }
+
+    private int getIndex(Spinner spinner, String myString) {
+        for (int i = 0; i < spinner.getCount(); i++) {
+            if (spinner.getItemAtPosition(i).toString().equalsIgnoreCase(myString)) {
+                return i;
+            }
+        }
+
+        return 0;
 
     }
 }

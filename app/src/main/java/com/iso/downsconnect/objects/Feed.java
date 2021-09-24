@@ -1,10 +1,12 @@
 package com.iso.downsconnect.objects;
 
-public class Feed {
+import java.io.Serializable;
+
+public class Feed implements Serializable {
     private int amount;
     private long entryTime;
     private String substance, foodUnit, notes, iron, vitamin, other;
-    private int ChildID;
+    private int childID, feedID;
 
     public Feed(){
 
@@ -56,11 +58,11 @@ public class Feed {
     }
 
     public int getChildID() {
-        return ChildID;
+        return childID;
     }
 
     public void setChildID(int childID) {
-        ChildID = childID;
+        this.childID = childID;
     }
 
     public long getEntryTime() {
@@ -93,5 +95,13 @@ public class Feed {
 
     public void setOther(String other) {
         this.other = other;
+    }
+
+    public int getFeedID() {
+        return feedID;
+    }
+
+    public void setFeedID(int feedID) {
+        this.feedID = feedID;
     }
 }

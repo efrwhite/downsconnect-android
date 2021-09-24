@@ -154,15 +154,26 @@ public class ListEntriesFragment extends Fragment {
                                             intent7.putExtra("devID", String.valueOf(entry.getForeignID()));
                                             startActivity(intent7);
                                             break;
-//                        case "Bathroom":
-//                            Intent intent8 = new Intent(getContext(), BathroomActivity.class);
-//                            intent8.putExtra("bathID", String.valueOf(entry.getForeignID()));
-//                            startActivity(intent8);
-//                            break;
+                                        case "Bathroom":
+                                            Intent intent8 = new Intent(getContext(), BathroomActivity.class);
+                                            intent8.putExtra("bathID", String.valueOf(entry.getForeignID()));
+                                            startActivity(intent8);
+                                            break;
                                         case "Journal":
                                             Intent intent9 = new Intent(getContext(), JournalActivity.class);
                                             intent9.putExtra("journID", String.valueOf(entry.getForeignID()));
                                             startActivity(intent9);
+                                            break;
+                                        case "Feed":
+                                            Intent intent10 = new Intent(getContext(), FeedActivity.class);
+                                            intent10.putExtra("feedID", String.valueOf(entry.getForeignID()));
+                                            if(entry.getEntryText().contains("drank")){
+                                                intent10.putExtra("type", "Fluid");
+                                            }
+                                            else{
+                                                intent10.putExtra("type", "Solid");
+                                            }
+                                            startActivity(intent10);
                                             break;
                                     }
                                 }
