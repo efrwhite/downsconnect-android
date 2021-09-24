@@ -1,7 +1,9 @@
 package com.iso.downsconnect;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -19,6 +21,9 @@ import com.google.android.material.tabs.TabLayout;
 import com.iso.downsconnect.fragments.ConstipationFragment;
 import com.iso.downsconnect.fragments.DiaperFragment;
 import com.iso.downsconnect.fragments.PottyFragment;
+import com.iso.downsconnect.helpers.DBHelper;
+import com.iso.downsconnect.helpers.FragmentData;
+import com.iso.downsconnect.objects.Bathroom;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -26,9 +31,13 @@ import java.util.List;
 
 public class BathroomActivity extends AppCompatActivity {
 
-    TabLayout tabLayout;
+    private TabLayout tabLayout;
     ViewPager viewPager;
-
+    private Bathroom bathroom;
+    private DBHelper helper;
+    private PottyFragment pottyFragment = new PottyFragment();
+    private DiaperFragment diaperFragment = new DiaperFragment();
+    private ConstipationFragment constipationFragment = new ConstipationFragment();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,8 +46,19 @@ public class BathroomActivity extends AppCompatActivity {
         final Button back = findViewById(R.id.backButton);
         TextView currentTime = findViewById(R.id.current_time_text);
 
+
         tabLayout = findViewById(R.id.tab_layout);
         viewPager = findViewById(R.id.view_pager);
+        helper = new DBHelper(this);
+
+
+        Intent intent = getIntent();
+        String msgID = intent.getStringExtra("bathID");
+        int id = Integer.parseInt(msgID);
+
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        final int childID = sharedPreferences.getInt("name", 1);
+
 
         Calendar calendar = Calendar.getInstance();
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
@@ -74,18 +94,44 @@ public class BathroomActivity extends AppCompatActivity {
         arrayList.add("Potty");
         arrayList.add("Constipation");
 
+        if(id != -1){
+            bathroom = helper.getBathroom(id);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("bathroom", bathroom);
+            pottyFragment.setArguments(bundle);
+            constipationFragment.setArguments(bundle);
+            diaperFragment.setArguments(bundle);
+        }
+
         prepareViewPager(viewPager,arrayList);
 
         tabLayout.setupWithViewPager(viewPager);
+
+        if(id != -1){
+            if(bathroom.getBathroomType().equals("Potty")){
+                TabLayout.Tab tab = tabLayout.getTabAt(1);
+                tab.select();
+            }
+            else if(bathroom.getBathroomType().equals("Diaper")){
+                TabLayout.Tab tab = tabLayout.getTabAt(0);
+                tab.select();
+            }
+            else if(bathroom.getBathroomType().equals("Constipation")){
+                TabLayout.Tab tab = tabLayout.getTabAt(2);
+                tab.select();
+            }
+        }
+
+
     }
 
     private void prepareViewPager(ViewPager viewPager, ArrayList<String> arrayList) {
         MainAdapter adapter = new MainAdapter(getSupportFragmentManager());
 
 
-        adapter.addFragment(new DiaperFragment(), "Diaper");
-        adapter.addFragment(new PottyFragment(), "Potty");
-        adapter.addFragment(new ConstipationFragment(), "Constipation");
+        adapter.addFragment(diaperFragment, "Diaper");
+        adapter.addFragment(pottyFragment, "Potty");
+        adapter.addFragment(constipationFragment, "Constipation");
 
 
         viewPager.setAdapter(adapter);

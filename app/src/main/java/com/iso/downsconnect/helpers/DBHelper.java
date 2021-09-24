@@ -35,7 +35,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String[] COLUMN_6 = {"EntryID", "EntryText", "EntryTime", "ChildID", "EntryType", "ForeignID"};
     private static final String[] COLUMN_7 = {"MedicalID", "ChildID", "Height", "Weight", "HeadSize", "DoctorsVisit", "Temperature", "Provider", "VisitNum", "ProviderType", "CheckAnswers", "AppointmentDates", "AppointmentProviders", "Notes"};
     private static final String[] COLUMN_8 = {"MilestoneID", "ChildID", "Roll", "Walk", "Stand", "Sit", "Crawl", "NoHandWalk", "Jump", "Holds", "HandMouth", "Passes", "Pincher", "Drinks", "Scribbles", "SpoonFeed", "Points", "Emotion", "Affection", "Interest", "Coos", "Babbles", "Speaks", "TwoWords", "Sentence", "Startles", "Turns"};
-    private static final String[] COLUMN_9 = {"BathroomID", "ChildID", "BathroomType", "TreatmentPlan", "Leak", "OpenAir", "DiaperCream", "Quantity", "PottyAccident", "DateOfLastStool", "Duration"};
+    private static final String[] COLUMN_9 = {"BathroomID", "ChildID", "BathroomType", "Treatment", "Leak", "OpenAir", "DiaperCream", "Quantity", "PottyAccident", "DateOfLastStool", "Duration"};
     private static final String[] COLUMN_10 = {"ProviderID", "ProviderName", "PracticeName", "Specialty", "Phone", "Fax", "Email", "Website", "Address", "State", "City", "Zip"};
     private static final String[] COLUMN_11 = {"ActivityID", "ChildID", "ActivityName", "EntryTime", "Duration", "DurationUnits" ,"Notes"};
     private static final String[] COLUMN_12 = {"ImageID", "ChildID", "Image"};
@@ -265,9 +265,9 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(COLUMN_3[4], feed.getNotes());
         values.put(COLUMN_3[5], feed.getFoodUnit());
         values.put(COLUMN_3[6], feed.getEntryTime());
-        values.put(COLUMN_3[6], feed.getIron());
-        values.put(COLUMN_3[6], feed.getVitamin());
-        values.put(COLUMN_3[6], feed.getOther());
+        values.put(COLUMN_3[7], feed.getIron());
+        values.put(COLUMN_3[8], feed.getVitamin());
+        values.put(COLUMN_3[9], feed.getOther());
         SQLiteDatabase db = this.getWritableDatabase();
         long result = db.insert(TABLE_NAMES[2], null, values);
         db.close();
@@ -383,10 +383,11 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(COLUMN_9[3], bathroom.getTreatmentPlan());
         values.put(COLUMN_9[4], bathroom.getLeak());
         values.put(COLUMN_9[5], bathroom.getOpenAir());
-        values.put(COLUMN_9[6], bathroom.getQuantity());
-        values.put(COLUMN_9[7], bathroom.getPottyAccident());
-        values.put(COLUMN_9[8], bathroom.getDateOfLastStool());
-        values.put(COLUMN_9[9], bathroom.getDuration());
+        values.put(COLUMN_9[6], bathroom.getDiaperCream());
+        values.put(COLUMN_9[7], bathroom.getQuantity());
+        values.put(COLUMN_9[8], bathroom.getPottyAccident());
+        values.put(COLUMN_9[9], bathroom.getDateOfLastStool());
+        values.put(COLUMN_9[10], bathroom.getDuration());
         SQLiteDatabase db = this.getWritableDatabase();
         long result = db.insert(TABLE_NAMES[8], null, values);
         db.close();
@@ -545,6 +546,33 @@ public class DBHelper extends SQLiteOpenHelper {
         return childBirthday;
     }
 
+    public Bathroom getBathroom(int childID){
+        String query = "SELECT * FROM Bathroom WHERE BathroomID = '" + childID + "';";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor c = db.rawQuery(query, null);
+        Bathroom bathroom = new Bathroom();
+        if(c.moveToFirst()){
+            c.moveToFirst();
+            bathroom.setBathroomID(c.getInt(0));
+            bathroom.setChildID(c.getInt(1));
+            bathroom.setBathroomType(c.getString(2));
+            bathroom.setTreatmentPlan(c.getString(3));
+            bathroom.setLeak(c.getString(4));
+            bathroom.setOpenAir(c.getString(5));
+            bathroom.setDiaperCream(c.getString(6));
+            bathroom.setQuantity(c.getString(7));
+            bathroom.setPottyAccident(c.getString(8));
+            bathroom.setDateOfLastStool(c.getLong(9));
+            bathroom.setDuration(c.getString(10));
+        }
+        else{
+            c.close();
+            bathroom = null;
+        }
+        db.close();
+        return bathroom;
+    }
+
    public Milestone getMilestone(int childID){
         String query = "SELECT * FROM Milestone WHERE ChildID = '" + childID + "';";
         SQLiteDatabase db = this.getWritableDatabase();
@@ -614,6 +642,32 @@ public class DBHelper extends SQLiteOpenHelper {
         }
         db.close();
         return provider;
+    }
+
+    public Feed getFeed(int id){
+        String query = "SELECT * FROM Feed WHERE FeedID = '" + id + "';";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor c = db.rawQuery(query, null);
+        Feed feed = new Feed();
+        if(c.moveToFirst()) {
+            c.moveToFirst();
+            feed.setFeedID(c.getInt(0));
+            feed.setChildID(c.getInt(1));
+            feed.setAmount(c.getInt(2));
+            feed.setSubstance(c.getString(3));
+            feed.setNotes(c.getString(4));
+            feed.setFoodUnit(c.getString(5));
+            feed.setEntryTime(c.getLong(6));
+            feed.setIron(c.getString(7));
+            feed.setVitamin(c.getString(8));
+            feed.setOther(c.getString(9));
+        }
+        else{
+            c.close();
+            feed = null;
+        }
+        db.close();
+        return feed;
     }
 
     public Activity getActivity(int id){

@@ -36,7 +36,7 @@ public class SolidFragment extends Fragment {
     private EditText notes, quantity, otherText;
     private Spinner foodUnit, solidFood;
     private Entry entry;
-    private Feed feed;
+    private Feed feed = new Feed();;
     private DBHelper helper;
     private CheckBox iron, vitamin, other;
 
@@ -84,6 +84,9 @@ public class SolidFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        if (getArguments() != null) {
+            feed = (Feed) getArguments().getSerializable("feed");
+        }
         return inflater.inflate(R.layout.fragment_solid, container, false);
     }
 
@@ -103,10 +106,12 @@ public class SolidFragment extends Fragment {
         vitamin = view.findViewById(R.id.vitaCheck);
         other = view.findViewById(R.id.otherCheck);
         otherText = view.findViewById(R.id.o_text);
-
-        feed = new Feed();
         helper = new DBHelper(getContext());
         entry = new Entry();
+
+    if(feed.getSubstance() != null){
+            setInfo();
+        }
 
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -162,5 +167,35 @@ public class SolidFragment extends Fragment {
                 }
             }
         });
+    }
+
+    public void setInfo(){
+        saveBtn.setEnabled(false);
+        if(!feed.getNotes().equals("")){
+            notes.setText(feed.getNotes());
+        }
+        quantity.setText(String.valueOf(feed.getAmount()));
+        if(!feed.getOther().equals("None")) {
+            otherText.setText(feed.getOther());
+            other.setChecked(true);
+        }
+        foodUnit.setSelection(getIndex(foodUnit, feed.getFoodUnit()));
+        solidFood.setSelection(getIndex(solidFood, feed.getSubstance()));
+        if(feed.getIron().equals("Yes")){
+            iron.setChecked(true);
+        }
+        if(feed.getVitamin().equals("Yes")){
+            vitamin.setChecked(true);
+        }
+
+    }
+
+    private int getIndex(Spinner spinner, String myString) {
+        for (int i = 0; i < spinner.getCount(); i++) {
+            if (spinner.getItemAtPosition(i).toString().equalsIgnoreCase(myString)) {
+                return i;
+            }
+        }
+        return 0;
     }
 }

@@ -1,6 +1,8 @@
 package com.iso.downsconnect.objects;
 
-public class Bathroom {
+import java.io.Serializable;
+
+public class Bathroom implements Serializable {
     private String bathroomType, treatmentPlan, notes, leak, openAir, diaperCream, quantity, pottyAccident, duration;
     private int childID, bathroomID;
     private long dateOfLastStool;
