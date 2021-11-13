@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class Feed implements Serializable {
     private int amount;
     private long entryTime;
-    private String substance, foodUnit, notes, iron, vitamin, other;
+    private String substance, foodUnit, notes, iron, vitamin, other, feedMode;
     private int childID, feedID;
 
     public Feed(){
@@ -103,5 +103,13 @@ public class Feed implements Serializable {
 
     public void setFeedID(int feedID) {
         this.feedID = feedID;
+    }
+
+    public String getFeedMode() {
+        return feedMode;
+    }
+
+    public void setFeedMode(String feedMode) {
+        this.feedMode = feedMode;
     }
 }

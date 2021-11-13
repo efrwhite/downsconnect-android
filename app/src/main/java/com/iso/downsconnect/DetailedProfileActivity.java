@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -34,7 +35,7 @@ public class DetailedProfileActivity extends AppCompatActivity implements DatePi
     private Button back, save;
     private DBHelper helper;
     private Child child = new Child();
-    private DateHandler month = new DateHandler();
+    private DateHandler dateHandler = new DateHandler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,10 +62,10 @@ public class DetailedProfileActivity extends AppCompatActivity implements DatePi
             gender.setSelection(getIndex(gender, child.getGender()));
             Calendar birthday = Calendar.getInstance();
             birthday.setTimeInMillis(child.getBirthday());
-            birthdayPicker.setText(month.writtenDate(birthday.get(Calendar.MONTH),birthday.get(Calendar.DATE) , birthday.get(Calendar.YEAR)));
+            birthdayPicker.setText(dateHandler.writtenDate(birthday.get(Calendar.MONTH),birthday.get(Calendar.DATE) , birthday.get(Calendar.YEAR)));
             Calendar due = Calendar.getInstance();
             due.setTimeInMillis(child.getDueDate());
-            dueDatePicker.setText(month.writtenDate(due.get(Calendar.MONTH),  due.get(Calendar.DATE) , due.get(Calendar.YEAR)));
+            dueDatePicker.setText(dateHandler.writtenDate(due.get(Calendar.MONTH),  due.get(Calendar.DATE) , due.get(Calendar.YEAR)));
             bloodType.setSelection(getIndex(bloodType, child.getBloodType()));
             allergies.setText(child.getAllergies());
             medications.setText(child.getMedications());
@@ -115,6 +116,7 @@ public class DetailedProfileActivity extends AppCompatActivity implements DatePi
                         if(children.size() == 1){
                             SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                             sharedPreferences.edit().putInt("name", children.get(0).getChildID()).commit();
+                            Log.i("ctest", String.valueOf(sharedPreferences.getInt("name", 1)));
                         }
                         Intent intent = new Intent(DetailedProfileActivity.this, ActivityContainer.class);
                         startActivity(intent);
@@ -174,12 +176,12 @@ public class DetailedProfileActivity extends AppCompatActivity implements DatePi
             int months = (int) days / 30;
             int years = (int) days / 365;
             age.setText(years + " year(s), " + months + " month(s), " + days + " day(s)");
-            birthdayPicker.setText((month + 1) + "/" + day + "/" + year);
+            birthdayPicker.setText(dateHandler.writtenDate(month, day, year));
         }
         if (dueDate) {
             due_Date.set(year, month, day);
             child.setDueDate(due_Date.getTimeInMillis());
-            dueDatePicker.setText((month + 1) + "/" + day + "/" + year);
+            dueDatePicker.setText(dateHandler.writtenDate(month, day, year));
         }
     }
 

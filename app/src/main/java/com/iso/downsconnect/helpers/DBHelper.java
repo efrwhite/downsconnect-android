@@ -25,11 +25,11 @@ import java.util.ArrayList;
 
 public class DBHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "downsconnect.db";
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 4;
     private static final String[] TABLE_NAMES = {"Account", "Child", "Feed", "Mood", "Sleep", "Entry", "Medical", "Milestone", "Bathroom", "Provider", "Activity", "Image", "Message", "Journal", "VisitInfo"};
     private static final String[] COLUMN_1 = {"AccountID","FirstName", "LastName", "Username", "Password", "Phone"};
     private static final String[] COLUMN_2 = {"ChildID", "FirstName", "LastName", "Gender", "BloodType", "DueDate", "Birthday", "Allergies", "Medications"};
-    private static final String[] COLUMN_3 = {"FeedID", "ChildID", "Amount", "Substance", "Notes", "FoodUnit" , "EntryTime", "Iron", "Vitamin", "Other"};
+    private static final String[] COLUMN_3 = {"FeedID", "ChildID", "Amount", "Substance", "Notes", "FoodUnit" , "EntryTime", "Iron", "Vitamin", "Other", "EatMode"};
     private static final String[] COLUMN_4 = {"MoodID", "ChildID", "MoodType", "Time", "Notes", "Units"};
     private static final String[] COLUMN_5 = {"SleepID", "ChildID", "SleepTime", "Duration", "Snoring" ,"Medication", "Supplements", "CPAP", "Other", "Study", "Unit", "Notes"};
     private static final String[] COLUMN_6 = {"EntryID", "EntryText", "EntryTime", "ChildID", "EntryType", "ForeignID"};
@@ -74,7 +74,8 @@ public class DBHelper extends SQLiteOpenHelper {
                 "EntryTime INTEGER, " +
                 "Iron TEXT, " + "" +
                 "Vitamin TEXT, " +
-                "Other TEXT);");
+                "Other TEXT, " +
+                "EatMode TEXT);");
         db.execSQL("CREATE TABLE Mood(" +
                 "MoodID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
                 "ChildID INTEGER, " +
@@ -196,21 +197,24 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         if(oldVersion != newVersion){
-            db.execSQL("DROP TABLE IF EXISTS Account");
-            db.execSQL("DROP TABLE IF EXISTS Child");
-            db.execSQL("DROP TABLE IF EXISTS Feed");
-            db.execSQL("DROP TABLE IF EXISTS Mood");
-            db.execSQL("DROP TABLE IF EXISTS Sleep");
-            db.execSQL("DROP TABLE IF EXISTS Entry");
-            db.execSQL("DROP TABLE IF EXISTS Medical");
-            db.execSQL("DROP TABLE IF EXISTS Milestone");
-            db.execSQL("DROP TABLE IF EXISTS Bathroom");
-            db.execSQL("DROP TABLE IF EXISTS Provider");
-            db.execSQL("DROP TABLE IF EXISTS Activity");
-            db.execSQL("DROP TABLE IF EXISTS Image");
-            db.execSQL("DROP TABLE IF EXISTS Message");
-            db.execSQL("DROP TABLE IF EXISTS Journal");
+//            db.execSQL("DROP TABLE IF EXISTS Account");
+//            db.execSQL("DROP TABLE IF EXISTS Child");
+//            db.execSQL("DROP TABLE IF EXISTS Feed");
+//            db.execSQL("DROP TABLE IF EXISTS Mood");
+//            db.execSQL("DROP TABLE IF EXISTS Sleep");
+//            db.execSQL("DROP TABLE IF EXISTS Entry");
+//            db.execSQL("DROP TABLE IF EXISTS Medical");
+//            db.execSQL("DROP TABLE IF EXISTS Milestone");
+//            db.execSQL("DROP TABLE IF EXISTS Bathroom");
+//            db.execSQL("DROP TABLE IF EXISTS Provider");
+//            db.execSQL("DROP TABLE IF EXISTS Activity");
+//            db.execSQL("DROP TABLE IF EXISTS Image");
+//            db.execSQL("DROP TABLE IF EXISTS Message");
+//            db.execSQL("DROP TABLE IF EXISTS Journal");
 
+        }
+        if(newVersion == 4){
+            db.execSQL("ALTER TABLE Feed ADD COLUMN EatMode TEXT");
         }
     }
 
@@ -268,6 +272,7 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(COLUMN_3[7], feed.getIron());
         values.put(COLUMN_3[8], feed.getVitamin());
         values.put(COLUMN_3[9], feed.getOther());
+        values.put(COLUMN_3[10], feed.getFeedMode());
         SQLiteDatabase db = this.getWritableDatabase();
         long result = db.insert(TABLE_NAMES[2], null, values);
         db.close();
@@ -661,6 +666,7 @@ public class DBHelper extends SQLiteOpenHelper {
             feed.setIron(c.getString(7));
             feed.setVitamin(c.getString(8));
             feed.setOther(c.getString(9));
+            feed.setFeedMode(c.getString(10));
         }
         else{
             c.close();
@@ -751,40 +757,40 @@ public class DBHelper extends SQLiteOpenHelper {
         return info;
     }
 
-    public ArrayList<Integer> getHeight(int childID){
+    public ArrayList<Float> getHeight(int childID){
         String query = "SELECT * FROM Medical WHERE ChildID = '" + childID +"';";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor c = db.rawQuery(query, null);
-        ArrayList<Integer> data = new ArrayList<>();
+        ArrayList<Float> data = new ArrayList<>();
         while(c.moveToNext()){
             String text = c.getString(2);
-            int dataPoint = Integer.parseInt(text.substring(0, text.indexOf(" ")));
+            float dataPoint = Float.parseFloat(text.substring(0, text.indexOf(" ")));
             data.add(dataPoint);
         }
         return data;
     }
 
-    public ArrayList<Integer> getWeight(int childID){
+    public ArrayList<Float> getWeight(int childID){
         String query = "SELECT * FROM Medical WHERE ChildID = '" + childID +"';";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor c = db.rawQuery(query, null);
-        ArrayList<Integer> data = new ArrayList<>();
+        ArrayList<Float> data = new ArrayList<>();
         while(c.moveToNext()){
             String text = c.getString(3);
-            int dataPoint = Integer.parseInt(text.substring(0, text.indexOf(" ")));
+            float dataPoint = Float.parseFloat(text.substring(0, text.indexOf(" ")));
             data.add(dataPoint);
         }
         return data;
     }
 
-    public ArrayList<Integer> getHeadSizes(int childID){
+    public ArrayList<Float> getHeadSizes(int childID){
         String query = "SELECT * FROM Medical WHERE ChildID = '" + childID +"';";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor c = db.rawQuery(query, null);
-        ArrayList<Integer> data = new ArrayList<>();
+        ArrayList<Float> data = new ArrayList<>();
         while(c.moveToNext()){
             String text = c.getString(4);
-            int dataPoint = Integer.parseInt(text.substring(0, text.indexOf(" ")));
+            float dataPoint = Float.parseFloat(text.substring(0, text.indexOf(" ")));
             data.add(dataPoint);
         }
         return data;

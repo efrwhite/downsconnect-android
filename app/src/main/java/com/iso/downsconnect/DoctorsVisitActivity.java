@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -45,6 +46,7 @@ import com.iso.downsconnect.fragments.TwelveYearFragment;
 import com.iso.downsconnect.fragments.TwoMonthFragment;
 import com.iso.downsconnect.fragments.TwoYearFragment;
 import com.iso.downsconnect.helpers.DBHelper;
+import com.iso.downsconnect.helpers.DateHandler;
 import com.iso.downsconnect.objects.Entry;
 import com.iso.downsconnect.objects.MedicalInfo;
 import com.iso.downsconnect.objects.Provider;
@@ -88,7 +90,7 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
     private ElevenYearFragment elevenYearFragment = new ElevenYearFragment();
     private TwelveYearFragment twelveYearFragment = new TwelveYearFragment();
     private NoAgeFragment noAgeFragment = new NoAgeFragment();
-
+    private DateHandler dateHandler = new DateHandler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,6 +100,8 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         final int childID = sharedPreferences.getInt("name", 1);
+        Log.i("chid", String.valueOf(childID));
+
 
         final FragmentManager fragmentManager = getSupportFragmentManager();
 
@@ -120,7 +124,6 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
                     }).show();
         }
         medicalInfo = new MedicalInfo();
-        medicalInfo.setChildID(childID);
 
 
         provider = findViewById(R.id.p_nameSpinner);
@@ -509,6 +512,7 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
                     && !height.getText().toString().equals("") && !headUnit.getSelectedItem().equals("Select")
                     && !tempUnit.getSelectedItem().equals("Select") && !weight.getText().toString().equals("")
                     && !heightUnit.getSelectedItem().equals("Select") && !weightUnit.getSelectedItem().equals("Select") && !providerType.getSelectedItem().toString().equals("Select")) {
+                medicalInfo.setChildID(childID);
                 medicalInfo.setProvider(provider.getSelectedItem().toString());
                 medicalInfo.setHeight(height.getText().toString() + " " + heightUnit.getSelectedItem().toString());
                 medicalInfo.setProviderType(providerType.getSelectedItem().toString());
@@ -567,7 +571,7 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
         Calendar calendar = Calendar.getInstance();
         calendar.set(year, month, day);
         doctorDate = calendar.getTimeInMillis();
-        doctorDatePicker.setText(month + "/" + day + "/" + year);
+        doctorDatePicker.setText(dateHandler.writtenDate(month, day, year));
     }
 
 //    1630890566360
