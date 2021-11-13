@@ -7,10 +7,12 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
 import com.iso.downsconnect.helpers.DBHelper;
+import com.iso.downsconnect.objects.MedicalInfo;
 import com.iso.downsconnect.objects.Point;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;
@@ -18,13 +20,14 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class ChartActivity extends AppCompatActivity {
     private DBHelper helper;
-    private ArrayList<Integer> data = new ArrayList<>();
+    private ArrayList<Float> data = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,9 +43,12 @@ public class ChartActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         final int childID = sharedPreferences.getInt("name", 1);
         String chartType = getIntent().getStringExtra("chart");
+        Log.i("chid", String.valueOf(childID));
+
 
         helper = new DBHelper(this);
 
+        ArrayList<MedicalInfo> infos = helper.getAllMedical();
         if(chartType.equals("Height")){
             data = helper.getHeight(childID);
         }
@@ -58,7 +64,7 @@ public class ChartActivity extends AppCompatActivity {
         ArrayList<Point> points = new ArrayList<>();
         if(data.size() != 0){
             int i = 0;
-            for(Integer ints: data){
+            for(Float ints: data){
                 Point point = new Point(i, ints);
                 points.add(point);
                 i++;

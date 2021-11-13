@@ -35,7 +35,7 @@ import java.util.Calendar;
 public class FluidFragment extends Fragment {
     private Button saveBtn;
     private EditText notes, fluidFood, quantity, otherText;
-    private Spinner foodUnit;
+    private Spinner foodUnit, mode;
     private DBHelper helper;
     private Feed feed = new Feed();
     private Entry entry;
@@ -108,6 +108,7 @@ public class FluidFragment extends Fragment {
         vitamin = view.findViewById(R.id.vitaCheckbox);
         other = view.findViewById(R.id.otherCheckbox);
         otherText = view.findViewById(R.id.otherText);
+        mode = view.findViewById(R.id.modeEatingSpinner);
         entry = new Entry();
 
         if(feed.getSubstance() != null){
@@ -119,11 +120,13 @@ public class FluidFragment extends Fragment {
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!fluidFood.getText().toString().equals("") && !foodUnit.getSelectedItem().equals("Select") && !quantity.getText().toString().equals("")){
+                if(!fluidFood.getText().toString().equals("") && !foodUnit.getSelectedItem().equals("Select") && !quantity.getText().toString().equals("") &&
+                    !mode.getSelectedItem().equals("Select")){
                     feed.setChildID(childID);
                     feed.setAmount(Integer.parseInt(quantity.getText().toString()));
                     feed.setSubstance(fluidFood.getText().toString());
                     feed.setFoodUnit(foodUnit.getSelectedItem().toString());
+                    feed.setFeedMode(mode.getSelectedItem().toString());
                     Calendar calendar = Calendar.getInstance();
                     feed.setEntryTime(calendar.getTimeInMillis());
                     if(!notes.getText().toString().equals("")){
@@ -182,6 +185,7 @@ public class FluidFragment extends Fragment {
         }
         foodUnit.setSelection(getIndex(foodUnit, feed.getFoodUnit()));
         fluidFood.setText(feed.getSubstance());
+        mode.setSelection(getIndex(mode, feed.getFeedMode()));
         if(feed.getIron().equals("Yes")){
             iron.setChecked(true);
         }

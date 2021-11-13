@@ -34,7 +34,7 @@ import java.util.Calendar;
 public class SolidFragment extends Fragment {
     private Button saveBtn;
     private EditText notes, quantity, otherText;
-    private Spinner foodUnit, solidFood;
+    private Spinner foodUnit, solidFood, mode;
     private Entry entry;
     private Feed feed = new Feed();;
     private DBHelper helper;
@@ -106,6 +106,7 @@ public class SolidFragment extends Fragment {
         vitamin = view.findViewById(R.id.vitaCheck);
         other = view.findViewById(R.id.otherCheck);
         otherText = view.findViewById(R.id.o_text);
+        mode = view.findViewById(R.id.modeEatingSpinner2);
         helper = new DBHelper(getContext());
         entry = new Entry();
 
@@ -116,7 +117,7 @@ public class SolidFragment extends Fragment {
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!solidFood.getSelectedItem().toString().equals("") && !quantity.getText().toString().equals("") && !foodUnit.getSelectedItem().equals("Select")){
+                if(!solidFood.getSelectedItem().toString().equals("") && !quantity.getText().toString().equals("") && !foodUnit.getSelectedItem().equals("Select") && !mode.getSelectedItem().equals("Select")){
                     Calendar calendar = Calendar.getInstance();
                     feed.setChildID(childID);
                     feed.setSubstance(solidFood.getSelectedItem().toString());
@@ -180,6 +181,7 @@ public class SolidFragment extends Fragment {
             other.setChecked(true);
         }
         foodUnit.setSelection(getIndex(foodUnit, feed.getFoodUnit()));
+        mode.setSelection(getIndex(mode, feed.getFeedMode()));
         solidFood.setSelection(getIndex(solidFood, feed.getSubstance()));
         if(feed.getIron().equals("Yes")){
             iron.setChecked(true);

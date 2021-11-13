@@ -1,16 +1,16 @@
 package com.iso.downsconnect.objects;
 
 public class Point {
-    private int y, x;
+    private float y, x;
 
     public Point(){}
 
-    public Point(int x, int y){
+    public Point(float x, float y){
         this.y = y;
         this.x = x;
     }
 
-    public int getY() {
+    public float getY() {
         return y;
     }
 
@@ -18,7 +18,7 @@ public class Point {
         this.y = y;
     }
 
-    public int getX() {
+    public float getX() {
         return x;
     }
 
