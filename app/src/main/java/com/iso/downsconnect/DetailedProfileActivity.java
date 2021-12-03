@@ -83,7 +83,7 @@ public class DetailedProfileActivity extends AppCompatActivity implements DatePi
             @Override
             public void onClick(View v) {
                 if (!fullName.getText().toString().equals("") && !gender.getSelectedItem().equals("Select") && !birthdayPicker.getText().toString().equals("")
-                        && !dueDatePicker.getText().toString().equals("") && !bloodType.getSelectedItem().equals("Select")) {
+                        && !bloodType.getSelectedItem().equals("Select")) {
                     String name = fullName.getText().toString();
                     if (!fullName.getText().toString().contains(" ")) {
                         AlertDialog a = new AlertDialog.Builder(save.getContext()).create();
@@ -106,6 +106,14 @@ public class DetailedProfileActivity extends AppCompatActivity implements DatePi
                         } else {
                             child.setMedications(medications.getText().toString());
                         }
+                        if(!dueDatePicker.getText().toString().equals("")) {
+                            child.setDueDate(due_Date.getTimeInMillis());
+                        }
+                        else{
+                            child.setDueDate(0);
+                        }
+
+
                         if(!childName.equals("None")){
                             helper.updateChild(child);
                         }
@@ -180,7 +188,6 @@ public class DetailedProfileActivity extends AppCompatActivity implements DatePi
         }
         if (dueDate) {
             due_Date.set(year, month, day);
-            child.setDueDate(due_Date.getTimeInMillis());
             dueDatePicker.setText(dateHandler.writtenDate(month, day, year));
         }
     }
