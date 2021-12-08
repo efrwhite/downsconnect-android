@@ -1,11 +1,15 @@
 package com.iso.downsconnect;
 
+import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -46,6 +50,54 @@ public class ProvidersActivity extends AppCompatActivity {
         practice = findViewById(R.id.practiceEdit);
         save = findViewById(R.id.saveButton);
         helper = new DBHelper(this);
+
+        address_one.setFocusable(false);
+        address_two.setFocusable(false);
+        state.setFocusable(false);
+        city.setFocusable(false);
+        zip.setFocusable(false);
+
+        final Activity activity = this;
+        address_one.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                activity.getCurrentFocus().clearFocus();
+                textDialog(address_one, "Address One", activity);
+//                if (view != null) {
+//                    InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+//                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+//                }
+            }
+        });
+
+        //click listeners for text popups
+        address_two.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                textDialog(address_two, "Address Two", activity);
+            }
+        });
+
+        state.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                textDialog(state, "State", activity);
+            }
+        });
+
+        city.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                textDialog(city, "City", activity);
+            }
+        });
+
+        zip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                textDialog(zip, "Zip Code", activity);
+            }
+        });
 
         //set information for exisitng provider if one is provided
         if(p_name != -1) {
@@ -138,5 +190,25 @@ public class ProvidersActivity extends AppCompatActivity {
 
         return 0;
 
+    }
+
+    //Text dialog box so user can see the text they're inputting
+    private void textDialog(final EditText editText, String title, final Activity activity) {
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        final EditText edittext = new EditText(getApplicationContext());
+        if(!editText.getText().toString().equals("")){
+            edittext.setText(editText.getText().toString());
+        }
+
+        alert.setTitle(title);
+
+        alert.setView(edittext);
+        alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                editText.setText(edittext.getText());
+            }
+        });
+        alert.show();
     }
 }

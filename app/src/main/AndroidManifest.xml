@@ -39,7 +39,7 @@
         <activity android:name="com.iso.downsconnect.DetailedProfileActivity" />
         <activity android:name="com.iso.downsconnect.ChartActivity" />
         <activity android:name="com.iso.downsconnect.ProvidersActivity"
-            android:windowSoftInputMode="stateVisible|adjustResize">
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize">
         </activity>
     </application>
 
