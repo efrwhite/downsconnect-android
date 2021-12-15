@@ -21,6 +21,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.iso.downsconnect.CaregiverProfileActivity;
 import com.iso.downsconnect.helpers.DBHelper;
 import com.iso.downsconnect.DetailedProfileActivity;
 import com.iso.downsconnect.ProvidersActivity;
@@ -40,6 +41,7 @@ public class ProfilesFragment extends Fragment {
     private ArrayList<Provider> providers = new ArrayList<>();
     private LinearLayout childLayout, caregiverLayout, providerLayout;
     private Intent childIntent;
+    private Button careButton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -66,6 +68,7 @@ public class ProfilesFragment extends Fragment {
 //        providerLayout.addView(text);
 
         Button childrenBtn = view.findViewById(R.id.addChildrenButton);
+        careButton = view.findViewById(R.id.addParentsButton);
         helper = new DBHelper(getContext());
         addChildren();
         addCareGivers();
@@ -85,6 +88,15 @@ public class ProfilesFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), ProvidersActivity.class);
                 intent.putExtra("p_name", -1);
+                startActivity(intent);
+            }
+        });
+
+        careButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), CaregiverProfileActivity.class);
+                intent.putExtra("care_name", "None");
                 startActivity(intent);
             }
         });
@@ -217,7 +229,7 @@ public class ProfilesFragment extends Fragment {
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
-                        for(AccountHolder account: accounts){
+                        for(final AccountHolder account: accounts){
                             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                             LinearLayout.LayoutParams textParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                             ViewGroup.MarginLayoutParams marginLayoutParams = new ViewGroup.MarginLayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -257,6 +269,14 @@ public class ProfilesFragment extends Fragment {
                             edit.setText("Edit");
                             edit.setWidth(10);
                             edit.setHeight(10);
+                            edit.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    Intent intent = new Intent(getContext(), CaregiverProfileActivity.class);
+                                    intent.putExtra("care_name", account.getFirstName());
+                                    startActivity(intent);
+                                }
+                            });
                             horizontalLayout.addView(edit);
 
                             caregiverLayout.addView(horizontalLayout);
