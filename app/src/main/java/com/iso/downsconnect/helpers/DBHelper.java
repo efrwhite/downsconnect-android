@@ -1,5 +1,6 @@
 package com.iso.downsconnect.helpers;
 
+import android.accounts.Account;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -18,6 +19,7 @@ import com.iso.downsconnect.objects.MedicalInfo;
 import com.iso.downsconnect.objects.Message;
 import com.iso.downsconnect.objects.Milestone;
 import com.iso.downsconnect.objects.Mood;
+import com.iso.downsconnect.objects.Point;
 import com.iso.downsconnect.objects.Provider;
 import com.iso.downsconnect.objects.Sleep;
 
@@ -197,21 +199,6 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         if(oldVersion != newVersion){
-//            db.execSQL("DROP TABLE IF EXISTS Account");
-//            db.execSQL("DROP TABLE IF EXISTS Child");
-//            db.execSQL("DROP TABLE IF EXISTS Feed");
-//            db.execSQL("DROP TABLE IF EXISTS Mood");
-//            db.execSQL("DROP TABLE IF EXISTS Sleep");
-//            db.execSQL("DROP TABLE IF EXISTS Entry");
-//            db.execSQL("DROP TABLE IF EXISTS Medical");
-//            db.execSQL("DROP TABLE IF EXISTS Milestone");
-//            db.execSQL("DROP TABLE IF EXISTS Bathroom");
-//            db.execSQL("DROP TABLE IF EXISTS Provider");
-//            db.execSQL("DROP TABLE IF EXISTS Activity");
-//            db.execSQL("DROP TABLE IF EXISTS Image");
-//            db.execSQL("DROP TABLE IF EXISTS Message");
-//            db.execSQL("DROP TABLE IF EXISTS Journal");
-
         }
         if(newVersion == 4){
             db.execSQL("ALTER TABLE Feed ADD COLUMN EatMode TEXT");
@@ -473,6 +460,50 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
         db.close();
         return result;
+    }
+
+    public AccountHolder getAccount(String user){
+        String query = "SELECT * FROM Account WHERE Username = '" + user + "';";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor c = db.rawQuery(query, null);
+        AccountHolder account = new AccountHolder();
+        if(c.moveToFirst()){
+            c.moveToFirst();
+            account.setAccountID(c.getInt(0));
+            account.setFirstName(c.getString(1));
+            account.setLastName(c.getString(2));
+            account.setUsername(c.getString(3));
+            account.setPassword(c.getString(4));
+            account.setPhone(c.getString(5));
+        }
+        else{
+            c.close();
+            account = null;
+        }
+        db.close();
+        return account;
+    }
+
+    public AccountHolder getAccountWithName(String fName){
+        String query = "SELECT * FROM Account WHERE FirstName = '" + fName + "';";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor c = db.rawQuery(query, null);
+        AccountHolder account = new AccountHolder();
+        if(c.moveToFirst()){
+            c.moveToFirst();
+            account.setAccountID(c.getInt(0));
+            account.setFirstName(c.getString(1));
+            account.setLastName(c.getString(2));
+            account.setUsername(c.getString(3));
+            account.setPassword(c.getString(4));
+            account.setPhone(c.getString(5));
+        }
+        else{
+            c.close();
+            account = null;
+        }
+        db.close();
+        return account;
     }
 
     public Child getChild(String firstName){
@@ -757,41 +788,73 @@ public class DBHelper extends SQLiteOpenHelper {
         return info;
     }
 
-    public ArrayList<Float> getHeight(int childID){
+    public ArrayList<Point> getHeight(int childID){
         String query = "SELECT * FROM Medical WHERE ChildID = '" + childID +"';";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor c = db.rawQuery(query, null);
-        ArrayList<Float> data = new ArrayList<>();
+        ArrayList<Point> data = new ArrayList<>();
+        int i = 0;
         while(c.moveToNext()){
+            Point dataPoint = new Point();
             String text = c.getString(2);
-            float dataPoint = Float.parseFloat(text.substring(0, text.indexOf(" ")));
+            dataPoint.setX(i);
+            dataPoint.setY(Float.parseFloat(text.substring(0, text.indexOf(" "))));
+            dataPoint.setUnit(text.substring(text.indexOf(" ")));
             data.add(dataPoint);
+            i++;
         }
         return data;
     }
 
-    public ArrayList<Float> getWeight(int childID){
+    public String checkUsername(String user){
+        String query = "SELECT * FROM Account WHERE UserName = '" + user + "';";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor c = db.rawQuery(query, null);
+        String username = null;
+        if(c.moveToFirst()){
+            c.moveToFirst();
+            username = c.getString(3);
+        }
+        if(username.equals(null)){
+            return "y";
+        }
+        else{
+            return "n";
+        }
+    }
+
+    public ArrayList<Point> getWeight(int childID){
         String query = "SELECT * FROM Medical WHERE ChildID = '" + childID +"';";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor c = db.rawQuery(query, null);
-        ArrayList<Float> data = new ArrayList<>();
+        ArrayList<Point> data = new ArrayList<>();
+        int i = 0;
         while(c.moveToNext()){
+            Point dataPoint = new Point();
             String text = c.getString(3);
-            float dataPoint = Float.parseFloat(text.substring(0, text.indexOf(" ")));
+            dataPoint.setX(i);
+            dataPoint.setY(Float.parseFloat(text.substring(0, text.indexOf(" "))));
+            dataPoint.setUnit(text.substring(text.indexOf(" ")));
             data.add(dataPoint);
+            i++;
         }
         return data;
     }
 
-    public ArrayList<Float> getHeadSizes(int childID){
+    public ArrayList<Point> getHeadSizes(int childID){
         String query = "SELECT * FROM Medical WHERE ChildID = '" + childID +"';";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor c = db.rawQuery(query, null);
-        ArrayList<Float> data = new ArrayList<>();
+        ArrayList<Point> data = new ArrayList<>();
+        int i = 0;
         while(c.moveToNext()){
+            Point dataPoint = new Point();
             String text = c.getString(4);
-            float dataPoint = Float.parseFloat(text.substring(0, text.indexOf(" ")));
+            dataPoint.setX(i);
+            dataPoint.setY(Float.parseFloat(text.substring(0, text.indexOf(" "))));
+            dataPoint.setUnit(text.substring(text.indexOf(" ")));
             data.add(dataPoint);
+            i++;
         }
         return data;
     }

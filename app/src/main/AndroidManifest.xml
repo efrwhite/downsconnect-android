@@ -9,38 +9,39 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.iso.downsconnect.VaccineActivity"></activity>
-        <activity android:name="com.iso.downsconnect.ListingActivity" />
-        <activity android:name="com.iso.downsconnect.MedicalListingsActivity" />
-        <activity android:name="com.iso.downsconnect.ProviderListingActivity" />
-        <activity android:name="com.iso.downsconnect.DoctorsVisitActivity" />
-        <activity android:name="com.iso.downsconnect.MainActivity">
+        <activity android:name=".CaregiverProfileActivity"></activity>
+        <activity android:name=".VaccineActivity" />
+        <activity android:name=".ListingActivity" />
+        <activity android:name=".MedicalListingsActivity" />
+        <activity android:name=".ProviderListingActivity" />
+        <activity android:name=".DoctorsVisitActivity" />
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.iso.downsconnect.SignInActivity" />
-        <activity android:name="com.iso.downsconnect.SignUpActivity" />
-        <activity android:name="com.iso.downsconnect.FeedActivity" />
-        <activity android:name="com.iso.downsconnect.ActivityActivity" />
-        <activity android:name="com.iso.downsconnect.JournalActivity" />
-        <activity android:name="com.iso.downsconnect.MedicalActivity" />
-        <activity android:name="com.iso.downsconnect.MessageActivity" />
-        <activity android:name="com.iso.downsconnect.MilestoneActivity" />
-        <activity android:name="com.iso.downsconnect.MoodActivity" />
-        <activity android:name="com.iso.downsconnect.MoreActivity" />
-        <activity android:name="com.iso.downsconnect.BathroomActivity" />
-        <activity android:name="com.iso.downsconnect.PhotoActivity" />
-        <activity android:name="com.iso.downsconnect.ResourcesActivity" />
-        <activity android:name="com.iso.downsconnect.SleepActivity" />
-        <activity android:name="com.iso.downsconnect.ActivityContainer" />
-        <activity android:name="com.iso.downsconnect.DetailedProfileActivity" />
-        <activity android:name="com.iso.downsconnect.ChartActivity" />
-        <activity android:name="com.iso.downsconnect.ProvidersActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustResize">
-        </activity>
+        <activity android:name=".SignInActivity" />
+        <activity android:name=".SignUpActivity" />
+        <activity android:name=".FeedActivity" />
+        <activity android:name=".ActivityActivity" />
+        <activity android:name=".JournalActivity" />
+        <activity android:name=".MedicalActivity" />
+        <activity android:name=".MessageActivity" />
+        <activity android:name=".MilestoneActivity" />
+        <activity android:name=".MoodActivity" />
+        <activity android:name=".MoreActivity" />
+        <activity android:name=".BathroomActivity" />
+        <activity android:name=".PhotoActivity" />
+        <activity android:name=".ResourcesActivity" />
+        <activity android:name=".SleepActivity" />
+        <activity android:name=".ActivityContainer" />
+        <activity android:name=".DetailedProfileActivity" />
+        <activity android:name=".ChartActivity" />
+        <activity
+            android:name=".ProvidersActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize"></activity>
     </application>
 
 </manifest>

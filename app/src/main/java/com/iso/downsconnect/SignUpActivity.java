@@ -55,13 +55,21 @@ public class SignUpActivity extends AppCompatActivity {
                         a.setMessage("The passwords you've entered don't match, please ensure that do before continuing");
                         a.show();
                     }
+                    if(helper.checkUsername(user).equals("n")){
+                        AlertDialog a = new AlertDialog.Builder(signUp.getContext()).create();
+                        a.setTitle("Username taken!");
+                        a.setMessage("The username you entered is in use already");
+                        a.show();
+                    }
                     else {
                         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                         sharedPreferences.edit().putBoolean("signedIn", true).commit();
+                        sharedPreferences.edit().putBoolean("user", true).commit();
                         AccountHolder accountHolder = new AccountHolder(first, last, user, pass, phone);
                         helper.addAccount(accountHolder);
                         helper.close();
                         Intent intent = new Intent(SignUpActivity.this, ActivityContainer.class);
+//                        intent.putExtra("user", user);
                         startActivity(intent);
                     }
                 }
