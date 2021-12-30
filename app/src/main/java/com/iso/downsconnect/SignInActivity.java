@@ -1,5 +1,6 @@
 package com.iso.downsconnect;
 
+import android.accounts.Account;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,10 +13,12 @@ import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.iso.downsconnect.helpers.DBHelper;
+import com.iso.downsconnect.objects.AccountHolder;
 
 public class SignInActivity extends AppCompatActivity {
     private DBHelper db;
     private Button signIn;
+    private AccountHolder account;
     @Override
     protected void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,16 +29,18 @@ public class SignInActivity extends AppCompatActivity {
         Button cancel = findViewById(R.id.cancelSignInButton);
         final EditText Username = findViewById(R.id.usernameEditText);
         final EditText Password = findViewById(R.id.passwordEditText);
+        account = new AccountHolder();
 
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String user = Username.getText().toString();
                 String pass = Password.getText().toString();
-                    if (db.getAccount(user, pass) != null) {
+                account = db.getAccount(user, pass);
+                    if (account != null) {
                         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                         sharedPreferences.edit().putBoolean("signedIn", true).commit();
-                        sharedPreferences.edit().putBoolean("user", true).commit();
+                        sharedPreferences.edit().putLong("user", account.getAccountID()).commit();
                         Intent intent = new Intent(SignInActivity.this, ActivityContainer.class);
 //                        intent.putExtra("user", user);
                         startActivity(intent);
