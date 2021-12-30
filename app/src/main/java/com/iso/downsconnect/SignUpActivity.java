@@ -64,10 +64,10 @@ public class SignUpActivity extends AppCompatActivity {
                     else {
                         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                         sharedPreferences.edit().putBoolean("signedIn", true).commit();
-                        sharedPreferences.edit().putBoolean("user", true).commit();
                         AccountHolder accountHolder = new AccountHolder(first, last, user, pass, phone);
-                        helper.addAccount(accountHolder);
+                        long id = helper.addAccount(accountHolder);
                         helper.close();
+                        sharedPreferences.edit().putLong("user", id).commit();
                         Intent intent = new Intent(SignUpActivity.this, ActivityContainer.class);
 //                        intent.putExtra("user", user);
                         startActivity(intent);

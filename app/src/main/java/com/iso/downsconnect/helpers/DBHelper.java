@@ -1,6 +1,5 @@
 package com.iso.downsconnect.helpers;
 
-import android.accounts.Account;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -29,7 +28,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "downsconnect.db";
     private static final int DATABASE_VERSION = 4;
     private static final String[] TABLE_NAMES = {"Account", "Child", "Feed", "Mood", "Sleep", "Entry", "Medical", "Milestone", "Bathroom", "Provider", "Activity", "Image", "Message", "Journal", "VisitInfo"};
-    private static final String[] COLUMN_1 = {"AccountID","FirstName", "LastName", "Username", "Password", "Phone"};
+    private static final String[] COLUMN_1 = {"AccountHolderID","FirstName", "LastName", "Username", "Password", "Phone"};
     private static final String[] COLUMN_2 = {"ChildID", "FirstName", "LastName", "Gender", "BloodType", "DueDate", "Birthday", "Allergies", "Medications"};
     private static final String[] COLUMN_3 = {"FeedID", "ChildID", "Amount", "Substance", "Notes", "FoodUnit" , "EntryTime", "Iron", "Vitamin", "Other", "EatMode"};
     private static final String[] COLUMN_4 = {"MoodID", "ChildID", "MoodType", "Time", "Notes", "Units"};
@@ -215,7 +214,7 @@ public class DBHelper extends SQLiteOpenHelper {
         }
     }
 
-    public void addAccount(AccountHolder accountHolder){
+    public long addAccount(AccountHolder accountHolder){
         ContentValues values = new ContentValues();
         values.put(COLUMN_1[1], accountHolder.getFirstName());
         values.put(COLUMN_1[2], accountHolder.getLastName());
@@ -223,8 +222,9 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(COLUMN_1[4], accountHolder.getPassword());
         values.put(COLUMN_1[5], accountHolder.getPhone());
         SQLiteDatabase db = this.getWritableDatabase();
-        db.insert(TABLE_NAMES[0], null, values);
+        long result = db.insert(TABLE_NAMES[0], null, values);
         db.close();
+        return result;
     }
 
     public boolean addChild(Child child){
@@ -582,6 +582,23 @@ public class DBHelper extends SQLiteOpenHelper {
         return childBirthday;
     }
 
+    public String getPassword(Long userID){
+        String query = "SELECT Password FROM Account WHERE AccountHolderID = '" + userID + "';";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor c = db.rawQuery(query, null);
+        String password;
+        if(c.moveToFirst()){
+            c.moveToFirst();
+            password = c.getString(0);
+        }
+        else{
+            c.close();
+            password = null;
+        }
+        db.close();
+        return password;
+    }
+
     public Bathroom getBathroom(int childID){
         String query = "SELECT * FROM Bathroom WHERE BathroomID = '" + childID + "';";
         SQLiteDatabase db = this.getWritableDatabase();
@@ -936,9 +953,6 @@ public class DBHelper extends SQLiteOpenHelper {
         }
 
    public AccountHolder getAccount(String user, String pass){
-//        String query = "SELECT * FROM AccountHolders WHERE Username = '" + user +
-//                "' AND Password = '" + pass + "';";
-
         String query = "SELECT * FROM Account WHERE Username = '" + user +
                 "' AND Password = '" + pass + "';";
         SQLiteDatabase db = this.getWritableDatabase();
@@ -1281,6 +1295,17 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(COLUMN_10[11], provider.getZip());
         SQLiteDatabase db = this.getWritableDatabase();
         return db.update(TABLE_NAMES[9], values, COLUMN_10[0] + "=" + provider.getProviderID(), null) > 0;
+    }
+
+    public boolean updateAccount(AccountHolder accountHolder){
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_1[1], accountHolder.getFirstName());
+        values.put(COLUMN_1[2], accountHolder.getLastName());
+        values.put(COLUMN_1[3], accountHolder.getUsername());
+        values.put(COLUMN_1[4], accountHolder.getPassword());
+        values.put(COLUMN_1[5], accountHolder.getPhone());
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.update(TABLE_NAMES[0], values, COLUMN_1[0] + "=" + accountHolder.getAccountID(), null) > 0;
     }
 
 }
