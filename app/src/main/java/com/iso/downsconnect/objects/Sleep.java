@@ -3,7 +3,7 @@ package com.iso.downsconnect.objects;
 public class Sleep implements Comparable {
     private int sleepID, childID, duration;
     private long sleepTime;
-    private String snoring, notes, medication, study, supplements, CPAP, other, unit;
+    private String snoring, notes, medication, study, supplements, CPAP, other, unit, sleepDate;
 
     public Sleep(){
 
@@ -114,5 +114,13 @@ public class Sleep implements Comparable {
 
     public void setUnit(String unit) {
         this.unit = unit;
+    }
+
+    public String getSleepDate() {
+        return sleepDate;
+    }
+
+    public void setSleepDate(String sleepDate) {
+        this.sleepDate = sleepDate;
     }
 }
