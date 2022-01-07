@@ -259,8 +259,14 @@
     <string name="iep_review">Review IEP and services</string>
     <string name="care_transition_plan">Have you arranged for the transition of care for your child?</string>
     <string name="nb_opening">Shortly after your child was born, your child will usually have a number of tests and procedures done. The following questions are gathering that information.</string>
-
-
+    <string name="options">Options</string>
+    <string name="twenty_four_date">Sleep Cycle Date</string>
+    <string name="twenty_four_text">24 Hour Sleep Cycle Calculation</string>
+    <string name="go">Go</string>
+    <string name="hours">Hours</string>
+    <string name="minutes">Minutes</string>
+    <string name="sleep_cycle">Sleep Cycle</string>
+    <string name="sleep_tot">Total Sleep:</string>
     <array name="gender">
         <item>Select</item>
         <item>Male</item>

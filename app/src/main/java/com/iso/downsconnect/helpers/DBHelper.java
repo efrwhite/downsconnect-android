@@ -26,13 +26,13 @@ import java.util.ArrayList;
 
 public class DBHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "downsconnect.db";
-    private static final int DATABASE_VERSION = 4;
+    private static final int DATABASE_VERSION = 7;
     private static final String[] TABLE_NAMES = {"Account", "Child", "Feed", "Mood", "Sleep", "Entry", "Medical", "Milestone", "Bathroom", "Provider", "Activity", "Image", "Message", "Journal", "VisitInfo"};
     private static final String[] COLUMN_1 = {"AccountHolderID","FirstName", "LastName", "Username", "Password", "Phone"};
     private static final String[] COLUMN_2 = {"ChildID", "FirstName", "LastName", "Gender", "BloodType", "DueDate", "Birthday", "Allergies", "Medications"};
     private static final String[] COLUMN_3 = {"FeedID", "ChildID", "Amount", "Substance", "Notes", "FoodUnit" , "EntryTime", "Iron", "Vitamin", "Other", "EatMode"};
     private static final String[] COLUMN_4 = {"MoodID", "ChildID", "MoodType", "Time", "Notes", "Units"};
-    private static final String[] COLUMN_5 = {"SleepID", "ChildID", "SleepTime", "Duration", "Snoring" ,"Medication", "Supplements", "CPAP", "Other", "Study", "Unit", "Notes"};
+    private static final String[] COLUMN_5 = {"SleepID", "ChildID", "SleepTime", "Duration", "Snoring" ,"Medication", "Supplements", "CPAP", "Other", "Study", "Unit", "Notes", "SleepDate"};
     private static final String[] COLUMN_6 = {"EntryID", "EntryText", "EntryTime", "ChildID", "EntryType", "ForeignID"};
     private static final String[] COLUMN_7 = {"MedicalID", "ChildID", "Height", "Weight", "HeadSize", "DoctorsVisit", "Temperature", "Provider", "VisitNum", "ProviderType", "CheckAnswers", "AppointmentDates", "AppointmentProviders", "Notes"};
     private static final String[] COLUMN_8 = {"MilestoneID", "ChildID", "Roll", "Walk", "Stand", "Sit", "Crawl", "NoHandWalk", "Jump", "Holds", "HandMouth", "Passes", "Pincher", "Drinks", "Scribbles", "SpoonFeed", "Points", "Emotion", "Affection", "Interest", "Coos", "Babbles", "Speaks", "TwoWords", "Sentence", "Startles", "Turns"};
@@ -96,7 +96,8 @@ public class DBHelper extends SQLiteOpenHelper {
                 "Other TEXT, " +
                 "Study TEXT, " +
                 "Unit TEXT, " +
-                "Notes TEXT);");
+                "Notes TEXT, " +
+                "SleepDate TEXT);");
         db.execSQL("CREATE TABLE Entry(" +
                 "EntryID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
                 "EntryText TEXT, " +
@@ -202,6 +203,28 @@ public class DBHelper extends SQLiteOpenHelper {
         if(newVersion == 4){
             db.execSQL("ALTER TABLE Feed ADD COLUMN EatMode TEXT");
         }
+        if(newVersion == 5){
+            db.execSQL("ALTER TABLE Sleep ADD COLUMN SleepDate TEXT");
+        }
+        if(newVersion == 6){
+            db.execSQL("DROP TABLE Sleep");
+        }
+        if(newVersion == 7){
+            db.execSQL("CREATE TABLE Sleep(" +
+                    "SleepID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
+                    "ChildID INTEGER, " +
+                    "SleepTime INTEGER," +
+                    "Duration INTEGER, " +
+                    "Snoring TEXT, " +
+                    "Medication TEXT, " +
+                    "Supplements TEXT, " +
+                    "CPAP TEXT, " +
+                    "Other TEXT, " +
+                    "Study TEXT, " +
+                    "Unit TEXT, " +
+                    "Notes TEXT, " +
+                    "SleepDate TEXT);");
+        }
     }
 
     public void deleteEntry(int id, String table){
@@ -293,6 +316,7 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(COLUMN_5[9], sleep.getStudy());
         values.put(COLUMN_5[10], sleep.getUnit());
         values.put(COLUMN_5[11], sleep.getNotes());
+        values.put(COLUMN_5[12], sleep.getSleepDate());
         SQLiteDatabase db = this.getWritableDatabase();
         long result = db.insert(TABLE_NAMES[4], null, values);
         db.close();
@@ -766,6 +790,7 @@ public class DBHelper extends SQLiteOpenHelper {
             sleep.setStudy(c.getString(9));
             sleep.setUnit(c.getString(10));
             sleep.setNotes(c.getString(11));
+            sleep.setSleepDate(c.getString(12));
         }
         else{
             c.close();
@@ -1233,6 +1258,36 @@ public class DBHelper extends SQLiteOpenHelper {
 
         c.close();
         return medicalInfos;
+    }
+
+    public int[] calculateSleepCycle(String date, int childID){
+        int[] times = new int[2];
+        String query = "SELECT Duration, Unit FROM Sleep WHERE ChildID = '" + childID +"' AND " +
+                "SleepDate = '" + date +"';";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor c = db.rawQuery(query, null);
+        int hours = 0;
+        int minutes = 0;
+        while(c.moveToNext()){
+            int duration = c.getInt(0);
+            String units = c.getString(1);
+            if(units.equals("mins")){
+                minutes += duration;
+            }
+            if(units.equals("hrs")){
+                hours += duration;
+            }
+        }
+        if(minutes > 60){
+            int moreHours = minutes / 60;
+            int remainder = minutes % 60;
+            hours += moreHours;
+            minutes = remainder;
+        }
+        times[0] = hours;
+        times[1] = minutes;
+
+        return times;
     }
 
     public boolean updateMilestone(Milestone milestone){

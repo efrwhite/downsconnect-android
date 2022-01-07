@@ -313,8 +313,39 @@
         android:id="@+id/untilText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/until"
+        android:text="@string/date"
         app:layout_constraintBaseline_toBaselineOf="@+id/current_time_text"
         app:layout_constraintStart_toStartOf="@+id/guideline3" />
+
+    <EditText
+        android:id="@+id/sleepDatePicker"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/rounded_box"
+        android:ems="10"
+        android:focusable="false"
+        android:gravity="center_vertical"
+        android:hint="Date"
+        android:inputType="textPersonName"
+        android:paddingLeft="5dp"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/sleepTimePicker"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/untilText"
+        app:layout_constraintTop_toBottomOf="@+id/sleepView" />
+
+    <Button
+        android:id="@+id/sleepCycleButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/sleep_cycle"
+        app:layout_constraintEnd_toEndOf="@+id/sleepView"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
