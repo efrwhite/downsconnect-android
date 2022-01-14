@@ -852,12 +852,12 @@ public class DBHelper extends SQLiteOpenHelper {
         String query = "SELECT * FROM Account WHERE UserName = '" + user + "';";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor c = db.rawQuery(query, null);
-        String username = null;
+        String username = "";
         if(c.moveToFirst()){
             c.moveToFirst();
             username = c.getString(3);
         }
-        if(username.equals(null)){
+        if(username.equals("")){
             return "y";
         }
         else{

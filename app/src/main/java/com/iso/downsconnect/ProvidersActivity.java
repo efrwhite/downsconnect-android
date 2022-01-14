@@ -63,10 +63,6 @@ public class ProvidersActivity extends AppCompatActivity {
             public void onClick(View v) {
                 activity.getCurrentFocus().clearFocus();
                 textDialog(address_one, "Address One", activity);
-//                if (view != null) {
-//                    InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-//                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-//                }
             }
         });
 

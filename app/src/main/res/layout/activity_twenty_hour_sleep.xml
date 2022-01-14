@@ -34,7 +34,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/left_arrow"
-        app:layout_constraintBottom_toBottomOf="@+id/sleepView"
+        app:layout_constraintBottom_toBottomOf="@id/sleepView2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

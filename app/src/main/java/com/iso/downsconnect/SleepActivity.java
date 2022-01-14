@@ -18,6 +18,7 @@ import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -267,6 +268,7 @@ public class SleepActivity extends AppCompatActivity implements TimePickerDialog
                     long id = helper.addSleep(sleep);
                     entry.setForeignID(id);
                     helper.addEntry(entry);
+                    Toast.makeText(getApplicationContext(), "Sleep information saved", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(SleepActivity.this, ActivityContainer.class);
                     startActivity(intent);
                 }

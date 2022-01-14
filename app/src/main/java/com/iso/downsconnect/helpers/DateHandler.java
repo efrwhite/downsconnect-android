@@ -1,5 +1,7 @@
 package com.iso.downsconnect.helpers;
 
+import android.util.Log;
+
 public class DateHandler {
     public DateHandler(){
 
@@ -49,5 +51,15 @@ public class DateHandler {
 
     public String writtenDate(int month, int day, int year){
         return getMonth(month) + " " + day + ", " + year;
+    }
+
+    public String writtenDateWithString(String date){
+        String[] splitDate = date.split("-");
+        String month = splitDate[0];
+        int numMonth = Integer.parseInt(month);
+
+        String writtenDate = getMonth(numMonth - 1) + " " + splitDate[1] + ", " + splitDate[2];
+
+        return writtenDate;
     }
 }
