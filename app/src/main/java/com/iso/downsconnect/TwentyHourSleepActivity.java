@@ -29,7 +29,6 @@ public class TwentyHourSleepActivity extends AppCompatActivity implements DatePi
     private DateHandler handler;
     private DBHelper helper;
     private long cycleDate;
-    private int[] times = new int[2];
     private String date;
 
     @Override
@@ -48,6 +47,15 @@ public class TwentyHourSleepActivity extends AppCompatActivity implements DatePi
         minutes = findViewById(R.id.minText);
         handler = new DateHandler();
         helper = new DBHelper(this);
+
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("MM-DD-YYYY");
+        Date dat = cal.getTime();
+        String currentDate = sdf.format(dat);
+        String writtenDate = handler.writtenDateWithString(currentDate);
+        datePicker.setText(writtenDate);
+        int[] times = helper.calculateSleepCycle(currentDate, childID);
+        setTimes(times);
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,14 +77,8 @@ public class TwentyHourSleepActivity extends AppCompatActivity implements DatePi
             @Override
             public void onClick(View v) {
                 if(!datePicker.getText().toString().equals("")) {
-                    times = helper.calculateSleepCycle(date, childID);
-                    hours.setText(String.valueOf(times[0]));
-                    if(times[1] < 10){
-                        minutes.setText("0" + times[1]);
-                    }
-                    else{
-                        minutes.setText(String.valueOf(times[1]));
-                    }
+                    int[] times = helper.calculateSleepCycle(date, childID);
+                    setTimes(times);
                 }
                 else{
                     AlertDialog a = new AlertDialog.Builder(go.getContext()).create();
@@ -86,6 +88,16 @@ public class TwentyHourSleepActivity extends AppCompatActivity implements DatePi
                 }
             }
         });
+    }
+
+    private void setTimes(int[] times) {
+        hours.setText(String.valueOf(times[0]));
+        if(times[1] < 10){
+            minutes.setText("0" + times[1]);
+        }
+        else{
+            minutes.setText(String.valueOf(times[1]));
+        }
     }
 
 

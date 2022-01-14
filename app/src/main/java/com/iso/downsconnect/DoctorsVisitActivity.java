@@ -546,7 +546,7 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
 
                 ageLayout.setVisibility(View.VISIBLE);
 
-                Toast.makeText(getApplicationContext(), "Doctor Visit infomation saved", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Doctor Visit information saved", Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(DoctorsVisitActivity.this, ActivityContainer.class);
                 startActivity(intent);

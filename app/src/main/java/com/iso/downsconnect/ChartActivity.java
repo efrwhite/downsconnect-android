@@ -27,15 +27,16 @@ import java.util.List;
 
 public class ChartActivity extends AppCompatActivity {
     private DBHelper helper;
-    private ArrayList<Float> data = new ArrayList<>();
+    private ArrayList<Point> data = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chart);
 
+        //options page for changing units used for charts??
 
-        //Hardcoded values for practice, replace with actual national averages and child data later
+
         LineChart lineChart = (LineChart) findViewById(R.id.growth_chart);
         Button back = findViewById(R.id.backButton);
 
@@ -61,15 +62,15 @@ public class ChartActivity extends AppCompatActivity {
 
         List<String> xLabels = new ArrayList<>(Arrays.asList("2months", "4months", "6months", "8months", "10months", "12months", "14months", "16months", "18months", "20months", "22months", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"));
 
-        ArrayList<Point> points = new ArrayList<>();
-        if(data.size() != 0){
-            int i = 0;
-            for(Float ints: data){
-                Point point = new Point(i, ints);
-                points.add(point);
-                i++;
-            }
-        }
+//        ArrayList<Point> points = new ArrayList<>();
+//        if(data.size() != 0){
+//            int i = 0;
+//            for(Float ints: data){
+//                Point point = new Point(i, ints);
+//                points.add(point);
+//                i++;
+//            }
+//        }
         ArrayList<Point> other = new ArrayList<>();
 //        Point point = new Point(2, 55);
 //        Point point_two = new Point(3, 65);
@@ -95,7 +96,7 @@ public class ChartActivity extends AppCompatActivity {
 //        points.add(point8);
 
         List<com.github.mikephil.charting.data.Entry> entries = new ArrayList<>();
-        for(Point h: points){
+        for(Point h: data){
             entries.add(new com.github.mikephil.charting.data.Entry(h.getX(), h.getY()));
         }
 
