@@ -22,7 +22,7 @@ public class MedicalActivity extends AppCompatActivity{
     private long doctorDate = 0;
     private long time;
     private MedicalInfo medicalInfo = new MedicalInfo();
-    private Button back, save, doctorVisitBtn, OTBtn, PTBtn, opthBtn, speech, hearing, dental, cardio, neck, height, weight, circumference, vaccine;
+    private Button back, save, doctorVisitBtn, OTBtn, PTBtn, opthBtn, speech, hearing, dental, cardio, neck, height, weight, circumference, vaccine, medications;
     private DBHelper dbHelper;
     private TextView allergyText, guidelines;
     @Override
@@ -52,6 +52,7 @@ public class MedicalActivity extends AppCompatActivity{
         allergyText = findViewById(R.id.allergyListTextView);
         vaccine = findViewById(R.id.vaccineButton);
         guidelines = findViewById(R.id.guidelinesHyperlink);
+        medications = findViewById(R.id.medicationButton);
 
         String allergies = dbHelper.getAllergies(childID);
         if(allergies != null && !allergies.equals("")) {
@@ -187,6 +188,14 @@ public class MedicalActivity extends AppCompatActivity{
                 intent.setAction(Intent.ACTION_VIEW);
                 intent.addCategory(Intent.CATEGORY_BROWSABLE);
                 intent.setData(Uri.parse("https://pediatrics.aappublications.org/content/128/2/393"));
+                startActivity(intent);
+            }
+        });
+
+        medications.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MedicalActivity.this, MedicationsActivity.class);
                 startActivity(intent);
             }
         });
