@@ -267,6 +267,11 @@
     <string name="minutes">Minutes</string>
     <string name="sleep_cycle">Sleep Cycle</string>
     <string name="sleep_tot">Total Sleep:</string>
+    <string name="med_name">Medication Name</string>
+    <string name="dose">Dose</string>
+    <string name="reason">Reason for taking</string>
+    <string name="add_med">Add a Medication</string>
+    <string name="past_med">Past Medications</string>
     <array name="gender">
         <item>Select</item>
         <item>Male</item>
