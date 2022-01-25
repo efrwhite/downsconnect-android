@@ -272,6 +272,7 @@
     <string name="reason">Reason for taking</string>
     <string name="add_med">Add a Medication</string>
     <string name="past_med">Past Medications</string>
+    <string name="frequency_taken">Frequency</string>
     <array name="gender">
         <item>Select</item>
         <item>Male</item>
@@ -412,6 +413,15 @@
         <item>Other-fed utensils</item>
         <item>G tube</item>
         <item>NG tube</item>
+    </array>
+    <array name="dosages">
+        <item>Select</item>
+        <item>g</item>
+        <item>mg</item>
+        <item>oz</item>
+        <item>cups</item>
+        <item>tsp</item>
+        <item>tbsp</item>
     </array>
     <array name="mood">
         <item>Select</item>
