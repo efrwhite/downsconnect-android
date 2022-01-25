@@ -7,26 +7,53 @@
     tools:context=".MedicationsActivity">
 
     <EditText
-        android:id="@+id/editTextTextPersonName4"
+        android:id="@+id/editTextTextPersonName6"
         android:layout_width="0dp"
         android:layout_height="28dp"
-        android:layout_marginStart="26dp"
-        android:layout_marginTop="51dp"
+        android:layout_marginStart="83dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/rounded_box"
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/textView47"
+        app:layout_constraintStart_toEndOf="@+id/textView49"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName3" />
+
+    <EditText
+        android:id="@+id/editTextTextPersonName4"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/rounded_box"
+        android:ems="10"
+        android:gravity="left"
+        android:inputType="textMultiLine"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView47" />
+
+    <TextView
+        android:id="@+id/textView47"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="45dp"
+        android:text="@string/reason"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView49" />
 
     <EditText
         android:id="@+id/editTextTextPersonName3"
         android:layout_width="0dp"
         android:layout_height="28dp"
         android:layout_marginStart="125dp"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="22dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/rounded_box"
         android:ems="10"
@@ -39,10 +66,10 @@
         android:id="@+id/editTextTextPersonName5"
         android:layout_width="82dp"
         android:layout_height="28dp"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="22dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/rounded_box"
-        android:entries="@array/dosage"
+        android:entries="@array/dosages"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
 
@@ -107,28 +134,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="32dp"
         android:text="@string/dose"
         android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/textView49"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView42" />
-
-    <TextView
-        android:id="@+id/textView47"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="60dp"
-        android:text="@string/reason"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView43" />
 
     <Button
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button"
+        android:text="@string/save"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -158,5 +176,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/medText"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView49"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/frequency_taken"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView43" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
