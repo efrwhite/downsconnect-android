@@ -7,7 +7,7 @@
     tools:context=".MedicationsActivity">
 
     <EditText
-        android:id="@+id/editTextTextPersonName6"
+        android:id="@+id/medFrequency"
         android:layout_width="0dp"
         android:layout_height="28dp"
         android:layout_marginStart="83dp"
@@ -18,10 +18,10 @@
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView49"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName3" />
+        app:layout_constraintTop_toBottomOf="@+id/medDose" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName4"
+        android:id="@+id/medReason"
         android:layout_width="0dp"
         android:layout_height="100dp"
         android:layout_marginStart="24dp"
@@ -49,7 +49,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView49" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName3"
+        android:id="@+id/medDose"
         android:layout_width="0dp"
         android:layout_height="28dp"
         android:layout_marginStart="125dp"
@@ -58,12 +58,12 @@
         android:background="@drawable/rounded_box"
         android:ems="10"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toStartOf="@+id/editTextTextPersonName5"
+        app:layout_constraintEnd_toStartOf="@+id/doseUnits"
         app:layout_constraintStart_toEndOf="@+id/textView43"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
+        app:layout_constraintTop_toBottomOf="@+id/medName" />
 
     <Spinner
-        android:id="@+id/editTextTextPersonName5"
+        android:id="@+id/doseUnits"
         android:layout_width="82dp"
         android:layout_height="28dp"
         android:layout_marginTop="22dp"
@@ -71,7 +71,7 @@
         android:background="@drawable/rounded_box"
         android:entries="@array/dosages"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
+        app:layout_constraintTop_toBottomOf="@+id/medName" />
 
     <View
         android:id="@+id/medicationView"
@@ -115,7 +115,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView48" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName2"
+        android:id="@+id/medName"
         android:layout_width="0dp"
         android:layout_height="28dp"
         android:layout_marginStart="24dp"

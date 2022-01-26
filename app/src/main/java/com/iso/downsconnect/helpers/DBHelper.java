@@ -26,8 +26,8 @@ import java.util.ArrayList;
 
 public class DBHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "downsconnect.db";
-    private static final int DATABASE_VERSION = 7;
-    private static final String[] TABLE_NAMES = {"Account", "Child", "Feed", "Mood", "Sleep", "Entry", "Medical", "Milestone", "Bathroom", "Provider", "Activity", "Image", "Message", "Journal", "VisitInfo"};
+    private static final int DATABASE_VERSION = 8;
+    private static final String[] TABLE_NAMES = {"Account", "Child", "Feed", "Mood", "Sleep", "Entry", "Medical", "Milestone", "Bathroom", "Provider", "Activity", "Image", "Message", "Journal", "VisitInfo", "Medication"};
     private static final String[] COLUMN_1 = {"AccountHolderID","FirstName", "LastName", "Username", "Password", "Phone"};
     private static final String[] COLUMN_2 = {"ChildID", "FirstName", "LastName", "Gender", "BloodType", "DueDate", "Birthday", "Allergies", "Medications"};
     private static final String[] COLUMN_3 = {"FeedID", "ChildID", "Amount", "Substance", "Notes", "FoodUnit" , "EntryTime", "Iron", "Vitamin", "Other", "EatMode"};
@@ -42,6 +42,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String[] COLUMN_12 = {"ImageID", "ChildID", "Image"};
     private static final String[] COLUMN_13 = {"MessageID", "ChildID", "Message"};
     private static final String[] COLUMN_14 = {"JournalID", "ChildID", "Title", "Notes"};
+    private static final String[] COLUMN_15 = {"MedID", "ChildID", "MedName", "MedDosage", "MedDosageUnits", "MedFrequency", "MedReason"};
     public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -67,7 +68,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 "Medications TEXT);");
         db.execSQL("CREATE TABLE Feed(" +
                 "FeedID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
-                "ChildID INTEGER, " +
+                "ChildID INTEGER, " + //Foreign Key
                 "Amount INTEGER, " +
                 "Substance TEXT, " +
                 "Notes TEXT, " +
@@ -79,14 +80,14 @@ public class DBHelper extends SQLiteOpenHelper {
                 "EatMode TEXT);");
         db.execSQL("CREATE TABLE Mood(" +
                 "MoodID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
-                "ChildID INTEGER, " +
+                "ChildID INTEGER, " + //Foreign Key
                 "MoodType TEXT, " +
                 "Time TEXT, " +
                 "Notes TEXT, " +
                 "Units TEXT);");
         db.execSQL("CREATE TABLE Sleep(" +
                 "SleepID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
-                "ChildID INTEGER, " +
+                "ChildID INTEGER, " + //Foreign Key
                 "SleepTime INTEGER," +
                 "Duration INTEGER, " +
                 "Snoring TEXT, " +
@@ -107,7 +108,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 "ForeignID INTEGER)");
         db.execSQL("CREATE TABLE Medical(" +
                 "MedicalID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
-                "ChildID INTEGER, " +
+                "ChildID INTEGER, " + //Foreign Key
                 "Height TEXT, " +
                 "Weight TEXT, " +
                 "HeadSize TEXT, " +
@@ -122,7 +123,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 "Notes TEXT)");
         db.execSQL("CREATE TABLE Milestone(" +
                 "MilestoneID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
-                "ChildID INTEGER, " +
+                "ChildID INTEGER, " + //Foreign Key
                 "Roll TEXT, " +
                 "Walk TEXT, " +
                 "Stand TEXT, " +
@@ -150,7 +151,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 "Turns TEXT)");
         db.execSQL("CREATE TABLE Bathroom(" +
                 "BathroomID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
-                "ChildID INTEGER, " +
+                "ChildID INTEGER, " + //Foreign Key
                 "BathroomType TEXT, " +
                 "Treatment TEXT, " +
                 "Leak TEXT, " +
@@ -175,7 +176,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 "Zip TEXT)");
         db.execSQL("CREATE TABLE Activity("+
                 "ActivityID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
-                "ChildID INTEGER, " +
+                "ChildID INTEGER, " + //Foreign Key
                 "ActivityName TEXT, " +
                 "EntryTime INTEGER, " +
                 "Duration TEXT, " +
@@ -183,17 +184,25 @@ public class DBHelper extends SQLiteOpenHelper {
                 "Notes TEXT)");
         db.execSQL("CREATE TABLE Image(" +
                 "ImageID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
-                "ChildID INTEGER, " +
+                "ChildID INTEGER, " + //Foreign Key
                 "Image BLOB)");
         db.execSQL("CREATE TABLE Message(" +
                 "MessageID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
-                "ChildID INTEGER, " +
+                "ChildID INTEGER, " + //Foreign Key
                 "Message TEXT)");
         db.execSQL("CREATE TABLE Journal(" +
                 "JournalID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
-                "ChildID INTEGER, " +
+                "ChildID INTEGER, " + //Foreign Key
                 "Title TEXT, " +
                 "Notes TEXT)");
+        db.execSQL("CREATE TABLE Medication(" +
+                "MedID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
+                "ChildID INTEGER REFERENCES Child(ChildID) ON UPDATE CASCADE," + //Foreign key
+                "MedName TEXT," +
+                "MedDosage NUMBER," +
+                "MedDosageUnits TEXT," +
+                "MedFrequency TEXT," +
+                "MedReason TEXT)");
     }
 
     @Override
@@ -224,6 +233,16 @@ public class DBHelper extends SQLiteOpenHelper {
                     "Unit TEXT, " +
                     "Notes TEXT, " +
                     "SleepDate TEXT);");
+        }
+        if(newVersion == 8){
+            db.execSQL("CREATE TABLE Medication(" +
+                    "MedID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
+                    "ChildID INTEGER REFERENCES Child(ChildID) ON UPDATE CASCADE," +
+                    "MedName TEXT," +
+                    "MedDosage NUMBER," +
+                    "MedDosageUnits TEXT," +
+                    "MedFrequency TEXT," +
+                    "MedReason TEXT)");
         }
     }
 
