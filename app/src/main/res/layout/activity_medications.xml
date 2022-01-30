@@ -57,7 +57,7 @@
         android:layout_marginEnd="8dp"
         android:background="@drawable/rounded_box"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:inputType="numberDecimal"
         app:layout_constraintEnd_toStartOf="@+id/doseUnits"
         app:layout_constraintStart_toEndOf="@+id/textView43"
         app:layout_constraintTop_toBottomOf="@+id/medName" />
@@ -143,10 +143,10 @@
         app:layout_constraintTop_toBottomOf="@+id/textView42" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/addBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/save"
+        android:text="@string/add"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
