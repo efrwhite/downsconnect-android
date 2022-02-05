@@ -274,6 +274,7 @@
     <string name="past_med">Past Medications</string>
     <string name="frequency_taken">Frequency</string>
     <string name="add">Add</string>
+    <string name="adds_med">Add Medication</string>
     <array name="gender">
         <item>Select</item>
         <item>Male</item>

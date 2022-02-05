@@ -1006,6 +1006,30 @@ public class DBHelper extends SQLiteOpenHelper {
         return message;
     }
 
+    public Medication getMedication(int id){
+        //retrieve medication information from medID
+        String query = "SELECT * FROM Medication WHERE MedID = '" + id + "';";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor c = db.rawQuery(query, null);
+        Medication medication = new Medication();
+        if(c.moveToFirst()){
+            c.moveToFirst();
+            medication.setMedID(c.getInt(0));
+            medication.setChildID(c.getInt(1));
+            medication.setName(c.getString(2));
+            medication.setDose(c.getDouble(3));
+            medication.setDoseUnits(c.getString(4));
+            medication.setFrequency(c.getString(5));
+            medication.setReason(c.getString(6));
+        }
+        else{
+            c.close();
+            medication = null;
+        }
+        db.close();
+        return medication;
+    }
+
     public Journal getJournal(int id){
         //query to select all journal info with specific id
         String query = "SELECT * FROM Journal WHERE JournalID = '" + id + "';";

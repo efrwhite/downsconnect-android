@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,7 +21,7 @@ import com.iso.downsconnect.objects.Medication;
 import java.util.Calendar;
 
 public class MedicationsActivity extends AppCompatActivity {
-    private Button back, add;
+    private Button back, add, pastMed;
     private EditText name, dose, frequency, reason;
     private Spinner doseUnits;
     private Entry entry = new Entry();
@@ -30,6 +31,8 @@ public class MedicationsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_medications);
+
+        int medID = getIntent().getIntExtra("mediID", -1);
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         final int childID = sharedPreferences.getInt("name", 1);
@@ -46,11 +49,24 @@ public class MedicationsActivity extends AppCompatActivity {
         reason = findViewById(R.id.medReason);
         doseUnits = findViewById(R.id.doseUnits);
         add = findViewById(R.id.addBtn);
+        pastMed = findViewById(R.id.addMed);
+
+//        Log.i("ksdjfklsdj", String.valueOf(medID));
+        if(medID != -1){
+            //display medication information if id is in database
+            med = dbHelper.getMedication(medID);
+            add.setText("Update");
+            name.setText(med.getName());
+            dose.setText(String.valueOf(med.getDose()));
+            doseUnits.setSelection(getIndex(doseUnits, med.getDoseUnits()));
+            frequency.setText(med.getFrequency());
+            reason.setText(med.getReason());
+        }
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MedicationsActivity.this, MedicalActivity.class);
+                Intent intent = new Intent(MedicationsActivity.this, MedicationHistoryActivity.class);
                 startActivity(intent);
             }
         });
@@ -92,6 +108,18 @@ public class MedicationsActivity extends AppCompatActivity {
             }
         });
 
+
+    }
+
+    //get index of selection in a spinner
+    private int getIndex(Spinner spinner, String myString) {
+        for (int i = 0; i < spinner.getCount(); i++) {
+            if (spinner.getItemAtPosition(i).toString().equalsIgnoreCase(myString)) {
+                return i;
+            }
+        }
+
+        return 0;
 
     }
 }
