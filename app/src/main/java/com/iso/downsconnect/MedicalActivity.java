@@ -195,7 +195,8 @@ public class MedicalActivity extends AppCompatActivity{
         medications.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MedicalActivity.this, MedicationsActivity.class);
+                Intent intent = new Intent(MedicalActivity.this, MedicationHistoryActivity.class);
+                intent.putExtra("mediID", "-1");
                 startActivity(intent);
             }
         });
