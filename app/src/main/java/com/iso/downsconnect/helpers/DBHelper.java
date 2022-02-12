@@ -1506,5 +1506,18 @@ public class DBHelper extends SQLiteOpenHelper {
         return db.update(TABLE_NAMES[0], values, COLUMN_1[0] + "=" + accountHolder.getAccountID(), null) > 0;
     }
 
+    public boolean updateMedication(Medication medication){
+        //updates Medication table for specific acccount when a column changes
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_15[1], medication.getChildID());
+        values.put(COLUMN_15[2], medication.getName());
+        values.put(COLUMN_15[3], medication.getDose());
+        values.put(COLUMN_15[4], medication.getDoseUnits());
+        values.put(COLUMN_15[5], medication.getFrequency());
+        values.put(COLUMN_15[6], medication.getReason());
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.update(TABLE_NAMES[14], values, COLUMN_15[0] + "=" + medication.getMedID(), null) > 0;
+    }
+
 }
 
