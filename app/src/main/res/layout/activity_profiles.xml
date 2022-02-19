@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_marginTop="8dp"
-        android:background="#BAF3F7"
+        android:background="@color/colorAccent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -20,7 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_marginTop="8dp"
-        android:background="#BAF3F7"
+        android:background="@color/colorAccent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,7 +31,7 @@
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_marginTop="8dp"
-        android:background="#BAF3F7"
+        android:background="@color/colorAccent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -78,7 +78,8 @@
         android:background="@drawable/add_button"
         app:layout_constraintBottom_toBottomOf="@+id/yourChildrenView"
         app:layout_constraintEnd_toEndOf="@+id/yourChildrenView"
-        app:layout_constraintTop_toTopOf="@+id/yourChildrenView" />
+        app:layout_constraintTop_toTopOf="@+id/yourChildrenView"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <Button
         android:id="@+id/addParentsButton"

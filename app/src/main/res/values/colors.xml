@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#3a4fa1 </color>
     <color name="colorPrimaryDark">#000</color>
-    <color name="colorAccent">#7fc0dc</color>
+    <color name="colorAccent">#b0bef0</color>
     <color name="bedazzledBlue">#405F9A</color>
     <color name="queenBlue">#456F93</color>
     <color name="wintergreenDream">#508E84</color>
