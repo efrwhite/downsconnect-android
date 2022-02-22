@@ -27,8 +27,8 @@ import java.util.ArrayList;
 
 public class DBHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "downsconnect.db";
-    private static final int DATABASE_VERSION = 8;
-    private static final String[] TABLE_NAMES = {"Account", "Child", "Feed", "Mood", "Sleep", "Entry", "Medical", "Milestone", "Bathroom", "Provider", "Activity", "Image", "Message", "Journal", "Medication"};
+    private static final int DATABASE_VERSION = 9;
+    private static final String[] TABLE_NAMES = {"Account", "Child", "Feed", "Mood", "Sleep", "Entry", "Medical", "Milestone", "Bathroom", "Provider", "Activity", "Image", "Message", "Journal", "Med"};
     private static final String[] COLUMN_1 = {"AccountHolderID","FirstName", "LastName", "Username", "Password", "Phone"};
     private static final String[] COLUMN_2 = {"ChildID", "FirstName", "LastName", "Gender", "BloodType", "DueDate", "Birthday", "Allergies", "Medications"};
     private static final String[] COLUMN_3 = {"FeedID", "ChildID", "Amount", "Substance", "Notes", "FoodUnit" , "EntryTime", "Iron", "Vitamin", "Other", "EatMode"};
@@ -197,7 +197,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 "ChildID INTEGER, " + //Foreign Key
                 "Title TEXT, " +
                 "Notes TEXT)");
-        db.execSQL("CREATE TABLE Medication(" +
+        db.execSQL("CREATE TABLE Med(" +
                 "MedID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
                 "ChildID INTEGER REFERENCES Child(ChildID) ON UPDATE CASCADE," + //Foreign key
                 "MedName TEXT," +
@@ -238,7 +238,7 @@ public class DBHelper extends SQLiteOpenHelper {
                     "SleepDate TEXT);");
         }
         if(newVersion == 8){
-            db.execSQL("CREATE TABLE Medication(" +
+            db.execSQL("CREATE TABLE Med(" +
                     "MedID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
                     "ChildID INTEGER REFERENCES Child(ChildID) ON UPDATE CASCADE," +
                     "MedName TEXT," +
@@ -246,6 +246,10 @@ public class DBHelper extends SQLiteOpenHelper {
                     "MedDosageUnits TEXT," +
                     "MedFrequency TEXT," +
                     "MedReason TEXT)");
+        }
+        if(newVersion == 9){
+            String newName = "Med";
+            db.execSQL("ALTER TABLE " + TABLE_NAMES[14] + " RENAME TO " + newName);
         }
     }
 
@@ -1008,7 +1012,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public Medication getMedication(int id){
         //retrieve medication information from medID
-        String query = "SELECT * FROM Medication WHERE MedID = '" + id + "';";
+        String query = "SELECT * FROM Med WHERE MedID = '" + id + "';";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor c = db.rawQuery(query, null);
         Medication medication = new Medication();
@@ -1283,7 +1287,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public ArrayList<Medication> getAllMedication(int childID){
         //query for selecting all medication info for a specific child
-        String query = "SELECT * FROM Medication WHERE ChildID ='" + childID + "';";
+        String query = "SELECT * FROM Med WHERE ChildID ='" + childID + "';";
         SQLiteDatabase db = getWritableDatabase();
         Cursor c = db.rawQuery(query, null);
         ArrayList<Medication> medications = new ArrayList<>();

@@ -22,6 +22,7 @@ import androidx.fragment.app.Fragment;
 
 import com.iso.downsconnect.ActivityActivity;
 import com.iso.downsconnect.BathroomActivity;
+import com.iso.downsconnect.MedicationHistoryActivity;
 import com.iso.downsconnect.helpers.DBHelper;
 import com.iso.downsconnect.FeedActivity;
 import com.iso.downsconnect.JournalActivity;
@@ -41,6 +42,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -241,7 +243,7 @@ public class HomeFragment extends Fragment {
         more.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), MoreActivity.class);
+                Intent intent = new Intent(getContext(), MedicationHistoryActivity.class);
                 startActivity(intent);
             }
         });
@@ -251,10 +253,12 @@ public class HomeFragment extends Fragment {
         ExecutorService service = Executors.newSingleThreadExecutor();
         final Handler handler = new Handler(Looper.getMainLooper());
 
+        entries = helper.getAllEntries();
+        Collections.sort(entries);
+
         service.execute(new Runnable() {
             @Override
             public void run() {
-                entries = helper.getAllEntries();
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
