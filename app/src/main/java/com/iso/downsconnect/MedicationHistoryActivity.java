@@ -21,6 +21,7 @@ import com.iso.downsconnect.objects.Medication;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 
 public class MedicationHistoryActivity extends AppCompatActivity {
     ArrayList<Medication> medications = new ArrayList<>();
@@ -53,7 +54,7 @@ public class MedicationHistoryActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
+        Collections.sort(medications);
         for(final Medication medication: medications){
             //create layout parameters for each linear layout
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -74,6 +75,7 @@ public class MedicationHistoryActivity extends AppCompatActivity {
             final LinearLayout horizontalLayout = new LinearLayout(this);
             horizontalLayout.setOrientation(LinearLayout.HORIZONTAL);
             horizontalLayout.setLayoutParams(marginLayoutParams);
+            horizontalLayout.setId(medication.getMedID());
 
             LinearLayout horizontalLayout2 = new LinearLayout(this);
             horizontalLayout2.setOrientation(LinearLayout.HORIZONTAL);
@@ -119,8 +121,7 @@ public class MedicationHistoryActivity extends AppCompatActivity {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
                                     dbHelper.deleteEntry(medication.getMedID(),"Med");
-                                    med.removeView(horizontalLayout);
-                                    med.invalidate();
+                                    med.removeView((View) horizontalLayout.getParent());
                                 }
                             })
                             .setNegativeButton("no", null).show();
