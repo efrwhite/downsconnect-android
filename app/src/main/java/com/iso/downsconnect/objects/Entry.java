@@ -1,6 +1,8 @@
 package com.iso.downsconnect.objects;
 
-public class Entry {
+import java.util.Comparator;
+
+public class Entry implements Comparable<Entry> {
     private int entryID, childID;
     private String entryText, entryType;
     private long entryTime, foreignID;
@@ -57,5 +59,18 @@ public class Entry {
 
     public void setEntryType(String entryType) {
         this.entryType = entryType;
+    }
+
+    @Override
+    public int compareTo(Entry o) {
+        if (this.entryTime > o.entryTime){
+            return -1;
+        }
+        if (this.entryTime < o.entryTime){
+            return 1;
+        }
+        else{
+            return 0;
+        }
     }
 }
