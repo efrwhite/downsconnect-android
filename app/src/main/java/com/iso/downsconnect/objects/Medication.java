@@ -1,6 +1,6 @@
 package com.iso.downsconnect.objects;
 
-public class Medication {
+public class Medication implements Comparable<Medication>{
     private int medID, childID;
     private double dose;
     private String name, doseUnits, reason, frequency;
@@ -61,5 +61,10 @@ public class Medication {
 
     public void setFrequency(String frequency) {
         this.frequency = frequency;
+    }
+
+    @Override
+    public int compareTo(Medication o) {
+        return this.getName().toLowerCase().compareTo(o.getName().toLowerCase());
     }
 }
