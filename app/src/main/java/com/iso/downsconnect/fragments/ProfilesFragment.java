@@ -31,6 +31,7 @@ import com.iso.downsconnect.objects.Child;
 import com.iso.downsconnect.objects.Provider;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -114,6 +115,7 @@ public class ProfilesFragment extends Fragment {
                     @Override
                     public void run() {
                         children = helper.getAllChildren();
+                        Collections.sort(children);
                         int i = 0;
                         for(Child child: children){
                             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -226,6 +228,7 @@ public class ProfilesFragment extends Fragment {
             @Override
             public void run() {
                 accounts = helper.getAllAccounts();
+                Collections.sort(accounts);
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
@@ -299,6 +302,7 @@ public class ProfilesFragment extends Fragment {
                     @Override
                     public void run() {
                         providers = helper.getAllProviders();
+                        Collections.sort(providers);
                         for(final Provider provider: providers){
                             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                             LinearLayout.LayoutParams textParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);

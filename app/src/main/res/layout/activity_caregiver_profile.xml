@@ -118,7 +118,7 @@
         android:background="@drawable/rounded_box"
         android:ems="10"
         android:hint="@string/phone_number"
-        android:inputType="textPersonName"
+        android:inputType="phone"
         android:paddingLeft="10dp"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
