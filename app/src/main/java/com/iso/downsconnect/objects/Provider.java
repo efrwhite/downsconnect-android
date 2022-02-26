@@ -1,6 +1,6 @@
 package com.iso.downsconnect.objects;
 
-public class Provider {
+public class Provider implements Comparable<Provider>{
     private String name, prac_name, specialty, phone, fax, email, website, address, state, city, zip;
     private int providerID;
 
@@ -98,5 +98,10 @@ public class Provider {
 
     public void setProviderID(int providerID) {
         this.providerID = providerID;
+    }
+
+    @Override
+    public int compareTo(Provider o) {
+        return this.name.compareTo(o.name);
     }
 }

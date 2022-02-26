@@ -1,6 +1,6 @@
 package com.iso.downsconnect.objects;
 
-public class AccountHolder {
+public class AccountHolder implements Comparable<AccountHolder>{
     private String firstName, lastName, username, password, phone;
     private int accountID;
     public AccountHolder(){
@@ -60,5 +60,14 @@ public class AccountHolder {
 
     public void setAccountID(int accountID) {
         this.accountID = accountID;
+    }
+
+    @Override
+    public int compareTo(AccountHolder o) {
+        String thisName = this.firstName + " " + this.lastName;
+        String thatName = o.firstName + " " + o.lastName;
+        thisName = thisName.toLowerCase();
+        thatName = thatName.toLowerCase();
+        return thisName.compareTo(thatName);
     }
 }
