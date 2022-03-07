@@ -28,7 +28,7 @@ import java.util.ArrayList;
 public class DBHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "downsconnect.db";
     private static final int DATABASE_VERSION = 9;
-    private static final String[] TABLE_NAMES = {"Account", "Child", "Feed", "Mood", "Sleep", "Entry", "Medical", "Milestone", "Bathroom", "Provider", "Activity", "Image", "Message", "Journal", "Med"};
+    private static final String[] TABLE_NAMES = {"Account", "Child", "Feed", "Mood", "Sleep", "Entry", "Medical", "Milestone", "Bathroom", "Provider", "Activity", "Image", "Message", "Journal", "Med", "Resources"};
     private static final String[] COLUMN_1 = {"AccountHolderID","FirstName", "LastName", "Username", "Password", "Phone"};
     private static final String[] COLUMN_2 = {"ChildID", "FirstName", "LastName", "Gender", "BloodType", "DueDate", "Birthday", "Allergies", "Medications"};
     private static final String[] COLUMN_3 = {"FeedID", "ChildID", "Amount", "Substance", "Notes", "FoodUnit" , "EntryTime", "Iron", "Vitamin", "Other", "EatMode"};
@@ -44,6 +44,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String[] COLUMN_13 = {"MessageID", "ChildID", "Message"};
     private static final String[] COLUMN_14 = {"JournalID", "ChildID", "Title", "Notes"};
     private static final String[] COLUMN_15 = {"MedID", "ChildID", "MedName", "MedDosage", "MedDosageUnits", "MedFrequency", "MedReason"};
+    private static final String[] COLUMN_16 = {"ResourceID", "Name", "URL"};
     public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -205,6 +206,10 @@ public class DBHelper extends SQLiteOpenHelper {
                 "MedDosageUnits TEXT," +
                 "MedFrequency TEXT," +
                 "MedReason TEXT)");
+        db.execSQL("CREATE TABLE Resources(" +
+                "ResourceID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
+                "Name TEXT, " +
+                "URL TEXT)");
     }
 
     @Override
