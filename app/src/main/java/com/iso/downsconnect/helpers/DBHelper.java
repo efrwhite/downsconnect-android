@@ -21,14 +21,16 @@ import com.iso.downsconnect.objects.Milestone;
 import com.iso.downsconnect.objects.Mood;
 import com.iso.downsconnect.objects.Point;
 import com.iso.downsconnect.objects.Provider;
+import com.iso.downsconnect.objects.Resource;
 import com.iso.downsconnect.objects.Sleep;
 
+import java.sql.SQLInput;
 import java.util.ArrayList;
 
 public class DBHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "downsconnect.db";
     private static final int DATABASE_VERSION = 9;
-    private static final String[] TABLE_NAMES = {"Account", "Child", "Feed", "Mood", "Sleep", "Entry", "Medical", "Milestone", "Bathroom", "Provider", "Activity", "Image", "Message", "Journal", "Med", "Resources"};
+    private static final String[] TABLE_NAMES = {"Account", "Child", "Feed", "Mood", "Sleep", "Entry", "Medical", "Milestone", "Bathroom", "Provider", "Activity", "Image", "Message", "Journal", "Med", "Resource"};
     private static final String[] COLUMN_1 = {"AccountHolderID","FirstName", "LastName", "Username", "Password", "Phone"};
     private static final String[] COLUMN_2 = {"ChildID", "FirstName", "LastName", "Gender", "BloodType", "DueDate", "Birthday", "Allergies", "Medications"};
     private static final String[] COLUMN_3 = {"FeedID", "ChildID", "Amount", "Substance", "Notes", "FoodUnit" , "EntryTime", "Iron", "Vitamin", "Other", "EatMode"};
@@ -206,7 +208,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 "MedDosageUnits TEXT," +
                 "MedFrequency TEXT," +
                 "MedReason TEXT)");
-        db.execSQL("CREATE TABLE Resources(" +
+        db.execSQL("CREATE TABLE Resource(" +
                 "ResourceID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
                 "Name TEXT, " +
                 "URL TEXT)");
@@ -530,6 +532,16 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(COLUMN_15[6], med.getReason());
         SQLiteDatabase db = this.getWritableDatabase();
         long result = db.insert(TABLE_NAMES[14], null, values);
+        db.close();
+        return result;
+    }
+
+    public long addResource(Resource resource){
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_16[1], resource.getName());
+        values.put(COLUMN_16[2], resource.getURL());
+        SQLiteDatabase db = this.getWritableDatabase();
+        long result = db.insert(TABLE_NAMES[15], null, values);
         db.close();
         return result;
     }
@@ -1133,6 +1145,22 @@ public class DBHelper extends SQLiteOpenHelper {
         return accounts;
     }
 
+    public ArrayList<Resource> getResources(){
+        String query = "SELECT * FROM Resouce";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor c = db.rawQuery(query, null);
+        ArrayList<Resource> resources = new ArrayList<>();
+        while(c.moveToNext()){
+            Resource resource = new Resource();
+            resource.setResourceID(c.getInt(0));
+            resource.setName(c.getString(1));
+            resource.setURL(c.getString(2));
+            resources.add(resource);
+        }
+        c.close();
+        return resources;
+    }
+
     public ArrayList<MedicalInfo> getSpecificProviders(int childID, String providerType){
         //query to retrieve all medical infos on specific child based on the provider type
         String query = "SELECT * FROM Medical WHERE ChildID = '" + childID +
@@ -1526,6 +1554,14 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(COLUMN_15[6], medication.getReason());
         SQLiteDatabase db = this.getWritableDatabase();
         return db.update(TABLE_NAMES[14], values, COLUMN_15[0] + "=" + medication.getMedID(), null) > 0;
+    }
+
+    public boolean updateResource(Resource resource){
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_16[1], resource.getName());
+        values.put(COLUMN_16[2], resource.getURL());
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.update(TABLE_NAMES[15], values, COLUMN_16[0] + "=" + resource.getResourceID(), null) > 0;
     }
 
 }
