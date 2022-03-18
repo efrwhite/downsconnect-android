@@ -275,6 +275,10 @@
     <string name="frequency_taken">Frequency</string>
     <string name="add">Add</string>
     <string name="adds_med">Add Medication</string>
+    <string name="add_res">Add A Resource</string>
+    <string name="your_res">Your Resources</string>
+    <string name="res_name">Resource Name</string>
+    <string name="res_url">Resource URL</string>
     <array name="gender">
         <item>Select</item>
         <item>Male</item>
