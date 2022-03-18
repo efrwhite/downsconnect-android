@@ -7,12 +7,15 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class ResourcesActivity extends AppCompatActivity {
     private TextView ndss, ndsc, dsdn;
+    private Button add;
+    private LinearLayout resourceLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +29,16 @@ public class ResourcesActivity extends AppCompatActivity {
         ndss = findViewById(R.id.ndssText);
         ndsc = findViewById(R.id.ndscText);
         dsdn = findViewById(R.id.dsdnText);
+        add = findViewById(R.id.addResouceBtn);
+        resourceLayout = findViewById(R.id.resourceLayout);
+
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ResourcesActivity.this, AddResourceActivity.class);
+                startActivity(intent);
+            }
+        });
 
         ndss.setOnClickListener(new View.OnClickListener() {
             @Override

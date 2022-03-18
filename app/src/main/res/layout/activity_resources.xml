@@ -5,6 +5,65 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ScrollView
+        android:layout_width="356dp"
+        android:layout_height="607dp"
+        app:layout_constraintBottom_toTopOf="@+id/addResouceBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/resourcesView"
+        app:layout_constraintVertical_bias="0.01999998">
+
+        <LinearLayout
+            android:id="@+id/resourceLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/nationalSupportText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/national_support_groups"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/ndscText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/NDSC"
+                android:textColor="#0645AD" />
+
+            <TextView
+                android:id="@+id/ndssText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/NDSS"
+                android:textColor="#0645AD" />
+
+            <TextView
+                android:id="@+id/dsdnText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/DSDN"
+                android:textColor="#0645AD" />
+
+            <TextView
+                android:id="@+id/yourRes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/your_res"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </ScrollView>
+
     <View
         android:id="@+id/resourcesView"
         android:layout_width="wrap_content"
@@ -35,47 +94,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/nationalSupportText"
+    <Button
+        android:id="@+id/addResouceBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/national_support_groups"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/resourcesView" />
-
-    <TextView
-        android:id="@+id/ndssText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="24dp"
-        android:text="@string/NDSS"
-        android:textColor="#0645AD"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nationalSupportText" />
-
-    <TextView
-        android:id="@+id/ndscText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="@string/NDSC"
-        android:textColor="#0645AD"
-        app:layout_constraintStart_toStartOf="@+id/ndssText"
-        app:layout_constraintTop_toBottomOf="@+id/ndssText" />
-
-    <TextView
-        android:id="@+id/dsdnText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="@string/DSDN"
-        android:textColor="#0645AD"
-        app:layout_constraintStart_toStartOf="@+id/ndscText"
-        app:layout_constraintTop_toBottomOf="@+id/ndscText" />
+        android:text="@string/add"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
