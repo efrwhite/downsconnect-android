@@ -61,7 +61,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView51" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName2"
+        android:id="@+id/res_name"
         android:layout_width="0dp"
         android:layout_height="34dp"
         android:layout_marginStart="32dp"
@@ -75,7 +75,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView50" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName3"
+        android:id="@+id/res_url"
         android:layout_width="0dp"
         android:layout_height="34dp"
         android:layout_marginStart="48dp"
@@ -83,8 +83,17 @@
         android:layout_marginEnd="8dp"
         android:background="@drawable/rounded_box"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:inputType="textUri"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView52"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
+        app:layout_constraintTop_toBottomOf="@+id/res_name" />
+
+    <Button
+        android:id="@+id/addRes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/add"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

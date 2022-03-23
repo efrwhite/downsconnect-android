@@ -2,20 +2,29 @@ package com.iso.downsconnect;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.iso.downsconnect.helpers.DBHelper;
+import com.iso.downsconnect.objects.Resource;
+
+import java.util.ArrayList;
+
 public class ResourcesActivity extends AppCompatActivity {
     private TextView ndss, ndsc, dsdn;
     private Button add;
     private LinearLayout resourceLayout;
+    private ArrayList<Resource> resources = new ArrayList<>();
+    private DBHelper helper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +39,8 @@ public class ResourcesActivity extends AppCompatActivity {
         ndsc = findViewById(R.id.ndscText);
         dsdn = findViewById(R.id.dsdnText);
         add = findViewById(R.id.addResouceBtn);
+        helper = new DBHelper(this);
+        resources = helper.getResources();
         resourceLayout = findViewById(R.id.resourceLayout);
 
         add.setOnClickListener(new View.OnClickListener() {
@@ -73,6 +84,7 @@ public class ResourcesActivity extends AppCompatActivity {
             }
         });
 
+
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,5 +92,28 @@ public class ResourcesActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        for (final Resource resource: resources) {
+            LinearLayout.LayoutParams textParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            textParams.setMargins(0, 30, 0, 30);
+
+            TextView resName = new TextView(this);
+            resName.setText(resource.getName());
+            resName.setTextSize(15);
+            resName.setTextColor(Color.parseColor("#0645AD"));
+            resName.setWidth(450);
+            resName.setLayoutParams(textParams);
+            resName.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent();
+                    intent.setAction(Intent.ACTION_VIEW);
+                    intent.addCategory(Intent.CATEGORY_BROWSABLE);
+                    intent.setData(Uri.parse(resource.getURL()));
+                    startActivity(intent);
+                }
+            });
+            resourceLayout.addView(resName);
+        }
     }
 }
