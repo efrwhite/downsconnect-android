@@ -29,7 +29,7 @@ import java.util.ArrayList;
 
 public class DBHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "downsconnect.db";
-    private static final int DATABASE_VERSION = 9;
+    private static final int DATABASE_VERSION = 10;
     private static final String[] TABLE_NAMES = {"Account", "Child", "Feed", "Mood", "Sleep", "Entry", "Medical", "Milestone", "Bathroom", "Provider", "Activity", "Image", "Message", "Journal", "Med", "Resource"};
     private static final String[] COLUMN_1 = {"AccountHolderID","FirstName", "LastName", "Username", "Password", "Phone"};
     private static final String[] COLUMN_2 = {"ChildID", "FirstName", "LastName", "Gender", "BloodType", "DueDate", "Birthday", "Allergies", "Medications"};
@@ -257,6 +257,12 @@ public class DBHelper extends SQLiteOpenHelper {
         if(newVersion == 9){
             String newName = "Med";
             db.execSQL("ALTER TABLE " + TABLE_NAMES[14] + " RENAME TO " + newName);
+        }
+        if(newVersion == 10){
+            db.execSQL("CREATE TABLE Resource(" +
+                    "ResourceID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
+                    "Name TEXT, " +
+                    "URL TEXT)");
         }
     }
 
@@ -1146,7 +1152,7 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     public ArrayList<Resource> getResources(){
-        String query = "SELECT * FROM Resouce";
+        String query = "SELECT * FROM Resource";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor c = db.rawQuery(query, null);
         ArrayList<Resource> resources = new ArrayList<>();
