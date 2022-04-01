@@ -212,7 +212,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/medicationsText" />
 
             <Button
-                android:id="@+id/addParentButton"
+                android:id="@+id/addCaregiverButton"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="8dp"
@@ -231,8 +231,8 @@
                 android:text="@string/phone_list"
                 android:textColor="#000"
                 android:textSize="18sp"
-                app:layout_constraintStart_toStartOf="@+id/addParentButton"
-                app:layout_constraintTop_toBottomOf="@+id/addParentButton" />
+                app:layout_constraintStart_toStartOf="@+id/addCaregiverButton"
+                app:layout_constraintTop_toBottomOf="@+id/addCaregiverButton" />
 
             <Button
                 android:id="@+id/saveButton"

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.iso.downsconnect.objects.AccountHolder;
 import com.iso.downsconnect.objects.Activity;
@@ -269,7 +270,14 @@ public class DBHelper extends SQLiteOpenHelper {
     public void deleteEntry(int id, String table){
         for(String name : TABLE_NAMES){
             if(name.equals(table)){
-                String query = "DELETE FROM " + table + " WHERE " + table + "ID = " + id + ";";
+                String query = "";
+                //If account, put in proper names for variables
+                if (table == "Account") {
+                    query = "DELETE FROM Account WHERE AccountHolderID = " + id + ";";
+                }
+                else {
+                    query = "DELETE FROM " + table + " WHERE " + table + "ID = " + id + ";";
+                }
                 SQLiteDatabase db = this.getWritableDatabase();
                 db.execSQL(query);
             }

@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -123,7 +124,7 @@ public class ProfilesFragment extends Fragment {
                             ViewGroup.MarginLayoutParams marginLayoutParams = new ViewGroup.MarginLayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                             marginLayoutParams.setMargins(50, 0, 50,10);
                             final LinearLayout horizontalLayout = new LinearLayout(getContext());
-                            horizontalLayout.setTag(child.getFirstName() + "Layout");
+                            horizontalLayout.setTag(child.getFirstName() + "CLayout");
                             horizontalLayout.setId(child.getChildID());
                             horizontalLayout.setOrientation(LinearLayout.HORIZONTAL);
                             horizontalLayout.setLayoutParams(marginLayoutParams);
@@ -205,15 +206,15 @@ public class ProfilesFragment extends Fragment {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         if(type.equals("Child")) {
                             helper.deleteEntry(button.getId(), "Child");
-                            childLayout.removeView(getView().findViewWithTag(button.getTag() + "Layout"));
+                            childLayout.removeView(getView().findViewWithTag(button.getTag() + "CLayout"));
                         }
-//                        else if (type.equals("Account")){
-//                            helper.deleteEntry(button.getId(), "Account");
-//                            caregiverLayout.removeView(getView().findViewById(button.getId()));
-//                        }
+                        else if (type.equals("Account")){
+                            helper.deleteEntry(button.getId(), "Account");
+                            caregiverLayout.removeView(getView().findViewWithTag(button.getTag() + "GLayout" ));
+                        }
                         else if (type.equals("Provider")){
                             helper.deleteEntry(button.getId(), "Provider");
-                            providerLayout.removeView(getView().findViewById(button.getId()));
+                            providerLayout.removeView(getView().findViewWithTag(button.getTag() + "PLayout"));
                         }
                     }
                 })
@@ -238,7 +239,7 @@ public class ProfilesFragment extends Fragment {
                             ViewGroup.MarginLayoutParams marginLayoutParams = new ViewGroup.MarginLayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                             marginLayoutParams.setMargins(50, 0, 50,10);
                             LinearLayout horizontalLayout = new LinearLayout(getContext());
-                            horizontalLayout.setTag(account.getFirstName() + "Layout");
+                            horizontalLayout.setTag(account.getFirstName() + "GLayout");
                             horizontalLayout.setOrientation(LinearLayout.HORIZONTAL);
                             horizontalLayout.setLayoutParams(marginLayoutParams);
 
@@ -259,6 +260,7 @@ public class ProfilesFragment extends Fragment {
                             delete.setWidth(10);
                             delete.setHeight(10);
                             delete.setId(account.getAccountID());
+                            delete.setTag(account.getFirstName());
                             delete.setLayoutParams(layoutParams);
                             delete.setOnClickListener(new View.OnClickListener() {
                                 @Override
@@ -310,7 +312,7 @@ public class ProfilesFragment extends Fragment {
                             marginLayoutParams.setMargins(50, 0, 50,10);
 
                             LinearLayout horizontalLayout = new LinearLayout(getContext());
-                            horizontalLayout.setTag(provider.getName() + "Layout");
+                            horizontalLayout.setTag(provider.getName() + "PLayout");
                             horizontalLayout.setOrientation(LinearLayout.HORIZONTAL);
                             horizontalLayout.setLayoutParams(marginLayoutParams);
                             horizontalLayout.setId(provider.getProviderID());
@@ -332,6 +334,7 @@ public class ProfilesFragment extends Fragment {
                             remove.setWidth(10);
                             remove.setHeight(10);
                             remove.setId(provider.getProviderID());
+                            remove.setTag(provider.getName());
                             remove.setLayoutParams(layoutParams);
                             remove.setOnClickListener(new View.OnClickListener() {
                                 @Override

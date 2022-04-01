@@ -32,7 +32,7 @@ public class DetailedProfileActivity extends AppCompatActivity implements DatePi
     private ImageView image;
     private boolean birthday, dueDate;
     private Calendar birthdayDate, due_Date;
-    private Button back, save;
+    private Button back, save, addCaregiver;
     private DBHelper helper;
     private Child child = new Child();
     private DateHandler dateHandler = new DateHandler();
@@ -53,7 +53,9 @@ public class DetailedProfileActivity extends AppCompatActivity implements DatePi
         birthdayPicker = findViewById(R.id.birthdayPicker);
         dueDatePicker = findViewById(R.id.dueDatePicker);
         image = findViewById(R.id.profileImageView);
+        addCaregiver = findViewById(R.id.addCaregiverButton);
 
+//        add section for adding a caregiver on the child profile part, the blue (+) button
         final String childName = getIntent().getStringExtra("childName");
         if (!childName.equals("None")) {
             child = helper.getChild(childName);
@@ -161,6 +163,15 @@ public class DetailedProfileActivity extends AppCompatActivity implements DatePi
                 dueDate = true;
                 birthday = false;
                 showDatePickerDialog();
+            }
+        });
+
+        addCaregiver.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DetailedProfileActivity.this, CaregiverProfileActivity.class);
+                intent.putExtra("care_name", "None");
+                startActivity(intent);
             }
         });
     }
