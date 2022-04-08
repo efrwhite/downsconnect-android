@@ -9,7 +9,7 @@
     <EditText
         android:id="@+id/pass_editText"
         android:layout_width="0dp"
-        android:layout_height="39dp"
+        android:layout_height="48dp"
         android:layout_marginStart="100dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
@@ -37,7 +37,7 @@
     <EditText
         android:id="@+id/user_editText"
         android:layout_width="0dp"
-        android:layout_height="39dp"
+        android:layout_height="48dp"
         android:layout_marginStart="75dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
@@ -88,14 +88,15 @@
         android:layout_height="50dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:background="@drawable/left_arrow"
+        android:background="@drawable/user_icon"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <EditText
         android:id="@+id/caregiver_name_editText"
         android:layout_width="208dp"
-        android:layout_height="39dp"
+        android:layout_height="48dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="32dp"
         android:background="@drawable/rounded_box"
@@ -111,7 +112,7 @@
     <EditText
         android:id="@+id/phone_editText"
         android:layout_width="0dp"
-        android:layout_height="39dp"
+        android:layout_height="48dp"
         android:layout_marginStart="75dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"

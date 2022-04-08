@@ -26,6 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/bathroom"
+            android:textColor="#004D40"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="@+id/bathroomView"
             app:layout_constraintEnd_toEndOf="@+id/bathroomView"
@@ -37,10 +38,11 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginStart="8dp"
-            android:background="@drawable/left_arrow"
+            android:background="@drawable/app_logo"
             app:layout_constraintBottom_toBottomOf="@+id/bathroomView"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="SpeakableTextPresentCheck" />
 
         <TextView
             android:id="@+id/current_time_text"
@@ -61,11 +63,13 @@
         android:layout_height="wrap_content"
         android:background="#E2EFD3"
         app:tabSelectedTextColor="@android:color/holo_blue_dark"
-        app:tabTextColor="@android:color/secondary_text_dark" />
+        app:tabTextColor="@android:color/secondary_text_dark"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <androidx.viewpager.widget.ViewPager
+        android:id="@+id/view_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/view_pager"/>
+        tools:ignore="SpeakableTextPresentCheck" />
 
 </LinearLayout>

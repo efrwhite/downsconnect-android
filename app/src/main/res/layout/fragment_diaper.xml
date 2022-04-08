@@ -22,11 +22,14 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
         android:background="@drawable/rounded_box"
+        android:drawablePadding="5dp"
         android:gravity="left"
         android:inputType="textMultiLine|text"
+        android:paddingLeft="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/notesText"
-        app:layout_constraintTop_toBottomOf="@+id/notesText" />
+        app:layout_constraintTop_toBottomOf="@+id/notesText"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <TextView
         android:id="@+id/eatText"
@@ -49,7 +52,7 @@
     <Spinner
         android:id="@+id/leakSpinner"
         android:layout_width="0dp"
-        android:layout_height="40dp"
+        android:layout_height="48dp"
         android:layout_marginEnd="24dp"
         android:background="@drawable/rounded_box"
         android:entries="@array/yn"
@@ -60,7 +63,7 @@
     <Spinner
         android:id="@+id/openAirSpinner"
         android:layout_width="0dp"
-        android:layout_height="40dp"
+        android:layout_height="48dp"
         android:layout_marginEnd="24dp"
         android:background="@drawable/rounded_box"
         android:entries="@array/yn"
@@ -99,7 +102,7 @@
     <Spinner
         android:id="@+id/diaperCreamSpinner"
         android:layout_width="0dp"
-        android:layout_height="40dp"
+        android:layout_height="48dp"
         android:layout_marginEnd="24dp"
         android:background="@drawable/rounded_box"
         android:entries="@array/sml"
@@ -110,7 +113,7 @@
     <Spinner
         android:id="@+id/quantitySpinner"
         android:layout_width="0dp"
-        android:layout_height="40dp"
+        android:layout_height="48dp"
         android:layout_marginEnd="24dp"
         android:background="@drawable/rounded_box"
         android:entries="@array/yn"

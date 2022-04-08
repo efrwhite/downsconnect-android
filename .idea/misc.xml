@@ -5,6 +5,7 @@
       <map>
         <entry key="app/src/main/res/layout/activity_activity.xml" value="0.17916666666666667" />
         <entry key="app/src/main/res/layout/activity_bathroom.xml" value="0.17916666666666667" />
+        <entry key="app/src/main/res/layout/activity_caregiver_profile.xml" value="0.2246376811594203" />
         <entry key="app/src/main/res/layout/activity_chart.xml" value="0.17916666666666667" />
         <entry key="app/src/main/res/layout/activity_container.xml" value="0.20729166666666668" />
         <entry key="app/src/main/res/layout/activity_detailed_profile.xml" value="0.17916666666666667" />
@@ -24,9 +25,14 @@
         <entry key="app/src/main/res/layout/activity_resources.xml" value="0.17916666666666667" />
         <entry key="app/src/main/res/layout/activity_signup.xml" value="0.17916666666666667" />
         <entry key="app/src/main/res/layout/activity_sleep.xml" value="0.17916666666666667" />
+        <entry key="app/src/main/res/layout/fragment_bathroom.xml" value="0.18697916666666667" />
+        <entry key="app/src/main/res/layout/fragment_constipation.xml" value="0.18697916666666667" />
         <entry key="app/src/main/res/layout/fragment_diaper.xml" value="0.21614583333333334" />
         <entry key="app/src/main/res/layout/fragment_eighteenmonth.xml" value="0.21614583333333334" />
         <entry key="app/src/main/res/layout/fragment_fifteenmonth.xml" value="0.265625" />
+        <entry key="app/src/main/res/layout/fragment_potty.xml" value="0.18697916666666667" />
+        <entry key="app/src/main/res/layout/fragment_sevenyears.xml" value="0.2246376811594203" />
+        <entry key="app/src/main/res/layout/fragment_sixmonth.xml" value="0.2246376811594203" />
         <entry key="app/src/main/res/layout/fragment_twoyears.xml" value="0.2125" />
         <entry key="app/src/main/res/layout/header.xml" value="0.2125" />
         <entry key="app/src/main/res/layout/test.xml" value="0.2125" />

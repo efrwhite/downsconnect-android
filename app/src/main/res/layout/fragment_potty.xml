@@ -22,11 +22,13 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
         android:background="@drawable/rounded_box"
+        android:drawablePadding="5dp"
         android:gravity="left"
         android:inputType="textMultiLine|text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/notesText"
-        app:layout_constraintTop_toBottomOf="@+id/notesText" />
+        app:layout_constraintTop_toBottomOf="@+id/notesText"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <TextView
         android:id="@+id/eatText"
@@ -49,7 +51,7 @@
     <Spinner
         android:id="@+id/accidentEditText"
         android:layout_width="0dp"
-        android:layout_height="40dp"
+        android:layout_height="48dp"
         android:layout_marginEnd="24dp"
         android:background="@drawable/rounded_box"
         android:entries="@array/yn"
@@ -60,13 +62,15 @@
     <EditText
         android:id="@+id/durationEditText"
         android:layout_width="0dp"
-        android:layout_height="40dp"
+        android:layout_height="48dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/rounded_box"
+        android:drawablePadding="5dp"
         android:inputType="number"
         app:layout_constraintBaseline_toBaselineOf="@+id/quantityText"
         app:layout_constraintEnd_toStartOf="@+id/unitsSpinner"
-        app:layout_constraintStart_toStartOf="@+id/guideline8" />
+        app:layout_constraintStart_toStartOf="@+id/guideline8"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline8"
@@ -88,7 +92,7 @@
     <Spinner
         android:id="@+id/unitsSpinner"
         android:layout_width="65dp"
-        android:layout_height="42dp"
+        android:layout_height="48dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/rounded_box"
         android:entries="@array/potty_time"
