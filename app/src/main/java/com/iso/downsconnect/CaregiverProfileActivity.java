@@ -50,6 +50,7 @@ public class CaregiverProfileActivity extends AppCompatActivity {
                 phone.setText(accountHolder.getPhone());
                 pass.setText(accountHolder.getPassword());
                 username.setText(accountHolder.getUsername());
+                save.setText("Update");
             }
         }
 
@@ -88,22 +89,36 @@ public class CaregiverProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //check if any information has been changed and update accordingly
-                String fullName = accountHolder.getFirstName() + " " + accountHolder.getLastName();
-                if(!fullName.equals(null) && !fullName.equals(name.getText().toString())){
-                    String newName = name.getText().toString();
-                    accountHolder.setFirstName(newName.substring(0, newName.indexOf(" ")));
-                    accountHolder.setLastName(newName.substring(newName.indexOf(" ")));
+                if(save.getText().toString().equals("Update")) {
+                    String fullName = accountHolder.getFirstName() + " " + accountHolder.getLastName();
+                    if (!fullName.equals(null) && !fullName.equals(name.getText().toString())) {
+                        String newName = name.getText().toString();
+                        accountHolder.setFirstName(newName.substring(0, newName.indexOf(" ")));
+                        accountHolder.setLastName(newName.substring(newName.indexOf(" ")));
+                    }
+                    if (!accountHolder.getPhone().equals(phone.getText().toString())) {
+                        accountHolder.setPhone(phone.getText().toString());
+                    }
+                    if (!accountHolder.getPassword().equals(pass.getText().toString())) {
+                        accountHolder.setPassword(pass.getText().toString());
+                    }
+                    if (!accountHolder.getUsername().equals(username.getText().toString())) {
+                        accountHolder.setUsername(username.getText().toString());
+                    }
+                    helper.updateAccount(accountHolder);
                 }
-                if(!accountHolder.getPhone().equals(phone.getText().toString())){
-                    accountHolder.setPhone(phone.getText().toString());
+                else{
+                    if(!name.getText().toString().equals("") && !phone.getText().toString().equals("") && !pass.getText().toString().equals("")
+                        && !username.getText().toString().equals("")){
+                        String newName = name.getText().toString();
+                        accountHolder.setFirstName(newName.substring(0, newName.indexOf(" ")));
+                        accountHolder.setLastName(newName.substring(newName.indexOf(" ")));
+                        accountHolder.setPhone(phone.getText().toString());
+                        accountHolder.setPassword(pass.getText().toString());
+                        accountHolder.setUsername(username.getText().toString());
+                        helper.addAccount(accountHolder);
+                    }
                 }
-                if(!accountHolder.getPassword().equals(pass.getText().toString())){
-                    accountHolder.setPassword(pass.getText().toString());
-                }
-                if(!accountHolder.getUsername().equals(username.getText().toString())){
-                    accountHolder.setUsername(username.getText().toString());
-                }
-                helper.updateAccount(accountHolder);
 
                 Intent intent = new Intent(CaregiverProfileActivity.this, ActivityContainer.class);
                 startActivity(intent);

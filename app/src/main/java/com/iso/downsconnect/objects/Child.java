@@ -1,6 +1,6 @@
 package com.iso.downsconnect.objects;
 
-public class Child {
+public class Child implements Comparable<Child>{
     private String firstName, lastName, allergies, bloodType, gender, medications;
     private int childID;
     private long birthday, dueDate;
@@ -84,5 +84,14 @@ public class Child {
 
     public void setMedications(String medications) {
         this.medications = medications;
+    }
+
+    @Override
+    public int compareTo(Child o) {
+        String thisName = this.firstName + " " + this.lastName;
+        String thatName = o.firstName + " " + o.lastName;
+        thisName = thisName.toLowerCase();
+        thatName = thatName.toLowerCase();
+        return thisName.compareTo(thatName);
     }
 }

@@ -2,6 +2,8 @@ package com.iso.downsconnect;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -19,6 +21,7 @@ import com.iso.downsconnect.objects.Medication;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 
 public class MedicationHistoryActivity extends AppCompatActivity {
     ArrayList<Medication> medications = new ArrayList<>();
@@ -51,7 +54,7 @@ public class MedicationHistoryActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
+        Collections.sort(medications);
         for(final Medication medication: medications){
             //create layout parameters for each linear layout
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -66,12 +69,13 @@ public class MedicationHistoryActivity extends AppCompatActivity {
             mainLayout.setOrientation(LinearLayout.HORIZONTAL);
             mainLayout.setLayoutParams(marginLayoutParams);
 
-            layoutParams.setMargins(200, 0, 0, 30);
-            textParams.setMargins(10, 30, 100, 30);
+            layoutParams.setMargins(0, 0, 0, 30);
+            textParams.setMargins(0, 30, 0, 30);
 
-            LinearLayout horizontalLayout = new LinearLayout(this);
+            final LinearLayout horizontalLayout = new LinearLayout(this);
             horizontalLayout.setOrientation(LinearLayout.HORIZONTAL);
             horizontalLayout.setLayoutParams(marginLayoutParams);
+            horizontalLayout.setId(medication.getMedID());
 
             LinearLayout horizontalLayout2 = new LinearLayout(this);
             horizontalLayout2.setOrientation(LinearLayout.HORIZONTAL);
@@ -81,15 +85,13 @@ public class MedicationHistoryActivity extends AppCompatActivity {
             medName.setText(medication.getName());
             medName.setTextSize(15);
             medName.setTextColor(Color.BLACK);
-            medName.setWidth(500);
+            medName.setWidth(450);
             medName.setLayoutParams(textParams);
             horizontalLayout.addView(medName);
 
             //Button to display more information about the medication
-            Button info = new Button(this);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                info.setBackground(getDrawable(R.drawable.right_arrow));
-            }
+            Button info = new Button(getApplicationContext());
+            info.setText("View");
             info.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -100,8 +102,32 @@ public class MedicationHistoryActivity extends AppCompatActivity {
                 }
             });
             info.setWidth(1);
-            info.setLayoutParams(textParams);
+            info.setLayoutParams(layoutParams);
             horizontalLayout.addView(info);
+
+            final Button delete = new Button(getApplicationContext());
+            delete.setText("Delete");
+            delete.setWidth(1);
+            delete.setId(medication.getMedID());
+            delete.setLayoutParams(layoutParams);
+            horizontalLayout.addView(delete);
+            delete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    new AlertDialog.Builder(MedicationHistoryActivity.this)
+                            .setTitle("Delete Medication")
+                            .setMessage("Are you sure you want to delete this medication?")
+                            .setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    dbHelper.deleteEntry(medication.getMedID(),"Med");
+                                    med.removeView((View) horizontalLayout.getParent());
+                                }
+                            })
+                            .setNegativeButton("no", null).show();
+                }
+            });
+
 
             //add nested layouts to their parent layouts
             mainLayout.addView(horizontalLayout);

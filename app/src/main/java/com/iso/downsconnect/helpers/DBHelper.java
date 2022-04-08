@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.iso.downsconnect.objects.AccountHolder;
 import com.iso.downsconnect.objects.Activity;
@@ -21,14 +22,16 @@ import com.iso.downsconnect.objects.Milestone;
 import com.iso.downsconnect.objects.Mood;
 import com.iso.downsconnect.objects.Point;
 import com.iso.downsconnect.objects.Provider;
+import com.iso.downsconnect.objects.Resource;
 import com.iso.downsconnect.objects.Sleep;
 
+import java.sql.SQLInput;
 import java.util.ArrayList;
 
 public class DBHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "downsconnect.db";
-    private static final int DATABASE_VERSION = 8;
-    private static final String[] TABLE_NAMES = {"Account", "Child", "Feed", "Mood", "Sleep", "Entry", "Medical", "Milestone", "Bathroom", "Provider", "Activity", "Image", "Message", "Journal", "Medication"};
+    private static final int DATABASE_VERSION = 10;
+    private static final String[] TABLE_NAMES = {"Account", "Child", "Feed", "Mood", "Sleep", "Entry", "Medical", "Milestone", "Bathroom", "Provider", "Activity", "Image", "Message", "Journal", "Med", "Resource"};
     private static final String[] COLUMN_1 = {"AccountHolderID","FirstName", "LastName", "Username", "Password", "Phone"};
     private static final String[] COLUMN_2 = {"ChildID", "FirstName", "LastName", "Gender", "BloodType", "DueDate", "Birthday", "Allergies", "Medications"};
     private static final String[] COLUMN_3 = {"FeedID", "ChildID", "Amount", "Substance", "Notes", "FoodUnit" , "EntryTime", "Iron", "Vitamin", "Other", "EatMode"};
@@ -44,6 +47,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String[] COLUMN_13 = {"MessageID", "ChildID", "Message"};
     private static final String[] COLUMN_14 = {"JournalID", "ChildID", "Title", "Notes"};
     private static final String[] COLUMN_15 = {"MedID", "ChildID", "MedName", "MedDosage", "MedDosageUnits", "MedFrequency", "MedReason"};
+    private static final String[] COLUMN_16 = {"ResourceID", "Name", "URL"};
     public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -197,7 +201,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 "ChildID INTEGER, " + //Foreign Key
                 "Title TEXT, " +
                 "Notes TEXT)");
-        db.execSQL("CREATE TABLE Medication(" +
+        db.execSQL("CREATE TABLE Med(" +
                 "MedID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
                 "ChildID INTEGER REFERENCES Child(ChildID) ON UPDATE CASCADE," + //Foreign key
                 "MedName TEXT," +
@@ -205,6 +209,10 @@ public class DBHelper extends SQLiteOpenHelper {
                 "MedDosageUnits TEXT," +
                 "MedFrequency TEXT," +
                 "MedReason TEXT)");
+        db.execSQL("CREATE TABLE Resource(" +
+                "ResourceID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
+                "Name TEXT, " +
+                "URL TEXT)");
     }
 
     @Override
@@ -238,7 +246,7 @@ public class DBHelper extends SQLiteOpenHelper {
                     "SleepDate TEXT);");
         }
         if(newVersion == 8){
-            db.execSQL("CREATE TABLE Medication(" +
+            db.execSQL("CREATE TABLE Med(" +
                     "MedID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
                     "ChildID INTEGER REFERENCES Child(ChildID) ON UPDATE CASCADE," +
                     "MedName TEXT," +
@@ -247,12 +255,29 @@ public class DBHelper extends SQLiteOpenHelper {
                     "MedFrequency TEXT," +
                     "MedReason TEXT)");
         }
+        if(newVersion == 9){
+            String newName = "Med";
+            db.execSQL("ALTER TABLE " + TABLE_NAMES[14] + " RENAME TO " + newName);
+        }
+        if(newVersion == 10){
+            db.execSQL("CREATE TABLE Resource(" +
+                    "ResourceID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
+                    "Name TEXT, " +
+                    "URL TEXT)");
+        }
     }
 
     public void deleteEntry(int id, String table){
         for(String name : TABLE_NAMES){
             if(name.equals(table)){
-                String query = "DELETE FROM " + table + " WHERE " + table + "ID = " + id + ";";
+                String query = "";
+                //If account, put in proper names for variables
+                if (table == "Account") {
+                    query = "DELETE FROM Account WHERE AccountHolderID = " + id + ";";
+                }
+                else {
+                    query = "DELETE FROM " + table + " WHERE " + table + "ID = " + id + ";";
+                }
                 SQLiteDatabase db = this.getWritableDatabase();
                 db.execSQL(query);
             }
@@ -521,6 +546,16 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(COLUMN_15[6], med.getReason());
         SQLiteDatabase db = this.getWritableDatabase();
         long result = db.insert(TABLE_NAMES[14], null, values);
+        db.close();
+        return result;
+    }
+
+    public long addResource(Resource resource){
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_16[1], resource.getName());
+        values.put(COLUMN_16[2], resource.getURL());
+        SQLiteDatabase db = this.getWritableDatabase();
+        long result = db.insert(TABLE_NAMES[15], null, values);
         db.close();
         return result;
     }
@@ -1008,7 +1043,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public Medication getMedication(int id){
         //retrieve medication information from medID
-        String query = "SELECT * FROM Medication WHERE MedID = '" + id + "';";
+        String query = "SELECT * FROM Med WHERE MedID = '" + id + "';";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor c = db.rawQuery(query, null);
         Medication medication = new Medication();
@@ -1122,6 +1157,22 @@ public class DBHelper extends SQLiteOpenHelper {
         c.close();
         //db.close();
         return accounts;
+    }
+
+    public ArrayList<Resource> getResources(){
+        String query = "SELECT * FROM Resource";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor c = db.rawQuery(query, null);
+        ArrayList<Resource> resources = new ArrayList<>();
+        while(c.moveToNext()){
+            Resource resource = new Resource();
+            resource.setResourceID(c.getInt(0));
+            resource.setName(c.getString(1));
+            resource.setURL(c.getString(2));
+            resources.add(resource);
+        }
+        c.close();
+        return resources;
     }
 
     public ArrayList<MedicalInfo> getSpecificProviders(int childID, String providerType){
@@ -1283,7 +1334,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public ArrayList<Medication> getAllMedication(int childID){
         //query for selecting all medication info for a specific child
-        String query = "SELECT * FROM Medication WHERE ChildID ='" + childID + "';";
+        String query = "SELECT * FROM Med WHERE ChildID ='" + childID + "';";
         SQLiteDatabase db = getWritableDatabase();
         Cursor c = db.rawQuery(query, null);
         ArrayList<Medication> medications = new ArrayList<>();
@@ -1517,6 +1568,14 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(COLUMN_15[6], medication.getReason());
         SQLiteDatabase db = this.getWritableDatabase();
         return db.update(TABLE_NAMES[14], values, COLUMN_15[0] + "=" + medication.getMedID(), null) > 0;
+    }
+
+    public boolean updateResource(Resource resource){
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_16[1], resource.getName());
+        values.put(COLUMN_16[2], resource.getURL());
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.update(TABLE_NAMES[15], values, COLUMN_16[0] + "=" + resource.getResourceID(), null) > 0;
     }
 
 }

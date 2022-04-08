@@ -35,6 +35,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -58,6 +59,7 @@ public class ListEntriesFragment extends Fragment {
 
         helper = new DBHelper(getContext());
         entries = helper.getAllEntries();
+        Collections.sort(entries);
         linearLayout = view.findViewById(R.id.entriesLayout);
 
         final ExecutorService service = Executors.newSingleThreadExecutor();
