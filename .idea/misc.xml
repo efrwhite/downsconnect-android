@@ -3,7 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="app/src/main/res/layout/activity_activity.xml" value="0.17916666666666667" />
+        <entry key="app/src/main/res/layout/activity_activity.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_bathroom.xml" value="0.17916666666666667" />
         <entry key="app/src/main/res/layout/activity_caregiver_profile.xml" value="0.2246376811594203" />
         <entry key="app/src/main/res/layout/activity_chart.xml" value="0.17916666666666667" />
@@ -18,6 +18,8 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.20729166666666668" />
         <entry key="app/src/main/res/layout/activity_medical.xml" value="0.17916666666666667" />
         <entry key="app/src/main/res/layout/activity_medical_listings.xml" value="0.17916666666666667" />
+        <entry key="app/src/main/res/layout/activity_medication_history.xml" value="0.2246376811594203" />
+        <entry key="app/src/main/res/layout/activity_medications.xml" value="0.2246376811594203" />
         <entry key="app/src/main/res/layout/activity_message.xml" value="0.17916666666666667" />
         <entry key="app/src/main/res/layout/activity_milestone.xml" value="0.17916666666666667" />
         <entry key="app/src/main/res/layout/activity_profiles.xml" value="0.17916666666666667" />

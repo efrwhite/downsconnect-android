@@ -1,55 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-    <EditText
-        android:id="@+id/notesEditText"
-        android:layout_width="300dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/rounded_box"
-        android:gravity="left"
-        android:inputType="textMultiLine|text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/notesText"
-        tools:ignore="SpeakableTextPresentCheck"
-        android:importantForAutofill="no" />
 
     <View
         android:id="@+id/activityView"
         android:layout_width="wrap_content"
         android:layout_height="56dp"
         android:background="@color/queenBlue"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/activityText"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="24dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
         android:text="@string/activity"
         android:textColor="#E3F2FD"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/activityView"
-        app:layout_constraintEnd_toEndOf="@+id/activityView"
-        app:layout_constraintStart_toStartOf="@+id/activityView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/backButton"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginBottom="4dp"
         android:background="@drawable/app_logo"
-        app:layout_constraintBottom_toBottomOf="@+id/activityView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/activityView"
+        app:layout_constraintLeft_toLeftOf="parent"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <TextView
@@ -64,92 +50,119 @@
 
     <TextView
         android:id="@+id/historyBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_width="75dp"
+        android:layout_height="25dp"
         android:layout_marginEnd="16dp"
         android:text="@string/history"
+        android:textAlignment="center"
         android:textColor="#90CAF9"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toBottomOf="@+id/activityText"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
         android:id="@+id/notesText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginBottom="32dp"
         android:text="@string/notes"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/notesEditText"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/timeText" />
+        app:layout_constraintTop_toBottomOf="@+id/durationText" />
 
-    <TextView
-        android:id="@+id/childActivityText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+    <EditText
+        android:id="@+id/notesEditText"
+        android:layout_width="300dp"
+        android:layout_height="66dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/rounded_box"
+        android:gravity="left"
+        android:importantForAutofill="no"
+        android:inputType="textMultiLine|text"
+        android:paddingLeft="7dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/notesEditText" />
+        app:layout_constraintTop_toBottomOf="@+id/notesText"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <Spinner
         android:id="@+id/activitySpinner"
         style="@style/Widget.AppCompat.Spinner.Underlined"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_width="355dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="8dp"
         android:entries="@array/activities"
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/childActivityText" />
-
-    <Button
-        android:id="@+id/saveButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/save"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <EditText
-        android:id="@+id/durationEditText"
-        android:layout_width="84dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/rounded_box"
-        android:ems="10"
-        android:gravity="center"
-        android:inputType="number"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/durationText"
-        tools:ignore="SpeakableTextPresentCheck"
-        android:importantForAutofill="no" />
-
-    <Spinner
-        android:id="@+id/durationUnits"
-        android:layout_width="59dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/rounded_box"
-        android:entries="@array/sleep_time"
-        app:layout_constraintStart_toEndOf="@+id/durationEditText"
-        app:layout_constraintTop_toBottomOf="@+id/durationText" />
+        app:layout_constraintTop_toBottomOf="@+id/timeText" />
 
     <TextView
         android:id="@+id/durationText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="64dp"
         android:text="@string/duration"
-        android:textSize="20dp"
+        android:textSize="16sp"
         android:textStyle="normal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/activitySpinner" />
+
+    <EditText
+        android:id="@+id/durationEditText"
+        android:layout_width="104dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="56dp"
+        android:background="@drawable/rounded_box"
+        android:ems="10"
+        android:gravity="center"
+        android:importantForAutofill="no"
+        android:inputType="number"
+        app:layout_constraintEnd_toStartOf="@+id/durationUnits"
+        app:layout_constraintHorizontal_bias="0.387"
+        app:layout_constraintStart_toEndOf="@+id/durationText"
+        app:layout_constraintTop_toBottomOf="@+id/activitySpinner"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <Spinner
+        android:id="@+id/durationUnits"
+        android:layout_width="63dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="72dp"
+        android:background="@drawable/rounded_box"
+        android:entries="@array/sleep_time"
+        app:layout_constraintBottom_toBottomOf="@+id/durationEditText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/activitySpinner"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/saveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="@string/save"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/childActivityText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="399dp"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

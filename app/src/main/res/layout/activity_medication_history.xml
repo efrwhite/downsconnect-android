@@ -8,8 +8,8 @@
 
     <Button
         android:id="@+id/addMed"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="117dp"
+        android:layout_height="51dp"
         android:text="@string/adds_med"
         app:layout_constraintEnd_toEndOf="@+id/medicationView2"
         app:layout_constraintStart_toEndOf="@+id/medText2"
@@ -41,7 +41,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/medicationView2">
+        app:layout_constraintTop_toBottomOf="@+id/medicationView2"
+        tools:ignore="SpeakableTextPresentCheck">
 
         <LinearLayout
             android:id="@+id/medLinear"

@@ -9,69 +9,48 @@
     <EditText
         android:id="@+id/medFrequency"
         android:layout_width="0dp"
-        android:layout_height="28dp"
-        android:layout_marginStart="83dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="8dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="84dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="16dp"
         android:background="@drawable/rounded_box"
         android:ems="10"
         android:inputType="textPersonName"
+        android:paddingLeft="7dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView49"
-        app:layout_constraintTop_toBottomOf="@+id/medDose" />
+        app:layout_constraintTop_toBottomOf="@+id/medDose"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <EditText
         android:id="@+id/medReason"
         android:layout_width="0dp"
         android:layout_height="100dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="48dp"
         android:layout_marginEnd="24dp"
         android:background="@drawable/rounded_box"
         android:ems="10"
         android:gravity="left"
         android:inputType="textMultiLine"
+        android:paddingLeft="7dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView47" />
+        app:layout_constraintTop_toBottomOf="@+id/textView47"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <TextView
         android:id="@+id/textView47"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="88dp"
         android:text="@string/reason"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView49" />
-
-    <EditText
-        android:id="@+id/medDose"
-        android:layout_width="0dp"
-        android:layout_height="28dp"
-        android:layout_marginStart="125dp"
-        android:layout_marginTop="22dp"
-        android:layout_marginEnd="8dp"
-        android:background="@drawable/rounded_box"
-        android:ems="10"
-        android:inputType="numberDecimal"
-        app:layout_constraintEnd_toStartOf="@+id/doseUnits"
-        app:layout_constraintStart_toEndOf="@+id/textView43"
-        app:layout_constraintTop_toBottomOf="@+id/medName" />
-
-    <Spinner
-        android:id="@+id/doseUnits"
-        android:layout_width="82dp"
-        android:layout_height="28dp"
-        android:layout_marginTop="22dp"
-        android:layout_marginEnd="16dp"
-        android:background="@drawable/rounded_box"
-        android:entries="@array/dosages"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/medName" />
 
     <View
         android:id="@+id/medicationView"
@@ -98,10 +77,11 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginStart="8dp"
-        android:background="@drawable/left_arrow"
+        android:background="@drawable/app_logo"
         app:layout_constraintBottom_toBottomOf="@id/medicationView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <TextView
         android:id="@+id/textView42"
@@ -117,24 +97,27 @@
     <EditText
         android:id="@+id/medName"
         android:layout_width="0dp"
-        android:layout_height="28dp"
+        android:layout_height="48dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="16dp"
         android:background="@drawable/rounded_box"
         android:ems="10"
         android:inputType="textPersonName"
+        android:paddingLeft="7dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView42"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.692"
         app:layout_constraintStart_toEndOf="@+id/textView42"
-        app:layout_constraintTop_toBottomOf="@+id/textView48" />
+        app:layout_constraintTop_toTopOf="@+id/textView42"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <TextView
         android:id="@+id/textView43"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="48dp"
         android:layout_marginBottom="32dp"
         android:text="@string/dose"
         android:textSize="18sp"
@@ -142,10 +125,43 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView42" />
 
+    <EditText
+        android:id="@+id/medDose"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="125dp"
+        android:layout_marginTop="22dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/rounded_box"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        android:paddingLeft="7dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView43"
+        app:layout_constraintEnd_toStartOf="@+id/doseUnits"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/textView43"
+        app:layout_constraintTop_toTopOf="@+id/textView43"
+        app:layout_constraintVertical_bias="0.673"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <Spinner
+        android:id="@+id/doseUnits"
+        android:layout_width="82dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="22dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/rounded_box"
+        android:entries="@array/dosages"
+        app:layout_constraintBottom_toBottomOf="@+id/medDose"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/medDose"
+        app:layout_constraintVertical_bias="0.909" />
+
     <Button
         android:id="@+id/addBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
         android:text="@string/add"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -168,7 +184,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="48dp"
         android:text="@string/frequency_taken"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
