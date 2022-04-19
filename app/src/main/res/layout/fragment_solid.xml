@@ -23,43 +23,18 @@
                 android:id="@+id/saveButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="120dp"
                 android:text="@string/save"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/addPhotobutton" />
-
-            <TextView
-                android:id="@+id/addPhotoText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="60dp"
-                android:text="@string/add_photo"
-                app:layout_constraintEnd_toStartOf="@+id/guideline8"
-                app:layout_constraintHorizontal_bias="0.459"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/otherCheck" />
-
-            <Button
-                android:id="@+id/addPhotobutton"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginTop="12dp"
-                android:background="@drawable/circle_bedazzledblue"
-                android:text="@string/plus"
-                android:textColor="#FFF"
-                app:layout_constraintEnd_toStartOf="@+id/guideline8"
-                app:layout_constraintHorizontal_bias="0.439"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/addPhotoText" />
+                app:layout_constraintTop_toBottomOf="@+id/o_text" />
 
             <Spinner
                 android:id="@+id/modeEatingSpinner2"
                 android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="8dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
                 android:background="@drawable/rounded_box"
                 android:entries="@array/feeding_mode"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -69,11 +44,13 @@
             <EditText
                 android:id="@+id/quantityEditText"
                 android:layout_width="78dp"
-                android:layout_height="37dp"
-                android:layout_marginTop="8dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="16dp"
                 android:background="@drawable/rounded_box"
+                android:paddingLeft="7dp"
                 app:layout_constraintStart_toStartOf="@+id/guideline8"
-                app:layout_constraintTop_toBottomOf="@+id/solidFoodEditText" />
+                app:layout_constraintTop_toBottomOf="@+id/solidFoodEditText"
+                tools:ignore="SpeakableTextPresentCheck" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline8"
@@ -86,10 +63,9 @@
                 android:id="@+id/modeEatingText2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="48dp"
                 android:text="@string/mode_of_feeding"
-                app:layout_constraintEnd_toStartOf="@+id/guideline8"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/quantityText"
                 app:layout_constraintTop_toBottomOf="@+id/quantityText" />
 
             <TextView
@@ -107,10 +83,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:minHeight="48dp"
                 android:text="@string/other"
-                app:layout_constraintEnd_toStartOf="@+id/guideline8"
-                app:layout_constraintHorizontal_bias="0.464"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/ironCheck"
                 app:layout_constraintTop_toBottomOf="@+id/ironCheck" />
 
             <EditText
@@ -123,9 +98,11 @@
                 android:background="@drawable/rounded_box"
                 android:gravity="left"
                 android:inputType="textMultiLine|text"
+                android:paddingLeft="7dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/notesText" />
+                app:layout_constraintTop_toBottomOf="@+id/notesText"
+                tools:ignore="SpeakableTextPresentCheck" />
 
             <TextView
                 android:id="@+id/notesText"
@@ -151,10 +128,10 @@
             <Spinner
                 android:id="@+id/unitSpinner"
                 android:layout_width="0dp"
-                android:layout_height="40dp"
+                android:layout_height="48dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
                 android:background="@drawable/rounded_box"
                 android:entries="@array/food"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -165,7 +142,8 @@
                 android:id="@+id/vitaCheck"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="24dp"
+                android:minHeight="48dp"
                 android:text="@string/multivitamin"
                 app:layout_constraintStart_toStartOf="@+id/guideline8"
                 app:layout_constraintTop_toBottomOf="@+id/vitaminsText2" />
@@ -173,40 +151,43 @@
             <EditText
                 android:id="@+id/o_text"
                 android:layout_width="0dp"
-                android:layout_height="24dp"
+                android:layout_height="48dp"
                 android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
                 android:ems="10"
                 android:inputType="textPersonName"
+                android:paddingLeft="7dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/guideline8"
-                app:layout_constraintTop_toBottomOf="@+id/textView31" />
+                app:layout_constraintTop_toBottomOf="@+id/textView31"
+                tools:ignore="SpeakableTextPresentCheck" />
 
             <CheckBox
                 android:id="@+id/ironCheck"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="24dp"
+                android:minHeight="48dp"
                 android:text="@string/iron"
-                app:layout_constraintEnd_toStartOf="@+id/guideline8"
-                app:layout_constraintHorizontal_bias="0.433"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/modeEatingText2"
                 app:layout_constraintTop_toBottomOf="@+id/vitaminsText2" />
 
             <TextView
                 android:id="@+id/eatText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="32dp"
                 android:text="@string/ate"
-                app:layout_constraintStart_toStartOf="@+id/quantityText"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/editText" />
 
             <Spinner
                 android:id="@+id/solidFoodEditText"
                 android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="8dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="16dp"
                 android:background="@drawable/rounded_box"
                 android:ems="10"
                 android:entries="@array/ate"
@@ -220,9 +201,9 @@
                 android:id="@+id/quantityText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="48dp"
                 android:text="@string/quantity"
-                app:layout_constraintStart_toStartOf="@+id/modeEatingText2"
+                app:layout_constraintStart_toStartOf="@+id/eatText"
                 app:layout_constraintTop_toBottomOf="@+id/eatText" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

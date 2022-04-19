@@ -23,6 +23,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:minHeight="48dp"
                 android:text="@string/iron"
                 app:layout_constraintEnd_toStartOf="@+id/guideline8"
                 app:layout_constraintHorizontal_bias="0.466"
@@ -42,16 +43,15 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:text="@string/mode_of_eating"
-                app:layout_constraintEnd_toStartOf="@+id/guideline8"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/quantityText"
                 app:layout_constraintTop_toBottomOf="@+id/quantityText" />
 
             <Spinner
                 android:id="@+id/modeEatingSpinner"
                 android:layout_width="0dp"
-                android:layout_height="40dp"
+                android:layout_height="48dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginEnd="8dp"
+                android:layout_marginEnd="16dp"
                 android:background="@drawable/rounded_box"
                 android:entries="@array/eating_mode"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -61,13 +61,16 @@
             <EditText
                 android:id="@+id/otherText"
                 android:layout_width="0dp"
-                android:layout_height="39dp"
+                android:layout_height="48dp"
+                android:layout_marginEnd="16dp"
                 android:ems="10"
                 android:inputType="textPersonName"
+                android:paddingLeft="7dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/guideline8"
-                app:layout_constraintTop_toBottomOf="@+id/textView32" />
+                app:layout_constraintTop_toBottomOf="@+id/textView32"
+                tools:ignore="SpeakableTextPresentCheck" />
 
             <TextView
                 android:id="@+id/notesText"
@@ -82,10 +85,10 @@
             <Spinner
                 android:id="@+id/unitSpinner"
                 android:layout_width="0dp"
-                android:layout_height="45dp"
+                android:layout_height="48dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
+                android:layout_marginEnd="16dp"
                 android:background="@drawable/rounded_box"
                 android:entries="@array/dosage"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -97,6 +100,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
+                android:minHeight="48dp"
                 android:text="@string/other"
                 app:layout_constraintEnd_toStartOf="@+id/guideline8"
                 app:layout_constraintStart_toStartOf="parent"
@@ -116,9 +120,9 @@
             <EditText
                 android:id="@+id/fluidFoodEditText"
                 android:layout_width="0dp"
-                android:layout_height="39dp"
+                android:layout_height="48dp"
                 android:layout_marginTop="4dp"
-                android:layout_marginEnd="8dp"
+                android:layout_marginEnd="16dp"
                 android:background="@drawable/rounded_box"
                 android:ems="10"
                 android:hint="@string/fluid"
@@ -135,7 +139,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:text="@string/amount_of_fluid"
-                app:layout_constraintStart_toStartOf="@+id/modeEatingText"
+                app:layout_constraintStart_toStartOf="@+id/eatText"
                 app:layout_constraintTop_toBottomOf="@+id/eatText" />
 
             <CheckBox
@@ -143,6 +147,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:minHeight="48dp"
                 android:text="@string/multivitamin"
                 app:layout_constraintStart_toStartOf="@+id/guideline8"
                 app:layout_constraintTop_toBottomOf="@+id/vitaminsText" />
@@ -157,9 +162,11 @@
                 android:background="@drawable/rounded_box"
                 android:gravity="left"
                 android:inputType="textMultiLine|text"
+                android:paddingLeft="7dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/notesText" />
+                app:layout_constraintTop_toBottomOf="@+id/notesText"
+                tools:ignore="SpeakableTextPresentCheck" />
 
             <TextView
                 android:id="@+id/textView32"
@@ -174,20 +181,23 @@
             <EditText
                 android:id="@+id/quantityEditText"
                 android:layout_width="85dp"
-                android:layout_height="41dp"
+                android:layout_height="48dp"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/rounded_box"
                 android:inputType="number"
+                android:paddingLeft="7dp"
                 app:layout_constraintStart_toStartOf="@+id/guideline8"
-                app:layout_constraintTop_toBottomOf="@+id/fluidFoodEditText" />
+                app:layout_constraintTop_toBottomOf="@+id/fluidFoodEditText"
+                tools:ignore="SpeakableTextPresentCheck" />
 
             <TextView
                 android:id="@+id/eatText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="24dp"
                 android:text="@string/fluid_ate"
-                app:layout_constraintStart_toStartOf="@+id/quantityText"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/editText" />
 
             <Button

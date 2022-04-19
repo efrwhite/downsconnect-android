@@ -84,7 +84,7 @@
     <string name="enter_time">Enter Time</string>
     <string name="amount_of_fluid">Amount of Fluid</string>
     <string name="enter_appointment_date">Enter Appointment Date</string>
-    <string name="ate">Ate</string>
+    <string name="ate">Food Consumed</string>
     <string name="mode_of_eating">Mode of Eating</string>
     <string name="mode_of_feeding">Mode of Feeding</string>
     <string name="vitamin">Please list any vitamins or supplements given with this feeding:</string>
@@ -183,7 +183,7 @@
     <string name="choose_pic">Choose a Picture</string>
     <string name="current_record">Current Record</string>
     <string name="AAP_guidelines">AAP Guidelines for Down\'s Syndrome</string>
-    <string name="fluid_ate">Fluid Ate</string>
+    <string name="fluid_ate">Fluid Consumed</string>
     <string name="fluid">Fluid</string>
     <string name="title">Title</string>
     <string name="msg">Message:</string>

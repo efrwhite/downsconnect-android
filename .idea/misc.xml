@@ -32,9 +32,11 @@
         <entry key="app/src/main/res/layout/fragment_diaper.xml" value="0.21614583333333334" />
         <entry key="app/src/main/res/layout/fragment_eighteenmonth.xml" value="0.21614583333333334" />
         <entry key="app/src/main/res/layout/fragment_fifteenmonth.xml" value="0.265625" />
+        <entry key="app/src/main/res/layout/fragment_fluid.xml" value="0.2246376811594203" />
         <entry key="app/src/main/res/layout/fragment_potty.xml" value="0.18697916666666667" />
         <entry key="app/src/main/res/layout/fragment_sevenyears.xml" value="0.2246376811594203" />
         <entry key="app/src/main/res/layout/fragment_sixmonth.xml" value="0.2246376811594203" />
+        <entry key="app/src/main/res/layout/fragment_solid.xml" value="0.2246376811594203" />
         <entry key="app/src/main/res/layout/fragment_twoyears.xml" value="0.2125" />
         <entry key="app/src/main/res/layout/header.xml" value="0.2125" />
         <entry key="app/src/main/res/layout/test.xml" value="0.2125" />
