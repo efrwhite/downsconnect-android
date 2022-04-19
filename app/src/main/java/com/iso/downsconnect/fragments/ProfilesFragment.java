@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -207,14 +208,17 @@ public class ProfilesFragment extends Fragment {
                         if(type.equals("Child")) {
                             helper.deleteEntry(button.getId(), "Child");
                             childLayout.removeView(getView().findViewWithTag(button.getTag() + "CLayout"));
+                            Toast.makeText(getContext(), "Deleted a child profile", Toast.LENGTH_SHORT).show();
                         }
                         else if (type.equals("Account")){
                             helper.deleteEntry(button.getId(), "Account");
                             caregiverLayout.removeView(getView().findViewWithTag(button.getTag() + "GLayout" ));
+                            Toast.makeText(getContext(), "Deleted an account", Toast.LENGTH_SHORT).show();
                         }
                         else if (type.equals("Provider")){
                             helper.deleteEntry(button.getId(), "Provider");
                             providerLayout.removeView(getView().findViewWithTag(button.getTag() + "PLayout"));
+                            Toast.makeText(getContext(), "Deleted a provider profile", Toast.LENGTH_SHORT).show();
                         }
                     }
                 })
