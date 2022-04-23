@@ -20,6 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/sleep"
+        android:textColor="#000000"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@+id/sleepView"
         app:layout_constraintEnd_toEndOf="@+id/sleepView"
@@ -31,7 +32,7 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginStart="8dp"
-        android:background="@drawable/left_arrow"
+        android:background="@drawable/app_logo"
         app:layout_constraintBottom_toBottomOf="@+id/sleepView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -84,7 +85,7 @@
     <EditText
         android:id="@+id/sleepTimePicker"
         android:layout_width="100dp"
-        android:layout_height="40dp"
+        android:layout_height="48dp"
         android:background="@drawable/rounded_box"
         android:focusable="false"
         android:gravity="center"
@@ -96,15 +97,16 @@
     <EditText
         android:id="@+id/wokeUpEditText"
         android:layout_width="100dp"
-        android:layout_height="40dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="100dp"
         android:hint="@string/tap_to_set"
         android:inputType="numberDecimal"
         android:textAlignment="center"
         android:textSize="14sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/openAirText"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline3" />
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toBottomOf="@+id/sleepTimePicker" />
 
     <EditText
         android:id="@+id/notesEditText"
@@ -116,6 +118,7 @@
         android:background="@drawable/rounded_box"
         android:gravity="left"
         android:inputType="text|textMultiLine"
+        android:paddingLeft="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/notesText" />
@@ -123,8 +126,9 @@
     <Spinner
         android:id="@+id/timerSpinner"
         android:layout_width="0dp"
-        android:layout_height="40dp"
+        android:layout_height="48dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
         android:background="@drawable/rounded_box"
         android:entries="@array/sleep_time"
@@ -160,8 +164,8 @@
 
     <Button
         android:id="@+id/dropDownButton"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_marginStart="8dp"
         android:background="@drawable/down_arrow"
         app:layout_constraintBaseline_toBaselineOf="@+id/addInfoText"
@@ -208,6 +212,7 @@
                 android:id="@+id/checkAllText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:text="@string/check_all_that_apply"
                 app:layout_constraintStart_toStartOf="@+id/treatmentQuestionText"
                 app:layout_constraintTop_toBottomOf="@+id/treatmentQuestionText" />
@@ -225,6 +230,8 @@
                 android:id="@+id/snoringYesCheckBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:minHeight="48dp"
                 android:text="@string/yes"
                 app:layout_constraintStart_toStartOf="@+id/snoringQuestionText"
                 app:layout_constraintTop_toBottomOf="@+id/snoringQuestionText" />
@@ -234,6 +241,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:minHeight="48dp"
                 android:text="@string/no"
                 app:layout_constraintStart_toEndOf="@+id/snoringYesCheckBox"
                 app:layout_constraintTop_toBottomOf="@+id/snoringQuestionText" />
@@ -242,6 +251,7 @@
                 android:id="@+id/medicationCheckBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:minHeight="48dp"
                 android:text="@string/medication_detailed_in_medicine_area"
                 app:layout_constraintStart_toStartOf="@+id/checkAllText"
                 app:layout_constraintTop_toBottomOf="@+id/checkAllText" />
@@ -250,6 +260,7 @@
                 android:id="@+id/supplementsCheckBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:minHeight="48dp"
                 android:text="@string/supplements_ex_melatonin"
                 app:layout_constraintStart_toStartOf="@+id/medicationCheckBox"
                 app:layout_constraintTop_toBottomOf="@+id/medicationCheckBox" />
@@ -258,6 +269,7 @@
                 android:id="@+id/cpapCheckBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:minHeight="48dp"
                 android:text="@string/cpap"
                 app:layout_constraintStart_toStartOf="@+id/supplementsCheckBox"
                 app:layout_constraintTop_toBottomOf="@+id/supplementsCheckBox" />
@@ -282,12 +294,13 @@
             <EditText
                 android:id="@+id/otherEditText"
                 android:layout_width="0dp"
-                android:layout_height="25dp"
+                android:layout_height="48dp"
                 android:layout_marginStart="8dp"
                 android:background="@drawable/rounded_box"
                 app:layout_constraintBaseline_toBaselineOf="@+id/indicateText"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/indicateText" />
+                app:layout_constraintStart_toEndOf="@+id/indicateText"
+                tools:ignore="SpeakableTextPresentCheck" />
 
             <CheckBox
                 android:id="@+id/studyYesCheckBox"

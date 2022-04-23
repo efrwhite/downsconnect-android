@@ -31,10 +31,11 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginStart="8dp"
-        android:background="@drawable/left_arrow"
+        android:background="@drawable/app_logo"
         app:layout_constraintBottom_toBottomOf="@+id/moodView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <TextView
         android:id="@+id/moodTime"
@@ -57,9 +58,11 @@
         android:ems="10"
         android:gravity="left"
         android:inputType="textMultiLine|text"
+        android:paddingLeft="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView34" />
+        app:layout_constraintTop_toBottomOf="@+id/textView34"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <TextView
         android:id="@+id/textView34"
@@ -84,7 +87,7 @@
     <Spinner
         android:id="@+id/moodSpinner"
         android:layout_width="0dp"
-        android:layout_height="34dp"
+        android:layout_height="48dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="16dp"
@@ -108,14 +111,14 @@
     <EditText
         android:id="@+id/durationTimeText"
         android:layout_width="76dp"
-        android:layout_height="35dp"
+        android:layout_height="48dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/rounded_box"
         android:ems="10"
         android:hint="@string/duration"
         android:inputType="number"
-        android:paddingLeft="5dp"
+        android:paddingLeft="10dp"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView37" />
@@ -123,7 +126,7 @@
     <Spinner
         android:id="@+id/moodUnits"
         android:layout_width="56dp"
-        android:layout_height="35dp"
+        android:layout_height="48dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/rounded_box"

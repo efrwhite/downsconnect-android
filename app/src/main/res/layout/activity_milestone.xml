@@ -30,9 +30,10 @@
         android:id="@+id/backButton"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:background="@drawable/left_arrow"
+        android:background="@drawable/app_logo"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <ScrollView
         android:layout_width="0dp"
@@ -53,6 +54,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="@string/physical"
+                android:textAlignment="center"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -69,7 +72,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8sp"
                 android:ems="10"
-                android:inputType="date" />
+                android:inputType="date"
+                android:minHeight="48dp"
+                tools:ignore="SpeakableTextPresentCheck" />
 
             <TextView
                 android:id="@+id/textView105"
@@ -85,7 +90,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8sp"
                 android:ems="10"
-                android:inputType="date" />
+                android:inputType="date"
+                android:minHeight="48dp"
+                tools:ignore="SpeakableTextPresentCheck" />
 
             <TextView
                 android:id="@+id/textView106"
@@ -101,7 +108,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8sp"
                 android:ems="10"
-                android:inputType="date" />
+                android:inputType="date"
+                android:minHeight="48dp"
+                tools:ignore="SpeakableTextPresentCheck" />
 
             <TextView
                 android:id="@+id/textView107"
@@ -117,7 +126,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8sp"
                 android:ems="10"
-                android:inputType="date" />
+                android:inputType="date"
+                android:minHeight="48dp"
+                tools:ignore="SpeakableTextPresentCheck" />
 
             <TextView
                 android:id="@+id/textView108"
@@ -133,7 +144,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8sp"
                 android:ems="10"
-                android:inputType="date" />
+                android:inputType="date"
+                android:minHeight="48dp"
+                tools:ignore="SpeakableTextPresentCheck" />
 
             <TextView
                 android:id="@+id/textView109"
@@ -149,7 +162,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8sp"
                 android:ems="10"
-                android:inputType="date" />
+                android:inputType="date"
+                android:minHeight="48dp"
+                tools:ignore="SpeakableTextPresentCheck" />
 
             <TextView
                 android:id="@+id/textView110"
@@ -165,13 +180,17 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8sp"
                 android:ems="10"
-                android:inputType="date" />
+                android:inputType="date"
+                android:minHeight="48dp"
+                tools:ignore="SpeakableTextPresentCheck" />
 
             <TextView
                 android:id="@+id/physical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="@string/fine_motor"
+                android:textAlignment="center"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -188,7 +207,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8sp"
                 android:ems="10"
-                android:inputType="date" />
+                android:inputType="date"
+                tools:ignore="SpeakableTextPresentCheck" />
 
             <TextView
                 android:id="@+id/textView112"
@@ -291,6 +311,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="@string/social"
+                android:textAlignment="center"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -362,6 +384,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="@string/verbal"
+                android:textAlignment="center"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -410,7 +434,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8sp"
                 android:ems="10"
-                android:inputType="date" />
+                android:inputType="date"
+                android:minHeight="48dp" />
 
             <TextView
                 android:id="@+id/textView128"
@@ -426,7 +451,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8sp"
                 android:ems="10"
-                android:inputType="date" />
+                android:inputType="date"
+                android:minHeight="48dp" />
 
             <TextView
                 android:id="@+id/textView129"
@@ -449,6 +475,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="@string/hearing"
+                android:textAlignment="center"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -481,25 +509,25 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8sp"
                 android:ems="10"
-                android:inputType="date" />
+                android:inputType="date"
+                android:minHeight="48dp" />
 
             <TextView
                 android:id="@+id/physical5"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="@string/notes"
+                android:textAlignment="center"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/editTextDate37"
+                android:id="@+id/editTextTextMultiLine2"
                 android:layout_width="match_parent"
-                android:layout_height="89dp"
-                android:layout_marginLeft="8sp"
-                android:background="@drawable/rounded_box"
+                android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="date"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp" />
+                android:gravity="start|top"
+                android:inputType="textMultiLine" />
 
         </LinearLayout>
     </ScrollView>

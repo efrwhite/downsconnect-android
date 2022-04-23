@@ -53,11 +53,13 @@
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="32dp"
         app:layout_constraintBottom_toTopOf="@+id/addResouceBtn"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dsdnText">
+        app:layout_constraintTop_toBottomOf="@+id/dsdnText"
+        app:layout_constraintVertical_bias="1.0">
 
         <LinearLayout
             android:id="@+id/resourceLayout"
@@ -69,6 +71,7 @@
                 android:id="@+id/yourRes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="28dp"
                 android:text="@string/your_res"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -89,6 +92,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/resources"
+        android:textColor="#BBDEFB"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@+id/resourcesView"
         app:layout_constraintEnd_toEndOf="@+id/resourcesView"
@@ -100,8 +104,7 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginStart="8dp"
-        android:background="@drawable/left_arrow"
-        app:layout_constraintBottom_toBottomOf="@+id/resourcesView"
+        android:background="@drawable/app_logo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

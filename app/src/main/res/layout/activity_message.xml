@@ -31,7 +31,7 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginStart="8dp"
-        android:background="@drawable/left_arrow"
+        android:background="@drawable/app_logo"
         app:layout_constraintBottom_toBottomOf="@+id/messageView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

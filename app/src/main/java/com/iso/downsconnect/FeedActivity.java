@@ -81,7 +81,7 @@ public class FeedActivity extends AppCompatActivity {
 
         ArrayList<String> arrayList = new ArrayList<>();
 
-        arrayList.add("Fluid");
+        arrayList.add("Liquid");
         arrayList.add("Solid");
 
         if(id != -1){
@@ -97,7 +97,7 @@ public class FeedActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
 
         if(id != -1) {
-            if (type.equals("Fluid")) {
+            if (type.equals("Liquid")) {
                 TabLayout.Tab tab = tabLayout.getTabAt(0);
                 tab.select();
             }
