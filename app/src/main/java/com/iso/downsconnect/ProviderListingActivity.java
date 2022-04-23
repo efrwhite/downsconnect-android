@@ -37,6 +37,8 @@ public class ProviderListingActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         final int childID = sharedPreferences.getInt("name", 0);
 
+        childAge = "0";
+
 
         if(type.equals("Neck")) {
             setContentView(R.layout.activity_neck_safety);
@@ -64,7 +66,7 @@ public class ProviderListingActivity extends AppCompatActivity {
                 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 LinearLayout.LayoutParams textParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 ViewGroup.MarginLayoutParams marginLayoutParams = new ViewGroup.MarginLayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                marginLayoutParams.setMargins(100, 0, 0,30);
+                marginLayoutParams.setMargins(100, 0, 100,30);
                 layoutParams.setMargins(200, 0, 0, 30);
                 textParams.setMargins(5, 5, 2, 5);
 
@@ -80,20 +82,10 @@ public class ProviderListingActivity extends AppCompatActivity {
                 //horizontalLayout.setPadding(5, 10, 10, 10);
 
                 LinearLayout verticalLayout = new LinearLayout(this);
-                verticalLayout.setBackgroundColor(Color.LTGRAY);
+                verticalLayout.setBackgroundColor(Color.parseColor("#FFBEBE"));
                 verticalLayout.setOrientation(LinearLayout.VERTICAL);
                 verticalLayout.setLayoutParams(textParams);
 
-                verticalLayout.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(ProviderListingActivity.this, MedicalListingsActivity.class);
-                        intent.putExtra("medical", medical.getMedicalID());
-                        intent.putExtra("age", childAge);
-                        intent.putExtra("type", type);
-                        startActivity(intent);
-                    }
-                });
 
                 TextView age = new TextView(getApplicationContext());
                 calcAge(childID, medical, age);
@@ -119,6 +111,17 @@ public class ProviderListingActivity extends AppCompatActivity {
                 verticalLayout.addView(date);
                 verticalLayout.addView(age);
                 verticalLayout.addView(name);
+
+                verticalLayout.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(ProviderListingActivity.this, MedicalListingsActivity.class);
+                        intent.putExtra("medical", medical.getMedicalID());
+                        intent.putExtra("age", childAge);
+                        intent.putExtra("type", type);
+                        startActivity(intent);
+                    }
+                });
                 horizontalLayout.addView(verticalLayout);
                 linearLayout.addView(horizontalLayout);
             }

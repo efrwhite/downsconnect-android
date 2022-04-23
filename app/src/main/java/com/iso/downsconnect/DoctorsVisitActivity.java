@@ -111,6 +111,7 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
         medicalInfos = dbHelper.getAllMedical();
         providers = dbHelper.getAllProviders();
         save = findViewById(R.id.saveButton);
+        //if no provider profiles have been added, display alert message
         if (providers.size() == 0 || dbHelper.getAllChildren().size() == 0) {
             new AlertDialog.Builder(DoctorsVisitActivity.this)
                     .setTitle("Missing Profiles")
@@ -189,8 +190,7 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
                 String selected = parent.getItemAtPosition(position).toString();
                 if (selected.equals("Pediatrician")) {
                     visitNum.setEnabled(true);
-                }
-                else{
+                } else {
                     visitNum.setEnabled(false);
                 }
             }
@@ -303,7 +303,7 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
                 //save visit info
                 String age = visitNum.getSelectedItem().toString();
                 if (visitNum.isEnabled()) {
-                    switch(age){
+                    switch (age) {
                         case "Select":
                             AlertDialog a = new AlertDialog.Builder(save.getContext()).create();
                             a.setTitle("Select Visit age");
@@ -311,20 +311,18 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
                             a.show();
                             break;
                         case "Newborn":
-                        medicalInfo = newBornFragment.saveInfo();
-                        if (medicalInfo != null) {
-                            addInfo(childID, age);
-                        }
-                        else{
-                            displayErrorMessage("Missing Visit Information", "Please make sure you've filled in the visit information");
-                        }
-                        break;
+                            medicalInfo = newBornFragment.saveInfo();
+                            if (medicalInfo != null) {
+                                addInfo(childID, age);
+                            } else {
+                                displayErrorMessage("Missing Visit Information", "Please make sure you've filled in the visit information");
+                            }
+                            break;
                         case "Two months":
                             medicalInfo = twoMonthFragment.saveInfo();
                             if (medicalInfo != null) {
                                 addInfo(childID, age);
-                            }
-                            else{
+                            } else {
                                 displayErrorMessage("Missing Visit Information", "Please make sure you've filled in the visit information");
                             }
                             break;
@@ -332,8 +330,7 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
                             medicalInfo = fourMonthFragment.saveInfo();
                             if (medicalInfo != null) {
                                 addInfo(childID, age);
-                            }
-                            else{
+                            } else {
                                 displayErrorMessage("Missing Visit Information", "Please make sure you've filled in the visit information");
                             }
                             break;
@@ -341,8 +338,7 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
                             medicalInfo = sixMonthFragment.saveInfo();
                             if (medicalInfo != null) {
                                 addInfo(childID, age);
-                            }
-                            else{
+                            } else {
                                 displayErrorMessage("Missing Visit Information", "Please make sure you've filled in the visit information");
                             }
                             break;
@@ -350,8 +346,7 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
                             medicalInfo = nineMonthFragment.saveInfo();
                             if (medicalInfo != null) {
                                 addInfo(childID, age);
-                            }
-                            else{
+                            } else {
                                 displayErrorMessage("Missing Visit Information", "Please make sure you've filled in the visit information");
                             }
                             break;
@@ -359,8 +354,7 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
                             medicalInfo = twelveMonthFragment.saveInfo();
                             if (medicalInfo != null) {
                                 addInfo(childID, age);
-                            }
-                            else{
+                            } else {
                                 displayErrorMessage("Missing Visit Information", "Please make sure you've filled in the visit information");
                             }
                             break;
@@ -368,8 +362,7 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
                             medicalInfo = fifteenMonthFragment.saveInfo();
                             if (medicalInfo != null) {
                                 addInfo(childID, age);
-                            }
-                            else{
+                            } else {
                                 displayErrorMessage("Missing Visit Information", "Please make sure you've filled in the visit information");
                             }
                             break;
@@ -377,8 +370,7 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
                             medicalInfo = eighteenMonthFragment.saveInfo();
                             if (medicalInfo != null) {
                                 addInfo(childID, age);
-                            }
-                            else{
+                            } else {
                                 displayErrorMessage("Missing Visit Information", "Please make sure you've filled in the visit information");
                             }
                             break;
@@ -386,26 +378,23 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
                             medicalInfo = thirtyMonthsFragment.saveInfo();
                             if (medicalInfo != null) {
                                 addInfo(childID, age);
-                            }
-                            else{
+                            } else {
                                 displayErrorMessage("Missing Visit Information", "Please make sure you've filled in the visit information");
                             }
                             break;
                         case "Two years":
-                        medicalInfo = twoYearFragment.saveInfo();
-                        if (medicalInfo != null) {
-                            addInfo(childID, age);
-                        }
-                        else{
-                            displayErrorMessage("Missing Visit Information", "Please make sure you've filled in the visit information");
-                        }
-                        break;
+                            medicalInfo = twoYearFragment.saveInfo();
+                            if (medicalInfo != null) {
+                                addInfo(childID, age);
+                            } else {
+                                displayErrorMessage("Missing Visit Information", "Please make sure you've filled in the visit information");
+                            }
+                            break;
                         case "Three years":
                             medicalInfo = threeYearFragment.saveInfo();
                             if (medicalInfo != null) {
                                 addInfo(childID, age);
-                            }
-                            else{
+                            } else {
                                 displayErrorMessage("Missing Visit Information", "Please make sure you've filled in the visit information");
                             }
                             break;
@@ -413,8 +402,7 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
                             medicalInfo = fourYearFragment.saveInfo();
                             if (medicalInfo != null) {
                                 addInfo(childID, age);
-                            }
-                            else{
+                            } else {
                                 displayErrorMessage("Missing Visit Information", "Please make sure you've filled in the visit information");
                             }
                             break;
@@ -422,8 +410,7 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
                             medicalInfo = fiveYearFragment.saveInfo();
                             if (medicalInfo != null) {
                                 addInfo(childID, age);
-                            }
-                            else{
+                            } else {
                                 displayErrorMessage("Missing Visit Information", "Please make sure you've filled in the visit information");
                             }
                             break;
@@ -431,8 +418,7 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
                             medicalInfo = sixYearFragment.saveInfo();
                             if (medicalInfo != null) {
                                 addInfo(childID, age);
-                            }
-                            else{
+                            } else {
                                 displayErrorMessage("Missing Visit Information", "Please make sure you've filled in the visit information");
                             }
                             break;
@@ -440,8 +426,7 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
                             medicalInfo = sevenYearFragment.saveInfo();
                             if (medicalInfo != null) {
                                 addInfo(childID, age);
-                            }
-                            else{
+                            } else {
                                 displayErrorMessage("Missing Visit Information", "Please make sure you've filled in the visit information");
                             }
                             break;
@@ -449,8 +434,7 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
                             medicalInfo = eightYearFragment.saveInfo();
                             if (medicalInfo != null) {
                                 addInfo(childID, age);
-                            }
-                            else{
+                            } else {
                                 displayErrorMessage("Missing Visit Information", "Please make sure you've filled in the visit information");
                             }
                             break;
@@ -458,8 +442,7 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
                             medicalInfo = nineYearFragment.saveInfo();
                             if (medicalInfo != null) {
                                 addInfo(childID, age);
-                            }
-                            else{
+                            } else {
                                 displayErrorMessage("Missing Visit Information", "Please make sure you've filled in the visit information");
                             }
                             break;
@@ -467,8 +450,7 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
                             medicalInfo = tenYearFragment.saveInfo();
                             if (medicalInfo != null) {
                                 addInfo(childID, age);
-                            }
-                            else{
+                            } else {
                                 displayErrorMessage("Missing Visit Information", "Please make sure you've filled in the visit information");
                             }
                             break;
@@ -476,42 +458,43 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
                             medicalInfo = elevenYearFragment.saveInfo();
                             if (medicalInfo != null) {
                                 addInfo(childID, age);
-                            }
-                            else{
+                            } else {
                                 displayErrorMessage("Missing Visit Information", "Please make sure you've filled in the visit information");
                             }
                             break;
                         case "Twelve years":
-                        medicalInfo = twelveYearFragment.saveInfo();
-                        if (medicalInfo != null) {
-                            addInfo(childID, age);
-                        }
-                        else{
-                            displayErrorMessage("Missing Visit Information", "Please make sure you've filled in the visit information");
-                        }
-                        break;
+                            medicalInfo = twelveYearFragment.saveInfo();
+                            if (medicalInfo != null) {
+                                addInfo(childID, age);
+                            } else {
+                                displayErrorMessage("Missing Visit Information", "Please make sure you've filled in the visit information");
+                            }
+                            break;
                         case "Not an age-scheduled visit":
                             medicalInfo = noAgeFragment.saveInfo();
                             if (medicalInfo != null) {
                                 addInfo(childID, age);
-                            }else{
+                            } else {
                                 displayErrorMessage("Missing Visit Information", "Please make sure you've filled in the visit information");
                             }
                             break;
                     }
-                }
-                else{
+                } else {
                     addInfo(childID, age);
                 }
             }
         });
     }
 
-    public void addInfo(int childID, String age){
+    public void addInfo(int childID, String age) {
+        //if provider is a pediatrician or a cardiologist, require user to input height, weight, head circumference, and temperature information
+        if (providerType.getSelectedItem().toString().equals("Pediatrician") || providerType.getSelectedItem().toString().equals("Cardio")) {
+            //check to make sure necessary information has been filled out
             if (!doctorDatePicker.getText().toString().equals("") && !provider.getSelectedItem().toString().equals("Select")
                     && !height.getText().toString().equals("") && !headUnit.getSelectedItem().equals("Select")
                     && !tempUnit.getSelectedItem().equals("Select") && !weight.getText().toString().equals("")
                     && !heightUnit.getSelectedItem().equals("Select") && !weightUnit.getSelectedItem().equals("Select") && !providerType.getSelectedItem().toString().equals("Select")) {
+                //add information to medical object
                 medicalInfo.setChildID(childID);
                 medicalInfo.setProvider(provider.getSelectedItem().toString());
                 medicalInfo.setHeight(height.getText().toString() + " " + heightUnit.getSelectedItem().toString());
@@ -520,26 +503,29 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
                 medicalInfo.setHeadInfo(headSize.getText().toString() + " " + headUnit.getSelectedItem().toString());
                 medicalInfo.setTemperatureInfo(temperature.getText().toString() + " " + tempUnit.getSelectedItem().toString());
                 medicalInfo.setDoctorDate(doctorDate);
-                if(visitNum.isEnabled()){
+                if (visitNum.isEnabled()) {
                     medicalInfo.setVisit(visitNum.getSelectedItem().toString());
                 }
-                if(medicalInfo.getAnswers() == null){
+                else{
+                    medicalInfo.setVisit("N/A");
+                }
+                if (medicalInfo.getAnswers() == null) {
                     medicalInfo.setAnswers("None");
                 }
-                if(medicalInfo.getDates() == null){
+                if (medicalInfo.getDates() == null) {
                     medicalInfo.setDates("None");
                 }
-                if(medicalInfo.getProviders() == null){
+                if (medicalInfo.getProviders() == null) {
                     medicalInfo.setProviders("None");
                 }
-//                        medicalInfo.setVisit(visitNum.getText().toString());
 
+                //create entry object for this visit
                 entry.setEntryTime(Calendar.getInstance().getTimeInMillis());
                 entry.setChildID(childID);
                 entry.setEntryType("Medical");
                 entry.setEntryText("Saved " + medicalInfo.getProviderType() + " appointment information for " + dbHelper.getChildName(childID));
 
-
+                //insert information into database
                 long id = dbHelper.addMedical(medicalInfo);
                 entry.setForeignID(id);
                 dbHelper.addEntry(entry);
@@ -550,14 +536,97 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
 
                 Intent intent = new Intent(DoctorsVisitActivity.this, ActivityContainer.class);
                 startActivity(intent);
-            }
-            else{
+                //alert to display if any information is missing
+            } else {
                 AlertDialog a = new AlertDialog.Builder(save.getContext()).create();
                 a.setTitle("Missing Doctor Visit Information");
                 a.setMessage("Please make sure you've filled out the necessary information");
                 a.show();
             }
+        } else {
+            if (!doctorDatePicker.getText().toString().equals("") && !provider.getSelectedItem().toString().equals("Select")
+                    && !providerType.getSelectedItem().toString().equals("Select")) {
+                medicalInfo.setChildID(childID);
+                medicalInfo.setProvider(provider.getSelectedItem().toString());
+                medicalInfo.setProviderType(providerType.getSelectedItem().toString());
+                medicalInfo.setDoctorDate(doctorDate);
+
+
+                //check if height has been filled out
+                if (!height.getText().toString().equals("") && !heightUnit.getSelectedItem().equals("Select")) {
+                    medicalInfo.setHeight(height.getText().toString() + " " + heightUnit.getSelectedItem().toString());
+                } else {
+                    //if not, save "N/A" for the data
+                    medicalInfo.setHeight("N/A");
+                }
+
+                //check if weight has been filled out
+                if (!weight.getText().toString().equals("") && !weightUnit.getSelectedItem().equals("Select")) {
+                    medicalInfo.setWeight(weight.getText().toString() + " " + weightUnit.getSelectedItem().toString());
+                } else {
+                    //if not, save "N/A" for the data
+                    medicalInfo.setWeight("N/A");
+                }
+
+                //check if head circumference has been filled out
+                if (!headSize.getText().toString().equals("") && !headUnit.getSelectedItem().toString().equals("Select")) {
+                    medicalInfo.setHeadInfo(headSize.getText().toString() + " " + headUnit.getSelectedItem().toString());
+                } else {
+                    //if not, save "N/A" for the data
+                    medicalInfo.setHeadInfo("N/A");
+                }
+
+                //check if temperature has been filled out
+                if (!temperature.getText().toString().equals("") && !tempUnit.getSelectedItem().toString().equals("Select")) {
+                    medicalInfo.setTemperatureInfo(temperature.getText().toString() + " " + tempUnit.getSelectedItem().toString());
+                } else {
+                    //if not, save "N/A" for the data
+                    medicalInfo.setTemperatureInfo("N/A");
+                }
+
+                //check if visit is a Pediatrician visit, if so document visit age
+                if (visitNum.isEnabled()) {
+                    medicalInfo.setVisit(visitNum.getSelectedItem().toString());
+                } else {
+                    medicalInfo.setVisit("N/A");
+                }
+                if (medicalInfo.getAnswers() == null) {
+                    medicalInfo.setAnswers("None");
+                }
+                if (medicalInfo.getDates() == null) {
+                    medicalInfo.setDates("None");
+                }
+                if (medicalInfo.getProviders() == null) {
+                    medicalInfo.setProviders("None");
+
+                    //make entry object for visit
+                    entry.setEntryTime(Calendar.getInstance().getTimeInMillis());
+                    entry.setChildID(childID);
+                    entry.setEntryType("Medical");
+                    entry.setEntryText("Saved " + medicalInfo.getProviderType() + " appointment information for " + dbHelper.getChildName(childID));
+
+                    //add information to database
+                    long id = dbHelper.addMedical(medicalInfo);
+                    entry.setForeignID(id);
+                    dbHelper.addEntry(entry);
+
+                    ageLayout.setVisibility(View.VISIBLE);
+
+                    Toast.makeText(getApplicationContext(), "Doctor Visit information saved", Toast.LENGTH_SHORT).show();
+
+                    Intent intent = new Intent(DoctorsVisitActivity.this, ActivityContainer.class);
+                    startActivity(intent);
+
+                    //alert to display if any information is missing
+                } else {
+                    AlertDialog a = new AlertDialog.Builder(save.getContext()).create();
+                    a.setTitle("Missing Doctor Visit Information");
+                    a.setMessage("Please make sure you've filled out the necessary information");
+                    a.show();
+                }
+            }
         }
+    }
 
     private void showDatePickerDialog() {
         @SuppressLint("ResourceType") DatePickerDialog datePickerDialog = new DatePickerDialog(this, 2, (DatePickerDialog.OnDateSetListener) this,
@@ -574,7 +643,6 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
         doctorDatePicker.setText(dateHandler.writtenDate(month, day, year));
     }
 
-//    1630890566360
 
     public void loadSpinnerData(){
         //loads all the providers currently saved in db
