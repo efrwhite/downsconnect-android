@@ -90,6 +90,7 @@ public class ConstipationFragment extends Fragment implements DatePickerDialog.O
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         if (getArguments() != null) {
+            //get the bathroom entry that was clicked in the view entries panel
             bathroom = (Bathroom) getArguments().getSerializable("bathroom");
         }
         return inflater.inflate(R.layout.fragment_constipation, container, false);
@@ -98,10 +99,11 @@ public class ConstipationFragment extends Fragment implements DatePickerDialog.O
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        //get current child id from shared preferences
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         final int childID = sharedPreferences.getInt("name", 1);
 
+        //preset unused bathroom values with None
         if (bathroom.getBathroomType() == null) {
             bathroom.setBathroomType("None");
             bathroom.setChildID(childID);
@@ -113,6 +115,7 @@ public class ConstipationFragment extends Fragment implements DatePickerDialog.O
             bathroom.setDuration("None");
         }
 
+        //Declare and initialize layout objects and variables
         lastStoolDate = view.findViewById(R.id.stoolDateEditText);
         lastStoolDate.setFocusable(false);
         treatment = view.findViewById(R.id.quantityEditText);
@@ -121,39 +124,53 @@ public class ConstipationFragment extends Fragment implements DatePickerDialog.O
         helper = new DBHelper(getContext());
         entry = new Entry();
 
+        //Display bathroom entry that was click in the view entries if type is constipation
         if (bathroom.getBathroomType().equals("Constipation")) {
             setInfo();
         }
 
+        //click listener for displaying date dialog when edit text is clicked
         lastStoolDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showDatePickerDialog();
             }
         });
+
+        //saves info to database when the button is clicked
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //check if all required fields have been filled out
                 if(!lastStoolDate.getText().toString().equals("") && !treatment.getText().toString().equals("")){
+                    //save notes info if there are notes present
                     if(!notes.getText().toString().equals("")){
                         bathroom.setDuration(notes.getText().toString());
                     }
                     else{
                         bathroom.setDuration("None");
                     }
+                    //set values in the bathroom object
                     bathroom.setBathroomType("Constipation");
                     bathroom.setTreatmentPlan(treatment.getText().toString());
+
+                    //add bathroom entry to database and get it's bathroom id
                     long id = helper.addBathroom(bathroom);
+
+                    //create entry object for the bathroom entry
                     entry.setChildID(childID);
                     entry.setEntryType("Bathroom");
                     entry.setEntryText(helper.getChildName(childID) + " was constipated, treated with " + bathroom.getTreatmentPlan());
                     entry.setEntryTime(Calendar.getInstance().getTimeInMillis());
+                    //set the corresponding bathroom id for the entry
                     entry.setForeignID(id);
+                    //add new entry to database and navigate back to home page
                     helper.addEntry(entry);
                     Intent intent = new Intent(getContext(), ActivityContainer.class);
                     startActivity(intent);
                 }
                 else{
+                    //display error if required fields not filled out
                     AlertDialog a = new AlertDialog.Builder(save.getContext()).create();
                     a.setTitle("Missing Information");
                     a.setMessage("Please make sure you've filled out the necessary information");
@@ -165,6 +182,7 @@ public class ConstipationFragment extends Fragment implements DatePickerDialog.O
 
     private void showDatePickerDialog() {
         Calendar cal = Calendar.getInstance();
+        //creates date dialog box to display
         @SuppressLint("ResourceType") DatePickerDialog datePicker = new DatePickerDialog(getContext(), 2,
                 this,
                 cal.get(Calendar.YEAR),
@@ -176,14 +194,18 @@ public class ConstipationFragment extends Fragment implements DatePickerDialog.O
     }
 
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+        //get user's selected date and store it into the object and display it
         DateHandler month_ = new DateHandler();
         Calendar calendar = Calendar.getInstance();
         calendar.set(year, month, dayOfMonth);
+        //saves date info
         bathroom.setDateOfLastStool(calendar.getTimeInMillis());
+        //displays date info
         lastStoolDate.setText(month_.getMonth(month) + " " + dayOfMonth + ", " + year);
     }
 
     public void setInfo(){
+        //prefill the fields based on the information from the bathroom entry that was clicked in the view entries panel
         save.setEnabled(false);
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(bathroom.getDateOfLastStool());
@@ -195,6 +217,7 @@ public class ConstipationFragment extends Fragment implements DatePickerDialog.O
 
     }
 
+    //function for find index of a value in a spinner
     private int getIndex(Spinner spinner, String myString) {
         for (int i = 0; i < spinner.getCount(); i++) {
             if (spinner.getItemAtPosition(i).toString().equalsIgnoreCase(myString)) {
