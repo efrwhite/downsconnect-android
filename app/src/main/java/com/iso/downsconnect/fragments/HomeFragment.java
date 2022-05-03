@@ -53,6 +53,7 @@ import java.util.concurrent.Executors;
  * create an instance of this fragment.
  */
 public class HomeFragment extends Fragment {
+    //declare variables
     private LinearLayout entryLayout;
     private DBHelper helper;
     private ArrayList<Entry> entries;
@@ -111,11 +112,12 @@ public class HomeFragment extends Fragment {
 
         helper = new DBHelper(getContext());
         entries = new ArrayList<>();
+
+        //get current child id from shared preferences
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         final int childID = sharedPreferences.getInt("name", 1);
-        Log.i("chid", String.valueOf(childID));
 
-
+        //initialize layout objects
         Button feed = view.findViewById(R.id.feedButton);
         Button activity = view.findViewById(R.id.activityButton);
         Button sleep = view.findViewById(R.id.sleepButton);
@@ -132,15 +134,19 @@ public class HomeFragment extends Fragment {
 
         addEntries();
 
+        //sign user out of app
         signOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //display message asking if user wants to sign out
                 new AlertDialog.Builder(getContext())
                         .setTitle("Sign Out")
                         .setMessage("Are you sure you want to sign out")
+                        //if yes is clicked, sign user out of app
                         .setPositiveButton("yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
+                                    //change signedin value to false to indicate that user signed out
                                     SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
                                     sharedPreferences.edit().putBoolean("signedIn", false).commit();
                                     Intent intent = new Intent(getContext(), MainActivity.class);
@@ -152,7 +158,8 @@ public class HomeFragment extends Fragment {
 
         });
 
-
+        //listeners for each button that takes you to corresponding activity page
+        //id values are set to -1 so app doesn't think you are trying to view an already existing entry
         feed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -249,47 +256,63 @@ public class HomeFragment extends Fragment {
         });
     }
 
+    //displays entries on home page
     public void addEntries(){
+        //Thread for handle the displaying of the entries
         ExecutorService service = Executors.newSingleThreadExecutor();
         final Handler handler = new Handler(Looper.getMainLooper());
 
+        //get the entries from db and sort them
         entries = helper.getAllEntries();
         Collections.sort(entries);
 
+        //start thread for add UI elements
         service.execute(new Runnable() {
             @Override
             public void run() {
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
+                        //loop through each entry and create date and entry text objects to add to entries list
                         for(Entry entry: entries){
+                            //define layout spacing/parameters for objects
                             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-
                             ViewGroup.MarginLayoutParams marginLayoutParams = new ViewGroup.MarginLayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+
+                            //controls the margin for whatever object has these parameters
                             marginLayoutParams.setMargins(10, 0, 0,30);
+
+                            //creates horizontal layout for placing object correctly on screen
                             LinearLayout horizontalLayout = new LinearLayout(getContext());
                             horizontalLayout.setOrientation(LinearLayout.HORIZONTAL);
                             horizontalLayout.setLayoutParams(marginLayoutParams);
+
+                            //controls the margins for whatever object has these parameters
                             layoutParams.setMargins(15, 0, 10, 30);
 
-
+                            //create textview containing the entry's text
                             TextView entryText = new TextView(getContext());
                             entryText.setText(entry.getEntryText() + " ");
                             entryText.setTextSize(15);
                             entryText.setWidth(600);
                             entryText.setLayoutParams(layoutParams);
 
+                            //text view containing entry's date and time
                             TextView entryDate = new TextView(getContext());
                             Calendar calendar = Calendar.getInstance();
                             calendar.setTimeInMillis(entry.getEntryTime());
+                            //formate date and time
                             Date date = calendar.getTime();
                             DateFormat formatter = new SimpleDateFormat("h:mm a");
                             String time = formatter.format(date);
 
                             entryDate.setText(month.getMonth(calendar.get(Calendar.MONTH)) + " " + calendar.get(Calendar.DATE) + ", " + calendar.get(Calendar.YEAR) + " at: " + time);
                             entryDate.setTextSize(15);
+                            //add the objects to the horizontal layout
                             horizontalLayout.addView(entryText);
                             horizontalLayout.addView(entryDate);
+
+                            //add horizontal layout to linearlayout
                             entryLayout.addView(horizontalLayout);
                         }
                     }

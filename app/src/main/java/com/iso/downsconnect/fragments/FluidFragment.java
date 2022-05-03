@@ -86,6 +86,7 @@ public class FluidFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         if (getArguments() != null) {
+            //get the feed entry that was clicked in the view entries panel
             feed = (Feed) getArguments().getSerializable("feed");
         }
         return inflater.inflate(R.layout.fragment_fluid, container, false);
@@ -95,9 +96,11 @@ public class FluidFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        //get current child id from shared preferences
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         final int childID = sharedPreferences.getInt("name", 1);
 
+        //Declare and initialize layout objects and variables
         saveBtn = view.findViewById(R.id.saveButton);
         notes = view.findViewById(R.id.editText);
         fluidFood = view.findViewById(R.id.fluidFoodEditText);
@@ -111,30 +114,37 @@ public class FluidFragment extends Fragment {
         mode = view.findViewById(R.id.modeEatingSpinner);
         entry = new Entry();
 
+        //Display feed entry that was click in the view entries if type is fluid
         if(feed.getSubstance() != null){
             setInfo();
         }
 
 
-
+        //saves info to database when the button is clicked
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //check if all required fields have been filled out
                 if(!fluidFood.getText().toString().equals("") && !foodUnit.getSelectedItem().equals("Select") && !quantity.getText().toString().equals("") &&
                     !mode.getSelectedItem().equals("Select")){
+                    //add info to feed object
                     feed.setChildID(childID);
                     feed.setAmount(Integer.parseInt(quantity.getText().toString()));
                     feed.setSubstance(fluidFood.getText().toString());
                     feed.setFoodUnit(foodUnit.getSelectedItem().toString());
                     feed.setFeedMode(mode.getSelectedItem().toString());
+                    //get time object and set time for feed
                     Calendar calendar = Calendar.getInstance();
                     feed.setEntryTime(calendar.getTimeInMillis());
+                    //save notes info if there are notes present
                     if(!notes.getText().toString().equals("")){
                         feed.setNotes(notes.getText().toString());
                     }
                     else{
                         feed.setNotes("");
                     }
+
+                    //save info based on whether checkbox is checked or not
                     if(vitamin.isChecked()){
                        feed.setVitamin("Yes");
                     }
@@ -153,17 +163,25 @@ public class FluidFragment extends Fragment {
                     else{
                         feed.setOther("None");
                     }
+
+                    //create entry object for the feed entry
                     entry.setChildID(childID);
                     entry.setEntryText(helper.getChildName(childID) + " drank " + feed.getAmount() + feed.getFoodUnit() + " of " + feed.getSubstance());
                     entry.setEntryTime(calendar.getTimeInMillis());
+
+                    //add feed to db and get id
                     long id = helper.addFeed(feed);
+
+                    //set the corresponding feed id for the entry
                     entry.setForeignID(id);
                     entry.setEntryType("Feed");
+                    //add new entry to database and navigate back to home page
                     helper.addEntry(entry);
                     Intent intent = new Intent(getContext(), ActivityContainer.class);
                     startActivity(intent);
                 }
                 else{
+                    //display error if required fields not filled out
                     AlertDialog a = new AlertDialog.Builder(saveBtn.getContext()).create();
                     a.setTitle("Missing Information");
                     a.setMessage("Please make sure you've filled out the necessary information");
@@ -174,6 +192,7 @@ public class FluidFragment extends Fragment {
     }
 
     public void setInfo(){
+        //prefill the fields based on the information from the bathroom entry that was clicked in the view entries panel
         saveBtn.setEnabled(false);
         if(!feed.getNotes().equals("")){
             notes.setText(feed.getNotes());
@@ -195,6 +214,7 @@ public class FluidFragment extends Fragment {
 
     }
 
+    //function for find index of a value in a spinner
     private int getIndex(Spinner spinner, String myString) {
         for (int i = 0; i < spinner.getCount(); i++) {
             if (spinner.getItemAtPosition(i).toString().equalsIgnoreCase(myString)) {
