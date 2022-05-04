@@ -25,6 +25,7 @@ public class NoAgeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        //initialize layout objects
         notes = view.findViewById(R.id.noAgeNotes);
         medicalInfo = new MedicalInfo();
     }
