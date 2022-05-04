@@ -92,6 +92,7 @@ public class NewBornFragment extends Fragment {
 
         medicalInfo = new MedicalInfo();
 
+        //initialize all layout objects
         yes1 = view.findViewById(R.id.checkBoxYes11);
         yes2 = view.findViewById(R.id.checkBoxYes2);
         yes3 = view.findViewById(R.id.checkBoxYes3);
@@ -134,6 +135,7 @@ public class NewBornFragment extends Fragment {
         setRegularListener(yes9, no9);
 
 
+        //set click listeners for each checkbox
         setToggleListener(yes2, no2, date1, provider1);
         setToggleListener(yes4, no4, date2, provider2);
         setToggleListener(yes6, no6,  date3, provider3);
@@ -147,7 +149,7 @@ public class NewBornFragment extends Fragment {
 
     }
 
-    //Called from within doctorsvisitactivity in order to save visit info
+    //Called from within DoctorsVisitActivity in order to save visit info
     public MedicalInfo saveInfo(){
         medicalInfo.setNotes("None");
         //check which checkbox is checked
@@ -167,10 +169,11 @@ public class NewBornFragment extends Fragment {
            return null;
        }
 
-       //check to see if a checkbox with an appoinment date and provider has been filled out
+       //check to see if a checkbox with an appointment date and provider has been filled out
        boolean written = false;
        if(yes2.isChecked()){
-            if(!date1.getText().toString().equals("") && !provider1.getSelectedItem().toString().equals("Select")){
+           //checks if required fields have been filled out and set info accordingly
+           if(!date1.getText().toString().equals("") && !provider1.getSelectedItem().toString().equals("Select")){
                 if(!written) {
                     medicalInfo.setDates(date1.getText().toString());
                     medicalInfo.setProviders(provider1.getSelectedItem().toString());
@@ -277,6 +280,7 @@ public class NewBornFragment extends Fragment {
 
     public void loadSpinnerData(){
         //loads all the providers currently saved in db
+        p_names.clear();
         p_names.add("Select");
         for(Provider provide: providers){
             p_names.add(provide.getName());
@@ -291,6 +295,7 @@ public class NewBornFragment extends Fragment {
 
     }
 
+    //disables and enables fields based on which checkbox is checked when tied to spinner and textfields
     public void setToggleListener(final CheckBox checkBox1, final CheckBox checkBox2, final EditText date, final Spinner provider){
         checkBox1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -310,6 +315,7 @@ public class NewBornFragment extends Fragment {
         });
     }
 
+    //deselects other checkbox
     private void setRegularListener(final CheckBox checkBox1, final CheckBox checkBox2){
         checkBox1.setOnClickListener(new View.OnClickListener() {
             @Override
