@@ -197,7 +197,7 @@ public class ElevenYearFragment extends Fragment {
             p_names.add(provide.getName());
         }
 
-        //create an adapter to set for each spinner
+        //create an adapter set for each adapter, which displays the array of names
         ArrayAdapter<String> providerAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item, p_names);
         providerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         provider1.setAdapter(providerAdapter);
@@ -207,7 +207,7 @@ public class ElevenYearFragment extends Fragment {
 
     }
 
-    //disables and enables fields based on which checkbox is checked when tied to spinner and textfields
+    //disables and enables fields based on which checkbox is checked when a checkbox determines whether you need to access a spinner and text-fields
     public void setToggleListener(final CheckBox checkBox1, final CheckBox checkBox2, final EditText date, final Spinner provider){
         checkBox1.setOnClickListener(new View.OnClickListener() {
             @Override

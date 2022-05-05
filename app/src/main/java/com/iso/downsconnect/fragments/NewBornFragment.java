@@ -285,6 +285,8 @@ public class NewBornFragment extends Fragment {
         for(Provider provide: providers){
             p_names.add(provide.getName());
         }
+
+        //create an adapter set for each adapter, which displays the array of names
         ArrayAdapter<String> providerAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item, p_names);
         providerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         provider1.setAdapter(providerAdapter);
