@@ -40,10 +40,12 @@ public class TwelveYearFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        //create db object and get all providers
         dbHelper = new DBHelper(getContext());
         providers = dbHelper.getAllProviders();
         medicalInfo = new MedicalInfo();
 
+        //initialize all layout objects
         yes1 = view.findViewById(R.id.checkBoxYes127);
         no1 = view.findViewById(R.id.checkBoxNo128);
 
@@ -52,13 +54,14 @@ public class TwelveYearFragment extends Fragment {
         date2 = view.findViewById(R.id.assessDate62);
         provider2 = view.findViewById(R.id.Spin12_2);
 
+        //creates listeners for each checkbox
         setToggleListener(yes1, no1, date2, provider2);
 
-
-
+        //loads spinners with the provider names
         loadSpinnerData();
     }
 
+    //Called from within DoctorsVisitActivity in order to save visit info
     public MedicalInfo saveInfo(){
         medicalInfo.setNotes("None");
         //check which checkbox is checked
@@ -69,11 +72,12 @@ public class TwelveYearFragment extends Fragment {
             return null;
         }
 
-        //check to see if a checkbox with an appoinment date and provider has been filled out
+        //check if required info is filled out if yes is checked
         boolean written = false;
         if(yes1.isChecked()){
             if(!date2.getText().toString().equals("") && !provider2.getSelectedItem().toString().equals("Select")){
                 if(!written) {
+                    //set object values if filled out
                     medicalInfo.setDates(date2.getText().toString());
                     medicalInfo.setProviders(provider2.getSelectedItem().toString());
                     written = true;
@@ -90,6 +94,7 @@ public class TwelveYearFragment extends Fragment {
         return medicalInfo;
     }
 
+    //sets the necessary info based on which checkcbox is selected
     public int selectedCheckbox(CheckBox one, CheckBox two, int first){
         //if yes is checked
         if(one.isChecked()){
@@ -119,10 +124,16 @@ public class TwelveYearFragment extends Fragment {
 
     public void loadSpinnerData(){
         //loads all the providers currently saved in db
+        //clear spinner to prevent duplicated
+        p_names.clear();
+
+        //add values to spinner array
         p_names.add("Select");
         for(Provider provide: providers){
             p_names.add(provide.getName());
         }
+
+        //create an adapter set for each adapter, which displays the array of names
         ArrayAdapter<String> providerAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item, p_names);
         providerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         provider1.setAdapter(providerAdapter);
@@ -130,6 +141,7 @@ public class TwelveYearFragment extends Fragment {
 
     }
 
+    //create an adapter set for each adapter, which displays the array of names
     public void setToggleListener(final CheckBox checkBox1, final CheckBox checkBox2, final EditText date, final Spinner provider){
         checkBox1.setOnClickListener(new View.OnClickListener() {
             @Override
