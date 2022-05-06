@@ -34,22 +34,23 @@ public class ChartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chart);
 
-        //options page for changing units used for charts??
-
-
+        //declare and intialize layout objects
         LineChart lineChart = (LineChart) findViewById(R.id.growth_chart);
         Button back = findViewById(R.id.backButton);
 
 
+        //get current child ID
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         final int childID = sharedPreferences.getInt("name", 1);
+
+        //determine which chart was clicked
         String chartType = getIntent().getStringExtra("chart");
         Log.i("chid", String.valueOf(childID));
 
-
+        //initialize db object
         helper = new DBHelper(this);
 
-        ArrayList<MedicalInfo> infos = helper.getAllMedical();
+        //get the data from the db depending on which kind of chart you are looking at
         if(chartType.equals("Height")){
             data = helper.getHeight(childID);
         }
@@ -60,7 +61,9 @@ public class ChartActivity extends AppCompatActivity {
             data = helper.getHeadSizes(childID);
         }
 
-        List<String> xLabels = new ArrayList<>(Arrays.asList("2months", "4months", "6months", "8months", "10months", "12months", "14months", "16months", "18months", "20months", "22months", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"));
+        //create labels for x-axis
+        List<String> xLabels = new ArrayList<>(Arrays.asList("2months", "4months", "6months", "8months", "10months", "12months", "14months", "16months",
+                "18months", "20months", "22months", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"));
 
 //        ArrayList<Point> points = new ArrayList<>();
 //        if(data.size() != 0){
@@ -71,7 +74,7 @@ public class ChartActivity extends AppCompatActivity {
 //                i++;
 //            }
 //        }
-        ArrayList<Point> other = new ArrayList<>();
+//        ArrayList<Point> other = new ArrayList<>();
 //        Point point = new Point(2, 55);
 //        Point point_two = new Point(3, 65);
 //        Point point_three = new Point( 4, 88);
@@ -95,6 +98,7 @@ public class ChartActivity extends AppCompatActivity {
 //        points.add(point3);
 //        points.add(point8);
 
+        //create a list containing the coordinates for each point
         List<com.github.mikephil.charting.data.Entry> entries = new ArrayList<>();
         for(Point h: data){
             entries.add(new com.github.mikephil.charting.data.Entry(h.getX(), h.getY()));
@@ -133,12 +137,13 @@ public class ChartActivity extends AppCompatActivity {
 //        }
 
         LineDataSet dataSet = new LineDataSet(entries, "Your Child"); // add entries to dataset
+        //define the color for the dataset
         dataSet.setColor(Color.RED);
         dataSet.setValueTextColor(Color.BLACK); // styling, ...
 
         //LineDataSet set = new LineDataSet(newest, "Average");
         //set.setColor(Color.BLACK);
-        dataSet.setValueTextColor(Color.RED);
+//        dataSet.setValueTextColor(Color.RED);
 
         List<ILineDataSet> dataSets = new ArrayList<>();
         dataSets.add(dataSet);
@@ -149,6 +154,7 @@ public class ChartActivity extends AppCompatActivity {
         lineChart.setDragEnabled(true);
         lineChart.invalidate(); // refresh
 
+        //define spacing and display info for x axis
         XAxis xAxis = lineChart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setAxisMinimum(0);
@@ -159,6 +165,7 @@ public class ChartActivity extends AppCompatActivity {
         lineChart.getXAxis().setValueFormatter(new com.github.mikephil.charting.formatter.IndexAxisValueFormatter(xLabels));
         //lineChart.setVisibleYRangeMaximum(50, YAxis.AxisDependency.LEFT);
 
+        //button for navigating back to home page
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

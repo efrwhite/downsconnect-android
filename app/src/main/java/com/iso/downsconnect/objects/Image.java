@@ -1,12 +1,17 @@
 package com.iso.downsconnect.objects;
 
+//object for holding information for a image entry
 public class Image {
+    //instance variables
     private int childID, imageID;
     private byte[] image;
+
+    //constructor to create the object
     public Image(){
 
     }
 
+    //getters and setters for each instance variable
     public int getChildID() {
         return childID;
     }

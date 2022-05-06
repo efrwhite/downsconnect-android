@@ -1,10 +1,13 @@
 package com.iso.downsconnect.objects;
 
+//object for holding for an activity entry
 public class Activity {
+    //instance variables
     private int childID, activityID;
     private String childActivity, notes, units, duration;
     private long entryTime;
 
+    //getters and setter for each instance variable
     public int getChildID() {
         return childID;
     }

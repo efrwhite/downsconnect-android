@@ -1,19 +1,26 @@
 package com.iso.downsconnect.objects;
 
+//object for holding information for a child entry
+//implements Comparable so child objects can be sorted
 public class Child implements Comparable<Child>{
+    //instance variables
     private String firstName, lastName, allergies, bloodType, gender, medications;
     private int childID;
     private long birthday, dueDate;
 
-   public Child(String firstName, String lastName, long birthday, String gender){
+    //constructor to create the object with parameters
+    public Child(String firstName, String lastName, long birthday, String gender){
        this.firstName = firstName;
        this.lastName = lastName;
        this.birthday = birthday;
        this.gender = gender;
    }
-   public Child(){}
+
+    //constructor to create the object
+    public Child(){}
 
 
+    //getters and setters for each instance variable
     public String getFirstName() {
         return firstName;
     }
@@ -86,6 +93,8 @@ public class Child implements Comparable<Child>{
         this.medications = medications;
     }
 
+    //implement compareTo to enable sorting
+    //sorts objects by the child's full name
     @Override
     public int compareTo(Child o) {
         String thisName = this.firstName + " " + this.lastName;

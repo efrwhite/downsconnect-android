@@ -1,9 +1,12 @@
 package com.iso.downsconnect.objects;
 
+//object for holding information for a mood entry
 public class Mood {
+    //instance variables
     private int moodID, childID;
     private String MoodType, time, notes, units;
 
+    //getters and setters for each instance variable
     public String getMoodType() {
         return MoodType;
     }

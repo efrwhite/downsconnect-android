@@ -27,11 +27,12 @@ public class CaregiverProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_caregiver_profile);
 
+        //get current user information
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         final long userID = sharedPreferences.getLong("user", 1);
-
         final String care_user = getIntent().getStringExtra("care_name");
 
+        //declare and initialize variables
         helper = new DBHelper(this);
         accountHolder = new AccountHolder();
         name = findViewById(R.id.caregiver_name_editText);
@@ -41,7 +42,7 @@ public class CaregiverProfileActivity extends AppCompatActivity {
         back = findViewById(R.id.caregiver_back);
         save = findViewById(R.id.user_save);
 
-        //set user information for logged in account
+        //if viewing an already existing account, display the account information
         if(!care_user.equals("None")) {
             accountHolder = helper.getAccountWithName(care_user);
             if (accountHolder != null) {
@@ -54,6 +55,7 @@ public class CaregiverProfileActivity extends AppCompatActivity {
             }
         }
 
+        //button for navigating back to home screen
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,6 +64,7 @@ public class CaregiverProfileActivity extends AppCompatActivity {
             }
         });
 
+        //prompts user for their password whenever user clicks on password edittext
         pass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,6 +78,7 @@ public class CaregiverProfileActivity extends AppCompatActivity {
                     alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
+                            //if password is correct, display password and allow user to update it
                             if (edittext.getText().toString().equals(helper.getPassword(userID))) {
                                 pass.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
                             }
@@ -85,10 +89,11 @@ public class CaregiverProfileActivity extends AppCompatActivity {
             }
         });
 
+        //button for saving or updating user information
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //check if any information has been changed and update accordingly
+                //check if any information has been changed for an existing aaccountand update accordingly
                 if(save.getText().toString().equals("Update")) {
                     String fullName = accountHolder.getFirstName() + " " + accountHolder.getLastName();
                     if (!fullName.equals(null) && !fullName.equals(name.getText().toString())) {
@@ -105,21 +110,27 @@ public class CaregiverProfileActivity extends AppCompatActivity {
                     if (!accountHolder.getUsername().equals(username.getText().toString())) {
                         accountHolder.setUsername(username.getText().toString());
                     }
+                    //call db function for updating accounts
                     helper.updateAccount(accountHolder);
                 }
                 else{
+                    //checks that necessary fields have been filled out for a new account
                     if(!name.getText().toString().equals("") && !phone.getText().toString().equals("") && !pass.getText().toString().equals("")
                         && !username.getText().toString().equals("")){
+                        //fill in account object with user info
                         String newName = name.getText().toString();
                         accountHolder.setFirstName(newName.substring(0, newName.indexOf(" ")));
                         accountHolder.setLastName(newName.substring(newName.indexOf(" ")));
                         accountHolder.setPhone(phone.getText().toString());
                         accountHolder.setPassword(pass.getText().toString());
                         accountHolder.setUsername(username.getText().toString());
+
+                        //add the new account to db
                         helper.addAccount(accountHolder);
                     }
                 }
 
+                //navigate back to home screen
                 Intent intent = new Intent(CaregiverProfileActivity.this, ActivityContainer.class);
                 startActivity(intent);
             }

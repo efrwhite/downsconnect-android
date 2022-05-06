@@ -37,19 +37,21 @@ public class FeedActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feed);
 
+        //declare and initialize variables
         final Button back = findViewById(R.id.backButton);
         TextView currentTime = findViewById(R.id.current_time_text);
-
         tabLayout = findViewById(R.id.tab_layout);
         viewPager = findViewById(R.id.view_pager);
         helper = new DBHelper(this);
 
+        //Get feed id to figure out whether this is a new entry of not
         Intent intent = getIntent();
         String msgID = intent.getStringExtra("feedID");
         int id = Integer.parseInt(msgID);
 
         String type = intent.getStringExtra("type");
 
+        //Calculate and display the current time
         Calendar calendar = Calendar.getInstance();
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
         int minute = calendar.get(Calendar.MINUTE);
@@ -71,6 +73,7 @@ public class FeedActivity extends AppCompatActivity {
             currentTime.setText("Today " + String.valueOf(hour) + ":" + realMins + "AM");
         }
 
+        //button for navigating back to home screen
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,11 +82,12 @@ public class FeedActivity extends AppCompatActivity {
             }
         });
 
+        //arraylist containing the names of the tabs for the feed activity
         ArrayList<String> arrayList = new ArrayList<>();
-
         arrayList.add("Liquid");
         arrayList.add("Solid");
 
+        //if viewing an already existing entry, send fragment info to each tab
         if(id != -1){
             feed = helper.getFeed(id);
             Bundle bun = new Bundle();
@@ -92,10 +96,11 @@ public class FeedActivity extends AppCompatActivity {
             fluidFragment.setArguments(bun);
         }
 
+        //set up the tablayout on the feed activity
         prepareViewPager(viewPager,arrayList);
-
         tabLayout.setupWithViewPager(viewPager);
 
+        //if viewing an existing feed entry, select the correct tab based on which feed type it is
         if(id != -1) {
             if (type.equals("Liquid")) {
                 TabLayout.Tab tab = tabLayout.getTabAt(0);
@@ -108,25 +113,15 @@ public class FeedActivity extends AppCompatActivity {
         }
     }
 
+    //method for adding a fragment to its corresponding tab
     private void prepareViewPager(ViewPager viewPager, ArrayList<String> arrayList) {
         FeedActivity.MainAdapter adapter = new FeedActivity.MainAdapter(getSupportFragmentManager());
-
-        //FeedFragment fragment = new FeedFragment();
-
         adapter.addFragment(fluidFragment, "Fluid");
         adapter.addFragment(solidFragment, "Solid");
-
-//        for (int i=0; i<arrayList.size(); i++){
-//            Bundle bundle = new Bundle();
-//            bundle.putString("title",arrayList.get(i));
-//            fragment.setArguments(bundle);
-//            adapter.addFragment(fragment,arrayList.get(i));
-//            fragment = new FeedFragment();
-//        }
-
         viewPager.setAdapter(adapter);
     }
 
+    //private class used to manage the fragments being used in the tablayout
     private class MainAdapter extends FragmentPagerAdapter {
         ArrayList<String> arrayList = new ArrayList<>();
         List<Fragment> fragmentList = new ArrayList<>();

@@ -1,11 +1,15 @@
 package com.iso.downsconnect.objects;
 
+//object for holding information for a journal entry
 public class Journal {
+    //instance variables
     private int journalID, childID;
     private String title, notes;
 
+    //constructor to create the object
     public Journal(){}
 
+    //getters and setters for each instance variable
     public int getJournalID() {
         return journalID;
     }

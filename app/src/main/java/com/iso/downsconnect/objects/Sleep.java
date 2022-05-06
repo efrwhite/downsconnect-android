@@ -1,19 +1,25 @@
 package com.iso.downsconnect.objects;
 
+//object for holding information for a sleep entry
+//implements Comparable so sleep objects can be sorted
 public class Sleep implements Comparable {
+    //instance variables
     private int sleepID, childID, duration;
     private long sleepTime;
     private String snoring, notes, medication, study, supplements, CPAP, other, unit, sleepDate;
 
+    //constructor to create the object
     public Sleep(){
 
     }
 
+    //constructor to create the object with parameters
     public Sleep(int childID, long startTime, long endTime, String notes){
         this.childID = childID;
         this.notes = notes;
     }
 
+    //getters and setters for each instance variable
     public int getSleepID() {
         return sleepID;
     }

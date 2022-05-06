@@ -35,10 +35,16 @@ public class ActivityActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_activity);
 
+        //Get activity id to figure out whether this is a new entry of not
         Intent intent = getIntent();
         String msgID = intent.getStringExtra("activityID");
         int id = Integer.parseInt(msgID);
 
+        //get current child ID
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        final int childID = sharedPreferences.getInt("name", 1);
+
+        //declare and initialize variables
         helper = new DBHelper(this);
         currentTime = findViewById(R.id.timeText);
         c_activity = findViewById(R.id.activitySpinner);
@@ -49,21 +55,22 @@ public class ActivityActivity extends AppCompatActivity {
         units = findViewById(R.id.durationUnits);
         notes = findViewById(R.id.notesEditText);
         history = findViewById(R.id.historyBtn);
+        final Button back = findViewById(R.id.backButton);
 
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        final int childID = sharedPreferences.getInt("name", 1);
-
+        //Initialize and fill in initial information for entry and activity objects
         entry = new Entry();
-        activity = new Activity();
-
         entry.setChildID(childID);
         entry.setEntryType("Activity");
+
+        activity = new Activity();
         activity.setChildID(childID);
 
-        durationText.setPaintFlags(durationText.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        //get all activities currently in db
         activities = helper.getAllActivities(childID);
 
+        //if viewing an already existing activity entry, display the information about that entry
         if(id != -1){
+            //fill in each field with the necessary information from the activity entry
             activity = helper.getActivity(id);
             save.setEnabled(false);
             c_activity.setSelection(getIndex(c_activity, activity.getChildActivity()));
@@ -76,6 +83,7 @@ public class ActivityActivity extends AppCompatActivity {
 
 
 
+        //Calculate and display the current time
         Calendar calendar = Calendar.getInstance();
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
         int minute = calendar.get(Calendar.MINUTE);
@@ -97,23 +105,25 @@ public class ActivityActivity extends AppCompatActivity {
             currentTime.setText("Today " + String.valueOf(hour) + ":" + realMins + "AM");
         }
 
-        c_activity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if(position == 0){
-                    activityText.setText("");
-                }
-                else {
-                    activityText.setText(helper.getChildName(childID) + " is " + c_activity.getSelectedItem().toString());
-                }
-            }
+        //
+//        c_activity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                if(position == 0){
+//                    activityText.setText("");
+//                }
+//                else {
+//                    activityText.setText(helper.getChildName(childID) + " is " + c_activity.getSelectedItem().toString());
+//                }
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//
+//            }
+//        });
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
+        //takes user to listing page to display previous activity entries
         history.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -123,8 +133,8 @@ public class ActivityActivity extends AppCompatActivity {
             }
         });
 
-        final Button back = findViewById(R.id.backButton);
 
+        //button for navigating back to home screen
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -133,26 +143,37 @@ public class ActivityActivity extends AppCompatActivity {
             }
         });
 
+        //saves activity information to db
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //checks to make sure necessary fields are filled out
                 if(!duration.getText().toString().equals("") && !units.getSelectedItem().toString().equals("Select")
                         && !c_activity.getSelectedItem().toString().equals("Select")){
+                    //add the info to the activity object
                     activity.setDuration(duration.getText().toString());
                     activity.setUnits(units.getSelectedItem().toString());
                     activity.setChildActivity(c_activity.getSelectedItem().toString());
                     Calendar cal = Calendar.getInstance();
                     activity.setEntryTime(cal.getTimeInMillis());
+
+                    //add info to entry object
                     entry.setEntryTime(cal.getTimeInMillis());
                     entry.setEntryText(helper.getChildName(childID) + " was " + c_activity.getSelectedItem().toString() + " for " + activity.getDuration() + " " + activity.getUnits());
                     entry.setEntryType("Activity");
+
+                    //if user wrote notes, add them accordingly
                     if(!notes.getText().toString().equals("")){
                         activity.setNotes(notes.getText().toString());
                     }
                     else{
                         activity.setNotes("");
                     }
+
+                    //add activity to db and get the id associated with it
                     long result = helper.addActivity(activity);
+
+                    //add new entry to database and navigate back to home page
                     entry.setForeignID(result);
                     helper.addEntry(entry);
                     Intent intent = new Intent(ActivityActivity.this, ActivityContainer.class);
@@ -162,7 +183,7 @@ public class ActivityActivity extends AppCompatActivity {
         });
     }
 
-    //get index of selection in a spinner
+    //get index of a selection in a spinner
     private int getIndex(Spinner spinner, String myString) {
         for (int i = 0; i < spinner.getCount(); i++) {
             if (spinner.getItemAtPosition(i).toString().equalsIgnoreCase(myString)) {
