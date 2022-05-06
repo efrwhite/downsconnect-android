@@ -1,12 +1,16 @@
 package com.iso.downsconnect.objects;
 
+//object for holding information for a medical visit entry
 public class MedicalInfo {
+    //instance variables
     private String provider, headInfo, temperatureInfo, visit, height, weight, providerType, answers, dates, providers, notes;
     private int childID, medicalID;
     private long doctorDate;
 
+    //constructor to create the object
     public MedicalInfo(){}
 
+    //getters and setters for each instance variable
     public String getProvider() {
         return provider;
     }

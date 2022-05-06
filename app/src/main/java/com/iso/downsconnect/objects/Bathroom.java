@@ -2,14 +2,20 @@ package com.iso.downsconnect.objects;
 
 import java.io.Serializable;
 
+//object for holding information for a bathroom entry
+//implements Serializable so any bathroom object can be sent to the 3 bathroom fragments
 public class Bathroom implements Serializable {
+    //instance variables
     private String bathroomType, treatmentPlan, notes, leak, openAir, diaperCream, quantity, pottyAccident, duration;
     private int childID, bathroomID;
     private long dateOfLastStool;
+
+    //constructor to create the object
     public Bathroom(){
 
     }
 
+    //constructor to create the object with parameters
     public Bathroom(String bathroomType, String treatmentPlan, String notes, long dateOfLastStool){
         this.bathroomType = bathroomType;
         this.treatmentPlan = treatmentPlan;
@@ -17,6 +23,7 @@ public class Bathroom implements Serializable {
         this.dateOfLastStool = dateOfLastStool;
     }
 
+    //getters and setters for each instance variable
     public String getBathroomType() {
         return bathroomType;
     }

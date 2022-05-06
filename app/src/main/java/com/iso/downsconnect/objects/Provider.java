@@ -1,9 +1,13 @@
 package com.iso.downsconnect.objects;
 
+//object for holding information for a provider entry
+//implements Comparable so provider objects can be sorted
 public class Provider implements Comparable<Provider>{
+    //instance variables
     private String name, prac_name, specialty, phone, fax, email, website, address, state, city, zip;
     private int providerID;
 
+    //getters and setters for each instance variable
     public String getName() {
         return name;
     }
@@ -100,6 +104,8 @@ public class Provider implements Comparable<Provider>{
         this.providerID = providerID;
     }
 
+    //implement compareTo to enable sorting
+    //sorts objects by the provider's name
     @Override
     public int compareTo(Provider o) {
         return this.name.compareTo(o.name);

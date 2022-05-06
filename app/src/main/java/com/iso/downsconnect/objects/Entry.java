@@ -2,17 +2,20 @@ package com.iso.downsconnect.objects;
 
 import java.util.Comparator;
 
+//object for holding information for a entries
+//implements Comparable so entry objects can be sorted
 public class Entry implements Comparable<Entry> {
+    //instance variables
     private int entryID, childID;
     private String entryText, entryType;
     private long entryTime, foreignID;
 
-
+    //constructor to create the object
     public Entry(){
 
     }
 
-
+    //getters and setters for each instance variable
     public int getChildID() {
         return childID;
     }
@@ -61,6 +64,9 @@ public class Entry implements Comparable<Entry> {
         this.entryType = entryType;
     }
 
+
+    //implement compareTo to enable sorting
+    //sorts objects by the entry's date and time
     @Override
     public int compareTo(Entry o) {
         if (this.entryTime > o.entryTime){

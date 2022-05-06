@@ -2,22 +2,28 @@ package com.iso.downsconnect.objects;
 
 import java.io.Serializable;
 
+//object for holding information for a bathroom entry
+//implements Serializable so any bathroom object can be sent to the 3 bathroom
 public class Feed implements Serializable {
+    //instance variables
     private int amount;
     private long entryTime;
     private String substance, foodUnit, notes, iron, vitamin, other, feedMode;
     private int childID, feedID;
 
+    //constructor to create the object
     public Feed(){
 
     }
 
+    //constructor to create the object with parameters
     public Feed(int amount, String substance, String timeConsumed){
         this.amount = amount;
         this.substance = substance;
         this.foodUnit = timeConsumed;
     }
 
+    //constructor to create the object with parameters
     public Feed(int amount, String substance, String timeConsumed, String notes){
         this.amount = amount;
         this.substance = substance;
@@ -25,6 +31,7 @@ public class Feed implements Serializable {
         this.notes = notes;
     }
 
+    //getters and setters for each instance variable
     public int getAmount() {
         return amount;
     }

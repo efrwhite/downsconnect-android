@@ -1,11 +1,18 @@
 package com.iso.downsconnect.objects;
 
+//object for holding information for an account entry
+//implements Comparable so child objects can be sorted
 public class AccountHolder implements Comparable<AccountHolder>{
+    //instance variables
     private String firstName, lastName, username, password, phone;
     private int accountID;
+
+    //constructor to create the object
     public AccountHolder(){
 
     }
+
+    //constructor to create the object with parameters
     public AccountHolder(String firstName, String lastName, String username, String password, String phone){
         this.firstName = firstName;
         this.lastName = lastName;
@@ -14,6 +21,7 @@ public class AccountHolder implements Comparable<AccountHolder>{
         this.phone = phone;
     }
 
+    //getters and setters for each instance variable
     public String getFirstName() {
         return firstName;
     }
@@ -62,6 +70,8 @@ public class AccountHolder implements Comparable<AccountHolder>{
         this.accountID = accountID;
     }
 
+    //implement compareTo to enable sorting
+    //sorts objects by the account's full name
     @Override
     public int compareTo(AccountHolder o) {
         String thisName = this.firstName + " " + this.lastName;

@@ -35,6 +35,7 @@ public class ActivityContainer extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_container);
 
+        //initialize db object and fragments
         helper = new DBHelper(getApplicationContext());
         FragmentManager fragmentManager = getSupportFragmentManager();
         final Fragment homeFragment = new HomeFragment();

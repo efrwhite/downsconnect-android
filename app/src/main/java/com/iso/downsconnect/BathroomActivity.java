@@ -43,23 +43,24 @@ public class BathroomActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bathroom);
 
+        //declare and initialize variables
         final Button back = findViewById(R.id.backButton);
         TextView currentTime = findViewById(R.id.current_time_text);
-
-
         tabLayout = findViewById(R.id.tab_layout);
         viewPager = findViewById(R.id.view_pager);
         helper = new DBHelper(this);
 
 
+        //Get bathroom id to figure out whether this is a new entry of not
         Intent intent = getIntent();
         String msgID = intent.getStringExtra("bathID");
         int id = Integer.parseInt(msgID);
 
+        //get current child ID
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         final int childID = sharedPreferences.getInt("name", 1);
 
-
+        //Calculate and display the current time
         Calendar calendar = Calendar.getInstance();
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
         int minute = calendar.get(Calendar.MINUTE);
@@ -81,6 +82,7 @@ public class BathroomActivity extends AppCompatActivity {
             currentTime.setText("Today " + String.valueOf(hour) + ":" + realMins + "AM");
         }
 
+        //button for navigating back to home screen
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -89,11 +91,13 @@ public class BathroomActivity extends AppCompatActivity {
             }
         });
 
+        //arraylist containing the names of the tabs for the bathroom activity
         ArrayList<String> arrayList = new ArrayList<>();
         arrayList.add("Diaper");
         arrayList.add("Potty");
         arrayList.add("Constipation");
 
+        //if viewing an already existing entry, send fragment info to each tab
         if(id != -1){
             bathroom = helper.getBathroom(id);
             Bundle bundle = new Bundle();
@@ -103,10 +107,11 @@ public class BathroomActivity extends AppCompatActivity {
             diaperFragment.setArguments(bundle);
         }
 
+        //set up the tablayout on the bathroom activity
         prepareViewPager(viewPager,arrayList);
-
         tabLayout.setupWithViewPager(viewPager);
 
+        //if viewing an existing bathroom entry, select the correct tab based on which bathroom type it is
         if(id != -1){
             if(bathroom.getBathroomType().equals("Potty")){
                 TabLayout.Tab tab = tabLayout.getTabAt(1);
@@ -125,18 +130,16 @@ public class BathroomActivity extends AppCompatActivity {
 
     }
 
+    //method for adding a fragment to its corresponding tab
     private void prepareViewPager(ViewPager viewPager, ArrayList<String> arrayList) {
         MainAdapter adapter = new MainAdapter(getSupportFragmentManager());
-
-
         adapter.addFragment(diaperFragment, "Diaper");
         adapter.addFragment(pottyFragment, "Potty");
         adapter.addFragment(constipationFragment, "Constipation");
-
-
         viewPager.setAdapter(adapter);
     }
 
+    //private class used to manage the fragments being used in the tablayout
     private class MainAdapter extends FragmentPagerAdapter {
         ArrayList<String> arrayList = new ArrayList<>();
         List<Fragment> fragmentList = new ArrayList<>();

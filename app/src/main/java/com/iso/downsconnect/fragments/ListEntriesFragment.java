@@ -110,7 +110,7 @@ public class ListEntriesFragment extends Fragment {
                             Calendar calendar = Calendar.getInstance();
                             calendar.setTimeInMillis(entry.getEntryTime());
                             Date dat = calendar.getTime();
-                            //formate date
+                            //format date
                             DateFormat formatter = new SimpleDateFormat("h:mm a");
                             String time = formatter.format(dat);
                             date.setText(dateHandler.getMonth(calendar.get(Calendar.MONTH)) + " " + calendar.get(Calendar.DATE) + ", " + calendar.get(Calendar.YEAR) + " at: " + time);

@@ -1,14 +1,18 @@
 package com.iso.downsconnect.objects;
 
+//object for holding information for a milestone entry
 public class Milestone {
+    //instance variables
     private int childId, milestoneId;
     private String roll, walk, stand, sit, val, crawl, nh_walk, jump,
             holds, hands_mouth, passes, pincher, drinks, scribbles, feed_spoon,
             points, emotion, affection, interest, coos, babbles, speaks,
             two_word, sentence, startles, turns;
 
+    //constructor to create the object
     public Milestone(){}
 
+    //getters and setters for each instance variable
     public int getChildId() {
         return childId;
     }

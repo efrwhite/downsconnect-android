@@ -1,12 +1,17 @@
 package com.iso.downsconnect.objects;
 
+//object for holding information for a medication entry
+//implements Comparable so medication objects can be sorted
 public class Medication implements Comparable<Medication>{
+    //instance variables
     private int medID, childID;
     private double dose;
     private String name, doseUnits, reason, frequency;
 
+    //constructor to create the object
     public Medication(){}
 
+    //getters and setters for each instance variable
     public int getMedID() {
         return medID;
     }
@@ -63,6 +68,8 @@ public class Medication implements Comparable<Medication>{
         this.frequency = frequency;
     }
 
+    //implement compareTo to enable sorting
+    //sorts objects by the medications's name
     @Override
     public int compareTo(Medication o) {
         return this.getName().toLowerCase().compareTo(o.getName().toLowerCase());
