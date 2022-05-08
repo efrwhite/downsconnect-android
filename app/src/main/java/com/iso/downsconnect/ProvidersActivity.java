@@ -61,7 +61,7 @@ public class ProvidersActivity extends AppCompatActivity {
         address_one.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                activity.getCurrentFocus().clearFocus();
+//                activity.getCurrentFocus().clearFocus();
                 textDialog(address_one, "Address One", activity);
             }
         });
