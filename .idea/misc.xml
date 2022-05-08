@@ -3,14 +3,16 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/add_button.xml" value="0.2805" />
         <entry key="app/src/main/res/layout/activity_activity.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_add_resource.xml" value="0.2760416666666667" />
         <entry key="app/src/main/res/layout/activity_bathroom.xml" value="0.17916666666666667" />
         <entry key="app/src/main/res/layout/activity_caregiver_profile.xml" value="0.2246376811594203" />
         <entry key="app/src/main/res/layout/activity_chart.xml" value="0.17916666666666667" />
         <entry key="app/src/main/res/layout/activity_container.xml" value="0.20729166666666668" />
-        <entry key="app/src/main/res/layout/activity_detailed_profile.xml" value="0.17916666666666667" />
+        <entry key="app/src/main/res/layout/activity_detailed_profile.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_doctor_visit.xml" value="0.20729166666666668" />
+        <entry key="app/src/main/res/layout/activity_email.xml" value="0.26313405797101447" />
         <entry key="app/src/main/res/layout/activity_feed.xml" value="0.265625" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.20729166666666668" />
         <entry key="app/src/main/res/layout/activity_journal.xml" value="0.2760416666666667" />
@@ -25,6 +27,9 @@
         <entry key="app/src/main/res/layout/activity_message.xml" value="0.17916666666666667" />
         <entry key="app/src/main/res/layout/activity_milestone.xml" value="0.17916666666666667" />
         <entry key="app/src/main/res/layout/activity_mood.xml" value="0.2760416666666667" />
+        <entry key="app/src/main/res/layout/activity_more.xml" value="0.26313405797101447" />
+        <entry key="app/src/main/res/layout/activity_neck_safety.xml" value="0.26313405797101447" />
+        <entry key="app/src/main/res/layout/activity_photo.xml" value="0.26313405797101447" />
         <entry key="app/src/main/res/layout/activity_profiles.xml" value="0.17916666666666667" />
         <entry key="app/src/main/res/layout/activity_provider_listing.xml" value="0.26313405797101447" />
         <entry key="app/src/main/res/layout/activity_providers.xml" value="0.17916666666666667" />

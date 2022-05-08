@@ -304,6 +304,7 @@
     <array name="height">
         <item>Select</item>
         <item>cm</item>
+        <item>in</item>
         <item>ft</item>
     </array>
     <array name="nursing">
