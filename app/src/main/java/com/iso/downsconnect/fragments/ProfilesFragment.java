@@ -59,13 +59,13 @@ public class ProfilesFragment extends Fragment {
 
         //get linear layouts for each section on the page
         childLayout = getView().findViewById(R.id.childrenLinearLayout);
-        childLayout.setGravity(Gravity.CENTER);
+        childLayout.setGravity(Gravity.LEFT);
 
         caregiverLayout = getView().findViewById(R.id.careGiversLayout);
-        caregiverLayout.setGravity(Gravity.CENTER);
+        caregiverLayout.setGravity(Gravity.LEFT);
 
         providerLayout = getView().findViewById(R.id.providersLayout);
-        providerLayout.setGravity(Gravity.CENTER);
+        providerLayout.setGravity(Gravity.LEFT);
 
 //        TextView text = new TextView(getContext());
 //        text.setText("hi");
@@ -140,8 +140,8 @@ public class ProfilesFragment extends Fragment {
 
                             //controls the margin for whatever object has these parameters
                             marginLayoutParams.setMargins(50, 0, 50,10);
-                            layoutParams.setMargins(200, 0, 0, 30);
-                            textParams.setMargins(50, 0, 10, 30);
+                            layoutParams.setMargins(75, 0, 0, 30);
+                            textParams.setMargins(30, 0, 10, 30);
 
                             //creates horizontal layout for placing object correctly on screen
                             final LinearLayout horizontalLayout = new LinearLayout(getContext());
@@ -152,16 +152,15 @@ public class ProfilesFragment extends Fragment {
 
                             //Text view for display child's first name
                             final TextView view = new TextView(getContext());
-                            view.setGravity(Gravity.CENTER_HORIZONTAL);
+                            view.setGravity(Gravity.LEFT);
                             view.setText(child.getFirstName());
                             view.setTextColor(Color.BLACK);
                             view.setTextSize(15);
-                            view.setWidth(250);
+                            view.setWidth(200);
                             view.setLayoutParams(textParams);
 
                             //Button that will delete child from db
                             final Button button = new Button(getContext());
-                            button.setLayoutParams(layoutParams);
                             button.setText("Delete");
                             button.setHeight(10);
                             button.setWidth(10);
@@ -183,6 +182,7 @@ public class ProfilesFragment extends Fragment {
                             edit.setText("Edit");
                             edit.setHeight(10);
                             edit.setWidth(10);
+                            edit.setLayoutParams(layoutParams);
                             edit.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
@@ -195,8 +195,8 @@ public class ProfilesFragment extends Fragment {
                                 }
                             });
                             // add button to layout
-                            horizontalLayout.addView(button);
                             horizontalLayout.addView(edit);
+                            horizontalLayout.addView(button);
                             //Method of selecting which child you're using the app for
                             horizontalLayout.setOnClickListener(new View.OnClickListener() {
                                 @Override
@@ -289,8 +289,8 @@ public class ProfilesFragment extends Fragment {
                             ViewGroup.MarginLayoutParams marginLayoutParams = new ViewGroup.MarginLayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
                             //controls the margin for whatever object has these parameters
-                            layoutParams.setMargins(200, 0, 0, 30);
-                            textParams.setMargins(50, 0, 10, 30);
+                            layoutParams.setMargins(75, 0, 0, 30);
+                            textParams.setMargins(30, 0, 10, 30);
                             marginLayoutParams.setMargins(50, 0, 50,10);
 
                             //creates horizontal layout for placing object correctly on screen
@@ -304,8 +304,8 @@ public class ProfilesFragment extends Fragment {
                             TextView cg_name = new TextView(getContext());
                             cg_name.setText(account.getFirstName());
                             cg_name.setTextSize(15);
-                            cg_name.setWidth(250);
-                            cg_name.setGravity(Gravity.CENTER_HORIZONTAL);
+                            cg_name.setWidth(200);
+                            cg_name.setGravity(Gravity.LEFT);
                             cg_name.setTextColor(Color.BLACK);
                             cg_name.setLayoutParams(textParams);
 
@@ -319,7 +319,6 @@ public class ProfilesFragment extends Fragment {
                             delete.setHeight(10);
                             delete.setId(account.getAccountID());
                             delete.setTag(account.getFirstName());
-                            delete.setLayoutParams(layoutParams);
                             delete.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
@@ -328,13 +327,13 @@ public class ProfilesFragment extends Fragment {
                                 }
                             });
                             //add button to horizontal layout
-                            horizontalLayout.addView(delete);
 
                             //Button that allows you to edit an account
                             Button edit = new Button(getContext());
                             edit.setText("Edit");
                             edit.setWidth(10);
                             edit.setHeight(10);
+                            edit.setLayoutParams(layoutParams);
                             edit.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
@@ -347,6 +346,7 @@ public class ProfilesFragment extends Fragment {
                             });
                             // add button to layout
                             horizontalLayout.addView(edit);
+                            horizontalLayout.addView(delete);
                             // add horizontal layout to main layout
                             caregiverLayout.addView(horizontalLayout);
                         }
@@ -383,8 +383,8 @@ public class ProfilesFragment extends Fragment {
 
                             //controls the margin for whatever object has these parameters
                             marginLayoutParams.setMargins(50, 0, 50,10);
-                            layoutParams.setMargins(200, 0, 0, 30);
-                            textParams.setMargins(50, 0, 10, 30);
+                            layoutParams.setMargins(75, 0, 0, 30);
+                            textParams.setMargins(30, 0, 10, 30);
 
                             //creates horizontal layout for placing object correctly on screen
                             LinearLayout horizontalLayout = new LinearLayout(getContext());
@@ -397,7 +397,7 @@ public class ProfilesFragment extends Fragment {
                             TextView name = new TextView(getContext());
                             name.setText(provider.getName());
                             name.setTextSize(15);
-                            name.setWidth(250);
+                            name.setWidth(200);
                             name.setGravity(Gravity.CENTER_HORIZONTAL);
                             name.setTextColor(Color.BLACK);
                             name.setLayoutParams(textParams);
@@ -411,7 +411,6 @@ public class ProfilesFragment extends Fragment {
                             remove.setHeight(10);
                             remove.setId(provider.getProviderID());
                             remove.setTag(provider.getName());
-                            remove.setLayoutParams(layoutParams);
                             remove.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
@@ -419,14 +418,13 @@ public class ProfilesFragment extends Fragment {
                                     delete(remove, "Provider");
                                 }
                             });
-                            //add button to horizontal layout
-                            horizontalLayout.addView(remove);
 
                             //Button that allows you to edit a provider
                             final Button change = new Button(getContext());
                             change.setText("Edit");
                             change.setHeight(10);
                             change.setWidth(10);
+                            change.setLayoutParams(layoutParams);
                             change.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
@@ -439,6 +437,7 @@ public class ProfilesFragment extends Fragment {
                             });
                             // add button to layout
                             horizontalLayout.addView(change);
+                            horizontalLayout.addView(remove);
 
                             //add horizontal layout to main provider layout
                             providerLayout.addView(horizontalLayout);
