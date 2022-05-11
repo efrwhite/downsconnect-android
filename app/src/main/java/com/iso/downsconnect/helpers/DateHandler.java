@@ -1,11 +1,13 @@
 package com.iso.downsconnect.helpers;
 
-import android.util.Log;
-
+//Helper class to handle any problems with dates
 public class DateHandler {
+    //constructor to create the object
     public DateHandler(){
 
     }
+
+    //method for converting a month's number into it's abbreviation
     public String getMonth(int month){
         String stringMonth;
         switch (month){
@@ -49,10 +51,12 @@ public class DateHandler {
        return stringMonth;
     }
 
+    //creates a string with the format month day, year
     public String writtenDate(int month, int day, int year){
         return getMonth(month) + " " + day + ", " + year;
     }
 
+    //gets written date with format month day, year from a date string
     public String writtenDateWithString(String date){
         String[] splitDate = date.split("-");
         String month = splitDate[0];
