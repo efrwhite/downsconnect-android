@@ -5,10 +5,13 @@ import android.graphics.BitmapFactory;
 
 import java.io.ByteArrayOutputStream;
 
+//helper class for converting images for the db
 public class ImageHelper {
 
+    //constructor to create the object
     public ImageHelper(){}
 
+    //converts the bitmap that was received
     public  byte[] getBytes(Bitmap bitmap) {
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 0, stream);
