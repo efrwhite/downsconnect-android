@@ -19,7 +19,7 @@ import com.iso.downsconnect.objects.Entry;
 import com.iso.downsconnect.objects.Message;
 
 import java.util.Calendar;
-
+//activity for creating new messages as well as displaying/updating existing ones
 public class MessageActivity extends AppCompatActivity {
     private TextView currentTime, history;
     private EditText messageText;

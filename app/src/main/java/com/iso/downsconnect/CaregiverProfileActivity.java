@@ -16,7 +16,7 @@ import android.widget.EditText;
 
 import com.iso.downsconnect.helpers.DBHelper;
 import com.iso.downsconnect.objects.AccountHolder;
-
+//activity for creating new caregiver profiles as well as viewing/updating existing ones
 public class CaregiverProfileActivity extends AppCompatActivity {
     private DBHelper helper;
     private EditText name, phone, pass, username;

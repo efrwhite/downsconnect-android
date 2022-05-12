@@ -52,6 +52,7 @@ import java.util.concurrent.Executors;
  * Use the {@link HomeFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
+//activity that displays home screen, used to navigate to all other pages in app
 public class HomeFragment extends Fragment {
     //declare variables
     private LinearLayout entryLayout;

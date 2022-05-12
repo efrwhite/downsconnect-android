@@ -23,7 +23,7 @@ import com.iso.downsconnect.objects.Feed;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-
+//activity to control/display the different tabs for feed page
 public class FeedActivity extends AppCompatActivity {
 
     TabLayout tabLayout;

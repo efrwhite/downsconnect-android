@@ -24,7 +24,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
+//Activity used to display charts for height, weight, and head circumference
 public class ChartActivity extends AppCompatActivity {
     private DBHelper helper;
     private ArrayList<Point> data = new ArrayList<>();

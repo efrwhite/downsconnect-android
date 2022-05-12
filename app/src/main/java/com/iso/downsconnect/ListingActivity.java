@@ -26,7 +26,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-
+//activity to display past entries for either activities, moods, messages, or journals
 public class ListingActivity extends AppCompatActivity {
     private Button back;
     private DBHelper helper;

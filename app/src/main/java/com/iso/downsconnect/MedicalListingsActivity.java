@@ -15,7 +15,7 @@ import com.iso.downsconnect.helpers.DateHandler;
 import com.iso.downsconnect.objects.MedicalInfo;
 
 import java.util.Calendar;
-
+//Activity to display medical info in more detail
 public class MedicalListingsActivity extends AppCompatActivity {
     private TextView date, name, p_type, visit, height, weight, head, temp, age;
     private Button back;

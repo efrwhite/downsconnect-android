@@ -14,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.iso.downsconnect.helpers.DBHelper;
 import com.iso.downsconnect.objects.AccountHolder;
-
+//activity for creating a new account
 public class SignUpActivity extends AppCompatActivity {
     private String first, last, user, phone, pass, confirmPass;
     private DBHelper helper;
@@ -25,22 +25,22 @@ public class SignUpActivity extends AppCompatActivity {
         setContentView(R.layout.activity_signup);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
-
+        //initialize variables
         helper = new DBHelper(this);
-
         firstName = findViewById(R.id.firstNameEditText);
         lastName = findViewById(R.id.lastNameEditText);
         userName = findViewById(R.id.usernameEditText);
         phoneNumber = findViewById(R.id.phoneEditText);
         password = findViewById(R.id.passwordEditText);
         confirmPassword = findViewById(R.id.confirmPasswordEditText);
-
         final Button signUp = findViewById(R.id.signUpButton);
         Button cancel = findViewById(R.id.cancelButton);
 
+        //inserts a new account into the db
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //retrieves info from all the fields and checks if they're not empty
                 first = firstName.getText().toString();
                 last = lastName.getText().toString();
                 user = userName.getText().toString();
@@ -49,12 +49,15 @@ public class SignUpActivity extends AppCompatActivity {
                 confirmPass = confirmPassword.getText().toString();
                 if (!first.equals("") && !last.equals("") && !user.equals("")
                         && !phone.equals("") && !pass.equals("") && !confirmPass.equals("")) {
+
+                    //a check to see if your passwords match
                     if(!pass.equals(confirmPass)){
                         AlertDialog a = new AlertDialog.Builder(signUp.getContext()).create();
                         a.setTitle("Passwords dont match");
                         a.setMessage("The passwords you've entered don't match, please ensure that do before continuing");
                         a.show();
                     }
+                    //checks if there is already a user in the db with this username
                     if(helper.checkUsername(user).equals("n")){
                         AlertDialog a = new AlertDialog.Builder(signUp.getContext()).create();
                         a.setTitle("Username taken!");
@@ -62,18 +65,24 @@ public class SignUpActivity extends AppCompatActivity {
                         a.show();
                     }
                     else {
+                        //sets variable in shared preferences to show that the a user is currently logged in
                         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                         sharedPreferences.edit().putBoolean("signedIn", true).commit();
+
+                        //create an account object and pass it to the db to insert it
                         AccountHolder accountHolder = new AccountHolder(first, last, user, pass, phone);
                         long id = helper.addAccount(accountHolder);
                         helper.close();
                         sharedPreferences.edit().putLong("user", id).commit();
+
+                        //navigates to the home screen
                         Intent intent = new Intent(SignUpActivity.this, ActivityContainer.class);
 //                        intent.putExtra("user", user);
                         startActivity(intent);
                     }
                 }
                 else{
+                    //display error if info is missing
                     AlertDialog a = new AlertDialog.Builder(signUp.getContext()).create();
                     a.setTitle("Invalid/Missing Information");
                     a.setMessage("Please make sure you've filled out all the required fields");
@@ -82,6 +91,7 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
 
+        //button to navigate back to main screen
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

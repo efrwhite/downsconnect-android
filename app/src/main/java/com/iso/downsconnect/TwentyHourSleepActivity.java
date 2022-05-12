@@ -22,6 +22,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+//activity to calculate and display how long a child has slept for a specific
 public class TwentyHourSleepActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
     private Button go, back;
     private EditText datePicker;
@@ -40,6 +41,7 @@ public class TwentyHourSleepActivity extends AppCompatActivity implements DatePi
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         final int childID = sharedPreferences.getInt("name", 1);
 
+        //initialize variables
         go = findViewById(R.id.goBtn);
         back = findViewById(R.id.backButton2);
         datePicker = findViewById(R.id.sleepCycleDate);
@@ -48,15 +50,19 @@ public class TwentyHourSleepActivity extends AppCompatActivity implements DatePi
         handler = new DateHandler();
         helper = new DBHelper(this);
 
+        //defaults the date to the current date
         Calendar cal = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("MM-DD-YYYY");
         Date dat = cal.getTime();
         String currentDate = sdf.format(dat);
         String writtenDate = handler.writtenDateWithString(currentDate);
         datePicker.setText(writtenDate);
+
+        //get the time the child has slept for the date
         int[] times = helper.calculateSleepCycle(currentDate, childID);
         setTimes(times);
 
+        //navigate back to home screen
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,6 +72,7 @@ public class TwentyHourSleepActivity extends AppCompatActivity implements DatePi
             }
         });
 
+        //display a date picker dialog box
         datePicker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,6 +80,7 @@ public class TwentyHourSleepActivity extends AppCompatActivity implements DatePi
             }
         });
 
+        //button user to calculate and display how long a child has slept for a specific date
         go.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,6 +98,7 @@ public class TwentyHourSleepActivity extends AppCompatActivity implements DatePi
         });
     }
 
+    //set the times returned from the method in the dbhelper
     private void setTimes(int[] times) {
         hours.setText(String.valueOf(times[0]));
         if(times[1] < 10){
@@ -103,6 +112,7 @@ public class TwentyHourSleepActivity extends AppCompatActivity implements DatePi
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+        //saves and displays the date the user selected
         Calendar cal = Calendar.getInstance();
         cal.set(year, month, dayOfMonth);
 //        cycleDate = cal.getTimeInMillis();
@@ -113,6 +123,7 @@ public class TwentyHourSleepActivity extends AppCompatActivity implements DatePi
         datePicker.setText(handler.writtenDate(month, dayOfMonth, year));
     }
 
+    //displays the date picker dialog box
     private void showDatePickerDialog(){
         @SuppressLint("ResourceType") DatePickerDialog datePickerDialog = new DatePickerDialog(this, 2, this,
                 Calendar.getInstance().get(Calendar.YEAR),

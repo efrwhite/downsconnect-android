@@ -20,7 +20,7 @@ import com.iso.downsconnect.objects.Entry;
 import com.iso.downsconnect.objects.Mood;
 
 import java.util.Calendar;
-
+//activity for creating new mood entries as well as updating/displaying existing ones
 public class MoodActivity extends AppCompatActivity {
     private TextView currentTime, history;
     private EditText notes, time;

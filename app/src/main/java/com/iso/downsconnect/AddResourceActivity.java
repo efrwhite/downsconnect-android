@@ -21,7 +21,7 @@ import com.iso.downsconnect.objects.Resource;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-
+//Activity that allows users to add a new resource to the db
 public class AddResourceActivity extends AppCompatActivity {
     private EditText name, url;
     private Button add;

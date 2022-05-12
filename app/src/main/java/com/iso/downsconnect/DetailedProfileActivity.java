@@ -25,7 +25,7 @@ import com.iso.downsconnect.helpers.DateHandler;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-
+//activity for creating new child profiles as well as viewing/updating existing child profiles
 public class DetailedProfileActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
     private EditText birthdayPicker, dueDatePicker, allergies, medications, fullName;
     private Spinner gender, bloodType;
