@@ -21,7 +21,8 @@ import com.iso.downsconnect.objects.MedicalInfo;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-
+//activity for displaying the medical entries for a specific provider type
+//displays neck safety page as well
 public class ProviderListingActivity extends AppCompatActivity {
     private DBHelper helper;
     private ArrayList<MedicalInfo> medicalInfos = new ArrayList<>();

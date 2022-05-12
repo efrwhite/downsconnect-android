@@ -19,7 +19,7 @@ import com.iso.downsconnect.objects.Child;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
-
+//Class used to display the fragments in the side navigation
 public class ActivityContainer extends AppCompatActivity {
     private DrawerLayout mDrawer;
     private Toolbar toolbar;

@@ -31,6 +31,7 @@ import java.util.Calendar;
  * Use the {@link SolidFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
+//fragment for displaying/saving info for a feed entry that is of type solid
 public class SolidFragment extends Fragment {
     private Button saveBtn;
     private EditText notes, quantity, otherText;

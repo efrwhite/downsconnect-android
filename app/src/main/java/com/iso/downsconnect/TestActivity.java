@@ -15,7 +15,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.iso.downsconnect.fragments.HomeFragment;
 import com.iso.downsconnect.fragments.ListEntriesFragment;
 import com.iso.downsconnect.fragments.ProfilesFragment;
-
+//A test activity Kai was using to figure out the side panel for the profiles :)
 public class TestActivity extends AppCompatActivity {
     private DrawerLayout mDrawer;
     private Toolbar toolbar;

@@ -53,7 +53,7 @@ import com.iso.downsconnect.objects.Provider;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-
+//activity used to save new medical info to the database
 public class DoctorsVisitActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
     private EditText doctorDatePicker, height, headSize, temperature, weight;
     private long doctorDate = 0;
@@ -69,6 +69,7 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
     private ArrayList<Provider> providers = new ArrayList<>();
     private ArrayList<MedicalInfo> medicalInfos = new ArrayList<>();
     private FrameLayout ageLayout;
+    //declare/initialize all the age specific fragments
     private NewBornFragment newBornFragment = new NewBornFragment();
     private TwoMonthFragment twoMonthFragment = new TwoMonthFragment();
     private FourMonthFragment fourMonthFragment = new FourMonthFragment();
@@ -98,22 +99,27 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor_visit);
 
+        //get current childID
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         final int childID = sharedPreferences.getInt("name", 1);
         Log.i("chid", String.valueOf(childID));
 
-
+        //initialize fragment manager to handle the displaying of the fragments
         final FragmentManager fragmentManager = getSupportFragmentManager();
 
 
+        //initialize variables
         doctorDatePicker = findViewById(R.id.doctorsDatePicker);
         dbHelper = new DBHelper(this);
+        //get provider and medical info from db
         medicalInfos = dbHelper.getAllMedical();
         providers = dbHelper.getAllProviders();
         save = findViewById(R.id.saveButton);
+
         //if no provider profiles have been added, display alert message
         if (providers.size() == 0 || dbHelper.getAllChildren().size() == 0) {
             new AlertDialog.Builder(DoctorsVisitActivity.this)
+                    //prompt user to create the needed profiles and navigate back to home screen
                     .setTitle("Missing Profiles")
                     .setMessage("Please make sure you have at least one provider and one child in the profiles section")
                     .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
@@ -124,9 +130,9 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
                         }
                     }).show();
         }
+
+        //initialize variables
         medicalInfo = new MedicalInfo();
-
-
         provider = findViewById(R.id.p_nameSpinner);
         providerType = findViewById(R.id.providerSpinner);
         height = findViewById(R.id.heightEditText);
@@ -143,6 +149,7 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
         back = findViewById(R.id.backButton);
         ageLayout = findViewById(R.id.ageLayout);
 
+        //disables the visit age spinner
         visitNum.setEnabled(false);
 
 
@@ -151,11 +158,13 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
         final int minute = calendar.get(Calendar.MINUTE);
         String realMins;
+        //fix minutes that are less than 10
         if (minute <= 10) {
             realMins = "0" + minute;
         } else {
             realMins = String.valueOf(minute);
         }
+        //detemines whether time was AM or PM
         if (hour > 12) {
             hour = hour - 12;
             currentTime.setText("Today " + String.valueOf(hour) + ":" + realMins + "PM");
@@ -181,6 +190,7 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
 
         //Display questions based on which visit for the pediatrican the child is currenlty on
 
+        //load the spinner with the provider names
         loadSpinnerData();
 
         providerType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -201,12 +211,15 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
             }
         });
 
+        //displays the corresponding age fragment based on which age was picked
         visitNum.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String selected = parent.getItemAtPosition(position).toString();
                 //Load appropriate fragment depending on what age the user picks
                 switch (selected) {
+                    //checks if the passed in string matches any of the strings in the case statements
+                    //if they match, set the fragment equal to the associated fragment
                     case "Newborn":
                         fragment = newBornFragment;
                         break;
@@ -272,7 +285,9 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
                         break;
 
                 }
+                //check to make sure that the user select an age to begin with
                 if (!selected.equals("Select")) {
+                    //display the fragment using the fragment manager
                     fragmentManager.beginTransaction().replace(R.id.ageLayout, fragment).commit();
                 }
             }
@@ -283,13 +298,15 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
             }
         });
 
-
+        //display the date dialog picker
         doctorDatePicker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showDatePickerDialog();
             }
         });
+
+        //button for navigating back to medical page
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -297,21 +314,28 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
                 startActivity(intent);
             }
         });
+
+        //button to save the medical info to the db
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //save visit info
                 String age = visitNum.getSelectedItem().toString();
+                //save the fragment info if the visit spinner is enabled
                 if (visitNum.isEnabled()) {
                     switch (age) {
+                        //checks for which case statement string matches the input string and run the code for it
                         case "Select":
+                            //display error message if visit age isn't selected
                             AlertDialog a = new AlertDialog.Builder(save.getContext()).create();
                             a.setTitle("Select Visit age");
                             a.setMessage("Please make you've selected a visit age");
                             a.show();
                             break;
                         case "Newborn":
+                            //get the info from the corresponding fragment
                             medicalInfo = newBornFragment.saveInfo();
+                            //if the need fragment fields were entered, add the info to the db, if not, display error message
                             if (medicalInfo != null) {
                                 addInfo(childID, age);
                             } else {
@@ -319,7 +343,9 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
                             }
                             break;
                         case "Two months":
+                            //get the info from the corresponding fragment
                             medicalInfo = twoMonthFragment.saveInfo();
+                            //if the need fragment fields were entered, add the info to the db, if not, display error message
                             if (medicalInfo != null) {
                                 addInfo(childID, age);
                             } else {
@@ -327,7 +353,9 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
                             }
                             break;
                         case "Four months":
+                            //get the info from the corresponding fragment
                             medicalInfo = fourMonthFragment.saveInfo();
+                            //if the need fragment fields were entered, add the info to the db, if not, display error message
                             if (medicalInfo != null) {
                                 addInfo(childID, age);
                             } else {
@@ -335,7 +363,9 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
                             }
                             break;
                         case "Six months":
+                            //get the info from the corresponding fragment
                             medicalInfo = sixMonthFragment.saveInfo();
+                            //if the need fragment fields were entered, add the info to the db, if not, display error message
                             if (medicalInfo != null) {
                                 addInfo(childID, age);
                             } else {
@@ -343,7 +373,9 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
                             }
                             break;
                         case "Nine months":
+                            //get the info from the corresponding fragment
                             medicalInfo = nineMonthFragment.saveInfo();
+                            //if the need fragment fields were entered, add the info to the db, if not, display error message
                             if (medicalInfo != null) {
                                 addInfo(childID, age);
                             } else {
@@ -351,7 +383,9 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
                             }
                             break;
                         case "Twelve months":
+                            //get the info from the corresponding fragment
                             medicalInfo = twelveMonthFragment.saveInfo();
+                            //if the need fragment fields were entered, add the info to the db, if not, display error message
                             if (medicalInfo != null) {
                                 addInfo(childID, age);
                             } else {
@@ -359,7 +393,9 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
                             }
                             break;
                         case "Fifteen months":
+                            //get the info from the corresponding fragment
                             medicalInfo = fifteenMonthFragment.saveInfo();
+                            //if the need fragment fields were entered, add the info to the db, if not, display error message
                             if (medicalInfo != null) {
                                 addInfo(childID, age);
                             } else {
@@ -367,7 +403,9 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
                             }
                             break;
                         case "Eighteen months":
+                            //get the info from the corresponding fragment
                             medicalInfo = eighteenMonthFragment.saveInfo();
+                            //if the need fragment fields were entered, add the info to the db, if not, display error message
                             if (medicalInfo != null) {
                                 addInfo(childID, age);
                             } else {
@@ -375,7 +413,9 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
                             }
                             break;
                         case "Thirty months":
+                            //get the info from the corresponding fragment
                             medicalInfo = thirtyMonthsFragment.saveInfo();
+                            //if the need fragment fields were entered, add the info to the db, if not, display error message
                             if (medicalInfo != null) {
                                 addInfo(childID, age);
                             } else {
@@ -383,7 +423,9 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
                             }
                             break;
                         case "Two years":
+                            //get the info from the corresponding fragment
                             medicalInfo = twoYearFragment.saveInfo();
+                            //if the need fragment fields were entered, add the info to the db, if not, display error message
                             if (medicalInfo != null) {
                                 addInfo(childID, age);
                             } else {
@@ -391,7 +433,9 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
                             }
                             break;
                         case "Three years":
+                            //get the info from the corresponding fragment
                             medicalInfo = threeYearFragment.saveInfo();
+                            //if the need fragment fields were entered, add the info to the db, if not, display error message
                             if (medicalInfo != null) {
                                 addInfo(childID, age);
                             } else {
@@ -399,7 +443,9 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
                             }
                             break;
                         case "Four years":
+                            //get the info from the corresponding fragment
                             medicalInfo = fourYearFragment.saveInfo();
+                            //if the need fragment fields were entered, add the info to the db, if not, display error message
                             if (medicalInfo != null) {
                                 addInfo(childID, age);
                             } else {
@@ -407,7 +453,9 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
                             }
                             break;
                         case "Five years":
+                            //get the info from the corresponding fragment
                             medicalInfo = fiveYearFragment.saveInfo();
+                            //if the need fragment fields were entered, add the info to the db, if not, display error message
                             if (medicalInfo != null) {
                                 addInfo(childID, age);
                             } else {
@@ -415,7 +463,9 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
                             }
                             break;
                         case "Six years":
+                            //get the info from the corresponding fragment
                             medicalInfo = sixYearFragment.saveInfo();
+                            //if the need fragment fields were entered, add the info to the db, if not, display error message
                             if (medicalInfo != null) {
                                 addInfo(childID, age);
                             } else {
@@ -423,7 +473,9 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
                             }
                             break;
                         case "Seven years":
+                            //get the info from the corresponding fragment
                             medicalInfo = sevenYearFragment.saveInfo();
+                            //if the need fragment fields were entered, add the info to the db, if not, display error message
                             if (medicalInfo != null) {
                                 addInfo(childID, age);
                             } else {
@@ -431,7 +483,9 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
                             }
                             break;
                         case "Eight years":
+                            //get the info from the corresponding fragment
                             medicalInfo = eightYearFragment.saveInfo();
+                            //if the need fragment fields were entered, add the info to the db, if not, display error message
                             if (medicalInfo != null) {
                                 addInfo(childID, age);
                             } else {
@@ -439,7 +493,9 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
                             }
                             break;
                         case "Nine years":
+                            //get the info from the corresponding fragment
                             medicalInfo = nineYearFragment.saveInfo();
+                            //if the need fragment fields were entered, add the info to the db, if not, display error message
                             if (medicalInfo != null) {
                                 addInfo(childID, age);
                             } else {
@@ -447,7 +503,9 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
                             }
                             break;
                         case "Ten years":
+                            //get the info from the corresponding fragment
                             medicalInfo = tenYearFragment.saveInfo();
+                            //if the need fragment fields were entered, add the info to the db, if not, display error message
                             if (medicalInfo != null) {
                                 addInfo(childID, age);
                             } else {
@@ -455,7 +513,9 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
                             }
                             break;
                         case "Eleven years":
+                            //get the info from the corresponding fragment
                             medicalInfo = elevenYearFragment.saveInfo();
+                            //if the need fragment fields were entered, add the info to the db, if not, display error message
                             if (medicalInfo != null) {
                                 addInfo(childID, age);
                             } else {
@@ -463,7 +523,9 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
                             }
                             break;
                         case "Twelve years":
+                            //get the info from the corresponding fragment
                             medicalInfo = twelveYearFragment.saveInfo();
+                            //if the need fragment fields were entered, add the info to the db, if not, display error message
                             if (medicalInfo != null) {
                                 addInfo(childID, age);
                             } else {
@@ -471,7 +533,9 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
                             }
                             break;
                         case "Not an age-scheduled visit":
+                            //get the info from the corresponding fragment
                             medicalInfo = noAgeFragment.saveInfo();
+                            //if the need fragment fields were entered, add the info to the db, if not, display error message
                             if (medicalInfo != null) {
                                 addInfo(childID, age);
                             } else {
@@ -480,6 +544,7 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
                             break;
                     }
                 } else {
+                    //if visit age spinner not active, continue to adding a new medical entry
                     addInfo(childID, age);
                 }
             }
@@ -536,7 +601,7 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
 
                 Intent intent = new Intent(DoctorsVisitActivity.this, ActivityContainer.class);
                 startActivity(intent);
-                //alert to display if any information is missing
+                //error message to display if any information is missing
             } else {
                 AlertDialog a = new AlertDialog.Builder(save.getContext()).create();
                 a.setTitle("Missing Doctor Visit Information");
@@ -612,6 +677,7 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
 
                     ageLayout.setVisibility(View.VISIBLE);
 
+                    //display success message and navigate back to home screen
                     Toast.makeText(getApplicationContext(), "Doctor Visit information saved", Toast.LENGTH_SHORT).show();
 
                     Intent intent = new Intent(DoctorsVisitActivity.this, ActivityContainer.class);
@@ -628,6 +694,7 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
         }
     }
 
+    //display date dialog box
     private void showDatePickerDialog() {
         @SuppressLint("ResourceType") DatePickerDialog datePickerDialog = new DatePickerDialog(this, 2, (DatePickerDialog.OnDateSetListener) this,
                 Calendar.getInstance().get(Calendar.YEAR),
@@ -636,6 +703,7 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
         datePickerDialog.show();
     }
 
+    //save and display the date that the user selected from the dialog
     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
         Calendar calendar = Calendar.getInstance();
         calendar.set(year, month, day);
@@ -650,11 +718,13 @@ public class DoctorsVisitActivity extends AppCompatActivity implements DatePicke
         for(Provider provide: providers){
             p_names.add(provide.getName());
         }
+        //create an adapter set for the adapter, which displays the array of names
         ArrayAdapter<String> providerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, p_names);
         providerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         provider.setAdapter(providerAdapter);
     }
 
+    //function for display error message with info passed in
     public void displayErrorMessage(String title, String message){
         AlertDialog b = new AlertDialog.Builder(save.getContext()).create();
         b.setTitle(title);

@@ -18,7 +18,7 @@ import com.iso.downsconnect.objects.Entry;
 import com.iso.downsconnect.objects.Journal;
 
 import java.util.Calendar;
-
+//activity for creating new journal's and displaying/updating existing journals
 public class JournalActivity extends AppCompatActivity {
     private TextView currentTime, history;
     private EditText title, notes;

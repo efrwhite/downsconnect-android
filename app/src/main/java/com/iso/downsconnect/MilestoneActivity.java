@@ -22,7 +22,7 @@ import com.iso.downsconnect.objects.Entry;
 import com.iso.downsconnect.objects.Milestone;
 
 import java.util.Calendar;
-
+//activity for keeping track of important development dates
 public class MilestoneActivity extends AppCompatActivity {
     private EditText roll, walk, stand, sit, val, crawl, nh_walk, jump,
             holds, hands_mouth, passes, pincher, drinks, scribbles, feed_spoon,

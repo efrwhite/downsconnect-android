@@ -28,7 +28,7 @@ import com.iso.downsconnect.objects.Bathroom;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-
+//activity to control/display the different tabs for the bathroom page
 public class BathroomActivity extends AppCompatActivity {
 
     private TabLayout tabLayout;

@@ -14,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.iso.downsconnect.helpers.DBHelper;
 import com.iso.downsconnect.objects.AccountHolder;
-
+//activity for signing back into the app with an existing account
 public class SignInActivity extends AppCompatActivity {
     private DBHelper db;
     private Button signIn;
@@ -24,6 +24,7 @@ public class SignInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        //initialize variables
         db = new DBHelper(this);
         signIn = findViewById(R.id.signInSignInButton);
         Button cancel = findViewById(R.id.cancelSignInButton);
@@ -31,12 +32,16 @@ public class SignInActivity extends AppCompatActivity {
         final EditText Password = findViewById(R.id.passwordEditText);
         account = new AccountHolder();
 
+        //sign in button that checks for the user info in the db
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //get the entered username and password and check if there is a user in the db with that info
                 String user = Username.getText().toString();
                 String pass = Password.getText().toString();
                 account = db.getAccount(user, pass);
+
+                //if user is in the db, set a variable that show that a user is logged in and navigate to home screen
                     if (account != null) {
                         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                         sharedPreferences.edit().putBoolean("signedIn", true).commit();
@@ -45,6 +50,7 @@ public class SignInActivity extends AppCompatActivity {
 //                        intent.putExtra("user", user);
                         startActivity(intent);
                     }
+                    //display error message if user is not in db
                 else{
                     AlertDialog a = new AlertDialog.Builder(signIn.getContext()).create();
                     a.setTitle("Incorrect Username or Password");
@@ -54,6 +60,7 @@ public class SignInActivity extends AppCompatActivity {
             }
         });
 
+        //button to navigate back to main screen
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

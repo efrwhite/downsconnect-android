@@ -37,6 +37,7 @@ import java.util.Date;
  * Use the {@link ConstipationFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
+//fragment for displaying/saving info for a bathroom entry that is of type constipation
 public class ConstipationFragment extends Fragment implements DatePickerDialog.OnDateSetListener {
     private EditText lastStoolDate, treatment, notes;
     private Button save;

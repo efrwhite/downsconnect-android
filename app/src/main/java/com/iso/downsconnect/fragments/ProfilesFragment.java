@@ -36,7 +36,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
+//displays all current profiles in the db and allow you to navigate to profile pages to create new profiles
 public class ProfilesFragment extends Fragment {
     private DBHelper helper;
     private ArrayList<Child> children = new ArrayList<>();

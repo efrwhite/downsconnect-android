@@ -13,12 +13,13 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.iso.downsconnect.helpers.DBHelper;
 import com.iso.downsconnect.objects.Provider;
-
+//activity for adding new providers to the db as well as updating/viewing existing ones
 public class ProvidersActivity extends AppCompatActivity {
     private EditText name, practice, number, email, website, fax, address_one, address_two, state, city, zip;
     private Spinner specialty;
@@ -30,11 +31,13 @@ public class ProvidersActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_providers);
 
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        final int childID = sharedPreferences.getInt("name", 1);
+//        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+//        final int childID = sharedPreferences.getInt("name", 1);
 
+        //get provider ID
         final int p_name = getIntent().getIntExtra("p_name", -1);
 
+        //initalize variables
         final Button back = findViewById(R.id.backButton);
         name = findViewById(R.id.providerName);
         specialty = findViewById(R.id.specialtySpinner);
@@ -51,6 +54,7 @@ public class ProvidersActivity extends AppCompatActivity {
         save = findViewById(R.id.saveButton);
         helper = new DBHelper(this);
 
+        //prevent users from being able to enter text directly into the edittext due to display issues
         address_one.setFocusable(false);
         address_two.setFocusable(false);
         state.setFocusable(false);
@@ -58,15 +62,15 @@ public class ProvidersActivity extends AppCompatActivity {
         zip.setFocusable(false);
 
         final Activity activity = this;
+
+        //click listeners to display a popup for entering the address info for each field
         address_one.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                activity.getCurrentFocus().clearFocus();
                 textDialog(address_one, "Address One", activity);
             }
         });
 
-        //click listeners for text popups
         address_two.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -121,6 +125,7 @@ public class ProvidersActivity extends AppCompatActivity {
         }
 
 
+        //button for navigating back to home screen
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -129,23 +134,31 @@ public class ProvidersActivity extends AppCompatActivity {
             }
         });
 
+        //button for inserting or updating a provider
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //checks if all needed fields have been filled out
                 if(!name.getText().toString().equals("") && name.getText().toString().contains(" ") && !practice.getText().toString().equals("")
                         && !specialty.getSelectedItem().toString().equals("Select") && !number.getText().toString().equals("")
                         && !email.getText().toString().equals("") && !address_one.getText().toString().equals("")
                         && !state.getText().toString().equals("") && !city.getText().toString().equals("") && !zip.getText().toString().equals("")){
+                    //checks if address two was filled out and appends it to the string if it was
                     if(!address_two.getText().toString().equals("")){
                         provider.setAddress(name.getText().toString() + ";" + address_two.getText().toString());
                     }
                     else{
                         provider.setAddress(address_one.getText().toString());
                     }
+                    //add values to the provider object
                     provider.setName(name.getText().toString());
                     provider.setPrac_name(practice.getText().toString());
                     provider.setSpecialty(specialty.getSelectedItem().toString());
                     provider.setPhone(number.getText().toString());
+                    provider.setState(state.getText().toString());
+                    provider.setCity(city.getText().toString());
+                    provider.setZip(zip.getText().toString());
+                    //check if these fields were filled out and add to object if they were
                     if(!fax.getText().toString().equals("")){
                         provider.setFax(fax.getText().toString());
                     }
@@ -153,20 +166,21 @@ public class ProvidersActivity extends AppCompatActivity {
                     if(!website.getText().toString().equals("")){
                         provider.setWebsite(website.getText().toString());
                     }
-                    provider.setState(state.getText().toString());
-                    provider.setCity(city.getText().toString());
-                    provider.setZip(zip.getText().toString());
 
+                    //check if updating a provider or adding a new one and calls the appropriate insert function
                     if(p_name != -1){
                         helper.updateProvider(provider);
                     }
                     else {
                         boolean num = helper.addProvider(provider);
                     }
+                    //display success message and navigate back to home page
+                    Toast.makeText(getApplicationContext(),"Added Provider", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(ProvidersActivity.this, ActivityContainer.class);
                     startActivity(intent);
                 }
                 else{
+                    //display error message if fields havent been filled out
                     AlertDialog a = new AlertDialog.Builder(save.getContext()).create();
                     a.setTitle("Missing Information");
                     a.setMessage("Please make sure you've filled out the necessary information");
@@ -189,7 +203,9 @@ public class ProvidersActivity extends AppCompatActivity {
     }
 
     //Text dialog box so user can see the text they're inputting
+    //is displayed whenever a user click on one of the address fields
     private void textDialog(final EditText editText, String title, final Activity activity) {
+        //creates dialog object, fills in values, and displays it
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
         final EditText edittext = new EditText(getApplicationContext());
         if(!editText.getText().toString().equals("")){

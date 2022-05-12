@@ -19,7 +19,7 @@ import com.iso.downsconnect.objects.Entry;
 import com.iso.downsconnect.objects.Medication;
 
 import java.util.Calendar;
-
+//activity for creating new medication as well as viewing/updating existing ones
 public class MedicationsActivity extends AppCompatActivity {
     private Button back, add, pastMed;
     private EditText name, dose, frequency, reason;

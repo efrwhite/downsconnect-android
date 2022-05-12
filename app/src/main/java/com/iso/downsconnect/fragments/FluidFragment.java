@@ -32,6 +32,7 @@ import java.util.Calendar;
  * Use the {@link FluidFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
+//fragment for displaying/saving info for a feed entry that is of type fluid
 public class FluidFragment extends Fragment {
     private Button saveBtn;
     private EditText notes, fluidFood, quantity, otherText;

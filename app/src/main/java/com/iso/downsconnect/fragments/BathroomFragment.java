@@ -1,5 +1,10 @@
 package com.iso.downsconnect.fragments;
-
+/////////////////////////////////////////////
+//
+// UNUSED FRAGMENT, i think......
+// or at least I can find any usages/implementation of this so
+// i believe its unused
+///////////////////////////////////////////////
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;

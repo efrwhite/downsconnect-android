@@ -20,7 +20,7 @@ import com.iso.downsconnect.objects.Entry;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-
+//Activity to add new activity infomation to the database
 public class ActivityActivity extends AppCompatActivity {
     private DBHelper helper;
     private TextView currentTime, activityText, durationText, history;

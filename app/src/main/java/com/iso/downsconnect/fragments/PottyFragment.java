@@ -30,6 +30,7 @@ import java.util.Calendar;
  * Use the {@link PottyFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
+//fragment for displaying/saving info for a bathroom entry that is of type potty
 public class PottyFragment extends Fragment {
     private Bathroom bathroom = new Bathroom();
     private Entry entry = new Entry();

@@ -30,6 +30,7 @@ import java.util.Calendar;
  * Use the {@link DiaperFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
+//fragment for displaying/saving info for a bathroom entry that is of type diaper
 public class DiaperFragment extends Fragment {
     private Bathroom bathroom = new Bathroom();
     private DBHelper helper;
