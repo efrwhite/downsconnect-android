@@ -16,7 +16,7 @@ import com.iso.downsconnect.helpers.DBHelper;
 import com.iso.downsconnect.objects.MedicalInfo;
 
 import java.util.Calendar;
-
+//Activity for navigating to the different medical pages
 public class MedicalActivity extends AppCompatActivity{
     private EditText doctorDatePicker;
     private long doctorDate = 0;
@@ -30,9 +30,11 @@ public class MedicalActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_medical);
 
+        //get current child ID
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         final int childID = sharedPreferences.getInt("name", 1);
 
+        //initialize variables
         dbHelper = new DBHelper(this);
         back = findViewById(R.id.backButton);
         save = findViewById(R.id.saveButton);
@@ -54,6 +56,7 @@ public class MedicalActivity extends AppCompatActivity{
         guidelines = findViewById(R.id.guidelinesHyperlink);
         medications = findViewById(R.id.medicationButton);
 
+        //get child's allergies and display them
         String allergies = dbHelper.getAllergies(childID);
         if(allergies != null && !allergies.equals("")) {
             allergyText.setText(allergies);
@@ -64,10 +67,12 @@ public class MedicalActivity extends AppCompatActivity{
 
 
 
+        //buttons for navigating to the different medical provider pages for listing the visit info
         OTBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MedicalActivity.this, ProviderListingActivity.class);
+                //defines which type of provider visits you want to see
                 intent.putExtra("type", "OT");
                 startActivity(intent);
             }
@@ -77,6 +82,7 @@ public class MedicalActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MedicalActivity.this, ProviderListingActivity.class);
+                //defines which type of provider visits you want to see
                 intent.putExtra("type", "PT");
                 startActivity(intent);
             }
@@ -86,6 +92,7 @@ public class MedicalActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MedicalActivity.this, ProviderListingActivity.class);
+                //defines which type of provider visits you want to see
                 intent.putExtra("type", "Ophthalmology");
                 startActivity(intent);
             }
@@ -95,6 +102,7 @@ public class MedicalActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MedicalActivity.this, ProviderListingActivity.class);
+                //defines which type of provider visits you want to see
                 intent.putExtra("type", "Speech");
                 startActivity(intent);
             }
@@ -104,6 +112,7 @@ public class MedicalActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MedicalActivity.this, ProviderListingActivity.class);
+                //defines which type of provider visits you want to see
                 intent.putExtra("type", "Hearing");
                 startActivity(intent);
             }
@@ -113,6 +122,7 @@ public class MedicalActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MedicalActivity.this, ProviderListingActivity.class);
+                //defines which type of provider visits you want to see
                 intent.putExtra("type", "Dental");
                 startActivity(intent);
             }
@@ -122,6 +132,7 @@ public class MedicalActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MedicalActivity.this, ProviderListingActivity.class);
+                //defines which type of provider visits you want to see
                 intent.putExtra("type", "Cardio");
                 startActivity(intent);
             }
@@ -131,25 +142,29 @@ public class MedicalActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MedicalActivity.this, ProviderListingActivity.class);
+                //defines which type of provider visits you want to see
                 intent.putExtra("type", "Neck");
                 startActivity(intent);
             }
         });
 
-
+        //button for navigating to activity for inserting medical visit info
         doctorVisitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MedicalActivity.this, DoctorsVisitActivity.class);
+                //defines that this is a new entry and not one that already exist
                 intent.putExtra("medID", -1);
                 startActivity(intent);
             }
         });
 
+        //buttons for display the child's various measurements throughout the years
         height.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MedicalActivity.this, ChartActivity.class);
+                //defines which type of measurement you are looking at
                 intent.putExtra("chart", "Height");
                 startActivity(intent);
             }
@@ -159,6 +174,7 @@ public class MedicalActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MedicalActivity.this, ChartActivity.class);
+                //defines which type of measurement you are looking at
                 intent.putExtra("chart", "Weight");
                 startActivity(intent);
             }
@@ -168,11 +184,13 @@ public class MedicalActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MedicalActivity.this, ChartActivity.class);
+                //defines which type of measurement you are looking at
                 intent.putExtra("chart", "HeadSize");
                 startActivity(intent);
             }
         });
 
+        //navigates to the vaccine activity for adding and updating vaccine info
         vaccine.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -181,6 +199,7 @@ public class MedicalActivity extends AppCompatActivity{
             }
         });
 
+        //hyperlink that navigates to phone's browser for guideline info
         guidelines.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -192,6 +211,7 @@ public class MedicalActivity extends AppCompatActivity{
             }
         });
 
+        //navigates to the vaccine activity for adding and updating medication info
         medications.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -201,18 +221,20 @@ public class MedicalActivity extends AppCompatActivity{
             }
         });
 
+        //get current time and display it it in the textview
         Calendar calendar = Calendar.getInstance();
         time = calendar.getTimeInMillis();
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
         int minute = calendar.get(Calendar.MINUTE);
         String realMins;
+        //adjust minute string if minutes are less than 10
         if(minute < 10){
             realMins = "0" + minute;
         }
         else{
             realMins = String.valueOf(minute);
         }
-
+        //determines whether the time is in AM or PM
         if(hour >= 12){
             hour = hour - 12;
             currentTime.setText("Today " + String.valueOf(hour) + ":" + realMins + " PM");
@@ -221,6 +243,7 @@ public class MedicalActivity extends AppCompatActivity{
             currentTime.setText("Today " + String.valueOf(hour) + ":" + realMins + " AM");
         }
 
+        //button that navigates back to home screen
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
