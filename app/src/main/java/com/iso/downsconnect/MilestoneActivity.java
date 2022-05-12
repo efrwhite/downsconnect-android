@@ -23,7 +23,7 @@ import com.iso.downsconnect.objects.Milestone;
 
 import java.util.Calendar;
 
-public class MilestoneActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener{
+public class MilestoneActivity extends AppCompatActivity {
     private EditText roll, walk, stand, sit, val, crawl, nh_walk, jump,
             holds, hands_mouth, passes, pincher, drinks, scribbles, feed_spoon,
             points, emotion, affection, interest, coos, babbles, speaks,
@@ -41,16 +41,14 @@ public class MilestoneActivity extends AppCompatActivity implements DatePickerDi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_milestone);
 
+        //get current child ID
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         final int childID = sharedPreferences.getInt("name", 1);
+
+
+        //intialize variables and objects
         helper = new DBHelper(this);
-
-
         final Button back = findViewById(R.id.backButton);
-        entry.setChildID(childID);
-        entry.setEntryText("Updated milestone information for " + helper.getChildName(childID));
-        entry.setEntryType("Milestone");
-
         turns = findViewById(R.id.editTextDate31);
         startles = findViewById(R.id.editTextDate30);
         sentence = findViewById(R.id.editTextDate29);
@@ -81,13 +79,21 @@ public class MilestoneActivity extends AppCompatActivity implements DatePickerDi
         month_ = new DateHandler();
         milestone = new Milestone();
 
+        //set initial entry object info
+        entry.setChildID(childID);
+        entry.setEntryText("Updated milestone information for " + helper.getChildName(childID));
+        entry.setEntryType("Milestone");
 
+        //set the id of the child you are saving the info for
         milestone.setChildId(childID);
 
+        //check if the child currently has milestone info already
         final Milestone stone = helper.getMilestone(childID);
         //childBirthday = helper.getChildBirthday(childID);
 
+        //if milestone object retrieved from db isn't null, display the fields that have values in the object
         if(stone != null){
+            //checks if there is a values and displays it if there is
             if(!stone.getTurns().equals("None")){
                 turns.setText(stone.getTurns());
             }
@@ -163,13 +169,16 @@ public class MilestoneActivity extends AppCompatActivity implements DatePickerDi
 
         }
 
+        //save the info to the db
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //checks if there is anything entered for the field, if there is, save it to the object
                 if(!turns.getText().toString().equals("")){
                     milestone.setTurns(turns.getText().toString());
                 }
                 else{
+                    //if nothing was entered, save "none" for it's values
                     milestone.setTurns("None");
                 }
 
@@ -341,25 +350,28 @@ public class MilestoneActivity extends AppCompatActivity implements DatePickerDi
                     milestone.setWalk("None");
                 }
 
+                //if this is an existing entry, store the updated info to the db
                 if(stone != null){
                     helper.updateMilestone(milestone);
-                    entry.setEntryTime(Calendar.getInstance().getTimeInMillis());
-                    helper.addEntry(entry);
                 }
                 else{
+                    //if this is a new milestone entry, add it to the db
                     long id = helper.addMilestone(milestone);
+                    //set the rest of the entry info and store it
                     entry.setForeignID(id);
-                    entry.setEntryTime(Calendar.getInstance().getTimeInMillis());
-                    helper.addEntry(entry);
-                    Log.i("asdf", String.valueOf(id));
+                    //                    Log.i("asdf", String.valueOf(id));
                 }
+                entry.setEntryTime(Calendar.getInstance().getTimeInMillis());
+                //adds new entry to db
+                helper.addEntry(entry);
+                //display success message and navigate back to home page
                 Toast.makeText(getApplicationContext(), "Milestone updated", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(MilestoneActivity.this, ActivityContainer.class);
                 startActivity(intent);
             }
         });
 
-
+//old code from before all the other fields were added :(
 //        if(stone != null){
 //            milestone.setStandingDate(stone.getStandingDate());
 //            milestone.setSittingDate(stone.getSittingDate());
@@ -455,6 +467,7 @@ public class MilestoneActivity extends AppCompatActivity implements DatePickerDi
 //        });
 
 
+        //button for navigating back to home screen
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -508,16 +521,16 @@ public class MilestoneActivity extends AppCompatActivity implements DatePickerDi
 //        });
     }
 
-    private void showDatePickerDialog() {
-        @SuppressLint("ResourceType") DatePickerDialog datePickerDialog = new DatePickerDialog(this, 2,  this,
-                Calendar.getInstance().get(Calendar.YEAR),
-                Calendar.getInstance().get(Calendar.MONTH),
-                Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
-        datePickerDialog.show();
-    }
+//    private void showDatePickerDialog() {
+//        @SuppressLint("ResourceType") DatePickerDialog datePickerDialog = new DatePickerDialog(this, 2,  this,
+//                Calendar.getInstance().get(Calendar.YEAR),
+//                Calendar.getInstance().get(Calendar.MONTH),
+//                Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
+//        datePickerDialog.show();
+//    }
 
-    @Override
-    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+//    @Override
+//    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
 //        Calendar calendar = Calendar.getInstance();
 //        if(stand){
 //            calendar.set(year, month, dayOfMonth);
@@ -579,5 +592,5 @@ public class MilestoneActivity extends AppCompatActivity implements DatePickerDi
 //                walkAge.setText(years + "yrs");
 //            }
 //        }
-    }
+//    }
 }

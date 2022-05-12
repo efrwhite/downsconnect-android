@@ -34,21 +34,25 @@ public class MoodActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mood);
 
+        //get current childID
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         final int childID = sharedPreferences.getInt("name", 1);
 
+        //get mood ID
         Intent intent = getIntent();
         String msgID = intent.getStringExtra("moodID");
         int id = Integer.parseInt(msgID);
 
 
+        //initialize objects
         mood = new Mood();
         entry = new Entry();
         db = new DBHelper(this);
 
-        Log.i("moodtesting", String.valueOf(db.getAllMoods().size()));
+//        Log.i("moodtesting", String.valueOf(db.getAllMoods().size()));
         mood.setChildID(childID);
 
+        //initialize variables
         final Button back = findViewById(R.id.backButton);
         currentTime = findViewById(R.id.moodTime);
         notes = findViewById(R.id.moodNotes);
@@ -58,6 +62,7 @@ public class MoodActivity extends AppCompatActivity {
         time = findViewById(R.id.durationTimeText);
         history = findViewById(R.id.messageHistory);
 
+        //if this is an existing mood entry, display the entry's info
         if(id != -1){
             save.setEnabled(false);
             mood = db.getMood(id);
@@ -70,16 +75,19 @@ public class MoodActivity extends AppCompatActivity {
         }
 
 
+        //get current time and display it it in the textview
         Calendar calendar = Calendar.getInstance();
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
         int minute = calendar.get(Calendar.MINUTE);
         String realMins;
+        //adjust minute string if minutes are less than 10
         if(minute <= 10){
             realMins = "0" + minute;
         }
         else{
             realMins = String.valueOf(minute);
         }
+        //determines whether the time is in AM or PM
         if(hour > 12){
             hour = hour - 12;
             currentTime.setText("Today " + String.valueOf(hour) + ":" + realMins + "PM");
@@ -91,6 +99,7 @@ public class MoodActivity extends AppCompatActivity {
             currentTime.setText("Today " + String.valueOf(hour) + ":" + realMins + "AM");
         }
 
+        //button that navigates back to home screen
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,6 +109,7 @@ public class MoodActivity extends AppCompatActivity {
             }
         });
 
+        //navigates to history page to display all past mood
         history.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -109,38 +119,47 @@ public class MoodActivity extends AppCompatActivity {
             }
         });
 
+        //adds a new mood entry to the db
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i("type", moodType.getSelectedItem().toString());
-                Log.i("units", units.getSelectedItem().toString());
-                Log.i("time", time.getText().toString());
+//                Log.i("type", moodType.getSelectedItem().toString());
+//                Log.i("units", units.getSelectedItem().toString());
+//                Log.i("time", time.getText().toString());
+                //check if all needed fields have been filled out
                 if(!moodType.getSelectedItem().toString().equals("Select") && !units.getSelectedItem().toString().equals("Select") &&
                     !time.getText().toString().equals("")){
+                    //add the entered info to the mood object
                     mood.setMoodType(moodType.getSelectedItem().toString());
                     mood.setTime(time.getText().toString());
                     mood.setUnits(units.getSelectedItem().toString());
+                    //check if user entered anything the notes section
                     if(!notes.getText().toString().equals("")){
                         mood.setNotes(notes.getText().toString());
                     }
                     else{
                         mood.setNotes("");
                     }
-                    Toast.makeText(getApplicationContext(), "Mood infomation saved", Toast.LENGTH_SHORT).show();
-
+                    //fill in the rest of the entry info
                     entry.setChildID(childID);
                     entry.setEntryTime(Calendar.getInstance().getTimeInMillis());
                     entry.setEntryText(db.getChildName(childID) + " was " + mood.getMoodType() + " for " + mood.getTime() + mood.getUnits());
                     entry.setEntryType("Mood");
 
+                    //insert the new mood and get the id associated with it
                     long id = db.addMood(mood);
+                    //add the returned ID to the entry object and add it to the db
                     entry.setForeignID(id);
                     db.addEntry(entry);
+
+                    //display success message and navigate back to home screen
+                    Toast.makeText(getApplicationContext(), "Mood infomation saved", Toast.LENGTH_SHORT).show();
 
                     Intent intent = new Intent(MoodActivity.this, ActivityContainer.class);
                     startActivity(intent);
                 }
                 else{
+                    //display error message
                     AlertDialog a = new AlertDialog.Builder(save.getContext()).create();
                     a.setTitle("Missing Information");
                     a.setMessage("Please make sure you've filled out the necessary information");
@@ -150,6 +169,7 @@ public class MoodActivity extends AppCompatActivity {
         });
     }
 
+    //get index of a selection in a spinner
     private int getIndex(Spinner spinner, String myString) {
         for (int i = 0; i < spinner.getCount(); i++) {
             if (spinner.getItemAtPosition(i).toString().equalsIgnoreCase(myString)) {

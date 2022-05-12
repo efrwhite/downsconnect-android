@@ -27,13 +27,18 @@ public class MedicalListingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_medical_listings);
 
+        //get current child ID
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         final int childID = sharedPreferences.getInt("name", 1);
 
+        //get medicalID of the entry you're looking at
         int medicalID = getIntent().getIntExtra("medical", 0);
+
+        //get child's age and the type of provider that the visit was for
         String childAge = getIntent().getStringExtra("age");
         final String type = getIntent().getStringExtra("type");
 
+        //initialize objects
         date = findViewById(R.id.dateText);
         name = findViewById(R.id.nameText);
         p_type = findViewById(R.id.typeText);
@@ -44,18 +49,22 @@ public class MedicalListingsActivity extends AppCompatActivity {
         temp = findViewById(R.id.tempText);
         back = findViewById(R.id.backButton);
         age = findViewById(R.id.ageText);
+        helper = new DBHelper(this);
         TextView currentTime = findViewById(R.id.current_time_text);
 
+        //get current time and display it it in the textview
         Calendar calendar = Calendar.getInstance();
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
         int minute = calendar.get(Calendar.MINUTE);
         String realMins;
+        //adjust minute string if minutes are less than 10
         if(minute <= 10){
             realMins = "0" + minute;
         }
         else{
             realMins = String.valueOf(minute);
         }
+        //determines whether the time is in AM or PM
         if(hour > 12){
             hour = hour - 12;
             currentTime.setText("Today " + String.valueOf(hour) + ":" + realMins + "PM");
@@ -67,16 +76,21 @@ public class MedicalListingsActivity extends AppCompatActivity {
             currentTime.setText("Today " + String.valueOf(hour) + ":" + realMins + "AM");
         }
 
-        helper = new DBHelper(this);
 
+        //get medical entry's info
         info = helper.getMedical(medicalID);
 
+        //object to store the date the medical visit occurred
         Calendar cal = Calendar.getInstance();
         cal.setTimeInMillis(info.getDoctorDate());
 
+        //display child's age
+//        age.setText(childAge);
 
-        age.setText(childAge);
+        //display visit date
         date.setText(month.getMonth(cal.get(Calendar.MONTH)) + " " + cal.get(Calendar.DATE) + ", " + cal.get(Calendar.YEAR));
+
+        //display the rest of the visit's info
         name.setText(info.getProvider());
         p_type.setText(info.getProviderType());
         height.setText(info.getHeight());
@@ -85,8 +99,10 @@ public class MedicalListingsActivity extends AppCompatActivity {
         head.setText(info.getHeadInfo());
         temp.setText(info.getTemperatureInfo());
 
-        calcAge(childID, info, age);
+        //calculate the age of the child during the visit and display it
+        calcAge(childID, info);
 
+        //button for navigating back to home screen
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,12 +114,15 @@ public class MedicalListingsActivity extends AppCompatActivity {
 
     }
 
-    private void calcAge(int childID, MedicalInfo medical, TextView text) {
+    //calculate the age of the child during the visit and display it
+    private void calcAge(int childID, MedicalInfo medical) {
+        //calculate the age of the child
         long difference = medical.getDoctorDate() - helper.getChildBirthday(childID);
         long days = difference / (24 * 60 * 60 * 1000);
         int months = (int) days / 30;
         int years = (int) days / 365;
 
+        //display correct unit based on child's age
         if(days < 31){
             age.setText(days + " days");
         }

@@ -51,10 +51,11 @@ public class MedicationsActivity extends AppCompatActivity {
         add = findViewById(R.id.addBtn);
         pastMed = findViewById(R.id.addMed);
 
-//        Log.i("ksdjfklsdj", String.valueOf(medID));
+        //if medicalID is not -1, get the medical entry and display the info in the proper fields
         if(medID != -1){
             //display medication information if id is in database
             med = dbHelper.getMedication(medID);
+            //changes name of submit button to "update" so any changes made to the entry will be update in the db
             add.setText("Update");
             name.setText(med.getName());
             dose.setText(String.valueOf(med.getDose()));
@@ -63,6 +64,7 @@ public class MedicationsActivity extends AppCompatActivity {
             reason.setText(med.getReason());
         }
 
+        //button to navigate back to the medications listing page
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,8 +76,10 @@ public class MedicationsActivity extends AppCompatActivity {
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //check if all fields are filled out
+                //checks if you are adding a new entry or updating an entry
+                //actions that are run if you are adding an entry
                 if (add.getText().toString().equals("Add")) {
+                    //checks if all the necessary fields have been filled out
                     if (!name.getText().toString().equals("") && !dose.getText().toString().equals("") && !frequency.getText().toString().equals("")
                             && !reason.getText().toString().equals("") && !doseUnits.getSelectedItem().toString().equals("Select")) {
                         //store info into medication object
@@ -100,25 +104,32 @@ public class MedicationsActivity extends AppCompatActivity {
                         Intent intent = new Intent(MedicationsActivity.this, ActivityContainer.class);
                         startActivity(intent);
                     } else {
+                        //display error message
                         AlertDialog a = new AlertDialog.Builder(add.getContext()).create();
                         a.setTitle("Missing Information");
                         a.setMessage("Please make sure you've filled out the necessary information");
                         a.show();
                     }
                 }
+                //actions that are run if you are updating an entry
                 else{
+                    //checks if all the necessary fields have been filled out
                     if (!name.getText().toString().equals("") && !dose.getText().toString().equals("") && !frequency.getText().toString().equals("")
                             && !reason.getText().toString().equals("") && !doseUnits.getSelectedItem().toString().equals("Select")) {
+                        //adds updated info into the new medication object
                         med.setName(name.getText().toString());
                         med.setDose(Double.parseDouble(dose.getText().toString()));
                         med.setFrequency(frequency.getText().toString());
                         med.setReason(reason.getText().toString());
                         med.setDoseUnits(doseUnits.getSelectedItem().toString());
+                        //adds the updated info for the entry to the db
                         dbHelper.updateMedication(med);
+                        //display a success message and navigate back to home screen
                         Toast.makeText(getApplicationContext(), "Medication Information updated", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(MedicationsActivity.this, ActivityContainer.class);
                         startActivity(intent);
                     } else {
+                        //display error message
                         AlertDialog a = new AlertDialog.Builder(add.getContext()).create();
                         a.setTitle("Missing Information");
                         a.setMessage("Please make sure you've filled out the necessary information");
