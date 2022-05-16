@@ -83,7 +83,7 @@ public class ListEntriesFragment extends Fragment {
                             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                             LinearLayout.LayoutParams textParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                             ViewGroup.MarginLayoutParams marginLayoutParams = new ViewGroup.MarginLayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                            marginLayoutParams.setMargins(20, 0, 50,10);
+                            marginLayoutParams.setMargins(0, 0, 5,10);
 
                             //create horizontal layout
                             LinearLayout mainLayout = new LinearLayout(getContext());
@@ -91,8 +91,8 @@ public class ListEntriesFragment extends Fragment {
                             mainLayout.setOrientation(LinearLayout.HORIZONTAL);
                             mainLayout.setLayoutParams(marginLayoutParams);
 
-                            layoutParams.setMargins(200, 0, 0, 30);
-                            textParams.setMargins(20, 30, 10, 30);
+                            layoutParams.setMargins(150, 0, 0, 30);
+                            textParams.setMargins(10, 30, 5, 30);
 
                             //create secondary horizontal layout
                             LinearLayout horizontalLayout = new LinearLayout(getContext());
@@ -105,6 +105,7 @@ public class ListEntriesFragment extends Fragment {
                             horizontalLayout2.setTag(entry.getEntryID()  + "Layout2");
                             horizontalLayout2.setOrientation(LinearLayout.VERTICAL);
 
+
                             //create textview for displaying date
                             TextView date = new TextView(getContext());
                             Calendar calendar = Calendar.getInstance();
@@ -116,7 +117,7 @@ public class ListEntriesFragment extends Fragment {
                             date.setText(dateHandler.getMonth(calendar.get(Calendar.MONTH)) + " " + calendar.get(Calendar.DATE) + ", " + calendar.get(Calendar.YEAR) + " at: " + time);
                             date.setTextSize(15);
                             date.setTextColor(Color.BLACK);
-                            date.setWidth(300);
+                            date.setWidth(250);
                             date.setLayoutParams(textParams);
                             //add date to secondary horizontal layout
                             horizontalLayout.addView(date);
@@ -127,7 +128,7 @@ public class ListEntriesFragment extends Fragment {
                             TextView c_activity = new TextView(getContext());
                             c_activity.setText(entry.getEntryText());
                             c_activity.setTextSize(15);
-                            c_activity.setWidth(350);
+                            c_activity.setWidth(250);
                             c_activity.setTextColor(Color.BLACK);
                             c_activity.setLayoutParams(textParams);
                             horizontalLayout.addView(c_activity);
@@ -135,7 +136,7 @@ public class ListEntriesFragment extends Fragment {
                             //create button to view entry
                             Button button = new Button(getContext());
                             button.setText("View");
-                            button.setWidth(20);
+                            button.setWidth(5);
                             button.setHeight(10);
                             button.setLayoutParams(textParams);
                             button.setOnClickListener(new View.OnClickListener() {

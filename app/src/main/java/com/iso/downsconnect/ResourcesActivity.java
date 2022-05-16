@@ -125,7 +125,7 @@ public class ResourcesActivity extends AppCompatActivity {
             resName.setText(resource.getName());
             resName.setTextSize(15);
             resName.setTextColor(Color.parseColor("#0645AD"));
-            resName.setWidth(450);
+            resName.setWidth(300);
             resName.setLayoutParams(textParams);
 //            resName.setOnClickListener(new View.OnClickListener() {
 //                @Override

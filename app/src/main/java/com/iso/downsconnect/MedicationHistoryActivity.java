@@ -71,7 +71,7 @@ public class MedicationHistoryActivity extends AppCompatActivity {
             ViewGroup.MarginLayoutParams marginLayoutParams = new ViewGroup.MarginLayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
             // set margins for parameters
-            marginLayoutParams.setMargins(20, 0, 50,10);
+            marginLayoutParams.setMargins(20, 0, 0,10);
             layoutParams.setMargins(0, 0, 0, 30);
             textParams.setMargins(0, 30, 0, 30);
 
@@ -95,13 +95,13 @@ public class MedicationHistoryActivity extends AppCompatActivity {
             medName.setText(medication.getName());
             medName.setTextSize(15);
             medName.setTextColor(Color.BLACK);
-            medName.setWidth(450);
+            medName.setWidth(300);
             medName.setLayoutParams(textParams);
             horizontalLayout.addView(medName);
 
             //Button to display more information about the medication
             Button info = new Button(getApplicationContext());
-            info.setText("View");
+            info.setText("Edit");
             info.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

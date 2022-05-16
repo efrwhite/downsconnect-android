@@ -53,7 +53,7 @@ public class SignUpActivity extends AppCompatActivity {
                     //a check to see if your passwords match
                     if(!pass.equals(confirmPass)){
                         AlertDialog a = new AlertDialog.Builder(signUp.getContext()).create();
-                        a.setTitle("Passwords dont match");
+                        a.setTitle("Passwords don't match");
                         a.setMessage("The passwords you've entered don't match, please ensure that do before continuing");
                         a.show();
                     }

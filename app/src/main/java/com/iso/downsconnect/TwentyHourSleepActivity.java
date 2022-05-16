@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -51,16 +52,16 @@ public class TwentyHourSleepActivity extends AppCompatActivity implements DatePi
         helper = new DBHelper(this);
 
         //defaults the date to the current date
-        Calendar cal = Calendar.getInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat("MM-DD-YYYY");
-        Date dat = cal.getTime();
-        String currentDate = sdf.format(dat);
-        String writtenDate = handler.writtenDateWithString(currentDate);
-        datePicker.setText(writtenDate);
+//        Calendar cal = Calendar.getInstance();
+//        SimpleDateFormat sdf = new SimpleDateFormat("MM-D-YYYY");
+//        Date dat = cal.getTime();
+//        String currentDate = sdf.format(dat);
+//        String writtenDate = handler.writtenDateWithString(currentDate);
+//        datePicker.setText(writtenDate);
 
         //get the time the child has slept for the date
-        int[] times = helper.calculateSleepCycle(currentDate, childID);
-        setTimes(times);
+//        int[] times = helper.calculateSleepCycle(currentDate, childID);
+//        setTimes(times);
 
         //navigate back to home screen
         back.setOnClickListener(new View.OnClickListener() {

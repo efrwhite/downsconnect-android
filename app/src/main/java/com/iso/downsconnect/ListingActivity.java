@@ -264,7 +264,7 @@ public class ListingActivity extends AppCompatActivity {
             date.setText(dateHandler.getMonth(calendar.get(Calendar.MONTH)) + " " + calendar.get(Calendar.DATE) + ", " + calendar.get(Calendar.YEAR) + " at: " + time);
             date.setTextSize(15);
             date.setTextColor(Color.BLACK);
-            date.setWidth(500);
+            date.setWidth(350);
             //define the margins for the object
             date.setLayoutParams(textParams);
             //add to secondary layout and add secondary layout to main layout
