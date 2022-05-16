@@ -296,7 +296,7 @@ public class HomeFragment extends Fragment {
                             TextView entryText = new TextView(getContext());
                             entryText.setText(entry.getEntryText() + " ");
                             entryText.setTextSize(15);
-                            entryText.setWidth(600);
+                            entryText.setWidth(375);
                             entryText.setLayoutParams(layoutParams);
 
                             //text view containing entry's date and time

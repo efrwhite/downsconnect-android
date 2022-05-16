@@ -56,6 +56,7 @@
         android:background="@drawable/rounded_box"
         android:ems="10"
         android:focusable="false"
+        android:hint="Enter A Date"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

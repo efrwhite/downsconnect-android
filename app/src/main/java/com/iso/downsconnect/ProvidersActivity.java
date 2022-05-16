@@ -37,7 +37,7 @@ public class ProvidersActivity extends AppCompatActivity {
         //get provider ID
         final int p_name = getIntent().getIntExtra("p_name", -1);
 
-        //initalize variables
+        //initialize variables
         final Button back = findViewById(R.id.backButton);
         name = findViewById(R.id.providerName);
         specialty = findViewById(R.id.specialtySpinner);
@@ -117,7 +117,7 @@ public class ProvidersActivity extends AppCompatActivity {
                 if (provider.getAddress().contains(";")) {
                     String address = provider.getAddress();
                     address_one.setText(provider.getAddress().substring(0, address.indexOf(";")));
-                    address_two.setText(provider.getAddress().substring(address.indexOf(";")));
+                    address_two.setText(provider.getAddress().substring(address.indexOf(";") + 1));
                 } else {
                     address_one.setText(provider.getAddress());
                 }
